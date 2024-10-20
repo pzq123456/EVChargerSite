@@ -1,0 +1,2 @@
+# Blogs
+> Blogs are a great way to share your knowledge and experience with the world. You can write about anything you like, and you can even include images and videos to make your blog posts more engaging.

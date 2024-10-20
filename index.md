@@ -4,22 +4,32 @@ layout: home
 
 hero:
   name: "EVChargerSite"
-  text: "EVCharger Site"
-  tagline: My great project tagline
+  text: "A map and a database"
+  tagline: "EVChargerMap is a map and database of electric vehicle charging stations from all around the world."
+  image: 
+    src: ./imgs/hero.png
+    alt: "Hero image"
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
+      text: Get Started
+      link: /about
     - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: Learn More
+      link: /about
 
 features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C 
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - title: "Global Coverage"
+    details: Three main regions are covered (the US, Europe, and China_.
+    link: /about
+    icon: 🌍
+  - title: "Timely Updates"
+    details: "The database is updated every month."
+    link: /about
+    icon: 🔄
+  - title: "Web based visualization & analysis"
+    details: "The map is interactive and can be used for analysis."
+    link: /about
+    icon: 📊
+
 ---
 

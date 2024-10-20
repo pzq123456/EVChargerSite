@@ -10,12 +10,12 @@ import {
 
 const members = [
   {
-    avatar: 'https://www.github.com/yyx990803.png',
-    name: 'Evan You',
-    title: 'Creator',
+    avatar: 'user.png',
+    name: 'Team Member 1',
+    title: 'Developer',
     links: [
-      { icon: 'github', link: 'https://github.com/yyx990803' },
-      { icon: 'twitter', link: 'https://twitter.com/youyuxi' }
+      { icon: 'github' },
+      { icon: 'twitter' }
     ]
   }
 ]
@@ -27,8 +27,7 @@ const members = [
       Our Team
     </template>
     <template #lead>
-      The development of VitePress is guided by an international
-      team, some of whom have chosen to be featured below.
+      The development of EVChargerMap is made possible by the following people.
     </template>
   </VPTeamPageTitle>
   <VPTeamMembers
