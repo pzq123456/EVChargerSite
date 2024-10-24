@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>EV Charger Program: Charting the Sustainable Energy Transition</title>
+  <link rel="icon" href="favicon.ico">
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/leaflet.css">
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <ul>
+        <li><a href="#welcome-section">Welcome</a></li>
+        <li><a href="#main-content">Explore Data</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="welcome-section" class="welcome-section">
+    <h1>EV Charger Program: Charting the Sustainable Energy Transition</h1>
+    <p>
+      The EV Charger Program focuses on the pivotal markets of China, the United States, and Europe, meticulously tracking the global progress in EV charging infrastructure deployment. It also delves into the burgeoning convergence of distributed photovoltaic power generation technology and microgrid technology with large-scale charging stations, exploring the resilience and recovery strategies of global charging stations in the face of disaster impacts.
+    </p>
+
+    <button class="scroll-btn" onclick="scrollToContent()">Scroll Down</button>
+    <div class="scroll-icon">
+      \/
+    </div>
+  </section>
+
+  <section id="main-content" class="main-content">
+
+    <script type="module" src="main.js"></script>
+    <country-switcher></country-switcher>
+    <div id="map"></div>
+  </section>
+
+  <footer>
+    <p>EVChargerMap © 2024 | <a href="https://thetipteam.editorx.io/website/">The TIP Research Group</a></p>
+  </footer>
+
+  <script>
+    function scrollToContent() {
+      document.getElementById('main-content').scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
+
+

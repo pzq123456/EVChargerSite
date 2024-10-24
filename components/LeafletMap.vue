@@ -1,11 +1,12 @@
 <template>
-  <div ref="map" id = "map" class="leaflet-map"></div>
+  <div ref="map" class="leaflet-map"></div>
 </template>
 
 <script>
-import { onMounted, ref, onBeforeUnmount, nextTick } from 'vue';
-import L from 'leaflet';
-import 'leaflet/dist/leaflet.css';
+import { onMounted, ref, onBeforeUnmount } from 'vue';
+
+import { baseMapInfos } from "../src/baseMaps.js";
+import { getBaseMap } from "../src/utils.js";
 
 export default {
   name: 'LeafletMap',
@@ -23,19 +24,60 @@ export default {
     const map = ref(null);
 
     onMounted(() => {
-      nextTick(() => {
-        map.value = L.map('map', {
-          center: props.center,
-          zoom: props.zoom,
-        });
-        L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png', {
-          attribution: '&copy; <a href="https://carto.com/">CARTO</a>',
-        }).addTo(map.value);
-      });
+      if (typeof window !== 'undefined') {
+        // 动态加载 Leaflet JS 和 CSS
+        const leafletScript = document.createElement('script');
+        leafletScript.src = 'https://unpkg.com/leaflet@1.7.1/dist/leaflet.js';
+        leafletScript.onload = () => { // Leaflet 加载完成后初始化地图
+          // let map = L.map('map',
+          //     {
+          //         renderer: L.canvas(),
+          //         attributionControl: false // 禁用归属信息
+          //     }
+          // ).setView([37.8, -96], 4);
+
+          // let baseMaps = getBaseMap(baseMapInfos);
+          // let layerControl = L.control.layers(baseMaps).addTo(map);
+          // baseMaps["dark_all"].addTo(map);
+
+          const L = window.L;
+
+          map.value = L.map(map.value, {
+            renderer: L.canvas(),
+            attributionControl: false, // 禁用归属信息
+          }).setView(props.center, props.zoom);
+
+          const baseMaps = getBaseMap(baseMapInfos);
+          const layerControl = L.control.layers(baseMaps).addTo(map.value);
+          baseMaps.dark_all.addTo(map.value);
+
+  
+
+          // map.value = L.map(map.value, {
+          //   center: props.center,
+          //   zoom: props.zoom,
+          // });
+
+          // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          //   maxZoom: 19,
+          //   attribution: '© OpenStreetMap',
+          // }).addTo(map.value);
+
+        };
+        document.head.appendChild(leafletScript);
+
+        // 动态加载 Leaflet CSS
+        const leafletCSS = document.createElement('link');
+        leafletCSS.rel = 'stylesheet';
+        leafletCSS.href = 'https://unpkg.com/leaflet@1.7.1/dist/leaflet.css';
+        document.head.appendChild(leafletCSS);
+      }
     });
 
     onBeforeUnmount(() => {
-      map.value.remove();
+      if (map.value) {
+        map.value.remove();
+      }
     });
 
     return { map };
@@ -45,7 +87,7 @@ export default {
 
 <style>
 .leaflet-map {
-  height: 600px;  /* 根据需要调整高度 */
-  width: 100%;   /* 根据需要调整宽度 */
+  height: 600px;
+  width: 100%;
 }
 </style>
