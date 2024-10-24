@@ -10,7 +10,7 @@ import 'leaflet/dist/leaflet.css';
 import { baseMapInfos } from "../src/baseMaps.js";
 import { getBaseMap } from "../src/utils.js";
 
-import { initGeoJsonLayer } from "../src/geoJsonLayer.js";
+import { initGeoJsonLayer } from "../src/geojsonlayer.js";
 
 const infoUpdate = function (props, data) {
     const contents = props ? `<b>${props.name}</b><br />${props.count} charging stations` : 'Hover over a state';
@@ -35,38 +35,58 @@ export default {
     let mapInstance = null;
 
     onMounted(() => {
-
-      import('leaflet').then(L => {
-        mapInstance = L.map(map.value, {
-          renderer: L.canvas(),
-          attributionControl: false, // 禁用归属信息
-        }).setView(props.center, props.zoom);
-
-        initGeoJsonLayer(L);
-
-        const baseMaps = getBaseMap(baseMapInfos);
-        const layerControl = L.control.layers(baseMaps).addTo(mapInstance);
-        baseMaps.dark_all.addTo(mapInstance);
-
-        const geoJsonLayer = L.geoJsonLayer(infoUpdate);
-
-        fetch('data/GeoJSON/us_states.json').then(response => response.json()).then(data => {
-          console.log(data);
-          geoJsonLayer.updateData(data);
-        });
-
-        layerControl.addOverlay(geoJsonLayer, 'US States');
+      if (typeof window !== 'undefined') {
+        // 动态加载 Leaflet JS 和 CSS
+        const leafletScript = document.createElement('script');
+        leafletScript.src = 'https://unpkg.com/leaflet@1.7.1/dist/leaflet.js';
+        leafletScript.onload = () => { // Leaflet 加载完成后初始化地图
 
 
-        geoJsonLayer.addTo(mapInstance);
-      });
+          const L = window.L;
 
+          mapInstance = L.map(map.value, {
+            renderer: L.canvas(),
+            attributionControl: false, // 禁用归属信息
+          }).setView(props.center, props.zoom);
+
+          initGeoJsonLayer();
+
+          const baseMaps = getBaseMap(baseMapInfos);
+          const layerControl = L.control.layers(baseMaps).addTo(mapInstance);
+          baseMaps.dark_all.addTo(mapInstance);
+
+          const geoJsonLayer = L.geoJsonLayer(infoUpdate);
+
+          fetch('data/GeoJSON/us_states.json').then(response => response.json()).then(data => {
+            geoJsonLayer.updateData(data);
+          });
+
+          layerControl.addOverlay(geoJsonLayer, 'US States');
+
+          geoJsonLayer.addTo(mapInstance);
+
+          // 添加比例尺
+          L.control.scale({ position: 'bottomright' }).addTo(mapInstance);
+        };
+
+        document.head.appendChild(leafletScript);
+
+        // 动态加载 Leaflet CSS
+        const leafletCSS = document.createElement('link');
+        leafletCSS.rel = 'stylesheet';
+        leafletCSS.href = 'https://unpkg.com/leaflet@1.7.1/dist/leaflet.css';
+        document.head.appendChild(leafletCSS);
+      }
     });
 
     onBeforeUnmount(() => {
-      if (map.value) {
-        map.value.remove();
+      if (mapInstance) {
+        mapInstance.remove();
       }
+
+      mapInstance = null;
+
+      map.value = null;
     });
 
     return { map };

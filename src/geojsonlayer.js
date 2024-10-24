@@ -1,6 +1,6 @@
 import { Stastics } from "./stastics.js";
 
-export function initGeoJsonLayer(L) { // 这一步只是 向L注册了一个新的类，但是并没有实例化
+export function initGeoJsonLayer() { // 这一步只是 向L注册了一个新的类，但是并没有实例化
 
     L.GeoJsonLayer = L.Layer.extend({
         initialize: function (infoUpdate) {
