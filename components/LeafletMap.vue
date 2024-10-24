@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { onMounted, ref, onBeforeUnmount } from 'vue';
+import { onMounted, ref, onBeforeUnmount, nextTick } from 'vue';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
@@ -23,22 +23,15 @@ export default {
     const map = ref(null);
 
     onMounted(() => {
-      map.value = L.map('map', {
-        center: props.center,
-        zoom: props.zoom,
+      nextTick(() => {
+        map.value = L.map('map', {
+          center: props.center,
+          zoom: props.zoom,
+        });
+        L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png', {
+          attribution: '&copy; <a href="https://carto.com/">CARTO</a>',
+        }).addTo(map.value);
       });
-
-      // const cartodbUrl = "https://cartodb-basemaps-{s}.global.ssl.fastly.net/";
-    //   {
-    //     name: "dark_all",
-    //     url: cartodbUrl,
-    //     style: "dark_all",
-    //     attribution: '&copy; <a href="https://carto.com/">CARTO</a>'
-    // },
-
-      L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://carto.com/">CARTO</a>',
-      }).addTo(map.value);
     });
 
     onBeforeUnmount(() => {
@@ -52,7 +45,7 @@ export default {
 
 <style>
 .leaflet-map {
-  height: 400px; /* 根据需要调整高度 */
+  height: 600px;  /* 根据需要调整高度 */
   width: 100%;   /* 根据需要调整宽度 */
 }
 </style>
