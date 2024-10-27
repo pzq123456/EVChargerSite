@@ -3,8 +3,12 @@ export const themeConfig = {
     nav: [
         { text: 'Home', link: '/' },
         { text: 'About', link: '/about' },
+        { text: 'Map', link: '/map' },
+        { text: 'Data', link: '/data' },
         { text: 'Team', link: '/team' },
-        { text: 'Blog', link: '/blogs' },
+        { text: 'Publications', link: '/Publications' },
+        { text: 'News', link: '/News' },
+        { text: 'Contact', link: '/contact' },
     ],
 
     socialLinks: [
@@ -12,7 +16,7 @@ export const themeConfig = {
     ],
 
     footer: {
-        copyright: 'EVChargerMap © 2024 | <a href="https://thetipteam.editorx.io/website/">The TIP Research Group</a>'
+        copyright: 'EVChargerMap © 2024 | <a href="https://thetipteam.editorx.io/website/">The TIP Research Group</a> @ <a href="https://www.polyu.edu.hk/"> HKPolyU </a>'
 
     },
 

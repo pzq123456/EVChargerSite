@@ -4,9 +4,10 @@
 layout: home
 
 hero:
-  name: "EVChargerSite"
+  name: "Global EV Data"
   text: "A map and a database"
-  tagline: "EVChargerMap is a map and database of electric vehicle charging stations from all around the world."
+  tagline: "An open electric vehicle data initiative for sharing the latest and historical information on the electric vehicle market, policy and charging infrastructure across the globe."
+
 
   actions:
     - theme: brand
@@ -16,19 +17,19 @@ hero:
       text: Learn More
       link: /about
 
-# features:
-#   - title: "Global Coverage"
-#     details: Three main regions are covered (the US, Europe, and China_.
-#     link: /about
-#     icon: 🌍
-#   - title: "Timely Updates"
-#     details: "The database is updated every month."
-#     link: /about
-#     icon: 🔄
-#   - title: "Web based visualization & analysis"
-#     details: "The map is interactive and can be used for analysis."
-#     link: /about
-#     icon: 📊
+features:
+  - title: "Global Coverage"
+    details: Three main regions are covered (the US, Europe, and China_.
+    link: /about
+    icon: 🌍
+  - title: "Timely Updates"
+    details: "The database is updated every month."
+    link: /about
+    icon: 🔄
+  - title: "Web based visualization & analysis"
+    details: "The map is interactive and can be used for analysis."
+    link: /about
+    icon: 📊
 
 ---
 

@@ -12,6 +12,8 @@ import { getBaseMap } from "../src/utils.js";
 
 import { initGeoJsonLayer } from "../src/geojsonlayer.js";
 
+import { data } from "../loader/us.data.js";
+
 const infoUpdate = function (props, data) {
     const contents = props ? `<b>${props.name}</b><br />${props.count} charging stations` : 'Hover over a state';
     this._div.innerHTML = `<h4>US EV Charging Stations</h4>${contents}`;
@@ -36,6 +38,7 @@ export default {
 
     onMounted(() => {
       if (typeof window !== 'undefined') {
+        // console.log(data);
         // 动态加载 Leaflet JS 和 CSS
         const leafletScript = document.createElement('script');
         leafletScript.src = 'https://unpkg.com/leaflet@1.7.1/dist/leaflet.js';
@@ -57,13 +60,17 @@ export default {
 
           const geoJsonLayer = L.geoJsonLayer(infoUpdate);
 
-          fetch('data/GeoJSON/us_states.json').then(response => response.json()).then(data => {
-            geoJsonLayer.updateData(data);
-          });
+          // fetch('data/GeoJSON/us_states.json').then(response => response.json()).then(data => {
+          //   geoJsonLayer.updateData(data);
+          // });
+
 
           layerControl.addOverlay(geoJsonLayer, 'US States');
 
           geoJsonLayer.addTo(mapInstance);
+
+          geoJsonLayer.updateData(data);
+
 
           // 添加比例尺
           L.control.scale({ position: 'bottomright' }).addTo(mapInstance);
