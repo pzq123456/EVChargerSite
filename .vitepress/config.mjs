@@ -6,5 +6,5 @@ export default defineConfig({
   title: "Global EV Data",
   description: "An open electric vehicle data initiative for sharing the latest and historical information on the electric vehicle market, policy and charging infrastructure across the globe.",
   themeConfig: themeConfig,
-  base: '/GlobalEVData/',
+  base: '/EVChargerSite/',
 })
