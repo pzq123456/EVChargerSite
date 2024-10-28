@@ -7,6 +7,9 @@ hero:
   name: "Global EV Data"
   text: "A map and a database"
   tagline: "An open electric vehicle data initiative for sharing the latest and historical information on the electric vehicle market, policy and charging infrastructure across the globe."
+  image:
+    src: "/logo.png"
+    alt: "Global EV Data"
 
 
   actions:

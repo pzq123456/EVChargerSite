@@ -11,6 +11,8 @@ export const themeConfig = {
         { text: 'Contact', link: '/contact' },
     ],
 
+    logo: '/logo.png',
+
     socialLinks: [
         { icon: 'github', link: 'https://github.com/pzq123456/EVChargerSite' }
     ],
