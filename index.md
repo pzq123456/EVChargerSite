@@ -11,7 +11,6 @@ hero:
     src: "/logo.png"
     alt: "Global EV Data"
 
-
   actions:
     - theme: brand
       text: Get Started
