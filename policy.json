@@ -1,0 +1,153 @@
+{
+    "Austria": {
+      "tax_benefits": "VAT deduction and exemption for zero-emission cars.",
+      "purchase_incentives": [
+        "Bonus for new cars and vans with fully-electric range of 50km and gross list price of ≤€60,000:",
+        "€3,000 for BEVs and FCEVs.",
+        "€1,250 for PHEVs and EREVs."
+      ]
+    },
+    "Belgium": {
+      "tax_benefits": "Deductibility of 100% under corporate taxation for zero-emission vehicles.",
+      "purchase_incentives": [
+        "Minimum rate for zero-emission vehicles (€61.50 in Brussels and Wallonia, €76.32 + 10% municipal tax in Flanders).",
+        "Flanders: Exemptions for BEVs, PHEVs, and FCEVs emitting ≤50g CO2/km until 2020.",
+        "Newly-registered leased zero-emission vehicles are exempted."
+      ]
+    },
+    "Bulgaria": {
+      "tax_benefits": "▬",
+      "purchase_incentives": "Exemption for electric vehicles."
+    },
+    "Croatia": {
+      "tax_benefits": "No excise duties for electric vehicles.",
+      "purchase_incentives": "▬"
+    },
+    "Cyprus": {
+      "tax_benefits": "Exemption for vehicles emitting <120g CO2/km.",
+      "purchase_incentives": "▬"
+    },
+    "Czech Republic": {
+      "tax_benefits": [
+        "Exemption from registration charges and vignettes for BEVs and FCEVs.",
+        "Incentive scheme: €9,200 for BEVs, €4,600 for PHEVs."
+      ],
+      "purchase_incentives": "▬"
+    },
+    "Denmark": {
+      "tax_benefits": "Exemption for FCEVs until the end of 2021.",
+      "purchase_incentives": [
+        "BEVs and PHEVs pay reduced registration tax (20% in 2020, increasing in subsequent years).",
+        "Temporary deduction in taxable personal income for private users."
+      ]
+    },
+    "Estonia": {
+      "tax_benefits": "Bonus of €5,000 for the purchase of a full-electric car or van <€50,000.",
+      "purchase_incentives": "▬"
+    },
+    "Finland": {
+      "tax_benefits": "Minimum rate for zero-emission vehicles.",
+      "purchase_incentives": "Incentive of €2,000 for households to purchase or lease a new BEV ≤€50,000 (until 2021)."
+    },
+    "France": {
+      "tax_benefits": "Regions provide exemptions for alternatively-powered vehicles.",
+      "purchase_incentives": "▬"
+    },
+    "Germany": {
+      "tax_benefits": "Temporary VAT reduction from 19% to 16%.",
+      "purchase_incentives": "▬"
+    },
+    "Greece": {
+      "tax_benefits": [
+        "Exemption for BEV cars.",
+        "50% reduction for HEV and PHEV cars.",
+        "Exemption for trucks with electric motors."
+      ],
+      "purchase_incentives": "▬"
+    },
+    "Hungary": {
+      "tax_benefits": "10-year exemption for BEVs and FCEVs registered until 2020.",
+      "purchase_incentives": [
+        "Exemption from CO2-based tax for vehicles emitting <20g CO2/km.",
+        "Incentives for purchasing BEVs and PHEVs."
+      ]
+    },
+    "Ireland": {
+      "tax_benefits": [
+        "Reduction for BEVs up to €5,000; PHEVs up to €2,500; HEVs up to €1,500.",
+        "Minimum rate (€120 per year) for BEVs.",
+        "Reduced rate (€170 per year) for PHEVs ≤60g CO2/km."
+      ],
+      "purchase_incentives": "'Benefit-in-kind concession' for electric cars and vans <€50,000."
+    },
+    "Italy": {
+      "tax_benefits": "Five-year exemption for electric vehicles from first registration.",
+      "purchase_incentives": "75% reduction of the tax rate for equivalent petrol vehicles after five years."
+    },
+    "Latvia": {
+      "tax_benefits": "Exemption for electric vehicles; Minimum rate (€10) for BEVs.",
+      "purchase_incentives": "Exemption for cars emitting ≤50g CO2/km registered after 31 December 2009."
+    },
+    "Lithuania": {
+      "tax_benefits": "▬",
+      "purchase_incentives": "▬"
+    },
+    "Luxembourg": {
+      "tax_benefits": "Minimum rate for vehicles emitting ≤90g CO2/km.",
+      "purchase_incentives": [
+        "Up to €5,000 for BEVs and PHEVs ≤50g CO2/km.",
+        "Purchase incentives for individuals."
+      ]
+    },
+    "Malta": {
+      "tax_benefits": "Minimum rate for vehicles emitting <100g CO2/km.",
+      "purchase_incentives": "▬"
+    },
+    "Netherlands": {
+      "tax_benefits": "Exemption for zero-emission cars.",
+      "purchase_incentives": [
+        "Subsidy scheme (SEPP) for buying or leasing new or used BEV.",
+        "Environmental investment deductions."
+      ]
+    },
+    "Poland": {
+      "tax_benefits": "Exemption for BEVs and PHEVs ≤2,000cc until the end of 2020.",
+      "purchase_incentives": "▬"
+    },
+    "Portugal": {
+      "tax_benefits": "VAT deduction for BEVs <€62,000 and PHEVs <€50,000.",
+      "purchase_incentives": "▬"
+    },
+    "Romania": {
+      "tax_benefits": "▬",
+      "purchase_incentives": "▬"
+    },
+    "Slovakia": {
+      "tax_benefits": "BEVs or PHEVs combined with other fuel types are depreciated for two years.",
+      "purchase_incentives": "▬"
+    },
+    "Slovenia": {
+      "tax_benefits": "Minimum rate (0.5%) for vehicles emitting <110g CO2/km.",
+      "purchase_incentives": "▬"
+    },
+    "Spain": {
+      "tax_benefits": "Exemption from special tax for vehicles emitting ≤120g CO2/km.",
+      "purchase_incentives": [
+        "Up to €10,000 for purchasing a new BEV, €4,250 for new PHEVs ≤50g CO2/km."
+      ]
+    },
+    "Sweden": {
+      "tax_benefits": "▬",
+      "purchase_incentives": "▬"
+    },
+    "United Kingdom": {
+      "tax_benefits": [
+        "Exemption for zero-emission vehicles.",
+        "Reduced annual road tax for zero-emission vehicles."
+      ],
+      "purchase_incentives": [
+        "Government grants for zero-emission cars up to £3,000 if price is <£50,000."
+      ]
+    }
+  }
+  

@@ -9,8 +9,8 @@
 </template>
   
 <script>
-    import Drawer from "./components/Drawer.vue";
-    import LeafletMap from './components/LeafletMap.vue';
+    import Drawer from "@/components/Drawer.vue";
+    import LeafletMap from '@/components/LeafletMap.vue';
 
     export default {
     name: "App",
