@@ -28,7 +28,7 @@
 import { useMapStore } from '@/stores/mapStore';
 import { computed } from 'vue';
 import { data } from '@/loader/policy.data.js';
-import law from '@/components/policy/law.vue';
+import law from '@/components/policy/Law.vue';
 
 const mapStore = useMapStore();
 
