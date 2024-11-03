@@ -12,7 +12,7 @@
     import { ref } from "vue";
     import Drawer from "@/components/Drawer.vue";
     import LeafletMap from '@/components/LeafletMap.vue';
-    import counter from '@/components/counter.vue';
+    import counter from '@/components/Counter.vue';
 
     let isDrawerOpen = ref(false);
 
