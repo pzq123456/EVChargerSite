@@ -1,6 +1,6 @@
 <template>
     <Drawer :is-open="isDrawerOpen" :speed="500" @close="closeDrawer">
-        <slot>  </slot>
+        <counter />
     </Drawer>
     <button @click="toggleDrawer">Toggle Drawer</button>
 
@@ -8,31 +8,19 @@
 
 </template>
   
-<script>
+<script setup>
+    import { ref } from "vue";
     import Drawer from "@/components/Drawer.vue";
     import LeafletMap from '@/components/LeafletMap.vue';
+    import counter from '@/components/counter.vue';
 
-    export default {
-    name: "App",
-    components: {
-        Drawer,
-        LeafletMap,
-    },
+    let isDrawerOpen = ref(false);
 
-    data() {
-        return {
-            isDrawerOpen: false,
-        };
-    },
+    const toggleDrawer = () => {
+        isDrawerOpen.value = !isDrawerOpen.value;
+    };
 
-    methods: {
-            toggleDrawer() {
-                this.isDrawerOpen = !this.isDrawerOpen;
-            },
-
-            closeDrawer() {
-                this.isDrawerOpen = false;
-            },
-        },
+    const closeDrawer = () => {
+        isDrawerOpen.value = false;
     };
 </script>
