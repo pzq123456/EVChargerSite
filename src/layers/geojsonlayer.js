@@ -3,13 +3,17 @@ import { Stastics } from "./stastics.js";
 export function initGeoJsonLayer() { // 这一步只是 向L注册了一个新的类，但是并没有实例化
 
     L.GeoJsonLayer = L.Layer.extend({
-        initialize: function (infoUpdate) {
+        initialize: function (infoUpdate, clickCallback = null) {
             this._stastics = new Stastics(); // 单值统计
             // this._grades = grades;
             this._colors = DefaultColors;
             this._infoUpdate = infoUpdate;
             this._data = DefaultGeoJson;
             this._getVal = (d) => parseInt(d.properties.count);
+            if (clickCallback) {
+                console.log('clickCallback')
+                this._clickCallback = clickCallback;
+            }
         },
 
         setColors: function (colors) {
@@ -94,7 +98,6 @@ export function initGeoJsonLayer() { // 这一步只是 向L注册了一个新�
             });
 
             layer.bringToFront();
-            // console.log(this._info)
             this._info.update(layer.feature.properties);
         },
 
@@ -105,6 +108,9 @@ export function initGeoJsonLayer() { // 这一步只是 向L注册了一个新�
 
         _zoomToFeature: function (e) {
             this._map.fitBounds(e.target.getBounds());
+            if (this._clickCallback) {
+                this._clickCallback(e.target.feature.properties);
+            }
         },
 
         _createInfo: function (infoUpdate = this._infoUpdate) {

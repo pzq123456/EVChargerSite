@@ -14,17 +14,6 @@ import { data } from "@/loader/eu.data.js";
 
 import { useMapStore } from '@/stores/mapStore';
 
-// const infoUpdate = function (props, data) {
-//     const contents = props ? `<b>${props.name}</b><br />${props.count} charging stations` : 'Hover over a state';
-//     this._div.innerHTML = `<h4>US EV Charging Stations</h4>${contents}`;
-//     if (props) {
-//         this._div.style.display = 'block';
-//         console.log(props.name);
-//     } else {
-//         this._div.style.display = 'none';
-//     }
-// }
-
 const infoUpdate = function (props, data) {
   const mapStore = useMapStore();
 
@@ -40,6 +29,17 @@ const infoUpdate = function (props, data) {
   } else {
     this._div.style.display = 'none';
     mapStore.updateHoveredRegion(null);  // 没有悬停时重置信息
+  }
+};
+
+const clickCallback = function (properties) {
+  // console.log("clickCallback");
+  const mapStore = useMapStore();
+  
+  if (properties){
+    mapStore.updateSelectedRegion(properties);
+  } else {
+    mapStore.updateSelectedRegion(null);
   }
 };
 
@@ -90,7 +90,7 @@ onMounted(() => {
       const layerControl = L.control.layers(baseMaps).addTo(mapInstance);
       baseMaps.dark_all.addTo(mapInstance);
 
-      const geoJsonLayer = L.geoJsonLayer(infoUpdate);
+      const geoJsonLayer = L.geoJsonLayer(infoUpdate, clickCallback);
 
       layerControl.addOverlay(geoJsonLayer, 'US States');
 

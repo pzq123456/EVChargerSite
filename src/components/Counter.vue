@@ -1,25 +1,82 @@
 <template>
-  <div v-if="hoveredRegion">
-    <p>当前悬停的区域: {{ hoveredRegion.name }}</p>
-    <p>充电站数量: {{ hoveredRegion.count }}</p>
-  </div>
-  <div v-else>
-    <p>悬停在某个区域以显示信息</p>
-  </div>
+    <div v-if="selectedRegion" class="region">
+      <h1>{{ selectedRegion.name }}</h1>
+      <p>CargeStation Count: 
+        <p class="num">
+          {{ selectedRegion.count }}
+        </p>
+      </p>
+    </div>
+
+    <div v-else>
+      <p>please select a region</p>
+    </div>
+
+    <div v-if="policy" class="policy">
+      <law :policy="policy" />
+    </div>
+
+    <div v-else>
+      <div class="notfound">
+        <p>Policy not found</p>
+      </div>
+    </div>
 </template>
 
-<script>
+<script setup>
+
 import { useMapStore } from '@/stores/mapStore';
 import { computed } from 'vue';
+import { data } from '@/loader/policy.data.js';
+import law from '@/components/policy/law.vue';
 
-export default {
-  setup() {
-    const mapStore = useMapStore();
-    const hoveredRegion = computed(() => mapStore.hoveredRegion);
+const mapStore = useMapStore();
 
-    return {
-      hoveredRegion
-    };
+const hoveredRegion = computed(() => mapStore.hoveredRegion);
+const selectedRegion = computed(() => mapStore.selectedRegion);
+
+// 匹配 选择区域国家名 与 数据中的国家名 匹配结果返回 data 中的数据 若无匹配则返回 null
+
+function getRegionData(regionName) {
+  // data 是一个 json 文件 国家名作为键值
+  return data[regionName] || null;
+}
+
+// 获取国家的法律条文 并渲染到页面上
+
+const policy = computed(() => {
+  if (selectedRegion.value) {
+    const regionData = getRegionData(selectedRegion.value.name);
+    return regionData;
   }
-};
+  return null;
+});
+
 </script>
+
+<style scoped>
+  .policy {
+    border-top: 1px solid var(--vp-c-border);
+  }
+  h1 {
+    font-size: 1.5em;
+  }
+  .region {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: var(--vp-c-gray-soft);
+  }
+
+  .num {
+    font-size: 1.5em;
+    color: var(--vp-c-success-1);
+  }
+
+  .notfound {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: var(--vp-c-gray-soft);
+    color: var(--vp-c-warning-1);
+  }
+
+</style>

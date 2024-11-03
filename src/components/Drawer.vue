@@ -41,14 +41,14 @@ export default {
     backgroundColor: {
       type: String,
       required: false,
-      default: "--vp-c-bg"
+      default: "var(--vp-c-bg-alt)",
     },
 
     // 高斯模糊
     blur: {
       type: String,
       required: false,
-      default: "5px",
+      default: "30px",
     },
   },
 

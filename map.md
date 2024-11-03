@@ -2,8 +2,8 @@
 layout: page
 ---
 
-<app/>
+<mymap />
 
 <script setup>
-    import app from './app.vue'
+    import mymap from '@/layouts/map.vue'
 </script>
