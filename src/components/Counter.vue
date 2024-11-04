@@ -1,6 +1,7 @@
 <template>
     <div v-if="selectedRegion" class="region">
-      <h1>{{ selectedRegion.name }}</h1>
+      <timezone :country="selectedRegion.name" :countryFlag="selectedRegion.ISO2" />
+      <!-- <h1>{{ selectedRegion.name }}</h1> -->
       <p>CargeStation Count: 
         <p class="num">
           {{ selectedRegion.count }}
@@ -29,6 +30,7 @@ import { useMapStore } from '@/stores/mapStore';
 import { computed } from 'vue';
 import { data } from '@/loader/policy.data.js';
 import law from '@/components/policy/Law.vue';
+import timezone from '@/components/chart/TimeZone.vue';
 
 const mapStore = useMapStore();
 
@@ -57,13 +59,14 @@ const policy = computed(() => {
 <style scoped>
   .policy {
     border-top: 1px solid var(--vp-c-border);
+    padding-top: 10px;
   }
   h1 {
     font-size: 1.5em;
   }
   .region {
     font-family: Arial, sans-serif;
-    margin: 20px;
+    margin: 10px;
     background-color: var(--vp-c-gray-soft);
   }
 

@@ -9,7 +9,12 @@
             backdropFilter: `blur(${blur})`,
           }">
         <slot></slot>
+        <div class="controlBar">
+          <button @click="closeDrawer" class="close-btn">Close > </button>
+        </div>
       </div>
+
+
     </div>
 </template>
 
@@ -28,7 +33,7 @@ export default {
     maxWidth: {
       type: String,
       required: false,
-      default: "600px",
+      default: "450px",
     },
 
     // Transition Speed in Milliseconds
@@ -41,7 +46,7 @@ export default {
     backgroundColor: {
       type: String,
       required: false,
-      default: "var(--vp-c-bg-alt)",
+      default: "var(--vp-c-bg)",
     },
 
     // 高斯模糊
@@ -130,5 +135,23 @@ export default {
     flex-direction: column;
     transform: translateX(100%);
     box-shadow: 0 2px 6px var(--vp-c-gutter);
+  }
+
+  .controlBar {
+    /* 位于父元素最底部 */
+    margin-top: auto;
+    padding: 5px;
+    display: flex;
+    justify-content: flex-end;
+    background-color: var(--vp-c-gutter);
+  }
+
+  .close-btn {
+    padding: 5px 10px;
+    background-color: var(--vp-c-danger-1);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
   }
 </style>

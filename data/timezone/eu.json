@@ -1,0 +1,206 @@
+{
+    "Albania": {
+        "flag": "🇦🇱",
+        "timeZone": "Europe/Tirane"
+    },
+    "Andorra": {
+        "flag": "🇦🇩",
+        "timeZone": "Europe/Andorra"
+    },
+    "Armenia": {
+        "flag": "🇦🇲",
+        "timeZone": "Asia/Yerevan"
+    },
+    "Austria": {
+        "flag": "🇦🇹",
+        "timeZone": "Europe/Vienna"
+    },
+    "Azerbaijan": {
+        "flag": "🇦🇿",
+        "timeZone": "Asia/Baku"
+    },
+    "Belarus": {
+        "flag": "🇧🇾",
+        "timeZone": "Europe/Minsk"
+    },
+    "Belgium": {
+        "flag": "🇧🇪",
+        "timeZone": "Europe/Brussels"
+    },
+    "Bosnia and Herzegovina": {
+        "flag": "🇧🇦",
+        "timeZone": "Europe/Sarajevo"
+    },
+    "Bulgaria": {
+        "flag": "🇧🇬",
+        "timeZone": "Europe/Sofia"
+    },
+    "Croatia": {
+        "flag": "🇭🇷",
+        "timeZone": "Europe/Zagreb"
+    },
+    "Cyprus": {
+        "flag": "🇨🇾",
+        "timeZone": "Asia/Nicosia"
+    },
+    "Czech Republic": {
+        "flag": "🇨🇿",
+        "timeZone": "Europe/Prague"
+    },
+    "Denmark": {
+        "flag": "🇩🇰",
+        "timeZone": "Europe/Copenhagen"
+    },
+    "Estonia": {
+        "flag": "🇪🇪",
+        "timeZone": "Europe/Tallinn"
+    },
+    "Finland": {
+        "flag": "🇫🇮",
+        "timeZone": "Europe/Helsinki"
+    },
+    "France": {
+        "flag": "🇫🇷",
+        "timeZone": "Europe/Paris"
+    },
+    "Georgia": {
+        "flag": "🇬🇪",
+        "timeZone": "Asia/Tbilisi"
+    },
+    "Germany": {
+        "flag": "🇩🇪",
+        "timeZone": "Europe/Berlin"
+    },
+    "Greece": {
+        "flag": "🇬🇷",
+        "timeZone": "Europe/Athens"
+    },
+    "Hungary": {
+        "flag": "🇭🇺",
+        "timeZone": "Europe/Budapest"
+    },
+    "Iceland": {
+        "flag": "🇮🇸",
+        "timeZone": "Atlantic/Reykjavik"
+    },
+    "Ireland": {
+        "flag": "🇮🇪",
+        "timeZone": "Europe/Dublin"
+    },
+    "Italy": {
+        "flag": "🇮🇹",
+        "timeZone": "Europe/Rome"
+    },
+    "Kazakhstan": {
+        "flag": "🇰🇿",
+        "timeZone": "Asia/Almaty"
+    },
+    "Kosovo": {
+        "flag": "🇽🇰",
+        "timeZone": "Europe/Belgrade"
+    },
+    "Latvia": {
+        "flag": "🇱🇻",
+        "timeZone": "Europe/Riga"
+    },
+    "Liechtenstein": {
+        "flag": "🇱🇮",
+        "timeZone": "Europe/Vaduz"
+    },
+    "Lithuania": {
+        "flag": "🇱🇹",
+        "timeZone": "Europe/Vilnius"
+    },
+    "Luxembourg": {
+        "flag": "🇱🇺",
+        "timeZone": "Europe/Luxembourg"
+    },
+    "Malta": {
+        "flag": "🇲🇹",
+        "timeZone": "Europe/Malta"
+    },
+    "Moldova": {
+        "flag": "🇲🇩",
+        "timeZone": "Europe/Chisinau"
+    },
+    "Monaco": {
+        "flag": "🇲🇨",
+        "timeZone": "Europe/Monaco"
+    },
+    "Montenegro": {
+        "flag": "🇲🇪",
+        "timeZone": "Europe/Podgorica"
+    },
+    "Netherlands": {
+        "flag": "🇳🇱",
+        "timeZone": "Europe/Amsterdam"
+    },
+    "North Macedonia": {
+        "flag": "🇲🇰",
+        "timeZone": "Europe/Skopje"
+    },
+    "Norway": {
+        "flag": "🇳🇴",
+        "timeZone": "Europe/Oslo"
+    },
+    "Poland": {
+        "flag": "🇵🇱",
+        "timeZone": "Europe/Warsaw"
+    },
+    "Portugal": {
+        "flag": "🇵🇹",
+        "timeZone": "Europe/Lisbon"
+    },
+    "Romania": {
+        "flag": "🇷🇴",
+        "timeZone": "Europe/Bucharest"
+    },
+    "Russia": {
+        "flag": "🇷🇺",
+        "timeZone": "Europe/Moscow"
+    },
+    "San Marino": {
+        "flag": "🇸🇲",
+        "timeZone": "Europe/San_Marino"
+    },
+    "Serbia": {
+        "flag": "🇷🇸",
+        "timeZone": "Europe/Belgrade"
+    },
+    "Slovakia": {
+        "flag": "🇸🇰",
+        "timeZone": "Europe/Bratislava"
+    },
+    "Slovenia": {
+        "flag": "🇸🇮",
+        "timeZone": "Europe/Ljubljana"
+    },
+    "Spain": {
+        "flag": "🇪🇸",
+        "timeZone": "Europe/Madrid"
+    },
+    "Sweden": {
+        "flag": "🇸🇪",
+        "timeZone": "Europe/Stockholm"
+    },
+    "Switzerland": {
+        "flag": "🇨🇭",
+        "timeZone": "Europe/Zurich"
+    },
+    "Turkey": {
+        "flag": "🇹🇷",
+        "timeZone": "Europe/Istanbul"
+    },
+    "Ukraine": {
+        "flag": "🇺🇦",
+        "timeZone": "Europe/Kiev"
+    },
+    "United Kingdom": {
+        "flag": "🇬🇧",
+        "timeZone": "Europe/London"
+    },
+    "Vatican City": {
+        "flag": "🇻🇦",
+        "timeZone": "Europe/Vatican"
+    }
+}
