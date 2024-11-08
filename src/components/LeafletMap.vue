@@ -25,7 +25,7 @@ const infoUpdate = function (props, data) {
   if (props) {
     this._div.style.display = 'block';
     mapStore.updateHoveredRegion(props);  // 更新悬停区域信息
-    console.log(props.name);
+    // console.log(props.name);
   } else {
     this._div.style.display = 'none';
     mapStore.updateHoveredRegion(null);  // 没有悬停时重置信息

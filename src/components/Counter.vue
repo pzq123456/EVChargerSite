@@ -2,11 +2,11 @@
     <div v-if="selectedRegion" class="region">
       <timezone :country="selectedRegion.name" :countryFlag="selectedRegion.ISO2" />
       <!-- <h1>{{ selectedRegion.name }}</h1> -->
-      <p>CargeStation Count: 
+      CargeStation Count: 
         <p class="num">
           {{ selectedRegion.count }}
         </p>
-      </p>
+
     </div>
 
     <div v-else>
@@ -22,6 +22,9 @@
         <p>Policy not found</p>
       </div>
     </div>
+
+    <bar-chart />
+
 </template>
 
 <script setup>
@@ -31,6 +34,7 @@ import { computed } from 'vue';
 import { data } from '@/loader/policy.data.js';
 import law from '@/components/policy/Law.vue';
 import timezone from '@/components/chart/TimeZone.vue';
+import BarChart from './chart/BarChart.vue';
 
 const mapStore = useMapStore();
 
