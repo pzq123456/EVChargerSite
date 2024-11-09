@@ -105,6 +105,13 @@ export default {
   mounted() {
     this.isVisible = this.isOpen;
   },
+
+  // unmounted 时，恢复滚动
+  beforeUnmount() {
+    this.toggleBackgroundScrolling(false);
+    // 同时关闭自身
+    this.closeDrawer();
+  },
 };
 </script>
 
