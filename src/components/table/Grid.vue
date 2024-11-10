@@ -72,7 +72,12 @@ function capitalize(str) {
 table {
   border: 2px solid var(--vp-c-border);
   border-radius: 3px;
-  background-color: var(--vp-c-gray-3);
+  margin-top: 20px;
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--vp-c-background);
+  /* 横向滚动条 */
+  overflow-x: auto;
 }
 
 th {
@@ -83,7 +88,7 @@ th {
 }
 
 td {
-  background-color: var(--vp-c-gray-1);
+  background-color: var(--vp-c-gray-soft);
 }
 
 th,

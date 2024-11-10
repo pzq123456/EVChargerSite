@@ -1,11 +1,4 @@
-<script setup>
-  import test from '@/components/test.vue'
-</script>
-
 # Markdown Extension Examples
-
-<test />
-
 This page demonstrates some of the built-in markdown extensions provided by VitePress.
 
 ## Syntax Highlighting

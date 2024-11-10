@@ -98,7 +98,7 @@ export function defaultMainScript(L, mapInstance) {
 
 <style>
 .leaflet-map {
-  height: 85vh;
+  height: 80vh;
   width: 100%;
 }
 .custom-popup .leaflet-popup-content-wrapper {
