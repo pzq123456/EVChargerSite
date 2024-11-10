@@ -28,28 +28,27 @@
 </template>
 
 <script setup>
-
+/**
+ * @file mapDetails.vue
+ * - 地图详情展示组件，用户点击地图上的某一区域时弹出
+ * - 可以展示包括时区、法律条文、柱状图等信息
+ * - 后续会集成更多的数据展示
+ */
 import { useMapStore } from '@/stores/mapStore';
 import { computed } from 'vue';
-import { data } from '@/loader/policy.data.js';
+
 import law from '@/components/policy/Law.vue';
 import timezone from '@/components/chart/TimeZone.vue';
-import BarChart from './chart/BarChart.vue';
+import BarChart from '@/components/chart/BarChart.vue';
+
+import { getRegionData } from '@/services/law.js';
 
 const mapStore = useMapStore();
 
-const hoveredRegion = computed(() => mapStore.hoveredRegion);
+// const hoveredRegion = computed(() => mapStore.hoveredRegion);
 const selectedRegion = computed(() => mapStore.selectedRegion);
 
-// 匹配 选择区域国家名 与 数据中的国家名 匹配结果返回 data 中的数据 若无匹配则返回 null
-
-function getRegionData(regionName) {
-  // data 是一个 json 文件 国家名作为键值
-  return data[regionName] || null;
-}
-
 // 获取国家的法律条文 并渲染到页面上
-
 const policy = computed(() => {
   if (selectedRegion.value) {
     const regionData = getRegionData(selectedRegion.value.name);

@@ -35,8 +35,9 @@ features:
 
 ---
 
+<LeafletMap />
+
 <script setup>
-import test from '@/components/test.vue'
+    import LeafletMap from '@/components/LeafletMap.vue';
 </script>
 
-<test />

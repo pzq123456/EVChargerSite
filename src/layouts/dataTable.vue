@@ -1,17 +1,9 @@
+
 <template>
-    <div>
-        <h1>DataTable</h1>
-    </div>
+  <Table />
 </template>
-  
+
 <script setup>
-// import { ref, defineProps } from 'vue';
-
-// const props = defineProps();
-
-
+import Table from '../components/table/Table.vue';
 </script>
 
-<style scoped>
-
-</style>

@@ -3,48 +3,15 @@
 </template>
 
 <script setup>
+/**
+ * @file LeafletMap.vue
+ * @description Leaflet 地图组件
+ * 封装 Leaflet 为纯粹的地图组件，不包含任何业务逻辑
+ * - 使用 mainScript 属性传入主要的地图脚本例如：加载地图图层、控制器等
+ */
 import { onMounted, ref, onBeforeUnmount } from 'vue';
 
-import { baseMapInfos } from "../layers/baseMaps.js";
-import { getBaseMap } from "../layers/utils.js";
-
-import { initGeoJsonLayer } from "../layers/geojsonlayer.js";
-
-import { data } from "@/loader/eu.data.js";
-
-import { useMapStore } from '@/stores/mapStore';
-
-const infoUpdate = function (props, data) {
-  const mapStore = useMapStore();
-
-  const contents = props
-    ? `<b>${props.name}</b><br />${props.count} charging stations`
-    : 'Hover over a state';
-  this._div.innerHTML = `<h4>US EV Charging Stations</h4>${contents}`;
-  
-  if (props) {
-    this._div.style.display = 'block';
-    mapStore.updateHoveredRegion(props);  // 更新悬停区域信息
-    // console.log(props.name);
-  } else {
-    this._div.style.display = 'none';
-    mapStore.updateHoveredRegion(null);  // 没有悬停时重置信息
-  }
-};
-
-const clickCallback = function (properties) {
-  // console.log("clickCallback");
-  const mapStore = useMapStore();
-  
-  if (properties){
-    mapStore.updateSelectedRegion(properties);
-  } else {
-    mapStore.updateSelectedRegion(null);
-  }
-};
-
 const map = ref(null);
-
 let mapInstance = null;
 
 const props = defineProps({
@@ -52,9 +19,15 @@ const props = defineProps({
     type: Array,
     default: () => [50, 10],
   },
+  
   zoom: {
     type: Number,
     default: 4,
+  },
+
+  mainScript: {
+    type: Function,
+    default: defaultMainScript,
   },
 });
 
@@ -74,8 +47,8 @@ function loadLeafletResources(callback) {
 }
 
 onMounted(() => {
-  if (typeof window !== 'undefined') {
 
+  if (typeof window !== 'undefined') {
     loadLeafletResources(() => {
       const L = window.L;
 
@@ -84,22 +57,8 @@ onMounted(() => {
         attributionControl: false, // 禁用归属信息
       }).setView(props.center, props.zoom);
 
-      initGeoJsonLayer();
+      props.mainScript(L, mapInstance);
 
-      const baseMaps = getBaseMap(baseMapInfos);
-      const layerControl = L.control.layers(baseMaps).addTo(mapInstance);
-      baseMaps.dark_all.addTo(mapInstance);
-
-      const geoJsonLayer = L.geoJsonLayer(infoUpdate, clickCallback);
-
-      layerControl.addOverlay(geoJsonLayer, 'US States');
-
-      geoJsonLayer.addTo(mapInstance);
-
-      geoJsonLayer.updateData(data);
-
-      // 添加比例尺
-      L.control.scale({ position: 'bottomright' }).addTo(mapInstance);
     });}
 });
 
@@ -111,91 +70,35 @@ onBeforeUnmount(() => {
   mapInstance = null;
 
   map.value = null;
+
+  // 移除 Leaflet CSS
+  const leafletCSS = document.querySelector('link[href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"]');
+  leafletCSS && leafletCSS.remove();
+
+  // 移除 Leaflet JS
+  const leafletScript = document.querySelector('script[src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"]');
+  leafletScript && leafletScript.remove();
+
 });
 
+</script>
 
+<script type="module">
+import { baseMapInfos } from "../layers/baseMaps.js";
+import { getBaseMap } from "../layers/utils.js";
 
-    
+export function defaultMainScript(L, mapInstance) {
 
-// export default {
-//   name: 'LeafletMap',
-//   props: {
-//     center: {
-//       type: Array,
-//       default: () => [50, 10],
-//     },
-//     zoom: {
-//       type: Number,
-//       default: 4,
-//     },
-//   },
-//   setup(props) {
-//     const map = ref(null);
+  const baseMaps = getBaseMap(baseMapInfos);
+  const layerControl = L.control.layers(baseMaps).addTo(mapInstance);
 
-//     let mapInstance = null;
-
-//     onMounted(() => {
-//       if (typeof window !== 'undefined') {
-//         // console.log(data);
-//         // 动态加载 Leaflet JS 和 CSS
-//         const leafletScript = document.createElement('script');
-//         leafletScript.src = 'https://unpkg.com/leaflet@1.7.1/dist/leaflet.js';
-//         leafletScript.onload = () => { // Leaflet 加载完成后初始化地图
-
-
-//           const L = window.L;
-
-//           mapInstance = L.map(map.value, {
-//             renderer: L.canvas(),
-//             attributionControl: false, // 禁用归属信息
-//           }).setView(props.center, props.zoom);
-
-//           initGeoJsonLayer();
-
-//           const baseMaps = getBaseMap(baseMapInfos);
-//           const layerControl = L.control.layers(baseMaps).addTo(mapInstance);
-//           baseMaps.dark_all.addTo(mapInstance);
-
-//           const geoJsonLayer = L.geoJsonLayer(infoUpdate);
-
-//           layerControl.addOverlay(geoJsonLayer, 'US States');
-
-//           geoJsonLayer.addTo(mapInstance);
-
-//           geoJsonLayer.updateData(data);
-
-//           // 添加比例尺
-//           L.control.scale({ position: 'bottomright' }).addTo(mapInstance);
-//         };
-
-//         document.head.appendChild(leafletScript);
-
-//         // 动态加载 Leaflet CSS
-//         const leafletCSS = document.createElement('link');
-//         leafletCSS.rel = 'stylesheet';
-//         leafletCSS.href = 'https://unpkg.com/leaflet@1.7.1/dist/leaflet.css';
-//         document.head.appendChild(leafletCSS);
-//       }
-//     });
-
-//     onBeforeUnmount(() => {
-//       if (mapInstance) {
-//         mapInstance.remove();
-//       }
-
-//       mapInstance = null;
-
-//       map.value = null;
-//     });
-
-//     return { map };
-//   },
-// };
+  baseMaps.dark_all.addTo(mapInstance);
+}
 </script>
 
 <style>
 .leaflet-map {
-  height: 600px;
+  height: 85vh;
   width: 100%;
 }
 .custom-popup .leaflet-popup-content-wrapper {
