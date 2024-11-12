@@ -4,30 +4,60 @@
 
 <script setup>
 import DemoGrid from './Grid.vue'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
-import { data } from '@/loader/eu.data.js'
+const props = defineProps({
+  geoJSONData: Object
+})
 
+const geoJSONData = ref(props.geoJSONData)
 
 const searchQuery = ref('')
-const { gridColumns, gridData } = geoJSONParse(data)
+
+const gridData = ref([])
+
+const gridColumns = ref([])
+
+watch(geoJSONData, (newVal) => {
+  const { gridData: data, gridColumns: columns } = geoJSONParse(newVal)
+  gridData.value = data
+  gridColumns.value = columns
+}, { immediate: true })
 
 function geoJSONParse(data) {
-    console.log(data);
     const features = data.features;
     const columns = Object.keys(features[0].properties);
-    const gridData = features.map((feature) => {
-        return feature.properties;
-    });
-    return { gridColumns: columns, gridData };
-}
 
+    // 加一列默认的 id
+    columns.unshift('id');
+
+    let gridData = features.map((feature, index) => {
+        return {
+            id: index,
+            ...feature.properties
+        };
+    });
+
+    // 加一列 geometry 将 geometry 的类型展示出来
+    columns.push('geometry');
+
+    gridData.forEach((item, index) => {
+        item.geometry = features[index].geometry.type;
+    });
+
+    return {
+        gridData,
+        gridColumns: columns
+    };
+}
 </script>
 
 <template>
   <form id="search">
     Search <input name="query" v-model="searchQuery">
   </form>
+
+
   <DemoGrid
     :data="gridData"
     :columns="gridColumns"
