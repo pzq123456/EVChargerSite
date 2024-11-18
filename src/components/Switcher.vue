@@ -30,19 +30,26 @@ const activate = (index) => {
 
 <style scoped>
 .switcher button {
-    margin: 5px;
-    padding: 10px;
+    background-color: var(--vp-c-green-soft);
+    color: var(--vp-c-text-2);
     border: none;
+    padding: 10px 20px;
+    margin: 5px;
     cursor: pointer;
-    font-weight: bold;
     border-radius: 5px;
-    border: 1px solid gainsboro;
+    font-size: 16px;
+    font-weight: 600;
 }
 
 .switcher button.active {
-    background-color: var(--vp-c-green-soft);
+    background-color: var(--vp-c-green-3);
     color: var(--vp-c-text-2);
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
     border-radius: 5px;
-    font-weight: bold;
+    font-size: 16px;
+    font-weight: 600;
 }
 </style>

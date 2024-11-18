@@ -7,12 +7,8 @@
         {{ isDrawerOpen ? "Close" : "Open" }}
     </button>
 
-    <div>
-      {{ activateIndex }}
-    </div>
-
-    <Switcher :buttons="buttons" v-model:activeIndex="activateIndex" />
-    <LeafletMap :mainScript />
+    <!-- <Switcher :buttons="buttons" v-model:activeIndex="activateIndex" /> -->
+    <LeafletMap :mainScript :center="mapCenter" :zoom="mapZoom" ref="map" />
 </template>
   
 <script setup>
@@ -20,12 +16,14 @@
     import Drawer from "@/components/Drawer.vue";
     import LeafletMap from '@/components/LeafletMap.vue';
     import mapDetails from "./mapDetails.vue";
-    import Switcher from '../components/Switcher.vue';
+    // import Switcher from '../components/Switcher.vue';
 
 
     import { useMapStore } from '@/stores/mapStore';
     import { computed, watch } from 'vue';
 
+    const mapCenter = ref([50, 10]);
+    const mapZoom = ref(4);
 
     const mapStore = useMapStore();
 
@@ -59,22 +57,26 @@ import { data as cn } from '@/loader/cn.data.js';
 
 const buttons = ['eu', 'us', 'cn'];
 
+// 根据按钮来改变 center 和 zoom
 const activateIndex = ref(0);
 
-
-const geoJSONData = ref(null);
-
-const data = {
-  eu,
-  us,
-  cn,
-};
-
-// computed 
-
-geoJSONData.value = computed(() => {
-  return data[buttons[activateIndex.value]];
+watch(activateIndex, (index) => {
+  switch (index) {
+    case 0:
+      mapCenter.value = [50, 10];
+      mapZoom.value = 4;
+      break;
+    case 1:
+      mapCenter.value = [40, -100];
+      mapZoom.value = 4;
+      break;
+    case 2:
+      mapCenter.value = [35, 105];
+      mapZoom.value = 4;
+      break;
+  }
 });
+
 
 const infoUpdate = function (props, data) {
   const mapStore = useMapStore();
@@ -119,7 +121,9 @@ function mainScript(L, mapInstance) {
 
   geoJsonLayer.addTo(mapInstance);
 
-  geoJsonLayer.updateData(eu);
+  geoJsonLayer.appendData(eu);
+  geoJsonLayer.appendData(us);
+  geoJsonLayer.appendData(cn);
 
   // 添加比例尺
   L.control.scale({ position: 'bottomright' }).addTo(mapInstance);

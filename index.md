@@ -35,7 +35,7 @@ features:
 
 ---
 
-<LeafletMap />
+<LeafletMap width="100%" height="400px" />
 
 <script setup>
     import LeafletMap from '@/components/LeafletMap.vue';

@@ -68,7 +68,7 @@ const download = () => {
 
 <template>
   <form id="search">
-    Search <input name="query" v-model="searchQuery">
+    Search <input id="query" name="query" v-model="searchQuery">
   </form>
 
   <DemoGrid
@@ -83,20 +83,20 @@ const download = () => {
   
 </template>
 
-<style>
+<style scoped>
   #search {
     margin-bottom: 10px;
   }
 
-  #search input[type="text"] {
-    width: 100%;
-    padding: 5px;
-    font-size: 1em;
-    border: 1px solid #ddd;
+  #query {
+    border: 1px solid var(--vp-c-gray-3);
+    border-radius: 5px;
   }
 
-  #search input[type="text"]:focus {
-    border-color: #fbfbfb;
+  #query:focus {
+    border: 1px solid var(--vp-c-green-3);
+    transition: border 0.3s;
+    background-color: var(--vp-c-gray-soft);
   }
 
   .download {
