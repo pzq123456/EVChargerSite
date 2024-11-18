@@ -13,8 +13,9 @@ import Switcher from '../components/Switcher.vue';
 
 import { data as eu } from '@/loader/eu.data.js';
 import { data as us } from '@/loader/us.data.js';
+import { data as cn } from '@/loader/cn.data.js';
 
-const buttons = ['eu', 'us'];
+const buttons = ['eu', 'us', 'cn'];
 
 const activateIndex = ref(0);
 
@@ -23,6 +24,7 @@ const geoJSONData = ref(null);
 const data = {
   eu,
   us,
+  cn,
 };
 
 // computed 

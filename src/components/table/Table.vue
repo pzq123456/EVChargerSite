@@ -50,6 +50,20 @@ function geoJSONParse(data) {
         gridColumns: columns
     };
 }
+
+// download function
+
+const download = () => {
+  const data = JSON.stringify(geoJSONData.value, null, 2)
+  const blob = new Blob([data], { type: 'text/json' })
+  const url = window.URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = 'data.json'
+  a.click()
+  window.URL.revokeObjectURL(url)
+}
+
 </script>
 
 <template>
@@ -57,12 +71,16 @@ function geoJSONParse(data) {
     Search <input name="query" v-model="searchQuery">
   </form>
 
-
   <DemoGrid
     :data="gridData"
     :columns="gridColumns"
     :filter-key="searchQuery">
   </DemoGrid>
+
+  <button class="download" @click="download">
+    Download
+  </button>
+  
 </template>
 
 <style>
@@ -81,4 +99,14 @@ function geoJSONParse(data) {
     border-color: #fbfbfb;
   }
 
+  .download {
+    margin: 10px 0;
+    padding: 5px 10px;
+    font-size: 1em;
+    background-color: var(--vp-c-green-3);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
 </style>
