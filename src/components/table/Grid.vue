@@ -70,7 +70,7 @@ function capitalize(str) {
 
 <style>
 table {
-  border: 2px solid var(--vp-c-border);
+  /* border: 2px solid var(--vp-c-border); */
   border-radius: 3px;
   margin-top: 20px;
   width: 100%;

@@ -78,9 +78,13 @@ const download = () => {
   </DemoGrid>
 
   <button class="download" @click="download">
-    Download
+    Download Demo
   </button>
-  
+    <!-- slot -->
+    <slot>
+
+    </slot>
+    
 </template>
 
 <style scoped>
@@ -103,9 +107,8 @@ const download = () => {
     margin: 10px 0;
     padding: 5px 10px;
     font-size: 1em;
-    background-color: var(--vp-c-green-3);
     color: white;
-    border: none;
+    border: solid 1px var(--vp-c-green-3);
     border-radius: 5px;
     cursor: pointer;
   }

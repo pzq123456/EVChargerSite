@@ -14,7 +14,7 @@ hero:
   actions:
     - theme: brand
       text: Get Started
-      link: /about
+      link: /map
     - theme: alt
       text: Learn More
       link: /about
@@ -35,9 +35,9 @@ features:
 
 ---
 
-<LeafletMap width="100%" height="400px" />
+<!-- <LeafletMap width="100%" height="400px" /> -->
 
-<script setup>
+<!-- <script setup>
     import LeafletMap from '@/components/LeafletMap.vue';
-</script>
+</script> -->
 

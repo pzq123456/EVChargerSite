@@ -57,6 +57,9 @@ onMounted(() => {
         attributionControl: false, // 禁用归属信息
       }).setView(props.center, props.zoom);
 
+      // 限制最大缩放级别
+      mapInstance.setMaxZoom(5);
+
       props.mainScript(L, mapInstance);
 
     });}
