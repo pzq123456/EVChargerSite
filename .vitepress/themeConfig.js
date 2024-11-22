@@ -14,7 +14,7 @@ export const themeConfig = {
     logo: '/logo.png',
 
     socialLinks: [
-        { icon: 'github', link: 'https://github.com/pzq123456/EVChargerSite' }
+        { icon: 'github', link: 'https://github.com/GlobalEVData/EVChargerSite' }
     ],
 
     footer: {

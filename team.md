@@ -15,6 +15,22 @@ const Investigators = [{
   title: 'Principal Investigator',
 }]
 
+// External Collaborators
+const ExternalCollaborators = [
+  {
+    avatar: '6.png',
+    name: 'Binru WEI',
+    title: 'Assistant Professor at Zhejiang University',
+  },
+  {
+    avatar: '7.png',
+    name: 'Zhenhan',
+    title: 'PhD Student zhenhan.peng@connect.polyu.hk',
+  }
+]
+
+
+
 const Reachers = [
   {
     avatar: '2.png',
@@ -31,12 +47,45 @@ const Reachers = [
     name: 'Fan ZHANG',
     title: 'Leading Researcher & Postdoc Fellow',
   },
-    {
+  {
+    avatar: '4.png',
+    name: 'Justin',
+    title: 'Leading Researcher & PhD Student',
+  },
+  {
+    avatar: '5.png',
+    name: 'Enyuan',
+    title: 'Data Analyst & PhD Student',
+  },
+  {
+    avatar: 'user.png',
+    name: 'Xiaoqi SHI',
+    title: 'Data Analyst & Master Student',
+  },
+  {
     avatar: 'https://www.github.com/pzq123456.png',
     name: 'Zhiqing PAN',
     title: 'Website Developer & Research Assistant',
-  }
+    links : [
+      {
+        icon: 'github',
+        link: 'https://www.github.com/pzq123456',
+      }
+    ]
+  },
 ]
+
+
+// Justin
+// Leading Researcher & PhD Student
+
+// Enyuan
+// Data Analyst & PhD Student
+
+// Xiaoqi SHI
+// Data Analyst & Master Student
+
+
 
 
 </script>
@@ -45,7 +94,7 @@ const Reachers = [
   <VPTeamPageTitle>
     <template #title>Our Team</template>
     <template #lead>
-      The development of the Global EV Data project is led by a team of researchers and developers.
+     The Global EV Data Initiative is led by <a href="https://thetipteam.editorx.io/website/">The TIP Research Group</a> at the The Hong Kong Polytechnic University (PolyU), which is an interdisciplinary research group focusing on Technology innovation, Infrastructure planning and Policy making in Smart Cities
     </template>
   </VPTeamPageTitle>
 
@@ -55,6 +104,15 @@ const Reachers = [
       </template>
       <template #members>
         <VPTeamMembers size="medium" :members= "Investigators" />
+      </template>
+  </VPTeamPageSection>
+
+  <VPTeamPageSection>
+      <template #title>
+        External Collaborators
+      </template>
+      <template #members>
+        <VPTeamMembers size="medium" :members= "ExternalCollaborators" />
       </template>
   </VPTeamPageSection>
 
@@ -70,5 +128,9 @@ const Reachers = [
 </VPTeamPage>
 
 <!-- style -->
-<style>
+<style scoped>
+  a {
+    color: #3eaf7c;
+  }
+
 </style>

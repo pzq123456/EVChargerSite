@@ -4,9 +4,8 @@
 layout: home
 
 hero:
-  name: "Global EV Data"
-  text: "A map and a database"
-  tagline: "An open electric vehicle data initiative for sharing the latest and historical information on the electric vehicle market, policy and charging infrastructure across the globe."
+  name: "Global EV Data Initiative"
+  tagline: "An open electric vehicle data initiative that aims to collect, analyse, visualize and share data on the electric vehicle market, policy and charging infrastructure across the globe."
   image:
     src: "/logo.png"
     alt: "Global EV Data"
@@ -20,24 +19,18 @@ hero:
       link: /about
 
 features:
-  - title: "Global Coverage"
-    details: Three main regions are covered (the US, Europe, and China_.
-    link: /about
+  - title: "Map"
+    details: Three main regions are covered (the US, Europe, and China)
+    link: /Map
     icon: 🌍
-  - title: "Timely Updates"
-    details: "The database is updated every month."
-    link: /about
+  - title: "Data"
+    details: "The database is updated regularly and can be downloaded."
+    link: /data
     icon: 🔄
-  - title: "Web based visualization & analysis"
-    details: "The map is interactive and can be used for analysis."
-    link: /about
-    icon: 📊
+  - title: "Publications"
+    details: "Our research papers and publications."
+    link: /publications
+    icon: 📚
+    
 
 ---
-
-<!-- <LeafletMap width="100%" height="400px" /> -->
-
-<!-- <script setup>
-    import LeafletMap from '@/components/LeafletMap.vue';
-</script> -->
-

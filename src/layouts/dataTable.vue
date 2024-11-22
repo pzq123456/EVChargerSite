@@ -79,7 +79,6 @@ function processData(data, rows = 30, fields) {
     margin: 10px 0;
     padding: 5px 10px;
     font-size: 1em;
-    color: white;
     border: solid 1px var(--vp-c-green-3);
     border-radius: 5px;
     cursor: pointer;
