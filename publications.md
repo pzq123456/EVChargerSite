@@ -1,4 +1,4 @@
-# Publications
+# Publications 
 
 1. **XX**. Where Are Public Electric Vehicle Charging Stations Located Globally? Insights from a Spatial Planning Perspective. Under Review. 
 
