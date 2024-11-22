@@ -13,7 +13,7 @@ You can download the sample data here; You could request for the full dataset by
 
 <script setup>
     import dataTable from '@/layouts/dataTable.vue'
-    import leafletMap from '@/components/leafletMap.vue'
+    import LeafletMap from '@/components/LeafletMap.vue';
 </script>
 
 <leafletMap />
