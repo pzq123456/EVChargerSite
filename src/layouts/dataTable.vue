@@ -31,9 +31,9 @@ const geoJSONData = ref(null);
 
 // Id Count Name Geometry
 
-const euFields = ['count', 'name', 'geometry'];
-const usFields = ['count', 'name', 'geometry'];
-const cnFields = ['count', 'name', 'geometry'];
+const euFields = ['count', 'name',];
+const usFields = ['count', 'name',];
+const cnFields = ['count', 'name',];
 
 const data = {
   eu: processData(eu, 10, euFields),

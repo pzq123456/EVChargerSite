@@ -51,7 +51,7 @@ export class Stastics {
         }
 
         if (isReverse) {
-            return 1 - mappedValue;
+            return Math.max(0, 1 - mappedValue);
         } else {
             return mappedValue;
         }

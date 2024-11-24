@@ -7,7 +7,6 @@
         {{ isDrawerOpen ? "Close" : "Open" }}
     </button>
 
-    <!-- <Switcher :buttons="buttons" v-model:activeIndex="activateIndex" /> -->
     <LeafletMap :mainScript :center="mapCenter" :zoom="mapZoom" ref="map" />
 </template>
   
@@ -53,30 +52,6 @@ import { initGeoJsonLayer } from "@/layers/geojsonlayer.js";
 import { data as eu } from '@/loader/eu.data.js';
 import { data as us } from '@/loader/us.data.js';
 import { data as cn } from '@/loader/cn.data.js';
-
-
-const buttons = ['eu', 'us', 'cn'];
-
-// 根据按钮来改变 center 和 zoom
-const activateIndex = ref(0);
-
-watch(activateIndex, (index) => {
-  switch (index) {
-    case 0:
-      mapCenter.value = [50, 10];
-      mapZoom.value = 4;
-      break;
-    case 1:
-      mapCenter.value = [40, -100];
-      mapZoom.value = 4;
-      break;
-    case 2:
-      mapCenter.value = [35, 105];
-      mapZoom.value = 4;
-      break;
-  }
-});
-
 
 const infoUpdate = function (props, data) {
   const mapStore = useMapStore();

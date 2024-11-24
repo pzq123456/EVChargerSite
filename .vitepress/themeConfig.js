@@ -6,7 +6,7 @@ export const themeConfig = {
         { text: 'Map', link: '/map' },
         { text: 'Data', link: '/data' },
         { text: 'Team', link: '/team' },
-        { text: 'Publications', link: '/Publications' },
+        { text: 'Publications', link: '/publications' },
         { text: 'News', link: '/News' },
         { text: 'Contact', link: '/contact' },
     ],
