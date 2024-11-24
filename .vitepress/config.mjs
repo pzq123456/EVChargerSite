@@ -9,4 +9,18 @@ export default defineConfig({
   themeConfig: themeConfig,
   base: '/EVChargerSite/',
   vite: viteConfig,
+  head: [
+    [
+      'script',
+      { async: '', src: 'https://www.googletagmanager.com/gtag/js?id=G-4706EZS57W' }
+    ],
+    [
+      'script',
+      {},
+      `  window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-4706EZS57W');`
+    ]
+  ]
 })
