@@ -54,4 +54,4 @@ You can download the sample data here; You could request for the full dataset by
 ---
 <leafletMap :mainScript/>
 
-> Data Preview in the map above.
+> Data Preview in the **map** above.

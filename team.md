@@ -24,8 +24,8 @@ const ExternalCollaborators = [
   },
   {
     avatar: '7.png',
-    name: 'Zhenhan',
-    title: 'PhD Student zhenhan.peng@connect.polyu.hk',
+    name: 'Zhenhan Peng',
+    title: 'PhD Student at KU Leuven, Belgium',
   }
 ]
 
@@ -43,7 +43,7 @@ const Reachers = [
     title: 'Leading Researcher & Postdoc Fellow',
   },
   {
-    avatar: 'user.png',
+    avatar: '8.png',
     name: 'Fan ZHANG',
     title: 'Leading Researcher & Postdoc Fellow',
   },

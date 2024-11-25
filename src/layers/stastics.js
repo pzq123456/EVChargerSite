@@ -51,7 +51,7 @@ export class Stastics {
         }
 
         if (isReverse) {
-            return Math.max(0, 1 - mappedValue);
+            return 1 - mappedValue;
         } else {
             return mappedValue;
         }
@@ -59,6 +59,7 @@ export class Stastics {
 
     mapValue2Color(value, isReverse = false, colors = defaultColors, stretch = 'linear') {
         let index = Math.floor(this.mapValue(value, isReverse, stretch) * (colors.length - 1));
+        if (index < 0) index = 0;
         return colors[index];
     }
 

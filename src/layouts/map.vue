@@ -4,7 +4,6 @@
     </Drawer>
 
     <button @click="toggleDrawer" :class="{ open: isDrawerOpen, close: !isDrawerOpen }" id="toggle">
-        {{ isDrawerOpen ? "Close" : "Open" }}
     </button>
 
     <LeafletMap :mainScript :center="mapCenter" :zoom="mapZoom" ref="map" />
@@ -109,13 +108,28 @@ function mainScript(L, mapInstance) {
 <style scoped>
 
 #toggle.open {
-    background-color: #f44336;
+    background-color: #f44336b0;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    /* 居中内容
+    display: flex;
+    justify-content: center;
+    align-items: center; */
+
 }
 
 /* button 区分 open 和 close */
 
 #toggle.close {
-    background-color: #4CAF50;
+    background-color: #10d717b0;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    /* 居中内容
+    display: flex;
+    justify-content: center;
+    align-items: center; */
 }
 
 </style>

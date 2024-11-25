@@ -101,8 +101,11 @@ export function defaultMainScript(L, mapInstance) {
 
 <style>
 .leaflet-map {
-  height: 80vh;
-  width: 100%;
+  height: 75vh;
+  width: 95%;
+  z-index: 0;
+  /* 自行居中 */
+  margin: 0 auto;
 }
 .custom-popup .leaflet-popup-content-wrapper {
     background: #ffffffe1;
