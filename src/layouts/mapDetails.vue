@@ -1,7 +1,7 @@
 <template>
     <div v-if="selectedRegion" class="region">
       <timezone :country="selectedRegion.name" :countryFlag="selectedRegion.ISO2" />
-      <!-- <h1>{{ selectedRegion.name }}</h1> -->
+      <!-- <h1>{{ selectedRegion.ISO2 }}</h1> -->
       CargeStation Count: 
         <p class="num">
           {{ selectedRegion.count }}
@@ -23,7 +23,8 @@
       </div>
     </div>
 
-    <bar-chart />
+    <!-- <bar-chart /> -->
+    <line-chart />
 
 </template>
 
@@ -40,6 +41,7 @@ import { computed } from 'vue';
 import law from '@/components/policy/Law.vue';
 import timezone from '@/components/chart/TimeZone.vue';
 import BarChart from '@/components/chart/BarChart.vue';
+import LineChart from '@/components/chart/LineChart.vue';
 
 import { getRegionData } from '@/services/law.js';
 

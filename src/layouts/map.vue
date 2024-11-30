@@ -44,64 +44,64 @@
         }
     });
 
-import { baseMapInfos } from "@/layers/baseMaps.js";
-import { getBaseMap } from "@/layers/utils.js";
-import { initGeoJsonLayer } from "@/layers/geojsonlayer.js";
+  import { baseMapInfos } from "@/layers/baseMaps.js";
+  import { getBaseMap } from "@/layers/utils.js";
+  import { initGeoJsonLayer } from "@/layers/geojsonlayer.js";
 
-import { data as eu } from '@/loader/eu.data.js';
-import { data as us } from '@/loader/us.data.js';
-import { data as cn } from '@/loader/cn.data.js';
+  import { data as eu } from '@/loader/eu.data.js';
+  import { data as us } from '@/loader/us.data.js';
+  import { data as cn } from '@/loader/cn.data.js';
 
-const infoUpdate = function (props, data) {
-  const mapStore = useMapStore();
+  const infoUpdate = function (props, data) {
+    const mapStore = useMapStore();
 
-  const contents = props
-    ? `<b>${props.name}</b><br />${props.count} charging stations`
-    : 'Hover over a state';
-  this._div.innerHTML = `<h4>INFO</h4>${contents}`;
-  
-  if (props) {
-    this._div.style.display = 'block';
-    mapStore.updateHoveredRegion(props);  // 更新悬停区域信息
-    // console.log(props.name);
-  } else {
-    this._div.style.display = 'none';
-    mapStore.updateHoveredRegion(null);  // 没有悬停时重置信息
+    const contents = props
+      ? `<b>${props.name}</b><br />${props.count} charging stations`
+      : 'Hover over a state';
+    this._div.innerHTML = `<h4>INFO</h4>${contents}`;
+    
+    if (props) {
+      this._div.style.display = 'block';
+      mapStore.updateHoveredRegion(props);  // 更新悬停区域信息
+      // console.log(props.name);
+    } else {
+      this._div.style.display = 'none';
+      mapStore.updateHoveredRegion(null);  // 没有悬停时重置信息
+    }
+  };
+
+  const clickCallback = function (properties) {
+    // console.log("clickCallback");
+    const mapStore = useMapStore();
+    
+    if (properties){
+      mapStore.updateSelectedRegion(properties);
+    } else {
+      mapStore.updateSelectedRegion(null);
+    }
+  };
+
+  function mainScript(L, mapInstance) {
+
+    initGeoJsonLayer();
+    const baseMaps = getBaseMap(baseMapInfos);
+    const layerControl = L.control.layers(baseMaps).addTo(mapInstance);
+
+    baseMaps.dark_all.addTo(mapInstance);
+
+    const geoJsonLayer = L.geoJsonLayer(infoUpdate, clickCallback);
+
+    layerControl.addOverlay(geoJsonLayer, 'Administrative divisions');
+
+    geoJsonLayer.addTo(mapInstance);
+
+    geoJsonLayer.appendData(eu);
+    geoJsonLayer.appendData(us);
+    geoJsonLayer.appendData(cn);
+
+    // 添加比例尺
+    L.control.scale({ position: 'bottomright' }).addTo(mapInstance);
   }
-};
-
-const clickCallback = function (properties) {
-  // console.log("clickCallback");
-  const mapStore = useMapStore();
-  
-  if (properties){
-    mapStore.updateSelectedRegion(properties);
-  } else {
-    mapStore.updateSelectedRegion(null);
-  }
-};
-
-function mainScript(L, mapInstance) {
-
-  initGeoJsonLayer();
-  const baseMaps = getBaseMap(baseMapInfos);
-  const layerControl = L.control.layers(baseMaps).addTo(mapInstance);
-
-  baseMaps.dark_all.addTo(mapInstance);
-
-  const geoJsonLayer = L.geoJsonLayer(infoUpdate, clickCallback);
-
-  layerControl.addOverlay(geoJsonLayer, 'Administrative divisions');
-
-  geoJsonLayer.addTo(mapInstance);
-
-  geoJsonLayer.appendData(eu);
-  geoJsonLayer.appendData(us);
-  geoJsonLayer.appendData(cn);
-
-  // 添加比例尺
-  L.control.scale({ position: 'bottomright' }).addTo(mapInstance);
-}
 
 </script>
 

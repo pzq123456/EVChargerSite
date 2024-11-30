@@ -22,5 +22,4 @@ export default defineConfig({
         gtag('js', new Date());
         gtag('config', 'G-4706EZS57W');`
     ]
-  ]
-})
+  ]})

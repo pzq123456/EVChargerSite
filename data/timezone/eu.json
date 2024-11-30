@@ -1,4 +1,13 @@
 {
+    "CN":{
+        "flag": "🇨🇳",
+        "timeZone": "Asia/Shanghai"
+    },
+    "US":{
+        "flag": "🇺🇸",
+        "timeZone": "America/New_York"
+    },
+
     "Albania": {
         "flag": "🇦🇱",
         "timeZone": "Europe/Tirane"

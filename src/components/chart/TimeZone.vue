@@ -27,7 +27,22 @@ const props = defineProps({
 });
 
 const timezone = computed(() => {
-  return data[props.country] || null;
+//   return data[props.country] || null;
+    let result = null;
+
+    if (data[props.country]) {
+        result = data[props.country];
+    } else if (data[props.countryFlag]) {
+        result = data[props.countryFlag];
+    }else {
+        result = null;
+    }
+
+    // console.log(result);
+
+    return result;
+
+    // || data[properties.countryFlag] 
 });
 
 // 获取指定时区的当前时间字符串
