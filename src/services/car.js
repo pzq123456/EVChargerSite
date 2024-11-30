@@ -9,8 +9,15 @@ import { data } from '@/loader/car.data.js';
 
 export function getCarData(regionName) {
     // 同时将 data.labels 附上
-    return {
+    let res =  {
         data: data[regionName] || null,
         labels: data.labels
+    }
+
+    // 若 data 为null 则返回 null
+    if (!res.data) {
+        return null;
+    }else{
+        return res;
     }
 }

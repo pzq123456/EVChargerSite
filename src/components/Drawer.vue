@@ -33,7 +33,7 @@ export default {
     maxWidth: {
       type: String,
       required: false,
-      default: "450px",
+      default: "500px",
     },
 
     // Transition Speed in Milliseconds
@@ -145,12 +145,17 @@ export default {
   }
 
   .controlBar {
-    /* 位于父元素最底部 */
+
     margin-top: auto;
     padding: 5px;
     display: flex;
     justify-content: flex-end;
     background-color: var(--vp-c-gutter);
+
+    /* 固定在底部 */
+    position: sticky;
+    bottom: 0;
+
   }
 
   .close-btn {

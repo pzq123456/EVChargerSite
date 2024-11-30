@@ -23,8 +23,18 @@
       </div>
     </div>
 
+    <!-- <div>
+      <h1>Car Data</h1>
+      <p>{{ carData }}</p>
+    </div> -->
+
     <!-- <bar-chart /> -->
-    <line-chart />
+    <!-- <line-chart :carData="carData" /> -->
+
+    <div v-if="carData">
+      <!-- <LineChart :inputData="carData" /> -->
+      <BarChart :inputData="carData" />
+    </div>
 
 </template>
 
@@ -44,6 +54,7 @@ import BarChart from '@/components/chart/BarChart.vue';
 import LineChart from '@/components/chart/LineChart.vue';
 
 import { getRegionData } from '@/services/law.js';
+import { getCarData } from '@/services/car.js';
 
 const mapStore = useMapStore();
 
@@ -55,6 +66,13 @@ const policy = computed(() => {
   if (selectedRegion.value) {
     const regionData = getRegionData(selectedRegion.value.name);
     return regionData;
+  }
+  return null;
+});
+
+const carData = computed(() => {
+  if (selectedRegion.value) {
+    return getCarData(selectedRegion.value.name);
   }
   return null;
 });
