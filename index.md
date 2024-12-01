@@ -21,7 +21,7 @@ hero:
 features:
   - title: "Map"
     details: Three main regions are covered (the US, Europe, and China)
-    link: /Map
+    link: /map
     icon: 🌍
   - title: "Data"
     details: "The database is updated regularly and can be downloaded."
