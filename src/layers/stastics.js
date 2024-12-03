@@ -59,11 +59,14 @@ export class Stastics {
 
     mapValue2Color(value, isReverse = false, colors = defaultColors, stretch = 'linear') {
         let index = Math.floor(this.mapValue(value, isReverse, stretch) * (colors.length - 1));
-        if (index < 0) index = 0;
+
+        if (index < 0) {
+            index = 0;
+        }
         return colors[index];
     }
 
-    getGrades(num) { // 获取整数分级
+    getGrades(num, fixed = 2) {
         let grades = [];
     
         // 计算出最大最小值差距
@@ -84,6 +87,9 @@ export class Stastics {
         for (let i = niceMin; i <= niceMax; i += niceStep) {
             grades.push(i);
         }
+
+        // 保留两位小数
+        grades = grades.map(d => d.toFixed(fixed));
     
         return grades;
     }

@@ -3,22 +3,20 @@ import { Stastics } from "./stastics.js";
 export function initGeoJsonLayer() { // 这一步只是 向L注册了一个新的类，但是并没有实例化
 
     L.GeoJsonLayer = L.Layer.extend({
-        initialize: function (infoUpdate, clickCallback = null) {
+        initialize: function (infoUpdate) {
             this._stastics = new Stastics(); // 单值统计
             // this._grades = grades;
             this._colors = DefaultColors;
             this._infoUpdate = infoUpdate;
             this._data = DefaultGeoJson;
             this._getVal = (d) => parseInt(d.properties.count);
-            if (clickCallback) {
-                console.log('clickCallback')
-                this._clickCallback = clickCallback;
-            }
         },
 
         setColors: function (colors) {
             this._colors = colors;
-            this._legend.update();
+            if (this._legend){
+                this._legend.update();
+            }
         },
 
         _getColor: function (d) {
@@ -36,23 +34,38 @@ export function initGeoJsonLayer() { // 这一步只是 向L注册了一个新�
             };
         },
 
+        clear: function () {
+            this._data = DefaultGeoJson;
+            this._stastics.clear();
+            if (this._geoJson) {
+                this._geoJson.clearLayers();
+                this._legend.update();
+            }
+        },
+
         updateData: function (data, getVal = (d) => parseInt(d.properties.count)) {
             this._data = data;
             this._stastics.clear();
             this._stastics.append(data.features, getVal);
             this._getVal = getVal;
+            if (this._geoJson) {
+                this._geoJson.clearLayers();
+                this._geoJson.addData(data);
+                this._legend.update();
+            }
 
-            this._geoJson.clearLayers();
-            this._geoJson.addData(data);
-            this._legend.update();
         },
 
         appendData: function (data, getVal = (d) => parseInt(d.properties.count)) {
             this._data.features = this._data.features.concat(data.features);
             this._stastics.append(data.features, getVal);
             this._getVal = getVal;
-            this._geoJson.addData(data);
-            this._legend.update();
+
+            if (this._geoJson) {
+                // this._geoJson.clearLayers();
+                this._geoJson.addData(data);
+                this._legend.update();
+            }
         },
 
         onAdd: function (map) {
@@ -98,6 +111,7 @@ export function initGeoJsonLayer() { // 这一步只是 向L注册了一个新�
             });
 
             layer.bringToFront();
+            // console.log(this._info)
             this._info.update(layer.feature.properties);
         },
 
@@ -108,9 +122,6 @@ export function initGeoJsonLayer() { // 这一步只是 向L注册了一个新�
 
         _zoomToFeature: function (e) {
             this._map.fitBounds(e.target.getBounds());
-            if (this._clickCallback) {
-                this._clickCallback(e.target.feature.properties);
-            }
         },
 
         _createInfo: function (infoUpdate = this._infoUpdate) {
@@ -148,7 +159,7 @@ export function initGeoJsonLayer() { // 这一步只是 向L注册了一个新�
             // console.log(grades);
             const colors = [];
 
-            labels.push('area level');
+            labels.push('legend');
 
             for (let i = 0; i < grades.length - 1; i++) {
                 colors.push(this._stastics.mapValue2Color(grades[i], false, this._colors));

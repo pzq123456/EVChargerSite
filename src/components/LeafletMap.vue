@@ -58,7 +58,7 @@ onMounted(() => {
       }).setView(props.center, props.zoom);
 
       // 限制最大缩放级别
-      mapInstance.setMaxZoom(5);
+      mapInstance.setMaxZoom(7);
 
       props.mainScript(L, mapInstance);
 
