@@ -2,8 +2,8 @@
 layout: page
 ---
 
-<mymap />
+<abmap />
 
 <script setup>
-    import mymap from '@/layouts/map.vue'
+    import abmap from '@/layouts/map.vue'
 </script>

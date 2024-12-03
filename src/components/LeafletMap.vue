@@ -9,7 +9,7 @@
  * 封装 Leaflet 为纯粹的地图组件，不包含任何业务逻辑
  * - 使用 mainScript 属性传入主要的地图脚本例如：加载地图图层、控制器等
  */
-import { onMounted, ref, onBeforeUnmount, watch } from 'vue';
+import { onMounted, ref, onBeforeUnmount} from 'vue';
 
 const map = ref(null);
 let mapInstance = null;
@@ -67,6 +67,7 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   if (mapInstance) {
+    delete window.L;
     mapInstance.remove();
   }
 
@@ -81,7 +82,6 @@ onBeforeUnmount(() => {
   // 移除 Leaflet JS
   const leafletScript = document.querySelector('script[src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"]');
   leafletScript && leafletScript.remove();
-
 });
 
 </script>
