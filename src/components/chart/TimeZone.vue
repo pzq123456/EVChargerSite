@@ -17,6 +17,7 @@
 </template>
 
 <script setup lang="js">
+import { pinyin } from 'pinyin-pro';
 
 import { ref, defineProps, computed, watch } from 'vue';
 import { data } from '@/loader/euTimeZone.data.js';
@@ -25,6 +26,22 @@ const props = defineProps({
   country: String,
   countryFlag: String
 });
+
+// 若 country 为中文字符，则转换为拼音
+// computed pinyin('汉语拼音', { toneType: 'none' }); // 'han yu pin yin'
+const country = computed(() => {
+    if (isChineseChar(props.country)) {
+        // console.log(props.country);
+        // console.log(pinyin(props.country, { toneType: 'none' }));
+        return pinyin(props.country, { toneType: 'none' }) + '(' + props.country + ')';
+    }
+    return props.country;
+});
+
+// 帮助函数判断是否为中文字符
+function isChineseChar(str) {
+    return /^[\u4e00-\u9fa5]+$/.test(str);
+}
 
 const timezone = computed(() => {
 //   return data[props.country] || null;

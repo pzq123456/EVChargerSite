@@ -58,8 +58,13 @@ const Reachers = [
     title: 'Data Analyst & PhD Student',
   },
   {
-    avatar: 'user.png',
+    avatar: '10.png',
     name: 'Xiaoqi SHI',
+    title: 'Data Analyst & Master Student',
+  },
+  {
+    avatar: '9.png',
+    name: 'Dingkang TENG',
     title: 'Data Analyst & Master Student',
   },
   {
@@ -100,21 +105,14 @@ const Reachers = [
 
   <VPTeamPageSection>
       <template #title>
-        Investigator
+      Principal Investigator
       </template>
       <template #members>
         <VPTeamMembers size="medium" :members= "Investigators" />
       </template>
   </VPTeamPageSection>
 
-  <VPTeamPageSection>
-      <template #title>
-        External Collaborators
-      </template>
-      <template #members>
-        <VPTeamMembers size="medium" :members= "ExternalCollaborators" />
-      </template>
-  </VPTeamPageSection>
+
 
   <VPTeamPageSection>
     <template #title>
@@ -125,6 +123,15 @@ const Reachers = [
     </template>
   </VPTeamPageSection>
 
+
+  <VPTeamPageSection>
+      <template #title>
+        External Collaborators
+      </template>
+      <template #members>
+        <VPTeamMembers size="medium" :members= "ExternalCollaborators" />
+      </template>
+  </VPTeamPageSection>
 </VPTeamPage>
 
 <!-- style -->

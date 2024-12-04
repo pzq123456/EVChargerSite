@@ -10,13 +10,7 @@ hero:
     src: "/logo.png"
     alt: "Global EV Data"
 
-  actions:
-    - theme: brand
-      text: Get Started
-      link: /map
-    - theme: alt
-      text: Learn More
-      link: /about
+
 
 features:
   - title: "Map"
