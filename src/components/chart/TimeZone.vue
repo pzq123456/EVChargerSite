@@ -3,7 +3,7 @@
         <div class="country">
             <h1>{{ country }}</h1>
             <!-- 渲染 flag emoji -->
-            <div v-if="timezone" class="flag">
+            <div v-if="flag" class="flag">
                 <img :src="flag" alt="flag" />
                 <!-- {{ flag }} -->
             </div>
@@ -19,8 +19,12 @@
 <script setup lang="js">
 import { pinyin } from 'pinyin-pro';
 
-import { ref, defineProps, computed, watch } from 'vue';
+import { defineProps, computed } from 'vue';
 import { data } from '@/loader/euTimeZone.data.js';
+
+import { data as flagData } from '@/loader/flag.data.js';
+
+// console.log(flagData);
 
 const props = defineProps({
   country: String,
@@ -44,7 +48,6 @@ function isChineseChar(str) {
 }
 
 const timezone = computed(() => {
-//   return data[props.country] || null;
     let result = null;
 
     if (data[props.country]) {
@@ -54,12 +57,7 @@ const timezone = computed(() => {
     }else {
         result = null;
     }
-
-    // console.log(result);
-
     return result;
-
-    // || data[properties.countryFlag] 
 });
 
 // 获取指定时区的当前时间字符串
@@ -98,7 +96,23 @@ const localTime = computed(() => {
 
 // 计算国旗 URL
 const flag = computed(() => {
-    return `https://flagcdn.com/h40/${props.countryFlag.toLowerCase()}.png`;
+    // 若传入的 name 是汉字范围则认为是中国
+    if (isChineseChar(props.country[0])) {
+        return 'https://flagcdn.com/h40/cn.png';
+    }
+
+    if (props.country === 'USA') {
+        return 'https://flagcdn.com/h40/us.png';
+    }
+
+    // 若 props 有 countryFlag，则使用 countryFlag
+    if (props.countryFlag) {
+        return `https://flagcdn.com/h40/${props.countryFlag.toLowerCase()}.png`;
+    }else if (flagData[props.country]) {
+        return `https://flagcdn.com/h40/${props.country["ISO 2"].toLowerCase()}.png`;
+    }else {
+        return null;
+    }
 });
 
 </script>

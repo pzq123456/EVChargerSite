@@ -59,6 +59,7 @@ layout: page
         geoJsonLayer.appendData(eu,(d) => parseFloat(d.properties.V));
         geoJsonLayer.update();
 
+        return geoJsonLayer;
     }
 
 

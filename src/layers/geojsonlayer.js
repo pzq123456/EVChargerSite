@@ -28,6 +28,7 @@ export function initGeoJsonLayer() { // 这一步只是 向L注册了一个新�
             this._legendName = column;
 
             this._colors = colors;
+
             if (this._legend){
                 this._legend.update();
             }
@@ -79,12 +80,9 @@ export function initGeoJsonLayer() { // 这一步只是 向L注册了一个新�
         },
 
         clear: function () {
-            this._data = DefaultGeoJson;
-            this._stastics.clear();
-            if (this._geoJson) {
-                this._geoJson.clearLayers();
-                this._legend.update();
-            }
+            // this = null;
+
+            this._data.features = [];
         },
 
         update() {
@@ -139,11 +137,14 @@ export function initGeoJsonLayer() { // 这一步只是 向L注册了一个新�
             // set onEachFeature
             this._geoJson.addTo(this._map);
             this._legend.addTo(this._map);
+
+            console.log(this._geoJson)
         },
 
-        onRemove: function () {
-            this._map.removeLayer(this._geoJson);
-            this._map.removeControl(this._legend);
+        onRemove: function (map) {
+            map.removeLayer(this._geoJson);
+            map.removeControl(this._legend);
+            this.clear();
         },
 
         _onEachFeature: function (feature, layer) {
@@ -256,3 +257,17 @@ function addLineBreaks(str) {
 
     return str.split(/[-_ ]/).join('<br />');
 }
+
+// onRemove: function (map) {
+//     if (this.options.pane) {
+//         this.getPane().removeChild(this._canvas);
+//     }else{
+//         map.getPanes().overlayPane.removeChild(this._canvas);
+//     }
+
+//     map.off('moveend', this._reset, this);
+
+//     if (map.options.zoomAnimation) {
+//         map.off('zoomanim', this._animateZoom, this);
+//     }
+// },

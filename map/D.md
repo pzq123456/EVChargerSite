@@ -59,7 +59,6 @@ layout: page
 
     const clickCallback = function (properties) {
         if (properties){
-            // console.log(properties);
             cityStore.updateSelectedCity(properties);
             cityStore.updateSelectedColumn(this._legendName);
         } else {
@@ -76,22 +75,26 @@ layout: page
         initGeoJsonLayer();
         initSelectAndButtonControl();
 
-        const geoJsonLayer = L.geoJsonLayer('Housing Price Index of EVCSs', clickCallback);
+        const D_geoJsonLayer = L.geoJsonLayer('mean_1500buffer-city', clickCallback);
 
         const D_Colors = colorsets[6];
-        geoJsonLayer.setColors(D_Colors);
+        D_geoJsonLayer.setColors(D_Colors);
 
-        layerControl.addOverlay(geoJsonLayer, 'Housing Price Index of EVCSs');
+        layerControl.addOverlay(D_geoJsonLayer, 'Housing Price Index of EVCSs');
 
-        geoJsonLayer.addTo(mapInstance);
-        geoJsonLayer.clear();
+        D_geoJsonLayer.addTo(mapInstance);
         
         const {cn, us} = data;
-        geoJsonLayer.appendData(cn,(d) => parseFloat(d.properties["mean_1500buffer-city"]));
-        geoJsonLayer.appendData(us,(d) => parseFloat(d.properties["mean_1500buffer-city"]));
-        geoJsonLayer.update();
+        D_geoJsonLayer.appendData(cn, (d) => parseFloat(d.properties["mean_1500buffer-city"]));
+        D_geoJsonLayer.appendData(us, (d) => parseFloat(d.properties["mean_1500buffer-city"]));
 
-        const columns = geoJsonLayer.getColumns();
+        D_geoJsonLayer.setColumn("mean_1500buffer-city", D_Colors);
+        D_geoJsonLayer.update();
+
+        const columns = D_geoJsonLayer.getColumns();
+
+        console.log(columns);
+        console.log(D_geoJsonLayer);
 
         const selectAndButtonControl = L.control.selectAndButton({
             columns: columns,
@@ -99,11 +102,13 @@ layout: page
             info: 'Select a column to show',
             onButtonClick: function (selectedColumn) {
                 const index = columns.indexOf(selectedColumn);
-                geoJsonLayer.setColumn(selectedColumn, D_Colors);
+                D_geoJsonLayer.setColumn(selectedColumn, D_Colors);
             }
         });
 
         selectAndButtonControl.addTo(mapInstance);
+
+        return D_geoJsonLayer;
     }
 
 

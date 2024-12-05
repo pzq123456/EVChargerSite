@@ -51,7 +51,7 @@ import { computed } from 'vue';
 import law from '@/components/policy/Law.vue';
 import timezone from '@/components/chart/TimeZone.vue';
 import BarChart from '@/components/chart/BarChart.vue';
-import LineChart from '@/components/chart/LineChart.vue';
+// import LineChart from '@/components/chart/LineChart.vue';
 
 import { getRegionData } from '@/services/law.js';
 import { getCarData } from '@/services/car.js';

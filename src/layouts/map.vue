@@ -95,6 +95,8 @@
     geoJsonLayer.appendData(eu);
     geoJsonLayer.appendData(us);
     geoJsonLayer.appendData(cn);
+
+    return geoJsonLayer;
   }
 
 </script>

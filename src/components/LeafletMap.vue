@@ -9,7 +9,7 @@
  * 封装 Leaflet 为纯粹的地图组件，不包含任何业务逻辑
  * - 使用 mainScript 属性传入主要的地图脚本例如：加载地图图层、控制器等
  */
-import { onMounted, ref, onBeforeUnmount, computed} from 'vue';
+import { onMounted, ref, onBeforeUnmount, onUnmounted} from 'vue';
 
 import { useData } from 'vitepress'
 const { isDark } = useData();
@@ -19,6 +19,8 @@ import { getBaseMap } from "../layers/utils.js";
 
 const map = ref(null);
 let mapInstance = null;
+
+let geojsonLayer = null;
 
 const props = defineProps({
   center: {
@@ -75,7 +77,8 @@ onMounted(() => {
         baseMaps.light_all.addTo(mapInstance);
       }
 
-      props.mainScript(L, mapInstance, layerControl);
+      geojsonLayer = props.mainScript(L, mapInstance, layerControl);
+      // console.log('geojsonLayer', geojsonLayer);
 
     });
   }
@@ -83,9 +86,9 @@ onMounted(() => {
 
 
 
-onBeforeUnmount(() => {
+onUnmounted(() => {
   if (mapInstance) {
-    delete window.L;
+    geojsonLayer.clear();
     mapInstance.remove();
   }
 
@@ -101,6 +104,7 @@ onBeforeUnmount(() => {
   const leafletScript = document.querySelector('script[src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"]');
   leafletScript && leafletScript.remove();
 });
+
 
 </script>
 

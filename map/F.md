@@ -34,24 +34,27 @@ layout: page
         initGeoJsonLayer();
         initSelectAndButtonControl();
 
-        const geoJsonLayer = L.geoJsonLayer('density_1500buffer-city');
+        const F_geoJsonLayer = L.geoJsonLayer('density_1500buffer-city');
 
-        const D_Colors = colorsets[5];
-        geoJsonLayer.setColors(D_Colors);
+        const colors = colorsets[5];
+        F_geoJsonLayer.setColors(colors);
 
-        layerControl.addOverlay(geoJsonLayer, 'Appendix F');
-        geoJsonLayer.clear();
+        layerControl.addOverlay(F_geoJsonLayer, 'Appendix F');
+        F_geoJsonLayer.clear();
 
-        geoJsonLayer.addTo(mapInstance);
+        F_geoJsonLayer.addTo(mapInstance);
 
 
         const {cn, us, eu} = data;
-        geoJsonLayer.appendData(us,(d) => parseFloat(d.properties["density_1500buffer-city"]));
-        geoJsonLayer.appendData(eu,(d) => parseFloat(d.properties["density_1500buffer-city"]));
-        geoJsonLayer.appendData(cn,(d) => parseFloat(d.properties["density_1500buffer-city"]));
-        geoJsonLayer.update();
+        F_geoJsonLayer.appendData(us,(d) => parseFloat(d.properties["density_1500buffer-city"]));
+        F_geoJsonLayer.appendData(eu,(d) => parseFloat(d.properties["density_1500buffer-city"]));
+        F_geoJsonLayer.appendData(cn,(d) => parseFloat(d.properties["density_1500buffer-city"]));
 
-        const columns = geoJsonLayer.getColumns();
+        F_geoJsonLayer.setColumn('density_1500buffer-city', colors);
+
+        F_geoJsonLayer.update();
+
+        const columns = F_geoJsonLayer.getColumns();
 
         const selectAndButtonControl = L.control.selectAndButton({
             columns: columns,
@@ -59,11 +62,13 @@ layout: page
             info: 'Select a column to show',
             onButtonClick: function (selectedColumn) {
                 const index = columns.indexOf(selectedColumn);
-                geoJsonLayer.setColumn(selectedColumn, D_Colors);
+                F_geoJsonLayer.setColumn(selectedColumn, colors);
             }
         });
 
         selectAndButtonControl.addTo(mapInstance);
+
+        return F_geoJsonLayer;
     }
 
 

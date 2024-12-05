@@ -33,23 +33,25 @@ layout: page
         initGeoJsonLayer();
         initSelectAndButtonControl();
         
-        const geoJsonLayer = L.geoJsonLayer('1500buffer-city');
+        const E_geoJsonLayer = L.geoJsonLayer('1500buffer-city');
 
         const colors = colorsets[0];
-        geoJsonLayer.setColors(colors);
+        E_geoJsonLayer.setColors(colors);
 
-        layerControl.addOverlay(geoJsonLayer, 'Appendix E');
-        geoJsonLayer.clear();
+        layerControl.addOverlay(E_geoJsonLayer, 'Appendix E');
+        E_geoJsonLayer.clear();
 
-        geoJsonLayer.addTo(mapInstance);
+        E_geoJsonLayer.addTo(mapInstance);
 
         const {cn, us, eu} = data;
-        geoJsonLayer.appendData(cn,(d) => parseFloat(d.properties["1500buffer-city"]));
-        geoJsonLayer.appendData(us,(d) => parseFloat(d.properties["1500buffer-city"]));
-        geoJsonLayer.appendData(eu,(d) => parseFloat(d.properties["1500buffer-city"]));
-        geoJsonLayer.update();
+        E_geoJsonLayer.appendData(cn,(d) => parseFloat(d.properties["1500buffer-city"]));
+        E_geoJsonLayer.appendData(us,(d) => parseFloat(d.properties["1500buffer-city"]));
+        E_geoJsonLayer.appendData(eu,(d) => parseFloat(d.properties["1500buffer-city"]));
 
-        const columns = geoJsonLayer.getColumns();
+        E_geoJsonLayer.setColumn('1500buffer-city', colors);
+        E_geoJsonLayer.update();
+
+        const columns = E_geoJsonLayer.getColumns();
 
         const selectAndButtonControl = L.control.selectAndButton({
             columns: columns,
@@ -57,12 +59,13 @@ layout: page
             info: 'Select a column to show',
             onButtonClick: function (selectedColumn) {
                 const index = columns.indexOf(selectedColumn);
-                geoJsonLayer.setColumn(selectedColumn, colors);
+                E_geoJsonLayer.setColumn(selectedColumn, colors);
             }
         });
 
         selectAndButtonControl.addTo(mapInstance);
 
+        return E_geoJsonLayer;
     }
 </script>
 

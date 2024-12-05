@@ -1,27 +1,30 @@
 <template>
     <div v-if="selectedCity" class="region">
-      {{ selectedColumn }}
+      <timezone :country="countryName" />
       <h1>
-        {{ name }}
+        {{ cityName }}
       </h1>
-        {{ selectedCity }}
+
+      <p class="num">
+        {{ selectedColumn }} : {{ selectedCity[selectedColumn].toFixed(2) }}
+      </p>
+
+
     </div>
 
     <div v-else>
       <p>please select a region</p>
     </div>
 
+
 </template>
 
 <script setup>
-/**
- * @file mapDetails.vue
- * - 地图详情展示组件，用户点击地图上的某一区域时弹出
- * - 可以展示包括时区、法律条文、柱状图等信息
- * - 后续会集成更多的数据展示
- */
+
 import { useCityStore } from '@/stores/cityStore';
 import { computed } from 'vue';
+import timezone from '@/components/chart/TimeZone.vue';
+import { pinyin } from 'pinyin-pro';
 
 const cityStore = useCityStore();
 
@@ -29,17 +32,46 @@ const selectedCity = computed(() => cityStore.selectedCity);
 const selectedColumn = computed(() => cityStore.selectedColumn);
 
 
-const name = computed(() => getName(selectedCity.value));
+const cityName = computed(() => {
+  const name = getCityName(selectedCity.value);
+  if (isChineseChar(name)) {
+    return pinyin(name, { toneType: 'none' }) + '(' + name + ')';
+  }else{
+    return name;
+  }
+});
 
+const countryName = computed(() => getCountryName(selectedCity.value));
 
-function getName(selectedCity) {
+function getCountryName(selectedCity) {
   if (selectedCity.cityname && selectedCity.pname) {
-    return `${selectedCity.cityname}, ${selectedCity.pname}`;
-  }else if (selectedCity.NAME_2 && selectedCity.NAME_1) {
-    return `${selectedCity.NAME_2}, ${selectedCity.NAME_1}`;
+    return selectedCity.pname;
+  }else if (selectedCity.GID_0) {
+    return selectedCity.GID_0;
   }else{
     return '';
   }
+}
+
+
+function getCityName(selectedCity) {
+  if (selectedCity.cityname && selectedCity.pname) {
+    return `${selectedCity.cityname}`;
+  }else if (selectedCity.NAME_2 && selectedCity.NAME_1) {
+    return `${selectedCity.NAME_2}`;
+  }else{
+    return '';
+  }
+}
+
+// // 固定两位小数
+// function toFixed2(num) {
+//   return num.toFixed(2);
+// }
+
+// 帮助函数判断是否为中文字符
+function isChineseChar(str) {
+    return /^[\u4e00-\u9fa5]+$/.test(str);
 }
 
 </script>
@@ -48,4 +80,16 @@ function getName(selectedCity) {
   h1 {
     font-size: 1.5em;
   }
+
+  .region {
+    font-family: Arial, sans-serif;
+    margin: 10px;
+    background-color: var(--vp-c-gray-soft);
+  }
+
+  .num {
+    font-size: 1.5em;
+    color: var(--vp-c-success-1);
+  }
+
 </style>
