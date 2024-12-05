@@ -58,11 +58,8 @@ export class Stastics {
     }
 
     mapValue2Color(value, isReverse = false, colors = defaultColors, stretch = 'linear') {
-        let index = Math.floor(this.mapValue(value, isReverse, stretch) * (colors.length - 1));
-
-        if (index < 0) {
-            index = 0;
-        }
+        let mappedValue = this.mapValue(value, isReverse, stretch);
+        let index = Math.floor(mappedValue * (colors.length - 1));
         return colors[index];
     }
 
@@ -94,19 +91,15 @@ export class Stastics {
         return grades;
     }
 
-    // // 等距离
-    // getGrades(num) {
-    //     let grades = [];
-    //     let step = (this._max - this._min) / num;
-    //     for (let i = 0; i <= num; i++) {
-    //         // grades.push(this._min + i * step);
-    //         let grade = this._min + i * step;
-    //         grades.push(grade.toFixed(2));
-    //     }
-    //     // grades 保留两位小数
-
-    //     return grades;
-    // }
+    // 等距离
+    getGradesFixed(num,fixed = 2) {
+        let grades = [];
+        let step = (this._max - this._min) / num;
+        for (let i = 0; i <= num; i++) {
+            grades.push((this._min + i * step).toFixed(fixed));
+        }
+        return grades;
+    }
     
     
 }

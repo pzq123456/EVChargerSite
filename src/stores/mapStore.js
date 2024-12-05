@@ -11,7 +11,6 @@ export const useMapStore = defineStore('mapStore', () => {
   }
 
   function updateSelectedRegion(regionData) {
-    // console.log('updateSelectedRegion')
     selectedRegion.value = regionData;
   }
 

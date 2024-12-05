@@ -1,7 +1,7 @@
 ---
 layout: page
 ---
-# Appendix C: Spatial Distributions of the Level of Population Coverage of EVCSs at the City Level
+# Spatial Distributions of the Level of Population Coverage of EVCSs at the City Level
 
 <LeafletMap :mainScript :center="mapCenter" :zoom="mapZoom" ref="map" />
 
@@ -9,25 +9,22 @@ layout: page
 <script setup>
     import LeafletMap from '@/components/LeafletMap.vue';
     import { ref } from 'vue';
-
-    import { baseMapInfos } from "@/layers/baseMaps.js";
-    import { getBaseMap } from "@/layers/utils.js";
     import { initGeoJsonLayer } from "@/layers/geojsonlayer.js";
 
     import { data } from '@/loader/C.data.js';
 
-    const infoUpdate = function (props, data) {
-        // const name = 
-        // 若 props 有 NAME_2 字段 或 cityname 字段，则显示该字段 二者只会出现一个
+    // const infoUpdate = function (props, data) {
+    //     // const name = 
+    //     // 若 props 有 NAME_2 字段 或 cityname 字段，则显示该字段 二者只会出现一个
 
-        const name = props ? props.NAME_2 || props.cityname : null;
+    //     const name = props ? props.NAME_2 || props.cityname : null;
 
-    const contents = props
-        ? `<b>${name}</b><br/>${props.V} Level of Population Coverage of EVCSs`
-        : 'Hover over a state';
-        this._div.innerHTML = `<h4>INFO</h4>${contents}`;
+    // const contents = props
+    //     ? `<b>${name}</b><br/>${props.V} Level of Population Coverage of EVCSs`
+    //     : 'Hover over a state';
+    //     this._div.innerHTML = `<h4>INFO</h4>${contents}`;
 
-    };
+    // };
 
     const colorsets = [
         ['#f7fbff','#deebf7','#c6dbef','#9ecae1','#6baed6','#4292c6','#2171b5','#08519c','#08306b'], // blue
@@ -42,21 +39,16 @@ layout: page
     const mapCenter = ref([39.8283, -98.5795]);
     const mapZoom = ref(4);
 
-    function mainScript(L, mapInstance) {
+    function mainScript(L, mapInstance, layerControl) {
 
         initGeoJsonLayer();
 
-        const baseMaps = getBaseMap(baseMapInfos);
-        const layerControl = L.control.layers(baseMaps).addTo(mapInstance);
-
-        baseMaps.dark_all.addTo(mapInstance);
-
-        const geoJsonLayer = L.geoJsonLayer(infoUpdate);
+        const geoJsonLayer = L.geoJsonLayer('Population Coverage of EVCSs');
 
         const D_Colors = colorsets[0];
         geoJsonLayer.setColors(D_Colors);
 
-        layerControl.addOverlay(geoJsonLayer, 'Appendix C');
+        layerControl.addOverlay(geoJsonLayer, 'Population Coverage of EVCSs');
         geoJsonLayer.clear();
 
         geoJsonLayer.addTo(mapInstance);
@@ -67,11 +59,18 @@ layout: page
         geoJsonLayer.appendData(eu,(d) => parseFloat(d.properties.V));
         geoJsonLayer.update();
 
-
-        // 添加比例尺
-        L.control.scale({ position: 'bottomright' }).addTo(mapInstance);
     }
 
 
 
 </script>
+
+
+<style scoped>
+    h1 {
+        font-size: 2em;
+        text-align: center;
+        margin: 0.67em 0;
+        color: var(--vp-c-brand-1);
+    }
+</style>

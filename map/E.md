@@ -10,24 +10,10 @@ layout: page
     import LeafletMap from '@/components/LeafletMap.vue';
     import { ref } from 'vue';
 
-    import { baseMapInfos } from "@/layers/baseMaps.js";
-    import { getBaseMap } from "@/layers/utils.js";
     import { initGeoJsonLayer } from "@/layers/geojsonlayer.js";
+    import { initSelectAndButtonControl } from '@/layers/controls/selectAndButton.js'; // 引入自定义控件
 
     import { data } from '@/loader/E.data.js';
-
-    const infoUpdate = function (props, data) {
-        // const name = 
-        // 若 props 有 NAME_2 字段 或 cityname 字段，则显示该字段 二者只会出现一个
-
-        const name = props ? props.NAME_2 || props.cityname : null;
-
-    const contents = props
-        ? `<b>${name}</b><br/>${props["1500buffer-city"]}-POI Mix of EVCSs`
-        : 'Hover over a state';
-        this._div.innerHTML = `<h4>INFO</h4>${contents}`;
-
-    };
 
     const colorsets = [
         ['#f7fbff','#deebf7','#c6dbef','#9ecae1','#6baed6','#4292c6','#2171b5','#08519c','#08306b'], // blue
@@ -42,19 +28,15 @@ layout: page
     const mapCenter = ref([50, 10]);
     const mapZoom = ref(4);
 
-    function mainScript(L, mapInstance) {
+    function mainScript(L, mapInstance, layerControl) {
 
         initGeoJsonLayer();
+        initSelectAndButtonControl();
+        
+        const geoJsonLayer = L.geoJsonLayer('1500buffer-city');
 
-        const baseMaps = getBaseMap(baseMapInfos);
-        const layerControl = L.control.layers(baseMaps).addTo(mapInstance);
-
-        baseMaps.dark_all.addTo(mapInstance);
-
-        const geoJsonLayer = L.geoJsonLayer(infoUpdate);
-
-        const D_Colors = colorsets[3];
-        geoJsonLayer.setColors(D_Colors);
+        const colors = colorsets[0];
+        geoJsonLayer.setColors(colors);
 
         layerControl.addOverlay(geoJsonLayer, 'Appendix E');
         geoJsonLayer.clear();
@@ -67,10 +49,28 @@ layout: page
         geoJsonLayer.appendData(eu,(d) => parseFloat(d.properties["1500buffer-city"]));
         geoJsonLayer.update();
 
-        // 添加比例尺
-        L.control.scale({ position: 'bottomright' }).addTo(mapInstance);
+        const columns = geoJsonLayer.getColumns();
+
+        const selectAndButtonControl = L.control.selectAndButton({
+            columns: columns,
+            buttonName: 'Show',
+            info: 'Select a column to show',
+            onButtonClick: function (selectedColumn) {
+                const index = columns.indexOf(selectedColumn);
+                geoJsonLayer.setColumn(selectedColumn, colors);
+            }
+        });
+
+        selectAndButtonControl.addTo(mapInstance);
+
     }
-
-
-
 </script>
+
+<style scoped>
+    h1 {
+        font-size: 2em;
+        text-align: center;
+        margin: 0.67em 0;
+        color: var(--vp-c-brand-1);
+    }
+</style>

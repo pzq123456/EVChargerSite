@@ -2,32 +2,33 @@
 layout: page
 ---
 # Appendix D: Spatial Distributions of the Housing Price Index of EVCSs at the City Level
+<Drawer :is-open="isDrawerOpen" :speed="500" @close="closeDrawer">
+    <cityDetails />
+</Drawer>
+
+<button @click="toggleDrawer" :class="{ open: isDrawerOpen, close: !isDrawerOpen }" id="toggle">
+</button>
 
 <LeafletMap :mainScript :center="mapCenter" :zoom="mapZoom" ref="map" />
 
 
 <script setup>
     import LeafletMap from '@/components/LeafletMap.vue';
-    import { ref } from 'vue';
-
-    import { baseMapInfos } from "@/layers/baseMaps.js";
-    import { getBaseMap } from "@/layers/utils.js";
+    import { ref, watch } from 'vue';
     import { initGeoJsonLayer } from "@/layers/geojsonlayer.js";
-
     import { data } from '@/loader/D.data.js';
+    import { initSelectAndButtonControl } from '@/layers/controls/selectAndButton.js'; // 引入自定义控件
 
-    const infoUpdate = function (props, data) {
-        // const name = 
-        // 若 props 有 NAME_2 字段 或 cityname 字段，则显示该字段 二者只会出现一个
+    import Drawer from "@/components/Drawer.vue";
+    import cityDetails from "@/layouts/cityDetails.vue";
 
-        const name = props ? props.NAME_2 || props.cityname : null;
+    import { useCityStore } from '@/stores/cityStore';
+    import { computed } from 'vue';
 
-    const contents = props
-        ? `<b>${name}</b><br/>${props["mean_1500buffer-city"]} charging stations`
-        : 'Hover over a state';
-        this._div.innerHTML = `<h4>INFO</h4>${contents}`;
 
-    };
+    const cityStore = useCityStore();
+
+    const selectedCity = computed(() => cityStore.selectedCity);
 
     const colorsets = [
         ['#f7fbff','#deebf7','#c6dbef','#9ecae1','#6baed6','#4292c6','#2171b5','#08519c','#08306b'], // blue
@@ -39,40 +40,96 @@ layout: page
         ['#fff7f3','#fde0dd','#fcc5c0','#fa9fb5','#f768a1','#dd3497','#ae017e','#7a0177','#49006a'], // pink
     ];
 
+    let isDrawerOpen = ref(false);
+
+    const toggleDrawer = () => {
+        isDrawerOpen.value = !isDrawerOpen.value;
+    };
+
+    const closeDrawer = () => {
+        isDrawerOpen.value = false;
+    };
+
+    // 只要 selectedRegion 不为空就打开抽屉
+    watch(selectedCity, (newVal) => {
+        if (newVal) {
+            isDrawerOpen.value = true;
+        }
+    });
+
+    const clickCallback = function (properties) {
+        if (properties){
+            // console.log(properties);
+            cityStore.updateSelectedCity(properties);
+            cityStore.updateSelectedColumn(this._legendName);
+        } else {
+            cityStore.updateSelectedCity(null);
+            cityStore.updateSelectedColumn(null);
+        }
+    };
+
     const mapCenter = ref([39.8283, -98.5795]);
     const mapZoom = ref(4);
 
-    function mainScript(L, mapInstance) {
+    function mainScript(L, mapInstance, layerControl) {
 
         initGeoJsonLayer();
+        initSelectAndButtonControl();
 
-
-
-
-        const baseMaps = getBaseMap(baseMapInfos);
-        const layerControl = L.control.layers(baseMaps).addTo(mapInstance);
-
-        baseMaps.dark_all.addTo(mapInstance);
-
-        const geoJsonLayer = L.geoJsonLayer(infoUpdate);
+        const geoJsonLayer = L.geoJsonLayer('Housing Price Index of EVCSs', clickCallback);
 
         const D_Colors = colorsets[6];
         geoJsonLayer.setColors(D_Colors);
 
-        layerControl.addOverlay(geoJsonLayer, 'Appendix D');
+        layerControl.addOverlay(geoJsonLayer, 'Housing Price Index of EVCSs');
 
         geoJsonLayer.addTo(mapInstance);
         geoJsonLayer.clear();
+        
         const {cn, us} = data;
         geoJsonLayer.appendData(cn,(d) => parseFloat(d.properties["mean_1500buffer-city"]));
         geoJsonLayer.appendData(us,(d) => parseFloat(d.properties["mean_1500buffer-city"]));
         geoJsonLayer.update();
 
+        const columns = geoJsonLayer.getColumns();
 
-        // 添加比例尺
-        L.control.scale({ position: 'bottomright' }).addTo(mapInstance);
+        const selectAndButtonControl = L.control.selectAndButton({
+            columns: columns,
+            buttonName: 'Show',
+            info: 'Select a column to show',
+            onButtonClick: function (selectedColumn) {
+                const index = columns.indexOf(selectedColumn);
+                geoJsonLayer.setColumn(selectedColumn, D_Colors);
+            }
+        });
+
+        selectAndButtonControl.addTo(mapInstance);
     }
 
 
 
 </script>
+
+
+<style scoped>
+    h1 {
+        font-size: 2em;
+        text-align: center;
+        margin: 0.67em 0;
+        color: var(--vp-c-brand-1);
+    }
+
+    #toggle.open {
+    background-color: #ff1100b0;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    }
+
+    #toggle.close {
+        background-color: #00ff08b0;
+        border-radius: 50%;
+        width: 10px;
+        height: 10px;
+    }
+</style>

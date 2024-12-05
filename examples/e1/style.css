@@ -2,3 +2,70 @@
     width: 100%;
     height: 100vh;
 }
+
+.custom-popup .leaflet-popup-content-wrapper {
+    background: #ffffffe1;
+}
+
+.custom-popup .leaflet-popup-tip {
+    background: #ffffffab;
+}
+
+.info { padding: 6px 8px; font: 14px/16px Arial, Helvetica, sans-serif; background: white; background: rgba(255,255,255,0.8); box-shadow: 0 0 15px rgba(0,0,0,0.2); border-radius: 5px; }
+.info h4 { margin: 0 0 5px; color: #000000; }
+.legend { text-align: left; line-height: 18px; color: #000000; }
+.legend i { width: 18px; height: 18px; float: left; margin-right: 8px; opacity: 0.7; }
+
+.legend-title {
+    font-size: 20px;
+    font-weight: bold;
+    border-bottom: 1px solid rgb(255, 255, 255);
+}
+
+number{
+    font-weight: bold;
+    font-size: 20px;
+    color: green;
+}
+
+/* 控件的整体样式 */
+.leaflet-control-select-button {
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.804);
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    font-family: Arial, sans-serif;
+}
+
+/* 信息文本的样式 */
+.select-button-info {
+    margin-bottom: 5px;
+    font-size: 20px;
+    color: #333;
+}
+
+/* 下拉框的样式 */
+.select-button-dropdown {
+    width: 150px;
+    margin-bottom: 5px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 14px;
+}
+
+/* 按钮的样式 */
+.select-button-button {
+    padding: 10px;
+    width: 100px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.select-button-button:hover {
+    background-color: #45a049;
+}

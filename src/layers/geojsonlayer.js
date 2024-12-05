@@ -3,19 +3,48 @@ import { Stastics } from "./stastics.js";
 export function initGeoJsonLayer() { // 这一步只是 向L注册了一个新的类，但是并没有实例化
 
     L.GeoJsonLayer = L.Layer.extend({
-        initialize: function (infoUpdate, clickCallback = null) {
+
+        initialize: function (lagendName = "Legend", clickCallback = null) {
+
             this._stastics = new Stastics(); // 单值统计
-            // this._grades = grades;
             this._colors = DefaultColors;
-            this._infoUpdate = infoUpdate;
             this._data = DefaultGeoJson;
             this._getVal = (d) => parseInt(d.properties.count);
+            this._legendName = lagendName;
+
             if (clickCallback) {
                 console.log('clickCallback')
                 this._clickCallback = clickCallback;
             }
         },
 
+        setColumn: function (column, colors = DefaultColors) {
+            // 在数据传入后 设置统计及显示的列
+
+            this._getVal = (d) => parseInt(d.properties[column]);
+            this._stastics.clear();
+            this._stastics.append(this._data.features, this._getVal);
+
+            this._legendName = column;
+
+            this._colors = colors;
+            if (this._legend){
+                this._legend.update();
+            }
+
+            if (this._geoJson) {
+                this._geoJson.clearLayers();
+                this._geoJson.addData(this._data);
+                this._legend.update();
+            }
+        },
+        
+        getColumns: function (
+            filter = (d) => !isNaN(parseInt(this._data.features[0].properties[d])) // 获取其中所有值为数字的列
+        ) {
+            return Object.keys(this._data.features[0].properties).filter(filter);
+        }, 
+        
         setColors: function (colors) {
             this._colors = colors;
             if (this._legend){
@@ -28,14 +57,25 @@ export function initGeoJsonLayer() { // 这一步只是 向L注册了一个新�
         },
 
         _style: function (feature) {
-            return {
-                weight: 1,
-                opacity: 1,
-                color: 'white',
-                // dashArray: '3',
-                fillOpacity: 0.7,
-                fillColor: this._getColor(this._getVal(feature))
-            };
+            // 若值严格为0 则表示无数据 使用灰色填充 表示没有数据
+            if (this._getVal(feature) === 0) {
+                return {
+                    weight: 1,
+                    color: 'white',
+                    dashArray: '3',
+                    fillOpacity: 0.7,
+                    fillColor: 'gray'
+                };
+            }else{
+                return {
+                    weight: 1,
+                    opacity: 1,
+                    color: 'white',
+                    fillOpacity: 0.7,
+                    fillColor: this._getColor(this._getVal(feature))
+                };
+            }
+
         },
 
         clear: function () {
@@ -44,6 +84,22 @@ export function initGeoJsonLayer() { // 这一步只是 向L注册了一个新�
             if (this._geoJson) {
                 this._geoJson.clearLayers();
                 this._legend.update();
+            }
+        },
+
+        update() {
+            if(this._stastics){
+                this._stastics.update();
+            }
+
+            if(this._legend){
+                this._legend.update();
+            }
+
+            if(this._geoJson){
+                this._geoJson.eachLayer((layer) => {
+                    layer.setStyle(this._style(layer.feature));
+                });
             }
         },
 
@@ -66,7 +122,6 @@ export function initGeoJsonLayer() { // 这一步只是 向L注册了一个新�
             this._getVal = getVal;
 
             if (this._geoJson) {
-                // this._geoJson.clearLayers();
                 this._geoJson.addData(data);
                 this._legend.update();
             }
@@ -74,10 +129,7 @@ export function initGeoJsonLayer() { // 这一步只是 向L注册了一个新�
 
         onAdd: function (map) {
             this._map = map;
-
-            this._createInfo(this._infoUpdate);
             this._createLegend();
-            this._info.addTo(this._map);
 
             this._geoJson = L.geoJson(this._data, {
                 style: this._style.bind(this),
@@ -90,9 +142,7 @@ export function initGeoJsonLayer() { // 这一步只是 向L注册了一个新�
         },
 
         onRemove: function () {
-            console.log('remove')
             this._map.removeLayer(this._geoJson);
-            this._map.removeControl(this._info);
             this._map.removeControl(this._legend);
         },
 
@@ -115,13 +165,10 @@ export function initGeoJsonLayer() { // 这一步只是 向L注册了一个新�
             });
 
             layer.bringToFront();
-            // console.log(this._info)
-            this._info.update(layer.feature.properties);
         },
 
         _resetHighlight: function (e) {
             this._geoJson.resetStyle(e.target);
-            this._info.update();
         },
 
         _zoomToFeature: function (e) {
@@ -131,21 +178,8 @@ export function initGeoJsonLayer() { // 这一步只是 向L注册了一个新�
             }
         },
 
-        _createInfo: function (infoUpdate = this._infoUpdate) {
-            const info = L.control();
-            info.onAdd = function (map) {
-                this._div = L.DomUtil.create('div', 'info');
-                this.update();
-                return this._div;
-            }
-            info.update = function (props) {
-                this._infoUpdate(props);
-            }
-            info.update = infoUpdate.bind(info);
-            this._info = info;
-        },
         _createLegend: function () {
-            let legend = L.control({position: 'bottomright'});
+            let legend = L.control({position: 'bottomleft'});
 
             legend.onAdd = this._legendHelper.bind(this);
 
@@ -162,32 +196,28 @@ export function initGeoJsonLayer() { // 这一步只是 向L注册了一个新�
             const labels = [];
             let from, to;
 
-            const grades = this._stastics.getGrades(this._colors.length);
-            // console.log(grades);
+            const grades = this._stastics.getGradesFixed(this._colors.length);
             const colors = [];
 
-            labels.push('legend');
+            const divTitle = L.DomUtil.create('div', 'legend-title', div);
+            divTitle.innerHTML = addLineBreaks(this._legendName);
+
+            labels.push(divTitle.outerHTML);
 
             for (let i = 0; i < grades.length - 1; i++) {
                 colors.push(this._stastics.mapValue2Color(grades[i], false, this._colors));
             }
 
             for (let i = 0; i < grades.length - 1; i++) {
-                // from = grades[i];
-                // to = grades[i + 1];
                 from = bigNumberFormat(grades[i]);
                 to = bigNumberFormat(grades[i + 1]);
                 labels.push(`<i style="background:${colors[i]}"></i> ${from}${to ? `&ndash;${to}` : '+'}`);
             }
-
+            // 灰色表示没有数据
+            labels.push(`<i style="background:gray"></i> No Data`);
             div.innerHTML = labels.join('<br>');
             return div;
         },
-
-        updateInfoUpdate: function (infoUpdate) {
-            this._infoUpdate = infoUpdate;
-            this._info.update = infoUpdate.bind(this._info);
-        }
 
     });
 
@@ -205,7 +235,6 @@ const DefaultColors = ['#f7fcf5', '#e5f5e0', '#c7e9c0', '#a1d99b', '#74c476', '#
 
 // 帮助函数 当数字过大时，将数字转化为科学计数法
 // 例如 1000000 -> 1e6
-
 function bigNumberFormat(num) {
     if (num < 1e3) {
         return num;
@@ -216,4 +245,14 @@ function bigNumberFormat(num) {
     } else {
         return (num / 1e9).toFixed(1) + 'B';
     }
+}
+
+// 帮助函数 分词添加换行符 例如 'Population Density' -> 'Population<br />Density'
+function addLineBreaks(str) {
+
+    // return str.split(' ').join('<br />');
+
+    // 同时支持将 '-' 及 '_' 替换为 '<br />'
+
+    return str.split(/[-_ ]/).join('<br />');
 }
