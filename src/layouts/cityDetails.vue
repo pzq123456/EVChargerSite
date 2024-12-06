@@ -6,10 +6,12 @@
       </h1>
 
       <p class="num">
-        {{ selectedColumn }} : {{ selectedCity[selectedColumn].toFixed(2) }}
+        {{ selectedColumn }} : {{ value }}
       </p>
 
-
+      <!-- <div>
+        {{ selectedCity }}
+      </div> -->
     </div>
 
     <div v-else>
@@ -31,6 +33,17 @@ const cityStore = useCityStore();
 const selectedCity = computed(() => cityStore.selectedCity);
 const selectedColumn = computed(() => cityStore.selectedColumn);
 
+const value = computed(() => {
+  if(selectedCity.value[selectedColumn.value]){
+    return selectedCity.value[selectedColumn.value].toFixed(2);
+  }else if(selectedCity.value.V) {
+    return selectedCity.value.V.toFixed(2);
+  }else if(selectedCity.value.count){
+    return selectedCity.value.count;
+  }else{
+    return 'N/A';
+  }
+});
 
 const cityName = computed(() => {
   const name = getCityName(selectedCity.value);
@@ -44,12 +57,14 @@ const cityName = computed(() => {
 const countryName = computed(() => getCountryName(selectedCity.value));
 
 function getCountryName(selectedCity) {
-  if (selectedCity.cityname && selectedCity.pname) {
+  if (selectedCity.pname) {
     return selectedCity.pname;
-  }else if (selectedCity.GID_0) {
-    return selectedCity.GID_0;
+  }else if(selectedCity.COUNTRY) {
+    return selectedCity.COUNTRY;
+  }else if(selectedCity.NAME_1) {
+    return selectedCity.NAME_1;
   }else{
-    return '';
+    return null;
   }
 }
 
@@ -63,11 +78,6 @@ function getCityName(selectedCity) {
     return '';
   }
 }
-
-// // 固定两位小数
-// function toFixed2(num) {
-//   return num.toFixed(2);
-// }
 
 // 帮助函数判断是否为中文字符
 function isChineseChar(str) {

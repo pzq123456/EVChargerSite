@@ -57,7 +57,24 @@ Fig. E-1 The spatial distributions of the POI Mix of EVCSs at the city level acr
 
 Figures F-1 and F-2 show the spatial distributions of road network density and the relative development level of road network around EVCSs at the city level across the three study areas and different buffer radii. It can be found that road network density around EVCSs in Chinese cities tend to be lower compared to the US and Europe. Meanwhile, in terms of the relative development level of road network, cities in China and the US tend to have a greater variability compared to Europe.
 
- 
+![Figure F-1](./imgs/p8.png)
+Fig. F-1 The spatial distributions of the road network density around EVCSs at the city level across the three study areas and different buffer radii 
 
+![Figure F-2](./imgs/p9.png)
+Fig. F-2 The spatial distributions of the relative development level of the road network around EVCSs at the city level across the three study areas and different buffer radii 
  
  
+## Appendix G: Data Sources 
+Table G-1 summaries the sources of the open datasets used in this study. 
+
+| Data type | Study area | Collection period | Data source |
+| --- | --- | --- | --- |
+| Public EVCS location data in 2022 | China | 2022/04/25-2022/08/16 | Amap: https://ditu.amap.com/?amapexchange=%2F |
+| | The US | 2022/09/24 | Alternative Fuels Data Center: https://afdc.energy.gov/stations/#/find/nearest?fuel=ELEC&ev_levels=all |
+| | Europe | 2022/07/01-2022/08/04 | European Alternative Fuels Observatory: https://ec.europa.eu/transport/infrastructure/tentec/tentec-portal/map/maps.html#&ui-state=dialog |
+| Population density data in 2020 | China, the US, and Europe | 2022/10/28 | WorldPop: https://hub.worldpop.org/geodata/listing?id=76 |
+| Housing price data in 2023 | China | 2023/02/15-2023/05/28 | Lianjia: https://bj.lianjia.com/ |
+| | The US | 2022/10/08-2023/05/25 | Zillow: https://www.zillow.com/ |
+| POI data in 2022 | China | 2022/04/22-2022/08/16 | Amap: https://ditu.amap.com/?amapexchange=%2F |
+| | the US and Europe | 2022/08/14 | GEOFABRIK: http://www.geofabrik.de/ |
+| Road network data in 2022 | China, the US, and Europe | 2022/08/14 | GEOFABRIK: http://www.geofabrik.de/ |

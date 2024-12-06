@@ -21,7 +21,7 @@ export function initGeoJsonLayer() { // 这一步只是 向L注册了一个新�
         setColumn: function (column, colors = DefaultColors) {
             // 在数据传入后 设置统计及显示的列
 
-            this._getVal = (d) => parseInt(d.properties[column]);
+            this._getVal = (d) => parseFloat(d.properties[column]);
             this._stastics.clear();
             this._stastics.append(this._data.features, this._getVal);
 
@@ -41,10 +41,11 @@ export function initGeoJsonLayer() { // 这一步只是 向L注册了一个新�
         },
         
         getColumns: function (
-            filter = (d) => !isNaN(parseInt(this._data.features[0].properties[d])) // 获取其中所有值为数字的列
+            filter = (d) => !isNaN(parseInt(this._data.features[0].properties[d])) && d !== 'area' // 获取其中所有值为数字的列 同时去除 area 列
         ) {
             return Object.keys(this._data.features[0].properties).filter(filter);
         }, 
+
         
         setColors: function (colors) {
             this._colors = colors;
@@ -83,6 +84,14 @@ export function initGeoJsonLayer() { // 这一步只是 向L注册了一个新�
             // this = null;
 
             this._data.features = [];
+            this._stastics.clear();
+            if (this._geoJson) {
+                this._geoJson.clearLayers();
+            }
+            if (this._legend) {
+                this._legend._container.innerHTML = '';
+            }
+
         },
 
         update() {
@@ -99,6 +108,8 @@ export function initGeoJsonLayer() { // 这一步只是 向L注册了一个新�
                     layer.setStyle(this._style(layer.feature));
                 });
             }
+
+            // this._stastics.print();
         },
 
         updateData: function (data, getVal = (d) => parseInt(d.properties.count)) {
@@ -138,7 +149,7 @@ export function initGeoJsonLayer() { // 这一步只是 向L注册了一个新�
             this._geoJson.addTo(this._map);
             this._legend.addTo(this._map);
 
-            console.log(this._geoJson)
+            // console.log(this._geoJson)
         },
 
         onRemove: function (map) {

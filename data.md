@@ -4,11 +4,13 @@
 ### 1.1 Data Description
 - **For** the US, we collected the location data of 46,548 EVCSs (with a sample rate of 87.02%) from the Alternative Fuels Data Center; 
 - **For** China, we collected the location data of 73,114 EVCSs (with a sample rate of 65.64%) from the AMAP, one of the largest online mapping service providers in China. 
-- **For** Europe, we collected the location data of 317,528 recharging points (with a sample rate of 49.65%) from the European Alternative Fuels Observatory. 
+- **For** Europe, we collected the location data of 317,528 recharging points (with a sample rate of 49.65%) from the European Alternative Fuels Observatory. These recharging points can be further grouped into 95,133 EVCSs according to the field of “evse_uid” in the dataset. 
+ 
+You can download the sample data [below](#_1-2-data-download); 
 
-These recharging points can be further grouped into 95,133 EVCSs according to the field of “evse_uid” in the dataset.You can download the sample data [below](#_1-2-data-download); You could request for the full dataset by sending us (global.ev.map@gmail.com) the application form. 
+You could request for the full dataset by sending us (global.ev.map@gmail.com) the application form. 
 
-### 1.2 Data Download
+### 1.2 Sample Data Download
 <div class="row">
     <div class="col-md-4">
         <button @click="downloadeu" class="btn btn-primary">Download EU Data</button>

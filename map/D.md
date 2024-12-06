@@ -1,7 +1,7 @@
 ---
 layout: page
 ---
-# Appendix D: Spatial Distributions of the Housing Price Index of EVCSs at the City Level
+# Spatial Distributions of the Housing Price Index of EVCSs at the City Level
 <Drawer :is-open="isDrawerOpen" :speed="500" @close="closeDrawer">
     <cityDetails />
 </Drawer>
@@ -77,7 +77,7 @@ layout: page
 
         const D_geoJsonLayer = L.geoJsonLayer('mean_1500buffer-city', clickCallback);
 
-        const D_Colors = colorsets[6];
+        const D_Colors = colorsets[0];
         D_geoJsonLayer.setColors(D_Colors);
 
         layerControl.addOverlay(D_geoJsonLayer, 'Housing Price Index of EVCSs');

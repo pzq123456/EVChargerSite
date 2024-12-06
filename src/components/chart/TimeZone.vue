@@ -97,19 +97,25 @@ const localTime = computed(() => {
 // 计算国旗 URL
 const flag = computed(() => {
     // 若传入的 name 是汉字范围则认为是中国
-    if (isChineseChar(props.country[0])) {
+    if (props.country&&isChineseChar(props.country[0])) {
         return 'https://flagcdn.com/h40/cn.png';
     }
 
-    if (props.country === 'USA') {
+    if (props.country === 'USA' || props.country === 'United States') {
         return 'https://flagcdn.com/h40/us.png';
+    }
+
+    if (props.country === 'UK' || props.country === 'United Kingdom') {
+        return 'https://flagcdn.com/h40/gb.png';
     }
 
     // 若 props 有 countryFlag，则使用 countryFlag
     if (props.countryFlag) {
         return `https://flagcdn.com/h40/${props.countryFlag.toLowerCase()}.png`;
     }else if (flagData[props.country]) {
-        return `https://flagcdn.com/h40/${props.country["ISO 2"].toLowerCase()}.png`;
+        const country = flagData[props.country];
+        // console.log(country); //"﻿ISO2"
+        return `https://flagcdn.com/h40/${country["﻿ISO2"].toLowerCase()}.png`;
     }else {
         return null;
     }

@@ -1,19 +1,35 @@
 ---
 layout: page
 ---
-# Appendix E: Spatial Distributions of the POI Mix of EVCSs at the City Level
+# Spatial Distributions of the POI Mix of EVCSs at the City Level
+
+<Drawer :is-open="isDrawerOpen" :speed="500" @close="closeDrawer">
+    <cityDetails />
+</Drawer>
+
+<button @click="toggleDrawer" :class="{ open: isDrawerOpen, close: !isDrawerOpen }" id="toggle">
+</button>
 
 <LeafletMap :mainScript :center="mapCenter" :zoom="mapZoom" ref="map" />
 
 
 <script setup>
     import LeafletMap from '@/components/LeafletMap.vue';
-    import { ref } from 'vue';
-
+    import { ref, watch } from 'vue';
     import { initGeoJsonLayer } from "@/layers/geojsonlayer.js";
+    import { data } from '@/loader/E.data.js';
     import { initSelectAndButtonControl } from '@/layers/controls/selectAndButton.js'; // 引入自定义控件
 
-    import { data } from '@/loader/E.data.js';
+    import Drawer from "@/components/Drawer.vue";
+    import cityDetails from "@/layouts/cityDetails.vue";
+
+    import { useCityStore } from '@/stores/cityStore';
+    import { computed } from 'vue';
+
+
+    const cityStore = useCityStore();
+
+    const selectedCity = computed(() => cityStore.selectedCity);
 
     const colorsets = [
         ['#f7fbff','#deebf7','#c6dbef','#9ecae1','#6baed6','#4292c6','#2171b5','#08519c','#08306b'], // blue
@@ -25,6 +41,33 @@ layout: page
         ['#fff7f3','#fde0dd','#fcc5c0','#fa9fb5','#f768a1','#dd3497','#ae017e','#7a0177','#49006a'], // pink
     ];
 
+    let isDrawerOpen = ref(false);
+
+    const toggleDrawer = () => {
+        isDrawerOpen.value = !isDrawerOpen.value;
+    };
+
+    const closeDrawer = () => {
+        isDrawerOpen.value = false;
+    };
+
+    // 只要 selectedRegion 不为空就打开抽屉
+    watch(selectedCity, (newVal) => {
+        if (newVal) {
+            isDrawerOpen.value = true;
+        }
+    });
+
+    const clickCallback = function (properties) {
+        if (properties){
+            cityStore.updateSelectedCity(properties);
+            cityStore.updateSelectedColumn(this._legendName);
+        } else {
+            cityStore.updateSelectedCity(null);
+            cityStore.updateSelectedColumn(null);
+        }
+    };
+
     const mapCenter = ref([50, 10]);
     const mapZoom = ref(4);
 
@@ -33,24 +76,22 @@ layout: page
         initGeoJsonLayer();
         initSelectAndButtonControl();
         
-        const E_geoJsonLayer = L.geoJsonLayer('1500buffer-city');
+        const E_geoJsonLayer = L.geoJsonLayer('1500buffer-city', clickCallback);
 
         const colors = colorsets[0];
         E_geoJsonLayer.setColors(colors);
 
         layerControl.addOverlay(E_geoJsonLayer, 'Appendix E');
-        E_geoJsonLayer.clear();
-
-        E_geoJsonLayer.addTo(mapInstance);
 
         const {cn, us, eu} = data;
-        E_geoJsonLayer.appendData(cn,(d) => parseFloat(d.properties["1500buffer-city"]));
-        E_geoJsonLayer.appendData(us,(d) => parseFloat(d.properties["1500buffer-city"]));
-        E_geoJsonLayer.appendData(eu,(d) => parseFloat(d.properties["1500buffer-city"]));
+        E_geoJsonLayer.appendData(cn);
+        E_geoJsonLayer.appendData(us);
+        E_geoJsonLayer.appendData(eu);
 
         E_geoJsonLayer.setColumn('1500buffer-city', colors);
         E_geoJsonLayer.update();
 
+        E_geoJsonLayer.addTo(mapInstance);
         const columns = E_geoJsonLayer.getColumns();
 
         const selectAndButtonControl = L.control.selectAndButton({
@@ -75,5 +116,19 @@ layout: page
         text-align: center;
         margin: 0.67em 0;
         color: var(--vp-c-brand-1);
+    }
+
+    #toggle.open {
+    background-color: #ff1100b0;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    }
+
+    #toggle.close {
+        background-color: #00ff08b0;
+        border-radius: 50%;
+        width: 10px;
+        height: 10px;
     }
 </style>

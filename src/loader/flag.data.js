@@ -7,13 +7,6 @@ import { parse } from 'csv-parse/sync';
 export default {
     watch: ['../../data/timezone/flag.csv'],
     load(watchedFiles) {
-        // const csvData = parse(fs.readFileSync(watchedFiles[0], 'utf-8'), {
-        //     columns: true,
-        //     skip_empty_lines: true,
-        // });
-
-        // 修改为 以 name 为 key 的对象
-
         const csvData = parse(fs.readFileSync(watchedFiles[0], 'utf-8'), {
             columns: true,
             skip_empty_lines: true,
@@ -22,8 +15,6 @@ export default {
             return acc;
         }
         , {});
-        
-
         return csvData;
     }
 }

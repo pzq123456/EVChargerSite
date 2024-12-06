@@ -4,6 +4,11 @@ export class Stastics {
         this._min = 0;
         this._average = 0;
         this._data = [];
+    } 
+
+    print(){
+        console.log("Stastics:", "max:", this._max, "min:", this._min, "average:", this._average);
+        console.log("data:", this._data);
     }
 
     clear() {
@@ -51,15 +56,15 @@ export class Stastics {
         }
 
         if (isReverse) {
-            return 1 - mappedValue;
+            // 反转后判断是否小于0，如果小于0则返回0
+            return Math.max(0, 1 - mappedValue);
         } else {
             return mappedValue;
         }
     }
 
     mapValue2Color(value, isReverse = false, colors = defaultColors, stretch = 'linear') {
-        let mappedValue = this.mapValue(value, isReverse, stretch);
-        let index = Math.floor(mappedValue * (colors.length - 1));
+        let index = Math.floor(this.mapValue(value, isReverse, stretch) * (colors.length - 1));
         return colors[index];
     }
 

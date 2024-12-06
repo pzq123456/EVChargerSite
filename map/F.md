@@ -1,20 +1,33 @@
 ---
 layout: page
 ---
-# Appendix F: Spatial Distributions of Access to EVCSs through Road Network at the City Level
+# Spatial Distributions of Access to EVCSs through Road Network at the City Level
+<Drawer :is-open="isDrawerOpen" :speed="500" @close="closeDrawer">
+    <cityDetails />
+</Drawer>
+
+<button @click="toggleDrawer" :class="{ open: isDrawerOpen, close: !isDrawerOpen }" id="toggle">
+</button>
 
 <LeafletMap :mainScript :center="mapCenter" :zoom="mapZoom" ref="map" />
 
 
 <script setup>
     import LeafletMap from '@/components/LeafletMap.vue';
-    import { ref } from 'vue';
-
+    import { ref, watch } from 'vue';
     import { initGeoJsonLayer } from "@/layers/geojsonlayer.js";
+    import { data } from '@/loader/F.data.js';
     import { initSelectAndButtonControl } from '@/layers/controls/selectAndButton.js'; // 引入自定义控件
 
-    import { data } from '@/loader/F.data.js';
+    import Drawer from "@/components/Drawer.vue";
+    import cityDetails from "@/layouts/cityDetails.vue";
 
+    import { useCityStore } from '@/stores/cityStore';
+    import { computed } from 'vue';
+
+    const cityStore = useCityStore();
+
+    const selectedCity = computed(() => cityStore.selectedCity);
 
     const colorsets = [
         ['#f7fbff','#deebf7','#c6dbef','#9ecae1','#6baed6','#4292c6','#2171b5','#08519c','#08306b'], // blue
@@ -26,6 +39,33 @@ layout: page
         ['#fff7f3','#fde0dd','#fcc5c0','#fa9fb5','#f768a1','#dd3497','#ae017e','#7a0177','#49006a'], // pink
     ];
 
+    let isDrawerOpen = ref(false);
+
+    const toggleDrawer = () => {
+        isDrawerOpen.value = !isDrawerOpen.value;
+    };
+
+    const closeDrawer = () => {
+        isDrawerOpen.value = false;
+    };
+
+    // 只要 selectedRegion 不为空就打开抽屉
+    watch(selectedCity, (newVal) => {
+        if (newVal) {
+            isDrawerOpen.value = true;
+        }
+    });
+
+    const clickCallback = function (properties) {
+        if (properties){
+            cityStore.updateSelectedCity(properties);
+            cityStore.updateSelectedColumn(this._legendName);
+        } else {
+            cityStore.updateSelectedCity(null);
+            cityStore.updateSelectedColumn(null);
+        }
+    };
+
     const mapCenter = ref([50, 10]);
     const mapZoom = ref(4);
 
@@ -34,9 +74,9 @@ layout: page
         initGeoJsonLayer();
         initSelectAndButtonControl();
 
-        const F_geoJsonLayer = L.geoJsonLayer('density_1500buffer-city');
+        const F_geoJsonLayer = L.geoJsonLayer('density_1500buffer-city', clickCallback);
 
-        const colors = colorsets[5];
+        const colors = colorsets[0];
         F_geoJsonLayer.setColors(colors);
 
         layerControl.addOverlay(F_geoJsonLayer, 'Appendix F');
@@ -81,5 +121,19 @@ layout: page
         text-align: center;
         margin: 0.67em 0;
         color: var(--vp-c-brand-1);
+    }
+
+    #toggle.open {
+    background-color: #ff1100b0;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    }
+
+    #toggle.close {
+        background-color: #00ff08b0;
+        border-radius: 50%;
+        width: 10px;
+        height: 10px;
     }
 </style>
