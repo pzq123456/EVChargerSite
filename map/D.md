@@ -93,8 +93,8 @@ layout: page
 
         const columns = D_geoJsonLayer.getColumns();
 
-        console.log(columns);
-        console.log(D_geoJsonLayer);
+        // console.log(columns);
+        // console.log(D_geoJsonLayer);
 
         const selectAndButtonControl = L.control.selectAndButton({
             columns: columns,

@@ -1,12 +1,16 @@
 <template>
     <div>
         <div class="country">
-            <h1>{{ country }}</h1>
-            <!-- 渲染 flag emoji -->
-            <div v-if="flag" class="flag">
-                <img :src="flag" alt="flag" />
-                <!-- {{ flag }} -->
+
+            <div class="countryBand">
+
+                <h1 class="countryName">{{ country }}</h1>
+
+                <div class="flag">
+                    <img v-if="flag" :src="flag" alt="flag" />
+                </div>
             </div>
+
 
             <!-- 渲染当前时间 -->
             <div v-if="localTime" class="time">
@@ -124,11 +128,23 @@ const flag = computed(() => {
 </script>
 
 <style scoped>
-    h1 {
-        font-size: 1.5em;
-        font-weight: bold;
+    .country {
+        display: flex;
+        flex-direction: column;
+        align-items: left;
+        width: 100%;
     }
 
+    .countryBand {
+        display: flex;
+        flex-direction: row;
+        align-items: left;
+        width: 100%;
+        background-color: var(--vp-c-gray-soft);
+        padding: 10px;
+        border-radius: 5px;
+        border-bottom: 1px solid var(--vp-c-gray-soft);
+    }
 
     .flag {
         display: flex;
@@ -136,12 +152,22 @@ const flag = computed(() => {
         height: 45px;
         background-color: var(--vp-c-gray-soft);
         border-radius: 5px;
-        align-items: center;
-        justify-content: center;
+        /* 固定在右边 */
+        margin-left: auto;
+
+    }
+
+    .countryName {
+        font-size: 1.5em;
+        font-weight: bold;
+        padding: 10px;
+        color: var(--vp-c-text)
     }
 
     .num {
-    font-size: 1em;
-    color: var(--vp-c-success-1);
+        font-size: 1em;
+        color: var(--vp-c-success-1);
+        font-weight: bold;
+        padding: 10px 0;
   }
 </style>

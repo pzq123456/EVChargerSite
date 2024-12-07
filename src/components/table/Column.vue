@@ -4,57 +4,101 @@
         <thead>
           <tr>
             <th>#</th>
-            <th>Name</th>
+            <th>Column</th>
             <th>Value</th>
           </tr>
         </thead>
         <tbody>
-            <tr v-for="(value, key, index) in data" :key="key" :class="{ active: index === activeRow }">
+            <tr v-for="(column, index) in columns" :key="column" :class="{ active: index === activeRow }">
                 <td>{{ index + 1 }}</td>
-                <td>{{ key }}</td>
-                <td>{{ value }}</td>
+                <td>{{ column }}</td>
+                <td>{{ data[column] }}</td>
             </tr>
         </tbody>
       </table>
+<!-- 
+      {{ data }}
+      {{ activeColumn }}
+      {{ activeRow }} -->
     </div>
   </template>
   
   <script setup>
-
-    import { computed } from "vue";
+    import { toRef, computed } from "vue";
 
     const props = defineProps({
       data: Object,
       activeColumn: String,
     });
 
-    const data = props.data;
-    const activeColumn = props.activeColumn;
+    const data = toRef(props, 'data');
+    const activeColumn = toRef(props, 'activeColumn');
 
+    // 对数据进行过滤 同时保持响应性
+    const filter = (d) => !isNaN(parseInt(data.value[d])) && d !== 'area';
+
+    // 获取所有的列
+    const columns = computed(() => Object.keys(data.value).filter(filter));
+
+    // 获取当前激活的行
     const activeRow = computed(() => {
-      return Object.keys(data).indexOf(activeColumn);
+      return columns.value.indexOf(activeColumn.value);
     });
+
+
+
+    // // filter filter = (d) => !isNaN(parseInt(this._data.features[0].properties[d])) && d !== 'area' // 获取其中所有值为数字的列 同时去除 area 列
+    // const filter = (d) => !isNaN(parseInt(data.value[d])) && d !== 'area';
+    // // 对data使用过滤器
+    // // const columns = 
+    // const columns = computed(() => Object.keys(data.value).filter(filter));
+
+    // const activeRow = computed(() => {
+    //   return columns.indexOf(activeColumn.value);
+    // });
 
   </script>
   
   <style scoped>
-  /* .simple-table {
+  .simple-table {
     width: 100%;
-    border-collapse: collapse;
-    margin: 10px 0;
-    font-size: 16px;
+    border-radius: 5px;
+    overflow: hidden;
+    padding: 10px;
+    margin: 20px 0;
+  }
+
+  .simple-table thead th {
+    background-color: #12644668;
     text-align: left;
+    font-weight: bold;
+    border-bottom: 1px solid #57e4c5;
   }
-  .simple-table th,
-  .simple-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-  }
-  .simple-table tbody tr:hover {
-    background-color: #f2f2f2;
-  } */
+
   .simple-table tr.active {
-    background-color: yellow;
+    border: 2px solid rgba(43, 115, 13, 0.463);
+    background-color: rgba(174, 218, 125, 0.154);
+    font-weight: bold;
+    animation: fadeIn 0.5s;
   }
+
+  .simple-table td {
+    border : 1px solid var(--vp-c-border);
+    padding: 5px;
+  }
+
+  @keyframes fadeIn {
+    from {
+      border: 2px solid rgba(18, 195, 18, 0.492);
+      opacity: 0;
+    }
+    to {
+      border: 2px solid rgba(18, 195, 18, 0.492);
+      opacity: 1;
+    }
+  }
+
+
+
   </style>
   

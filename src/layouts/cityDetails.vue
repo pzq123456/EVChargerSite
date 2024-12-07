@@ -1,9 +1,9 @@
 <template>
     <div v-if="selectedCity" class="region">
       <timezone :country="countryName" />
-      <h1>
+      <div class="cityName">
         {{ cityName }}
-      </h1>
+      </div>
 
       <p class="num">
         {{ selectedColumn }} : {{ value }}
@@ -12,6 +12,8 @@
       <!-- <div>
         {{ selectedCity }}
       </div> -->
+      <Column :data="selectedCity" :activeColumn="selectedColumn" />
+
     </div>
 
     <div v-else>
@@ -27,6 +29,7 @@ import { useCityStore } from '@/stores/cityStore';
 import { computed } from 'vue';
 import timezone from '@/components/chart/TimeZone.vue';
 import { pinyin } from 'pinyin-pro';
+import Column from "@/components/table/Column.vue";
 
 const cityStore = useCityStore();
 
@@ -100,6 +103,12 @@ function isChineseChar(str) {
   .num {
     font-size: 1.5em;
     color: var(--vp-c-success-1);
+  }
+
+  .cityName {
+    font-size: 1.5em;
+    font-weight: bold;
+    padding: 10px;
   }
 
 </style>
