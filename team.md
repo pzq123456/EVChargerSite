@@ -49,12 +49,12 @@ const Reachers = [
   },
   {
     avatar: '4.png',
-    name: 'Justin',
+    name: 'Justin Hayse Chiwing G. Tang',
     title: 'Leading Researcher & PhD Student',
   },
   {
     avatar: '5.png',
-    name: 'Enyuan',
+    name: 'Enyuan CAO',
     title: 'Data Analyst & PhD Student',
   },
   {
@@ -126,7 +126,7 @@ const Reachers = [
 
   <VPTeamPageSection>
       <template #title>
-        External Collaborators
+        International Collaborators
       </template>
       <template #members>
         <VPTeamMembers size="medium" :members= "ExternalCollaborators" />

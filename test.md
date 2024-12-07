@@ -1,12 +1,16 @@
 # test
 
-<h1>{{ isDark }}</h1>
+<Column :data="jsonData" :activeColumn="activeColumn" />
 
 
 <script setup>
-import { useData } from 'vitepress'
+import Column from "@/components/table/Column.vue";
 
-const { isDark } = useData()
+import { ref } from "vue";
+
+const jsonData = ref({ name: "John", age: 30, city: "New York", email: "das", phone: "1234567890" });
+const activeColumn = ref("name");
+
 </script>
 
 
