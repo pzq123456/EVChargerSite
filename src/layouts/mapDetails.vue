@@ -13,15 +13,15 @@
       <p>please select a region</p>
     </div>
 
-    <div v-if="policy" class="policy">
+    <!-- <div v-if="policy" class="policy">
       <law :policy="policy" />
-    </div>
+    </div> -->
 
-    <div v-else>
+    <!-- <div v-else>
       <div class="notfound">
         <p>Policy not found</p>
       </div>
-    </div>
+    </div> -->
 
     <!-- <div>
       <h1>Car Data</h1>
@@ -31,10 +31,10 @@
     <!-- <bar-chart /> -->
     <!-- <line-chart :carData="carData" /> -->
 
-    <div v-if="carData">
+    <!-- <div v-if="carData"> -->
       <!-- <LineChart :inputData="carData" /> -->
-      <BarChart :inputData="carData" />
-    </div>
+      <!-- <BarChart :inputData="carData" /> -->
+    <!-- </div> -->
 
 </template>
 
