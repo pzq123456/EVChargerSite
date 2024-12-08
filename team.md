@@ -24,7 +24,7 @@ const ExternalCollaborators = [
   },
   {
     avatar: '7.png',
-    name: 'Zhenhan Peng',
+    name: 'Zhenhan PENG',
     title: 'PhD Student at KU Leuven, Belgium',
   }
 ]
@@ -49,7 +49,7 @@ const Reachers = [
   },
   {
     avatar: '4.png',
-    name: 'Justin Hayse Chiwing G. Tang',
+    name: 'Justin Hayse Chiwing G. TANG',
     title: 'Leading Researcher & PhD Student',
   },
   {
