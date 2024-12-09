@@ -14,17 +14,21 @@ hero:
 
 features:
   - title: "Map"
-    details: Three main regions are covered (the US, Europe, and China)
+    details: "We visualize various spatial EV data and the analysis results through interactive maps."
     link: /map
     icon: 🌍
+
   - title: "Data"
-    details: "The database is updated regularly and can be downloaded."
+    details: "We collected global EV policy, market, and charging facility data from various data sources and share the EV datasets upon request."
     link: /data
     icon: 🔄
+
   - title: "Publications"
-    details: "Our research papers and publications."
+    details: "We update regularly the latest research outputs using the global EV data as the main data sources."
     link: /publications
     icon: 📚
-    
+
+
+
 
 ---
