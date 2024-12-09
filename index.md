@@ -19,7 +19,7 @@ features:
     icon: 🌍
 
   - title: "Data"
-    details: "We collected global EV policy, market, and charging facility data from various data sources and share the EV datasets upon request."
+    details: "We collect global EV policy, market, and charging facility data from various data sources and share the EV datasets upon request."
     link: /data
     icon: 🔄
 
