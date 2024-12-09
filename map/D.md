@@ -3,7 +3,11 @@ layout: page
 ---
 # Spatial Distributions of the Housing Price Index of EVCSs at the City Level
 <Drawer :is-open="isDrawerOpen" :speed="500" @close="closeDrawer">
-    <cityDetails />
+    <cityDetails>
+            <div class="note custom-block github-alert">
+            <p>the spatial distributions of the housing price index of EVCSs at the city level across China and the US with different buffer radii. It can be found that for most cities in both China and the US, the values of housing price index are close to each other (fluctuating around 1), while the US has a wider variation range.</p>
+        </div>
+    </cityDetails>
 </Drawer>
 
 <button @click="toggleDrawer" :class="{ open: isDrawerOpen, close: !isDrawerOpen }" id="toggle">

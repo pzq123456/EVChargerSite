@@ -9,6 +9,10 @@
         {{ selectedColumn }} : {{ value }}
       </p>
 
+      <!-- slot -->
+
+      <slot></slot>
+
       <!-- <div>
         {{ selectedCity }}
       </div> -->
@@ -51,11 +55,44 @@ const value = computed(() => {
 const cityName = computed(() => {
   const name = getCityName(selectedCity.value);
   if (isChineseChar(name)) {
-    return pinyin(name, { toneType: 'none' }) + '(' + name + ')';
+    // return pinyin(name, { toneType: 'none' }) + '(' + name + ')';
+    // return pinYin(handleChineseCityName(name)) + '(' + name + ')';
+    return handleChineseCityName(name);
+    
+    
   }else{
     return name;
   }
 });
+
+
+// 帮助函数 处理中国地名 将 省替换为 Province 自治区替换为 Autonomous Region 市替换为 City 
+// 省 -> Province
+// 自治区 -> Autonomous Region
+// 市 -> City
+// 特别行政区 -> Hong Kong, Macau
+// 直辖市 -> Municipality
+
+const keyWordsMap = {
+  '省': 'Province',
+  '自治区': 'Autonomous Region',
+  '市': 'City',
+  '香港': 'Hong Kong',
+  '澳门': 'Macau',
+  '直辖市': 'Municipality'
+}
+
+function handleChineseCityName(name) {
+  // 首先识别中文字符中是否含有关键字
+  for (let key in keyWordsMap) {
+    if (name.includes(key)) {
+      return pinyin(name.replace(key, ''), {
+        toneType: 'none'
+      }).toUpperCase() + ' ' + keyWordsMap[key];
+    }
+  }
+}
+
 
 const countryName = computed(() => getCountryName(selectedCity.value));
 
@@ -84,7 +121,8 @@ function getCityName(selectedCity) {
 
 // 帮助函数判断是否为中文字符
 function isChineseChar(str) {
-    return /^[\u4e00-\u9fa5]+$/.test(str);
+  var reg = /[\u4E00-\u9FA5\uF900-\uFA2D]/;
+  return reg.test(str);
 }
 
 </script>
@@ -102,13 +140,15 @@ function isChineseChar(str) {
 
   .num {
     font-size: 1.5em;
+    padding: 10px;
+
     color: var(--vp-c-success-1);
   }
 
   .cityName {
     font-size: 1.5em;
-    font-weight: bold;
     padding: 10px;
+    color: var(--vp-c-text);
   }
 
 </style>

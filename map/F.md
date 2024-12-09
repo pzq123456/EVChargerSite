@@ -3,7 +3,11 @@ layout: page
 ---
 # Spatial Distributions of Access to EVCSs through Road Network at the City Level
 <Drawer :is-open="isDrawerOpen" :speed="500" @close="closeDrawer">
-    <cityDetails />
+    <cityDetails>
+        <div class="note custom-block github-alert">
+            <p>the spatial distributions of road network density and the relative development level of road network around EVCSs at the city level across China, the US, and Europe with different buffer radii. It can be found that road network density around EVCSs in Chinese cities tend to be lower compared to the US and Europe. Meanwhile, in terms of the relative development level of road network, cities in China and the US tend to have a greater variability compared to Europe.</p>
+        </div>
+    </cityDetails>
 </Drawer>
 
 <button @click="toggleDrawer" :class="{ open: isDrawerOpen, close: !isDrawerOpen }" id="toggle">

@@ -41,10 +41,37 @@ const country = computed(() => {
     if (isChineseChar(props.country)) {
         // console.log(props.country);
         // console.log(pinyin(props.country, { toneType: 'none' }));
-        return pinyin(props.country, { toneType: 'none' }) + '(' + props.country + ')';
+        // return pinyin(props.country, { toneType: 'none' }) + '(' + props.country + ')';
+        return handleChineseCityName(props.country);
     }
     return props.country;
 });
+
+
+const keyWordsMap = {
+  '省': 'Province',
+  '自治区': 'Autonomous Region',
+  '市': 'City',
+  '香港': 'Hong Kong',
+  '澳门': 'Macau',
+  '直辖市': 'Municipality'
+}
+
+function handleChineseCityName(name) {
+  // 首先识别中文字符中是否含有关键字
+  for (let key in keyWordsMap) {
+    if (name.includes(key)) {
+        // 若是香港或澳门，则直接返回
+        if (key === '香港' || key === '澳门') {
+            return keyWordsMap[key];
+        }
+
+      return pinyin(name.replace(key, ''), {
+        toneType: 'none'
+      }).toUpperCase() + ' ' + keyWordsMap[key];
+    }
+  }
+}
 
 // 帮助函数判断是否为中文字符
 function isChineseChar(str) {

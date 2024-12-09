@@ -1,9 +1,9 @@
 <template>
-    <div>
+
       <table class="simple-table">
         <thead>
           <tr>
-            <th>#</th>
+            <th></th>
             <th>Column</th>
             <th>Value</th>
           </tr>
@@ -12,15 +12,15 @@
             <tr v-for="(column, index) in columns" :key="column" :class="{ active: index === activeRow }">
                 <td>{{ index + 1 }}</td>
                 <td>{{ column }}</td>
-                <td>{{ data[column] }}</td>
+                <!-- <td>{{ data[column] }}</td> -->
+
+                <!-- vif 将 0 替换为 N/A -->
+                <td v-if="data[column] === 0">N/A</td>
+                <td v-else>{{ data[column] }}</td>
             </tr>
         </tbody>
       </table>
-<!-- 
-      {{ data }}
-      {{ activeColumn }}
-      {{ activeRow }} -->
-    </div>
+
   </template>
   
   <script setup>
@@ -63,21 +63,20 @@
   .simple-table {
     width: 100%;
     border-radius: 5px;
-    overflow: hidden;
+    border-collapse: collapse;
+    margin: 0 auto;
     padding: 10px;
-    margin: 20px 0;
   }
 
   .simple-table thead th {
     background-color: #12644668;
     text-align: left;
     font-weight: bold;
-    border-bottom: 1px solid #57e4c5;
   }
 
   .simple-table tr.active {
-    border: 2px solid rgba(43, 115, 13, 0.463);
-    background-color: rgba(174, 218, 125, 0.154);
+
+    background-color: rgba(234, 255, 0, 0.395);
     font-weight: bold;
     animation: fadeIn 0.5s;
   }

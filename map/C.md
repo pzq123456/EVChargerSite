@@ -4,7 +4,11 @@ layout: page
 # Spatial Distributions of the Level of Population Coverage of EVCSs at the City Level
 
 <Drawer :is-open="isDrawerOpen" :speed="500" @close="closeDrawer">
-    <cityDetails />
+    <cityDetails>
+        <div class="note custom-block github-alert">
+            <p>the spatial distributions of the level of population coverage of EVCSs at the city level across China, the US, and Europe. It can be found that for most cities in the our study areas, they tend to have a low level of population coverage of EVCSs.</p>
+        </div>
+    </cityDetails>
 </Drawer>
 
 <button @click="toggleDrawer" :class="{ open: isDrawerOpen, close: !isDrawerOpen }" id="toggle">
