@@ -164,18 +164,16 @@ onUnmounted(() => {
 
 /* 按钮的样式 */
 .select-button-button {
-    padding: 10px;
-    width: 100px;
-    border: none;
+    padding: 5px;
     border-radius: 5px;
-    background-color: #4CAF50;
+    background-color: #57a05a;
     color: white;
     cursor: pointer;
     font-size: 14px;
 }
 
 .select-button-button:hover {
-    background-color: #45a049;
+    background-color: #27732a;
 }
 
 </style>

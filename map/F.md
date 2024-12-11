@@ -79,7 +79,7 @@ layout: page
         initGeoJsonLayer();
         initSelectAndButtonControl();
 
-        const F_geoJsonLayer = L.geoJsonLayer('density_1500buffer-city', clickCallback);
+        const F_geoJsonLayer = L.geoJsonLayer('density_300buffer-city', clickCallback);
 
         const colors = colorsets[0];
         F_geoJsonLayer.setColors(colors);
@@ -91,11 +91,11 @@ layout: page
 
 
         const {cn, us, eu} = data;
-        F_geoJsonLayer.appendData(us,(d) => parseFloat(d.properties["density_1500buffer-city"]));
-        F_geoJsonLayer.appendData(eu,(d) => parseFloat(d.properties["density_1500buffer-city"]));
-        F_geoJsonLayer.appendData(cn,(d) => parseFloat(d.properties["density_1500buffer-city"]));
+        F_geoJsonLayer.appendData(us,(d) => parseFloat(d.properties["density_300buffer-city"]));
+        F_geoJsonLayer.appendData(eu,(d) => parseFloat(d.properties["density_300buffer-city"]));
+        F_geoJsonLayer.appendData(cn,(d) => parseFloat(d.properties["density_300buffer-city"]));
 
-        F_geoJsonLayer.setColumn('density_1500buffer-city', colors);
+        F_geoJsonLayer.setColumn('density_300buffer-city', colors);
 
         F_geoJsonLayer.update();
 

@@ -81,7 +81,7 @@ layout: page
         initGeoJsonLayer();
         initSelectAndButtonControl();
         
-        const E_geoJsonLayer = L.geoJsonLayer('1500buffer-city', clickCallback);
+        const E_geoJsonLayer = L.geoJsonLayer('300buffer-city', clickCallback);
 
         const colors = colorsets[0];
         E_geoJsonLayer.setColors(colors);
@@ -93,7 +93,7 @@ layout: page
         E_geoJsonLayer.appendData(us);
         E_geoJsonLayer.appendData(eu);
 
-        E_geoJsonLayer.setColumn('1500buffer-city', colors);
+        E_geoJsonLayer.setColumn('300buffer-city', colors);
         E_geoJsonLayer.update();
 
         E_geoJsonLayer.addTo(mapInstance);

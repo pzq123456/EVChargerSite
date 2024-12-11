@@ -151,6 +151,8 @@ export default {
     display: flex;
     justify-content: flex-end;
     background-color: var(--vp-c-gutter);
+    /* background-color: var(--vp-c-gutter); */
+
 
     /* 固定在底部 */
     position: sticky;

@@ -81,7 +81,7 @@ layout: page
         initGeoJsonLayer();
         initSelectAndButtonControl();
 
-        const D_geoJsonLayer = L.geoJsonLayer('mean_1500buffer-city', clickCallback);
+        const D_geoJsonLayer = L.geoJsonLayer('mean_300buffer-city', clickCallback);
 
         const D_Colors = colorsets[0];
         D_geoJsonLayer.setColors(D_Colors);
@@ -91,10 +91,10 @@ layout: page
         D_geoJsonLayer.addTo(mapInstance);
         
         const {cn, us} = data;
-        D_geoJsonLayer.appendData(cn, (d) => parseFloat(d.properties["mean_1500buffer-city"]));
-        D_geoJsonLayer.appendData(us, (d) => parseFloat(d.properties["mean_1500buffer-city"]));
+        D_geoJsonLayer.appendData(cn, (d) => parseFloat(d.properties["mean_300buffer-city"]));
+        D_geoJsonLayer.appendData(us, (d) => parseFloat(d.properties["mean_300buffer-city"]));
 
-        D_geoJsonLayer.setColumn("mean_1500buffer-city", D_Colors);
+        D_geoJsonLayer.setColumn("mean_300buffer-city", D_Colors);
         D_geoJsonLayer.update();
 
         const columns = D_geoJsonLayer.getColumns();

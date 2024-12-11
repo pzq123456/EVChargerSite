@@ -40,8 +40,6 @@ export function initSelectAndButtonControl() {
             
             // 排序列名
             this.options.columns = sortColumnsByNumber(this.options.columns);
-            
-
 
             this.options.columns.forEach(option => {
                 const optionElement = L.DomUtil.create('option', '', select);
