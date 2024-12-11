@@ -25,7 +25,7 @@ Interactive Map : [Click Here](./C.md)
 <!-- ![Figure D-1](../imgs/p5.png) -->
 Interactive Map : [Click Here](./D.md)
 
-## [the Built Environment zround EVCSs ](./E.md)
+## [The Built Environment around EVCSs ](./E.md)
 
 > the spatial distributions of POI Mix of EVCSs at the city level across China, the US, and Europe with different buffer radii. It can be found that for most cities in our study areas, they tend to have a high POI Mix of EVCSs, while more cities in the US and Europe tend to have a higher POI Mix of EVCSs compared to China when the buffer radii are 800m and 1000m.
 
