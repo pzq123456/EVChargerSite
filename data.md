@@ -24,7 +24,6 @@ You could request for the full dataset by sending us (global.ev.map@gmail.com) t
 </div>
 
 
-## 2. Data set 2
 
 <script setup>
     import { data as eu } from '@/loader/eu.data.js';

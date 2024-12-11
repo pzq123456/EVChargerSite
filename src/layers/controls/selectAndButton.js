@@ -37,6 +37,12 @@ export function initSelectAndButtonControl() {
             const select = L.DomUtil.create('select', 'select-button-dropdown', container);
             select.id = `dropdown-${L.Util.stamp(this)}`; // 添加唯一 ID
             this._select = select;
+            
+            // 排序列名
+            this.options.columns = sortColumnsByNumber(this.options.columns);
+            
+
+
             this.options.columns.forEach(option => {
                 const optionElement = L.DomUtil.create('option', '', select);
                 optionElement.value = option;
@@ -70,4 +76,28 @@ export function initSelectAndButtonControl() {
     };
 }
 
+function extractNumberFromString(str) {
+    // 提取字符串中的数字
+    const match = str.match(/\d+/g);
+    return match ? parseInt(match[0]) : null; // 返回第一个数字，如果没有数字返回 null
+}
+
+function sortColumnsByNumber(columns) {
+    return columns.slice().sort((a, b) => {
+        const numA = extractNumberFromString(a);
+        const numB = extractNumberFromString(b);
+
+        // 若两者都有数字，则按数字升序排列
+        if (numA !== null && numB !== null) {
+            return numA - numB;
+        }
+
+        // 若只有一个含有数字，则无数字的放在后面
+        if (numA !== null) return -1;
+        if (numB !== null) return 1;
+
+        // 若两者都没有数字，则保持原样的顺序
+        return 0;
+    });
+}
 // export default L.Control.SelectAndButton;

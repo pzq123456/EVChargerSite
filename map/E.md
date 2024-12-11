@@ -6,7 +6,8 @@ layout: page
 <Drawer :is-open="isDrawerOpen" :speed="500" @close="closeDrawer">
     <cityDetails>
         <div class="note custom-block github-alert">
-            <p>the spatial distributions of POI Mix of EVCSs at the city level across China, the US, and Europe with different buffer radii. It can be found that for most cities in our study areas, they tend to have a high POI Mix of EVCSs, while more cities in the US and Europe tend to have a higher POI Mix of EVCSs compared to China when the buffer radii are 800m and 1000m.</p>
+            <p>The spatial distributions of POI Mix of EVCSs at the city level across China, the US, and Europe with different buffer radii. It can be found that for most cities in our study areas, they tend to have a high POI Mix of EVCSs, while more cities in the US and Europe tend to have a higher POI Mix of EVCSs compared to China when the buffer radii are 800m and 1000m.</p>
+            <p>In the following table, the column "<b>XXX</b>buffer-city" represents the average POI Mix of EVCSs with the <b>XXX</b> m buffer radius across cities.</p>
         </div>
     </cityDetails>
 </Drawer>

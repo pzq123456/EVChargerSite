@@ -35,15 +35,48 @@
     const activeColumn = toRef(props, 'activeColumn');
 
     // 对数据进行过滤 同时保持响应性
-    const filter = (d) => !isNaN(parseInt(data.value[d])) && d !== 'area';
-
+    // const filter = (d) => !isNaN(parseInt(data.value[d])) && d !== 'area';
+    const filter = (d) => !isNaN(parseInt(data.value[d])) && d !== 'area' && !d.includes('zscore') // 去除 area 和含有 zscore 的列
+   
     // 获取所有的列
-    const columns = computed(() => Object.keys(data.value).filter(filter));
+    const columns = computed(() => { 
+      // return Object.keys(data.value).filter(filter)
+      return sortColumnsByNumber(Object.keys(data.value).filter(filter));
+    });
 
     // 获取当前激活的行
     const activeRow = computed(() => {
       return columns.value.indexOf(activeColumn.value);
     });
+
+    function extractNumberFromString(str) {
+        // 提取字符串中的数字
+        const match = str.match(/\d+/g);
+        return match ? parseInt(match[0]) : null; // 返回第一个数字，如果没有数字返回 null
+    }
+
+    function sortColumnsByNumber(columns) {
+        return columns.slice().sort((a, b) => {
+            const numA = extractNumberFromString(a);
+            const numB = extractNumberFromString(b);
+
+            // 若两者都有数字，则按数字升序排列
+            if (numA !== null && numB !== null) {
+                return numA - numB;
+            }
+
+            // 若只有一个含有数字，则无数字的放在后面
+            if (numA !== null) return -1;
+            if (numB !== null) return 1;
+
+            // 若两者都没有数字，则保持原样的顺序
+            return 0;
+        })
+        // .map((column) => column.replace(/[_-]/g, ' ')).map((column) => column.replace(/(\d+)/g, ' $1 ')); // 下次优化
+
+        // 同时将 key 中的 _ - 等字符替换为空格 在数字前后加空格
+
+    }
 
 
 

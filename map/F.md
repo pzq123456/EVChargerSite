@@ -5,7 +5,8 @@ layout: page
 <Drawer :is-open="isDrawerOpen" :speed="500" @close="closeDrawer">
     <cityDetails>
         <div class="note custom-block github-alert">
-            <p>the spatial distributions of road network density and the relative development level of road network around EVCSs at the city level across China, the US, and Europe with different buffer radii. It can be found that road network density around EVCSs in Chinese cities tend to be lower compared to the US and Europe. Meanwhile, in terms of the relative development level of road network, cities in China and the US tend to have a greater variability compared to Europe.</p>
+            <p>The spatial distributions of road network density and the relative development level of road network around EVCSs at the city level across China, the US, and Europe with different buffer radii. It can be found that road network density around EVCSs in Chinese cities tend to be lower compared to the US and Europe. Meanwhile, in terms of the relative development level of road network, cities in China and the US tend to have a greater variability compared to Europe.</p>
+            <p>In the following table, the column "	density_<b>XXX</b>buffer-city" represents the average road network density around EVCSs with the <b>XXX</b> m buffer radii across cities. The column "<b>XXX</b>_r_buffer-city" represents the relative development level of the road network around EVCSs with the <b>XXX</b> m buffer radii across cities.</p>
         </div>
     </cityDetails>
 </Drawer>

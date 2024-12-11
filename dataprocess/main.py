@@ -131,5 +131,5 @@ if __name__ == '__main__':
     # print(gdf.columns)
     # print(gdf.head())
 
-    # process1(path, column = 'density_r', SAVEDDIR = 'F', SAVVNAME = 'eur')
+    process1(path, column = 'density_r', SAVEDDIR = 'F', SAVVNAME = 'eur')
 

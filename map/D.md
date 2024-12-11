@@ -2,10 +2,12 @@
 layout: page
 ---
 # Spatial Distributions of the Housing Price Index of EVCSs at the City Level
+
 <Drawer :is-open="isDrawerOpen" :speed="500" @close="closeDrawer">
     <cityDetails>
-            <div class="note custom-block github-alert">
-            <p>the spatial distributions of the housing price index of EVCSs at the city level across China and the US with different buffer radii. It can be found that for most cities in both China and the US, the values of housing price index are close to each other (fluctuating around 1), while the US has a wider variation range.</p>
+        <div class="note custom-block github-alert">
+            <p>The spatial distributions of the housing price index of EVCSs at the city level across China and the US with different buffer radii. It can be found that for most cities in both China and the US, the values of housing price index are close to each other (fluctuating around 1), while the US has a wider variation range.</p>
+            <p>In the following table, the column "mean<b>XXX</b>buffer-city" represents the average housing price index of EVCSs with the <b>XXX</b> m buffer radius across cities.</p>
         </div>
     </cityDetails>
 </Drawer>

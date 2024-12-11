@@ -41,11 +41,10 @@ export function initGeoJsonLayer() { // 这一步只是 向L注册了一个新�
         },
         
         getColumns: function (
-            filter = (d) => !isNaN(parseInt(this._data.features[0].properties[d])) && d !== 'area' // 获取其中所有值为数字的列 同时去除 area 列
+            filter = (d) => !isNaN(parseInt(this._data.features[0].properties[d])) && d !== 'area' && !d.includes('zscore') // 去除 area 和含有 zscore 的列
         ) {
             return Object.keys(this._data.features[0].properties).filter(filter);
         }, 
-
         
         setColors: function (colors) {
             this._colors = colors;

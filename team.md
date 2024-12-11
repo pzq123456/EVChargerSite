@@ -99,7 +99,7 @@ const Reachers = [
   <VPTeamPageTitle>
     <template #title>Our Team</template>
     <template #lead>
-     The Global EV Data Initiative is led by <a href="https://thetipteam.editorx.io/website/">The TIP Research Group</a> at the The Hong Kong Polytechnic University (PolyU), which is an interdisciplinary research group focusing on Technology innovation, Infrastructure planning and Policy making in Smart Cities
+     The Global EV Data Initiative is led by <a href="https://thetipteam.editorx.io/website/">The TIP Research Group</a> at The Hong Kong Polytechnic University (PolyU), which is an interdisciplinary research group focusing on <b class = "TIP">T</b>echnology innovation, <b class = "TIP">I</b>nfrastructure planning and <b class = "TIP">P</b>olicy making in Smart Cities
     </template>
   </VPTeamPageTitle>
 
@@ -138,6 +138,12 @@ const Reachers = [
 <style scoped>
   a {
     color: #3eaf7c;
+  }
+
+  .TIP {
+    color: #3eaf7c;
+    font-weight: bold;
+    font-size: 1.2em;
   }
 
 </style>
