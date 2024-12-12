@@ -13,9 +13,9 @@
 
 
             <!-- 渲染当前时间 -->
-            <div v-if="localTime" class="time">
+            <!-- <div v-if="localTime" class="time">
                 <p class="num">{{ localTime }}</p>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>

@@ -48,7 +48,7 @@ const value = computed(() => {
   }else if(selectedCity.value.count){
     return selectedCity.value.count;
   }else{
-    return 'N/A';
+    return 'N.A.';
   }
 });
 

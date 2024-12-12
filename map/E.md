@@ -7,7 +7,7 @@ layout: page
     <cityDetails>
         <div class="note custom-block github-alert">
             <p>The spatial distributions of POI Mix of EVCSs at the city level across China, the US, and Europe with different buffer radii. It can be found that for most cities in our study areas, they tend to have a high POI Mix of EVCSs, while more cities in the US and Europe tend to have a higher POI Mix of EVCSs compared to China when the buffer radii are 800m and 1000m.</p>
-            <p>In the following table, the column "<b>XXX</b>buffer-city" represents the average POI Mix of EVCSs with the <b>XXX</b> m buffer radius across cities.</p>
+            <p>In the following table, the column "<b>XXX</b> m buffer" represents the average POI Mix of EVCSs with the <b>XXX</b> m buffer radius across cities.</p>
         </div>
     </cityDetails>
 </Drawer>
@@ -38,12 +38,12 @@ layout: page
 
     const colorsets = [
         ['#f7fbff','#deebf7','#c6dbef','#9ecae1','#6baed6','#4292c6','#2171b5','#08519c','#08306b'], // blue
-        ['#ffffd9','#edf8b1','#c7e9b4','#7fcdbb','#41b6c4','#1d91c0','#225ea8','#253494','#081d58'], // blue-green
-        ['#ffffe5','#f7fcb9','#d9f0a3','#addd8e','#78c679','#41ab5d','#238443','#006837','#004529'], // green
-        ['#f7f4f9','#e7e1ef','#d4b9da','#c994c7','#df65b0','#e7298a','#ce1256','#980043','#67001f'], // red
-        ['#fcfbfd','#efedf5','#dadaeb','#bcbddc','#9e9ac8','#807dba','#6a51a3','#54278f','#3f007d'], // purple
-        ['#fff5eb','#fee6ce','#fdd0a2','#fdae6b','#fd8d3c','#f16913','#d94801','#a63603','#7f2704'], // orange
-        ['#fff7f3','#fde0dd','#fcc5c0','#fa9fb5','#f768a1','#dd3497','#ae017e','#7a0177','#49006a'], // pink
+        // ['#ffffd9','#edf8b1','#c7e9b4','#7fcdbb','#41b6c4','#1d91c0','#225ea8','#253494','#081d58'], // blue-green
+        // ['#ffffe5','#f7fcb9','#d9f0a3','#addd8e','#78c679','#41ab5d','#238443','#006837','#004529'], // green
+        // ['#f7f4f9','#e7e1ef','#d4b9da','#c994c7','#df65b0','#e7298a','#ce1256','#980043','#67001f'], // red
+        // ['#fcfbfd','#efedf5','#dadaeb','#bcbddc','#9e9ac8','#807dba','#6a51a3','#54278f','#3f007d'], // purple
+        // ['#fff5eb','#fee6ce','#fdd0a2','#fdae6b','#fd8d3c','#f16913','#d94801','#a63603','#7f2704'], // orange
+        // ['#fff7f3','#fde0dd','#fcc5c0','#fa9fb5','#f768a1','#dd3497','#ae017e','#7a0177','#49006a'], // pink
     ];
 
     let isDrawerOpen = ref(false);
@@ -81,19 +81,19 @@ layout: page
         initGeoJsonLayer();
         initSelectAndButtonControl();
         
-        const E_geoJsonLayer = L.geoJsonLayer('300buffer-city', clickCallback);
+        const E_geoJsonLayer = L.geoJsonLayer('300m buffer', clickCallback);
 
         const colors = colorsets[0];
         E_geoJsonLayer.setColors(colors);
 
-        layerControl.addOverlay(E_geoJsonLayer, 'Appendix E');
+        // layerControl.addOverlay(E_geoJsonLayer, '300m buffer');
 
         const {cn, us, eu} = data;
         E_geoJsonLayer.appendData(cn);
         E_geoJsonLayer.appendData(us);
         E_geoJsonLayer.appendData(eu);
 
-        E_geoJsonLayer.setColumn('300buffer-city', colors);
+        E_geoJsonLayer.setColumn('300m buffer', colors);
         E_geoJsonLayer.update();
 
         E_geoJsonLayer.addTo(mapInstance);

@@ -78,12 +78,12 @@ layout: page
 
         initGeoJsonLayer();
 
-        const geoJsonLayer = L.geoJsonLayer('Population Coverage of EVCSs', clickCallback);
+        const geoJsonLayer = L.geoJsonLayer('Level of Population Coverage of EVCSs', clickCallback);
 
         const D_Colors = colorsets[0];
         geoJsonLayer.setColors(D_Colors);
 
-        layerControl.addOverlay(geoJsonLayer, 'Population Coverage of EVCSs');
+        // layerControl.addOverlay(geoJsonLayer, 'Population Coverage of EVCSs');
         geoJsonLayer.clear();
 
         geoJsonLayer.addTo(mapInstance);
