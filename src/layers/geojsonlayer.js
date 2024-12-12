@@ -207,7 +207,9 @@ export function initGeoJsonLayer() { // 这一步只是 向L注册了一个新�
             const labels = [];
             let from, to;
 
-            const grades = this._stastics.getGradesFixed(this._colors.length);
+            // const grades = this._stastics.getGradesFixed(this._colors.length); // 等间距
+            const grades = this._stastics.getGrades(this._colors.length, 1);
+
             const colors = [];
 
             const divTitle = L.DomUtil.create('div', 'legend-title', div);
@@ -224,8 +226,9 @@ export function initGeoJsonLayer() { // 这一步只是 向L注册了一个新�
                 to = bigNumberFormat(grades[i + 1]);
                 labels.push(`<i style="background:${colors[i]}"></i> ${from}${to ? `&ndash;${to}` : '+'}`);
             }
+
             // 灰色表示没有数据
-            labels.push(`<i style="background:gray"></i> No Data`);
+            labels.push(`<i style="background:gray"></i> N.A.`);
             div.innerHTML = labels.join('<br>');
             return div;
         },

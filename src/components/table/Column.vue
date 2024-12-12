@@ -4,7 +4,9 @@
       <thead>
         <tr>
           <th></th>
-          <th>Column</th>
+          <!-- 同样检查 column 是否等于 V -->
+          <!-- <th>Column</th> -->
+          <th v-if="columns[0] !== 'V'">Column</th>
           <th>Value</th>
         </tr>
       </thead>
@@ -15,8 +17,10 @@
           :class="{ active: index === activeRow }"
         >
           <td>{{ index + 1 }}</td>
-          <td>{{ column }}</td>
-          <td v-if="data[column] === 0">N/A</td>
+          <!-- 若 column 等于 V 则不渲染column名 -->
+          <!-- <td>{{ column }}</td> -->
+          <td v-if="column !== 'V'">{{ column }}</td>
+          <td v-if="data[column] === 0"> N.A. </td>
           <td v-else>{{ formatValue(data[column]) }}</td>
         </tr>
       </tbody>
@@ -122,7 +126,7 @@ function sortColumnsByNumber(columns) {
 .simple-table tr.active {
   background-color: rgba(234, 255, 0, 0.395);
   font-weight: bold;
-  animation: fadeIn 0.5s;
+  animation: fadeIn 1s;
 }
 
 .simple-table td {
@@ -138,7 +142,6 @@ function sortColumnsByNumber(columns) {
 }
 
 .control-button {
-  border: 1px solid #ccc;
   border-radius: 3px;
   padding: 5px 10px;
   margin: 0 5px;
@@ -156,12 +159,10 @@ function sortColumnsByNumber(columns) {
 
 @keyframes fadeIn {
   from {
-    border: 2px solid rgba(18, 195, 18, 0.492);
-    opacity: 0;
+    background-color: rgba(234, 255, 0, 0.395);
   }
   to {
-    border: 2px solid rgba(18, 195, 18, 0.492);
-    opacity: 1;
+    background-color: transparent;
   }
 }
 </style>
