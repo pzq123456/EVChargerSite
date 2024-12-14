@@ -1,7 +1,7 @@
 # EVChargerSite
 EVChargerSite
 
-## 设计
+<!-- ## 设计
 ### 1. 地图组件设计：
 - 将地图组件化，并且使用vue重写地图控件
 - 地图控件的功能：控制地图行为，包括加载数据、图层管理、底图切换等
@@ -21,4 +21,4 @@ EVChargerSite
 
 ## 风场
 > - https://github.com/electricitymaps/electricitymaps-contrib/blob/master/web/src/features/weather-layers/wind-layer/windy.ts
-> - https://github.com/electricitymaps/electricitymaps-contrib/blob/master/web/src/api/getWeatherData.ts
+> - https://github.com/electricitymaps/electricitymaps-contrib/blob/master/web/src/api/getWeatherData.ts -->

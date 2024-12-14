@@ -1,12 +1,16 @@
 ---
 layout: page
 ---
-# Spatial Distributions of Access to EVCSs through Road Network at the City Level
+# Spatial Distributions of Access to EV charging stations (EVCSs) through Road Network at the City Level in 2022
+
+EVCSs through Road Network at the City Level
+<!-- (EVCSs) at the City Level in 2022 -->
+
 <Drawer :is-open="isDrawerOpen" :speed="500" @close="closeDrawer">
     <cityDetails>
         <div class="note custom-block github-alert">
             <p>The spatial distributions of road network density and the relative development level of road network around EVCSs at the city level across China, the US, and Europe with different buffer radii. It can be found that road network density around EVCSs in Chinese cities tend to be lower compared to the US and Europe. Meanwhile, in terms of the relative development level of road network, cities in China and the US tend to have a greater variability compared to Europe.</p>
-            <p>In the following table, the column "<b>XXX</b> m buffer-city" represents the average road network density around EVCSs with the <b>XXX</b> m buffer radii across cities. The column "relative <b>XXX</b> m buffer" represents the relative development level of the road network around EVCSs with the <b>XXX</b> m buffer radii across cities.</p>
+            <p>In the following table, the column "<b>XXX</b> m buffer (density)" represents the average road network density around EVCSs with the <b>XXX</b> m buffer radii across cities. The column "<b>XXX</b> m buffer (level)" represents the relative development level of the road network around EVCSs with the <b>XXX</b> m buffer radii across cities.</p>
         </div>
     </cityDetails>
 </Drawer>
@@ -79,7 +83,7 @@ layout: page
         initGeoJsonLayer();
         initSelectAndButtonControl();
 
-        const F_geoJsonLayer = L.geoJsonLayer('300m buffer', clickCallback);
+        const F_geoJsonLayer = L.geoJsonLayer('300m buffer (density)', clickCallback);
 
         const colors = colorsets[0];
         F_geoJsonLayer.setColors(colors);
@@ -91,11 +95,11 @@ layout: page
 
 
         const {cn, us, eu} = data;
-        F_geoJsonLayer.appendData(us,(d) => parseFloat(d.properties["300m buffer"]));
-        F_geoJsonLayer.appendData(eu,(d) => parseFloat(d.properties["300m buffer"]));
-        F_geoJsonLayer.appendData(cn,(d) => parseFloat(d.properties["300m buffer"]));
+        F_geoJsonLayer.appendData(us,(d) => parseFloat(d.properties["300m buffer (density)"]));
+        F_geoJsonLayer.appendData(eu,(d) => parseFloat(d.properties["300m buffer (density)"]));
+        F_geoJsonLayer.appendData(cn,(d) => parseFloat(d.properties["300m buffer (density)"]));
 
-        F_geoJsonLayer.setColumn('300m buffer', colors);
+        F_geoJsonLayer.setColumn('300m buffer (density)', colors);
 
         F_geoJsonLayer.update();
 

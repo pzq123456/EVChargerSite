@@ -36,8 +36,8 @@ function renameNormalizedFields(geoJson) {
 // 字段规范化 移除字段前缀 mean_ 及后缀 -city 在数字后添加单位 m及空格
 function normalizeFieldName(fieldName) {
     if (fieldName.includes('density_r_')) {
-        return fieldName.replace('density_r_', 'relative ').replace('buffer-city', 'm buffer');
+        return fieldName.replace('density_r_', 'relative ').replace('buffer-city', 'm buffer (level)');
     } else if (fieldName.includes('density_')) {
-        return fieldName.replace('density_', '').replace('buffer-city', 'm buffer');
+        return fieldName.replace('density_', '').replace('buffer-city', 'm buffer (density)');
     }
 }
