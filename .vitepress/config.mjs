@@ -21,5 +21,7 @@ export default defineConfig({
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
         gtag('config', 'G-4706EZS57W');`
-    ]
-  ]})
+    ],
+
+  ]
+})

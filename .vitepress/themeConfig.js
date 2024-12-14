@@ -12,7 +12,11 @@ export const themeConfig = {
     ],
 
     logo: '/logo.png',
-
+    head: [
+      'link',
+      { rel: 'icon', href: '/favicon.ico' }
+    ],
+    
     socialLinks: [
         { icon: 'github', link: 'https://github.com/GlobalEVData/EVChargerSite' }
     ],

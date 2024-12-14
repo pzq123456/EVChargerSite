@@ -44,7 +44,7 @@ layout: page
         // ['#fff7f3','#fde0dd','#fcc5c0','#fa9fb5','#f768a1','#dd3497','#ae017e','#7a0177','#49006a'], // pink
     ];
 
-    const mapCenter = ref([39.8283, -98.5795]);
+    const mapCenter = ref([50, 10]);
     const mapZoom = ref(4);
 
     let isDrawerOpen = ref(false);
