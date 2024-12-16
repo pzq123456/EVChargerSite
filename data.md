@@ -26,41 +26,78 @@ You could request for the full dataset by sending us (global.ev.map@gmail.com) t
 
 
 <script setup>
-    import { data as eu } from '@/loader/eu.data.js';
-    import { data as us } from '@/loader/us.data.js';
-    import { data as cn } from '@/loader/cn.data.js';
+    // import { data as eu } from '@/loader/eu.data.js';
+    // import { data as us } from '@/loader/us.data.js';
+    // import { data as cn } from '@/loader/cn.data.js';
 
+    import { data } from '@/loader/csv.data.js';
 
+    const { eu, us, cn } = data; // data from csv
 
+    // donwload data as csv
     const downloadeu = () => {
-        const data = JSON.stringify(eu);
+        const data = eu.map(item => Object.values(item).join(',')).join('\n');
         const blob = new Blob([data], { type: 'text/plain' });
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'eu.data.json';
+        a.download = 'eu.csv';
         a.click();
     }
 
     const downloadus = () => {
-        const data = JSON.stringify(us);
+        const data = us.map(item => Object.values(item).join(',')).join('\n');
         const blob = new Blob([data], { type: 'text/plain' });
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'us.data.json';
+        a.download = 'us.csv';
         a.click();
     }
 
     const downloadcn = () => {
-        const data = JSON.stringify(cn);
+        const data = cn.map(item => Object.values(item).join(',')).join('\n');
         const blob = new Blob([data], { type: 'text/plain' });
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'cn.data.json';
+        a.download = 'cn.csv';
         a.click();
     }
+
+
+
+
+
+    // const downloadeu = () => {
+    //     const data = JSON.stringify(eu);
+    //     const blob = new Blob([data], { type: 'text/plain' });
+    //     const url = window.URL.createObjectURL(blob);
+    //     const a = document.createElement('a');
+    //     a.href = url;
+    //     a.download = 'eu.data.json';
+    //     a.click();
+    // }
+
+    // const downloadus = () => {
+    //     const data = JSON.stringify(us);
+    //     const blob = new Blob([data], { type: 'text/plain' });
+    //     const url = window.URL.createObjectURL(blob);
+    //     const a = document.createElement('a');
+    //     a.href = url;
+    //     a.download = 'us.data.json';
+    //     a.click();
+    // }
+
+    // const downloadcn = () => {
+    //     const data = JSON.stringify(cn);
+    //     const blob = new Blob([data], { type: 'text/plain' });
+    //     const url = window.URL.createObjectURL(blob);
+    //     const a = document.createElement('a');
+    //     a.href = url;
+    //     a.download = 'cn.data.json';
+    //     a.click();
+    // }
 
 </script>
 
