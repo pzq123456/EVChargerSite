@@ -13,7 +13,7 @@ You could request for the full dataset by sending us (global.ev.map@gmail.com) t
 
 <div class="row">
     <div class="col-md-4">
-        <button @click="downloadeu" class="btn btn-primary">Download EU Data</button>
+        <button @click="downloadeu" class="btn btn-primary">Download Europe Data</button>
     </div>
     <div class="col-md-4">
         <button @click="downloadus" class="btn btn-primary">Download US Data</button>

@@ -28,5 +28,7 @@ export const themeConfig = {
 
     search: {
         provider: 'local'
-    }
+    },
+
+
 }

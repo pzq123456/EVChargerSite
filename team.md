@@ -68,6 +68,12 @@ const Reachers = [
     title: 'Data Analyst & Master Student',
   },
   {
+    // Ding Chen，Data Analyst & Master Student
+    avatar: '11.png',
+    name: 'Ding CHEN',
+    title: 'Data Analyst & Master Student',
+  },
+  {
     avatar: 'https://www.github.com/pzq123456.png',
     name: 'Zhiqing PAN',
     title: 'Website Developer & Research Assistant',
