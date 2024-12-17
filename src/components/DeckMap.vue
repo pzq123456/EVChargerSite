@@ -274,6 +274,8 @@ body {
   background-color: rgba(255, 255, 255, 0.146);
   border: 1px solid rgba(163, 163, 163, 0.373);
   border-radius: 5px;
+  /* 隐藏元素 */
+  display: none;
 }
 
 label {

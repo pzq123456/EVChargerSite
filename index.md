@@ -12,21 +12,21 @@ hero:
 
 
 
-features:
-  - title: "Map"
-    details: "We visualize various spatial EV data and the analysis results through interactive maps."
-    link: /map
-    icon: 🌍
+#features:
+#  - title: "Map"
+#    details: "We visualize various spatial EV data and the analysis results through interactive maps."
+#    link: /map
+#    icon: 🌍
 
-  - title: "Data"
-    details: "We collect global EV policy, market, and charging facility data from various data sources and share the EV datasets upon request."
-    link: /data
-    icon: 🔄
+#  - title: "Data"
+#    details: "We collect global EV policy, market, and charging facility data from various data sources and share the EV datasets upon request."
+#    link: /data
+#    icon: 🔄
 
-  - title: "Publications"
-    details: "We update regularly the latest research outputs using the global EV data as the main data sources."
-    link: /publications
-    icon: 📚
+#  - title: "Publications"
+#    details: "We update regularly the latest research outputs using the global EV data as the main data sources."
+#    link: /publications
+#    icon: 📚
 
 
 ---

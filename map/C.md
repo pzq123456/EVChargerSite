@@ -1,7 +1,8 @@
 ---
 layout: page
 ---
-# Spatial Distributions of the Level of Population Coverage of EV charging stations (EVCSs) at the City Level in 2022
+<!-- # Spatial Distributions of the Level of Population Coverage of EV charging stations (EVCSs) at the City Level in 2022 -->
+# Population Coverage of EV Charging Stations (EVCSs) in 2022
 
 <Drawer :is-open="isDrawerOpen" :speed="500" @close="closeDrawer">
     <cityDetails>

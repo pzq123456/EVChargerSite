@@ -17,9 +17,9 @@ export const themeConfig = {
       { rel: 'icon', href: '/favicon.ico' }
     ],
     
-    socialLinks: [
-        { icon: 'github', link: 'https://github.com/GlobalEVData/EVChargerSite' }
-    ],
+    // socialLinks: [
+    //     { icon: 'github', link: 'https://github.com/GlobalEVData/EVChargerSite' }
+    // ],
 
     footer: {
         copyright: 'GlobalEVData © 2024 | <a href="https://thetipteam.editorx.io/website/">The TIP Research Group</a> @ <a href="https://www.polyu.edu.hk/"> HKPolyU </a>'
