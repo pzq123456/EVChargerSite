@@ -17,12 +17,12 @@
         <span id="upperPercentile-value"></span>
       </div>
       <div class="legned">
-        <div style="background-color: rgb(1, 152, 189); width: 16.66%; height: 20px;"></div>
-        <div style="background-color: rgb(73, 227, 206); width: 16.66%; height: 20px;"></div>
-        <div style="background-color: rgb(216, 254, 181); width: 16.66%; height: 20px;"></div>
-        <div style="background-color: rgb(254, 237, 177); width: 16.66%; height: 20px;"></div>
-        <div style="background-color: rgb(254, 173, 84); width: 16.66%; height: 20px;"></div>
-        <div style="background-color: rgb(209, 55, 78); width: 16.66%; height: 20px;"></div>
+        <div style="background-color: rgb(1, 152, 189); width: 16.6666668%; height: 10px;"></div>
+        <div style="background-color: rgb(73, 227, 206); width: 16.6666668%; height: 10px;"></div>
+        <div style="background-color: rgb(216, 254, 181); width: 16.6666668%; height: 10px;"></div>
+        <div style="background-color: rgb(254, 237, 177); width: 16.6666668%; height: 10px;"></div>
+        <div style="background-color: rgb(254, 173, 84); width: 16.6666668%; height: 10px;"></div>
+        <div style="background-color: rgb(209, 55, 78); width: 16.6666668%; height: 10px;"></div>
       </div>
 
       <div class="legnd-info">
@@ -97,12 +97,12 @@ function test() {
       // container: 'deck-map',
       mapStyle: 'https://basemaps.cartocdn.com/gl/dark-matter-nolabels-gl-style/style.json',
       initialViewState: {
-        longitude: -1.4157,
-        latitude: 52.2324,
+        longitude: 8,
+        latitude: 54,
         zoom: 6,
         minZoom: 5,
         maxZoom: 15,
-        pitch: 40.5
+        pitch: 55
       },
       controller: true
     });
@@ -163,8 +163,8 @@ let deckgl = null;
 onMounted(() => {
     loadDeckResources(test).then((deck) => {
         deckgl = deck;
-        console.log('DeckGL loaded');
-        console.log(deckgl);
+        // console.log('DeckGL loaded');
+        // console.log(deckgl);
     });
 
 });
@@ -259,7 +259,6 @@ function flying(deckgl) {
 
 <style scoped>
 body {
-  font-family: Helvetica, Arial, sans-serif;
   width: 100vw;
   height: 100vh;
   margin: 0;
@@ -267,15 +266,14 @@ body {
 
 #control-panel {
   position: absolute;
-  top: 0;
-  left: 0;
+  bottom: 0;
+  right: 0;
   margin: 12px;
   padding: 20px;
-  font-size: 12px;
-  line-height: 1.5;
   z-index: 1;
-  font-family: Helvetica, Arial, sans-serif;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
+  background-color: rgba(255, 255, 255, 0.146);
+  border: 1px solid rgba(163, 163, 163, 0.373);
+  border-radius: 5px;
 }
 
 label {
@@ -295,13 +293,5 @@ input {
 .legnd-info {
   display: flex;
   justify-content: space-between;
-}
-
-#deck-map {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
 }
 </style>
