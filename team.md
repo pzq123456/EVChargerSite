@@ -77,12 +77,12 @@ const Reachers = [
     avatar: 'https://www.github.com/pzq123456.png',
     name: 'Zhiqing PAN',
     title: 'Website Developer & Research Assistant',
-    links : [
-      {
-        icon: 'github',
-        link: 'https://www.github.com/pzq123456',
-      }
-    ]
+    // links : [
+    //   {
+    //     icon: 'github',
+    //     link: 'https://www.github.com/pzq123456',
+    //   }
+    // ]
   },
 ]
 

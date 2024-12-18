@@ -25,5 +25,5 @@ export default defineConfig({
   ],
   // appearance.initialValue = 'dark',
   // appearance.darkMode = true,
-  appearance : "force-dark",
+  // appearance : "force-dark",
 })
