@@ -66,9 +66,24 @@ function handleChineseCityName(name) {
             return keyWordsMap[key];
         }
 
-      return pinyin(name.replace(key, ''), {
+      let mypinyin =  pinyin(name.replace(key, ''), {
         toneType: 'none'
-      }).toUpperCase() + ' ' + keyWordsMap[key];
+      });
+
+      // 删除空格
+        mypinyin = mypinyin.replace(/\s+/g, '');
+        // 首字母大写
+        mypinyin = mypinyin.charAt(0).toUpperCase() + mypinyin.slice(1);
+        // 连接关键字
+        mypinyin = mypinyin 
+        //  + keyWordsMap[key];
+        // ,China
+        mypinyin = mypinyin + ', China';
+    //   console.log(mypinyin);
+    //   .toUpperCase() + ' ' + keyWordsMap[key];
+    return mypinyin;
+
+
     }
   }
 }
@@ -132,24 +147,60 @@ const flag = computed(() => {
         return 'https://flagcdn.com/h40/cn.png';
     }
 
-    if (props.country === 'USA' || props.country === 'United States') {
+    // if (props.country === 'USA' || props.country === 'United States') {
+    //     return 'https://flagcdn.com/h40/us.png';
+    // }// 修改为包含 USA, United States 和 US 字符串
+    if (props.country.includes('USA') || props.country.includes('United States') || props.country.includes('US')) {
         return 'https://flagcdn.com/h40/us.png';
     }
 
-    if (props.country === 'UK' || props.country === 'United Kingdom') {
+    // if (props.country === 'UK' || props.country === 'United Kingdom') {
+    //     return 'https://flagcdn.com/h40/gb.png';
+    // }
+
+    if (props.country.includes('UK') || props.country.includes('United Kingdom')) {
         return 'https://flagcdn.com/h40/gb.png';
     }
 
-    // 若 props 有 countryFlag，则使用 countryFlag
-    if (props.countryFlag) {
-        return `https://flagcdn.com/h40/${props.countryFlag.toLowerCase()}.png`;
-    }else if (flagData[props.country]) {
-        const country = flagData[props.country];
-        // console.log(country); //"﻿ISO2"
-        return `https://flagcdn.com/h40/${country["﻿ISO2"].toLowerCase()}.png`;
-    }else {
+    // // "provinece, Country" 提取国家名
+
+    // const country = props.country.split(',')[0].trim();
+ 
+    // console.log(country);
+    // if (flagData[country]) {
+    //     const country = flagData[country];
+    //     // console.log(country); //"﻿ISO2"
+    //     return `https://flagcdn.com/h40/${country["﻿ISO2"].toLowerCase()}.png`;
+    // } else {
+    //     return null;
+    // }
+
+    const countryInput = props.country.split(',')[1]?.trim(); // 提取逗号后的部分并去掉首尾空格
+
+    // 修改 country 变量使之仅仅含有国家名
+    country.value = props.country.split(',')[0].trim();
+
+    console.log(countryInput);
+
+    if (flagData[countryInput]) {
+        const countryData = flagData[countryInput]; // 避免重复定义变量
+        // console.log(countryData); //"﻿ISO2"
+        return `https://flagcdn.com/h40/${countryData["﻿ISO2"].toLowerCase()}.png`;
+    } else {
         return null;
     }
+
+
+    // // 若 props 有 countryFlag，则使用 countryFlag
+    // if (props.countryFlag) {
+    //     return `https://flagcdn.com/h40/${props.countryFlag.toLowerCase()}.png`;
+    // }else if (flagData[props.country]) {
+    //     const country = flagData[props.country];
+    //     // console.log(country); //"﻿ISO2"
+    //     return `https://flagcdn.com/h40/${country["﻿ISO2"].toLowerCase()}.png`;
+    // }else {
+    //     return null;
+    // }
 });
 
 </script>

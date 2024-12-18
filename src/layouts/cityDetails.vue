@@ -88,7 +88,10 @@ function handleChineseCityName(name) {
     if (name.includes(key)) {
       return pinyin(name.replace(key, ''), {
         toneType: 'none'
-      }).toUpperCase() + ' ' + keyWordsMap[key];
+      }).replace(/\s+/g, '').charAt(0).toUpperCase() + pinyin(name.replace(key, ''), {
+        toneType: 'none'
+      }).replace(/\s+/g, '').slice(1) + ' ' 
+      + keyWordsMap[key];
     }
   }
 }
@@ -100,7 +103,8 @@ function getCountryName(selectedCity) {
   if (selectedCity.pname) {
     return selectedCity.pname;
   }else if(selectedCity.COUNTRY) {
-    return selectedCity.COUNTRY;
+    // return selectedCity.COUNTRY;
+    return selectedCity.NAME_1 + ', ' + selectedCity.COUNTRY;
   }else if(selectedCity.NAME_1) {
     return selectedCity.NAME_1;
   }else{
