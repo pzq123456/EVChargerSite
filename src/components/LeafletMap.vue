@@ -110,8 +110,8 @@ onUnmounted(() => {
 
 <style>
 .leaflet-map {
-  height: 75vh;
-  width: 95%;
+  height: 78vh;
+  width: 100%;
   z-index: 0;
   /* 自行居中 */
   margin: 0 auto;

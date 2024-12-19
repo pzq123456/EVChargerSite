@@ -102,24 +102,24 @@ layout: page
 
 
 <style scoped>
+
     h1 {
-        font-size: 2em;
-        text-align: center;
-        margin: 0.67em 0;
+        font-size: 1.5em;
         color: var(--vp-c-brand-1);
+        text-align: center;
     }
 
     #toggle.open {
     background-color: #ff1100b0;
     border-radius: 50%;
-    width: 10px;
-    height: 10px;
+    width: 5px;
+    height: 5px;
     }
 
     #toggle.close {
         background-color: #00ff08b0;
         border-radius: 50%;
-        width: 10px;
-        height: 10px;
+        width: 5px;
+        height: 5px;
     }
 </style>

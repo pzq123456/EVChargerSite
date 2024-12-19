@@ -118,11 +118,11 @@ layout: page
 
 <style scoped>
     h1 {
-        font-size: 2em;
-        text-align: center;
-        margin: 0.67em 0;
+        font-size: 1.5em;
         color: var(--vp-c-brand-1);
+        text-align: center;
     }
+
 
     #toggle.open {
     background-color: #ff1100b0;
