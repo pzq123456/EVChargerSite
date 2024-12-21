@@ -23,6 +23,9 @@ export default defineConfig({
         gtag('config', 'G-4706EZS57W');`
     ],
   ],
+  markdown: {
+    math: true
+  }
   // appearance.initialValue = 'dark',
   // appearance.darkMode = true,
   // appearance : "force-dark",
