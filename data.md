@@ -1,6 +1,6 @@
 # Data Sets
 
-## 1. Global Public Electric Vehicle Charging Data in 2022
+## 1. Global Public Electric Vehicle Charging Station (EVCS) Data in 2022
 ### 1.1 Data Description
 - **For** the US, we collected the location data of 46,548 EVCSs (with a sample rate of 87.02%) from the Alternative Fuels Data Center; 
 - **For** China, we collected the location data of 73,114 EVCSs (with a sample rate of 65.64%) from the AMAP, one of the largest online mapping service providers in China. 

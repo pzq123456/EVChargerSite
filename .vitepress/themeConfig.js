@@ -8,7 +8,7 @@ export const themeConfig = {
         { text: 'Team', link: '/team' },
         { text: 'Publications', link: '/publications' },
         { text: 'News', link: '/News' },
-        { text: 'Contact', link: '/contact' },
+        { text: 'Contact Us', link: '/contact' },
     ],
 
     logo: '/logo.png',
