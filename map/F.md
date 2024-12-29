@@ -2,7 +2,8 @@
 layout: page
 ---
 <!-- # Spatial Distributions of Access to EV charging stations (EVCSs) through Road Network at the City Level in 2022 -->
-# Access to EV Charging Stations (EVCSs) through Road Network in 2022
+<!-- # Access to EV Charging Stations (EVCSs) through Road Network in 2022 -->
+<DropDown :options="menu" defaultKey="F"/>
 
 <Drawer :is-open="isDrawerOpen" :speed="500" @close="closeDrawer">
     <cityDetails>
@@ -119,7 +120,8 @@ layout: page
     }
 
 
-
+import { menu } from './menu.js';
+import DropDown from '@/components/Dropdown.vue';
 </script>
 
 <style scoped>

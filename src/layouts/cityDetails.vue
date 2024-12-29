@@ -132,27 +132,32 @@ function isChineseChar(str) {
 </script>
 
 <style scoped>
-  h1 {
-    font-size: 1.5em;
-  }
+h1 {
+  font-size: 1.5em;
+  color: var(--vp-c-text-1); /* 使用主文本颜色变量 */
+  font-family: var(--vp-font-family-base); /* 使用默认字体 */
+}
 
-  .region {
-    font-family: Arial, sans-serif;
-    margin: 10px;
-    background-color: var(--vp-c-gray-soft);
-  }
+.region {
+  font-family: var(--vp-font-family-base); /* 使用默认字体 */
+  margin: 10px;
+  padding: 10px;
+  background-color: var(--vp-c-default-soft); /* 使用默认背景变量 */
+  border-radius: 4px; /* 添加圆角 */
+}
 
-  .num {
-    font-size: 1.5em;
-    padding: 10px;
+.num {
+  font-size: 1.5em;
+  padding: 10px;
+  color: var(--vp-c-success-1); /* 使用成功颜色变量 */
+  font-weight: bold; /* 加粗字体 */
+}
 
-    color: var(--vp-c-success-1);
-  }
-
-  .cityName {
-    font-size: 1.5em;
-    padding: 10px;
-    color: var(--vp-c-text);
-  }
+.cityName {
+  font-size: 1.5em;
+  padding: 10px;
+  color: var(--vp-c-text-1); /* 使用主文本颜色变量 */
+  font-family: var(--vp-font-family-base); /* 使用默认字体 */
+}
 
 </style>

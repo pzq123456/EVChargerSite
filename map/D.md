@@ -2,7 +2,9 @@
 layout: page
 ---
 <!-- # Spatial Distributions of the Housing Price Index of EV charging stations (EVCSs) at the City Level in 2022 -->
-# Housing Price around EV Charging Stations (EVCSs) in 2022
+<!-- # Housing Price around EV Charging Stations (EVCSs) in 2022 -->
+
+<DropDown :options="menu" defaultKey="D"/>
 
 <Drawer :is-open="isDrawerOpen" :speed="500" @close="closeDrawer">
     <cityDetails>
@@ -119,7 +121,8 @@ layout: page
     }
 
 
-
+import { menu } from './menu.js';
+import DropDown from '@/components/Dropdown.vue';
 </script>
 
 

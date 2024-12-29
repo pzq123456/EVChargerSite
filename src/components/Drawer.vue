@@ -116,56 +116,59 @@ export default {
 </script>
 
 <style scoped>
-  .drawer {
-    visibility: hidden;
-  }
+.drawer {
+  visibility: hidden;
+}
 
-  .drawer.is-visible {
-    visibility: visible;
-  }
+.drawer.is-visible {
+  visibility: visible;
+}
 
-  .drawer.is-open .drawer__content {
-    transform: translateX(0);
-  }
+.drawer.is-open .drawer__content {
+  transform: translateX(0);
+}
 
-  .drawer__content {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    height: 100%;
-    width: 100%;
-    z-index: 9999;
-    overflow: auto;
-    transition-property: transform;
-    display: flex;
-    flex-direction: column;
-    transform: translateX(100%);
-    box-shadow: 0 2px 6px var(--vp-c-gutter);
-  }
+.drawer__content {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  max-width: 400px; /* 限制抽屉宽度，避免过大 */
+  z-index: 9999;
+  overflow: auto;
+  transition: transform 0.3s ease-in-out; /* 添加平滑过渡效果 */
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  background-color: var(--vp-c-bg); /* 使用背景变量 */
+  box-shadow: 0 2px 6px var(--vp-c-divider); /* 使用分割线颜色作为阴影 */
+}
 
-  .controlBar {
+.controlBar {
+  margin-top: auto;
+  padding: 10px; /* 增加内边距 */
+  display: flex;
+  justify-content: flex-end;
+  background-color: var(--vp-c-bg-soft); /* 使用背景变量 */
+  position: sticky;
+  bottom: 0;
+  border-top: 1px solid var(--vp-c-border); /* 添加上边框 */
+}
 
-    margin-top: auto;
-    padding: 5px;
-    display: flex;
-    justify-content: flex-end;
-    background-color: var(--vp-c-gutter);
-    /* background-color: var(--vp-c-gutter); */
+.close-btn {
+  padding: 8px 16px; /* 增加按钮内边距 */
+  background-color: var(--vp-c-danger-1); /* 使用危险色变量 */
+  color: var(--vp-c-white); /* 使用白色文本 */
+  border: none;
+  border-radius: 4px; /* 圆角 */
+  cursor: pointer;
+  font-family: var(--vp-font-family-base); /* 使用默认字体 */
+  transition: background-color 0.2s ease-in-out; /* 添加悬停过渡效果 */
+}
 
-
-    /* 固定在底部 */
-    position: sticky;
-    bottom: 0;
-
-  }
-
-  .close-btn {
-    padding: 5px 10px;
-    background-color: var(--vp-c-danger-1);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
+.close-btn:hover {
+  background-color: var(--vp-c-danger-2); /* 悬停时使用更亮的危险色 */
+}
 </style>

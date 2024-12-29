@@ -2,7 +2,9 @@
 layout: page
 ---
 <!-- # Spatial Distributions of the POI Mix of EV charging stations (EVCSs) at the City Level in 2022 -->
-# The Built Environment around EV Charging Stations (EVCSs) in 2022
+<!-- # The Built Environment around EV Charging Stations (EVCSs) in 2022 -->
+
+<DropDown :options="menu" defaultKey="E"/>
 
 <Drawer :is-open="isDrawerOpen" :speed="500" @close="closeDrawer">
     <cityDetails>
@@ -114,6 +116,9 @@ layout: page
 
         return E_geoJsonLayer;
     }
+
+import { menu } from './menu.js';
+import DropDown from '@/components/Dropdown.vue';
 </script>
 
 <style scoped>

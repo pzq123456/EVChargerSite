@@ -115,30 +115,35 @@ function sortColumnsByNumber(columns) {
   border-collapse: collapse;
   margin: 0 auto;
   padding: 10px;
+  background-color: var(--vp-c-bg); /* 使用背景变量 */
 }
 
 .simple-table thead th {
-  background-color: #12644668;
+  background-color: var(--vp-c-green-soft); /* 使用成功背景变量 */
   text-align: left;
   font-weight: bold;
+  padding: 10px;
+  color: var(--vp-c-text-1); /* 使用主文本颜色变量 */
+  border: 2px solid var(--vp-c-border); /* 使用边框变量 */
 }
 
 .simple-table tr.active {
-  background-color: rgba(234, 255, 0, 0.395);
+  background-color: var(--vp-c-warning-soft); /* 使用警告背景变量 */
   font-weight: bold;
   animation: fadeIn 1s;
 }
 
 .simple-table td {
-  border: 1px solid var(--vp-c-border);
-  padding: 5px;
+  border: 1px solid var(--vp-c-border); /* 使用边框变量 */
+  padding: 10px;
+  color: var(--vp-c-text-1); /* 使用主文本颜色变量 */
 }
 
 .toolbar {
   margin-top: 10px;
   text-align: center;
   font-size: 14px;
-
+  color: var(--vp-c-text-1); /* 使用主文本颜色变量 */
 }
 
 .control-button {
@@ -147,19 +152,24 @@ function sortColumnsByNumber(columns) {
   margin: 0 5px;
   font-size: 14px;
   cursor: pointer;
+  background-color: var(--vp-c-default-3); /* 使用默认背景变量 */
+  color: var(--vp-c-text-1); /* 使用主文本颜色变量 */
+  border: 1px solid var(--vp-c-border); /* 使用边框变量 */
+  transition: background-color 0.2s ease-in-out; /* 添加悬停过渡效果 */
 }
 
 .control-button:hover {
-  background-color: #ccc;
+  background-color: var(--vp-c-default-2); /* 悬停时使用更亮的默认背景 */
 }
 
 .decimal-value {
   padding: 0 10px;
+  color: var(--vp-c-text-1); /* 使用主文本颜色变量 */
 }
 
 @keyframes fadeIn {
   from {
-    background-color: rgba(234, 255, 0, 0.395);
+    background-color: var(--vp-c-warning-soft); /* 使用警告背景变量 */
   }
   to {
     background-color: transparent;

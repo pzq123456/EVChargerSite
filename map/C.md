@@ -2,7 +2,9 @@
 layout: page
 ---
 <!-- # Spatial Distributions of the Level of Population Coverage of EV charging stations (EVCSs) at the City Level in 2022 -->
-# Population Coverage of EV Charging Stations (EVCSs) in 2022
+<!-- # Population Coverage of EV Charging Stations (EVCSs) in 2022 -->
+
+<DropDown :options="menu" defaultKey="C"/>
 
 <Drawer :is-open="isDrawerOpen" :speed="500" @close="closeDrawer">
     <cityDetails>
@@ -98,6 +100,8 @@ layout: page
         return geoJsonLayer;
     }
 
+import { menu } from './menu.js';
+import DropDown from '@/components/Dropdown.vue';
 </script>
 
 

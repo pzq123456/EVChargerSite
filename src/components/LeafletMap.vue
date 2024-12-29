@@ -117,63 +117,93 @@ onUnmounted(() => {
   margin: 0 auto;
 }
 
+/* 自定义弹出框样式 */
 .custom-popup .leaflet-popup-content-wrapper {
-    background: #ffffffe1;
+  background: var(--vp-c-bg-soft); /* 使用背景变量 */
+  border-radius: 4px; /* 添加圆角 */
+  box-shadow: 0 2px 6px var(--vp-c-divider); /* 使用阴影变量 */
 }
 
 .custom-popup .leaflet-popup-tip {
-    background: #ffffffab;
+  background: var(--vp-c-bg-soft); /* 使用背景变量 */
 }
 
-.info { padding: 6px 8px; font: 14px/16px Arial, Helvetica, sans-serif; background: white; background: rgba(255,255,255,0.8); box-shadow: 0 0 15px rgba(0,0,0,0.2); border-radius: 5px; }
-.info h4 { margin: 0 0 5px; color: #000000; }
-.legend { text-align: left; line-height: 18px; color: #000000; }
-.legend i { width: 18px; height: 18px; float: left; margin-right: 8px; opacity: 0.7; }
+/* 信息框样式 */
+.info {
+  padding: 6px 8px;
+  font: 14px/16px var(--vp-font-family-base); /* 使用默认字体 */
+  background: var(--vp-c-bg-soft); /* 使用背景变量 */
+  box-shadow: 0 0 15px var(--vp-c-divider); /* 使用阴影变量 */
+  border-radius: 5px;
+}
+
+.info h4 {
+  margin: 0 0 5px;
+  color: var(--vp-c-text-1); /* 使用主文本颜色变量 */
+}
+
+/* 图例样式 */
+.legend {
+  text-align: left;
+  line-height: 18px;
+  color: var(--vp-c-text-1); /* 使用主文本颜色变量 */
+}
+
+.legend i {
+  width: 18px;
+  height: 18px;
+  float: left;
+  margin-right: 8px;
+  opacity: 0.7;
+}
 
 .legend-title {
-    font-size: 20px;
-    font-weight: bold;
-    border-bottom: 1px solid rgb(255, 255, 255);
+  font-size: 20px;
+  font-weight: bold;
+  border-bottom: 1px solid var(--vp-c-border); /* 使用边框变量 */
 }
 
-/* 控件的整体样式 */
+/* 控件整体样式 */
 .leaflet-control-select-button {
-    padding: 10px;
-    background-color: rgba(255, 255, 255, 0.804);
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    font-family: Arial, sans-serif;
+  padding: 10px;
+  background-color: var(--vp-c-bg-soft); /* 使用背景变量 */
+  border-radius: 5px;
+  box-shadow: 0 0 5px var(--vp-c-divider); /* 使用阴影变量 */
+  font-family: var(--vp-font-family-base); /* 使用默认字体 */
 }
 
-/* 信息文本的样式 */
+/* 信息文本样式 */
 .select-button-info {
-    margin-bottom: 5px;
-    font-size: 20px;
-    color: #333;
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: var(--vp-c-text-1); /* 使用主文本颜色变量 */
 }
 
-/* 下拉框的样式 */
+/* 下拉框样式 */
 .select-button-dropdown {
-    width: 150px;
-    margin-bottom: 5px;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    font-size: 14px;
+  width: 150px;
+  margin-bottom: 5px;
+  padding: 5px;
+  border: 1px solid var(--vp-c-border); /* 使用边框变量 */
+  border-radius: 3px;
+  font-size: 14px;
+  background-color: var(--vp-c-bg); /* 使用背景变量 */
+  color: var(--vp-c-text-1); /* 使用主文本颜色变量 */
 }
 
-/* 按钮的样式 */
+/* 按钮样式 */
 .select-button-button {
-    padding: 5px;
-    border-radius: 5px;
-    background-color: #57a05a;
-    color: white;
-    cursor: pointer;
-    font-size: 14px;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: var(--vp-c-success-1); /* 使用成功色变量 */
+  color: var(--vp-c-white); /* 使用白色文本 */
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease-in-out; /* 添加悬停过渡效果 */
 }
 
 .select-button-button:hover {
-    background-color: #27732a;
+  background-color: var(--vp-c-success-2); /* 悬停时使用更亮的成功色 */
 }
 
 </style>

@@ -206,46 +206,44 @@ const flag = computed(() => {
 </script>
 
 <style scoped>
-    .country {
-        display: flex;
-        flex-direction: column;
-        align-items: left;
-        width: 100%;
-    }
+.country {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* 使用 flex-start 替代 left */
+  width: 100%;
+}
 
-    .countryBand {
-        display: flex;
-        flex-direction: row;
-        align-items: left;
-        width: 100%;
-        background-color: var(--vp-c-gray-soft);
-        padding: 10px;
-        border-radius: 5px;
-        border-bottom: 1px solid var(--vp-c-gray-soft);
-    }
+.countryBand {
+  display: flex;
+  flex-direction: row;
+  align-items: center; /* 垂直居中对齐 */
+  width: 100%;
+  background-color: var(--vp-c-default-soft); /* 使用默认背景变量 */
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px; /* 添加间距 */
+}
 
-    .flag {
-        display: flex;
-        width: 75px;
-        height: 45px;
-        background-color: var(--vp-c-gray-soft);
-        border-radius: 5px;
-        /* 固定在右边 */
-        margin-left: auto;
+.flag {
+  width: 75px;
+  height: 45px;
+  background-color: var(--vp-c-gray-soft); /* 使用灰色背景变量 */
+  border-radius: 5px;
+  margin-left: auto; /* 固定在右边 */
+}
 
-    }
+.countryName {
+  font-size: 1.5em;
+  font-weight: bold;
+  padding: 10px;
+  color: var(--vp-c-text-1); /* 使用主文本颜色变量 */
+  font-family: var(--vp-font-family-base); /* 使用默认字体 */
+}
 
-    .countryName {
-        font-size: 1.5em;
-        font-weight: bold;
-        padding: 10px;
-        color: var(--vp-c-text)
-    }
-
-    .num {
-        font-size: 1em;
-        color: var(--vp-c-success-1);
-        font-weight: bold;
-        padding: 10px 0;
-  }
+.num {
+  font-size: 1em;
+  color: var(--vp-c-success-1); /* 使用成功色变量 */
+  font-weight: bold;
+  padding: 10px 0;
+}
 </style>
