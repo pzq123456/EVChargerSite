@@ -23,10 +23,16 @@ export default {
       skip_empty_lines: true,
     });
 
+    // return {
+    //   cn: sampleData(cnData),
+    //   eu: sampleData(euData),
+    //   us: sampleData(usData),
+    // };
+
     return {
-      cn: sampleData(cnData),
-      eu: sampleData(euData),
-      us: sampleData(usData),
+      cn: cnData,
+      eu: euData,
+      us: usData,
     };
   },
 };

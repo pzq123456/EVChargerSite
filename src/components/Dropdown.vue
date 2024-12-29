@@ -33,11 +33,9 @@
       <li v-for="(item, key) in options" :key="key" class="dropdown-item">
         <a
           :href="base + item.url"
-          target="_blank"
           class="dropdown-link"
           :class="{ 'dropdown-item-active': selectedTitle === item.title }"
           @click="selectedTitle = item.title"
-          
         >
           {{ item.title }}
         </a>

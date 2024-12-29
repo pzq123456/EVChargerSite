@@ -180,7 +180,7 @@ const flag = computed(() => {
     // 修改 country 变量使之仅仅含有国家名
     country.value = props.country.split(',')[0].trim();
 
-    console.log(countryInput);
+    // console.log(countryInput);
 
     if (flagData[countryInput]) {
         const countryData = flagData[countryInput]; // 避免重复定义变量

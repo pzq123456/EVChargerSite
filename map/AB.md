@@ -2,8 +2,10 @@
 layout: page
 ---
 
-<abmap />
+<!-- <abmap /> -->
+<deckMap />
 
 <script setup>
-    import abmap from '@/layouts/map.vue'
+    // import abmap from '@/layouts/map.vue'
+    import deckMap from '@/components/DeckMap.vue'
 </script>

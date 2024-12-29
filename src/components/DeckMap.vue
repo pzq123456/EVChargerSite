@@ -1,5 +1,5 @@
 <template>
-  <div id = "deck-map" >
+  <div id = "deck-map" > </div>
     <div id="control-panel">
       <div>
         <label>Radius</label>
@@ -30,16 +30,19 @@
         <span>Higher</span>
       </div>
     </div>
-  </div>
+
 
   <!-- <div id="deck-map"></div> -->
 </template>
 
 <script setup>
-import { onMounted, onUnmounted } from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 import { data } from '@/loader/points.data.js';
 const { eu, us, cn } = data; // data from csv
 
+
+// deck-map
+const deckmap = ref(null);
 
 function loadDeckResources(callback) {
   return new Promise((resolve, reject) => {
@@ -89,6 +92,19 @@ function loadDeckResources(callback) {
   });
 }
 
+// function getTooltip(object) {
+//   if (!object) {
+//     return null;
+//   }
+//   // const lat = object.position[1];
+//   // const lng = object.position[0];
+//   // const count = object.points.length;
+
+//   console.log(object);  
+
+//   return '0';
+// }
+
 // 编写一个测试函数 以确定是否成功加载资源
 function test() {
     const {DeckGL, HexagonLayer} = deck;
@@ -97,14 +113,19 @@ function test() {
       // container: 'deck-map',
       mapStyle: 'https://basemaps.cartocdn.com/gl/dark-matter-nolabels-gl-style/style.json',
       initialViewState: {
-        longitude: 8,
-        latitude: 54,
-        zoom: 6,
-        minZoom: 5,
-        maxZoom: 15,
+        longitude: 114,
+        latitude: 36,
+        zoom: 5,
+        minZoom: 2,
+        maxZoom: 10,
         pitch: 55
       },
-      controller: true
+      controller: true,
+      cotainer: deckmap.value,
+      // pickable: true,
+      // getPosition: d => d,
+      // getTooltip: getTooltip,
+      getCursor: ({isHovering}) => isHovering ? 'pointer' : 'default',
     });
 
     const OPTIONS = ['radius', 'coverage', 'upperPercentile'];
@@ -172,7 +193,7 @@ onMounted(() => {
 
 
 onUnmounted(() => {
-    console.log(deck);
+    // console.log(deck);
 
     deckgl.finalize();
     // // canvas 清理
@@ -258,42 +279,55 @@ function flying(deckgl) {
 </script>
 
 <style scoped>
-body {
-  width: 100vw;
-  height: 100vh;
-  margin: 0;
-}
 
 #control-panel {
   position: absolute;
   bottom: 0;
-  right: 0;
+  left: 0;
   margin: 12px;
   padding: 20px;
   z-index: 1;
-  background-color: rgba(255, 255, 255, 0.146);
-  border: 1px solid rgba(163, 163, 163, 0.373);
+  background-color: var(--vp-c-bg-soft); /* 使用背景变量 */
+  border: 1px solid var(--vp-c-border); /* 使用边框变量 */
   border-radius: 5px;
-  /* 隐藏元素 */
-  display: none;
+  box-shadow: var(--vp-shadow-1); /* 使用阴影变量 */
+  backdrop-filter: blur(8px); /* 添加背景模糊效果 */
 }
 
 label {
   display: inline-block;
   width: 140px;
+  color: var(--vp-c-text-1); /* 使用主文本颜色变量 */
 }
 
 input {
   width: 100px;
+  padding: 5px;
+  border: 1px solid var(--vp-c-border); /* 使用边框变量 */
+  border-radius: 3px;
+  background-color: var(--vp-c-bg); /* 使用背景变量 */
+  color: var(--vp-c-text-1); /* 使用主文本颜色变量 */
 }
 
 .legned {
   display: flex;
   justify-content: space-between;
+  margin-top: 10px; /* 添加间距 */
 }
 
 .legnd-info {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  color: var(--vp-c-text-1); /* 使用主文本颜色变量 */
+}
+
+#deck-map {
+  height: 78vh;
+  width: 100%;
+  z-index: 0;
+  margin: 0 auto;
+  border-radius: 5px; /* 添加圆角 */
+  overflow: hidden; /* 隐藏溢出内容 */
 }
 </style>
