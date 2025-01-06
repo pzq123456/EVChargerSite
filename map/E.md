@@ -15,11 +15,10 @@ layout: page
     </cityDetails>
 </Drawer>
 
-<button @click="toggleDrawer" :class="{ open: isDrawerOpen, close: !isDrawerOpen }" id="toggle">
-</button>
-
 <LeafletMap :mainScript :center="mapCenter" :zoom="mapZoom" ref="map" />
 
+<button @click="toggleDrawer" :class="{ open: isDrawerOpen, close: !isDrawerOpen }" id="toggle">
+</button>
 
 <script setup>
     import LeafletMap from '@/components/LeafletMap.vue';
@@ -132,14 +131,14 @@ import DropDown from '@/components/Dropdown.vue';
     #toggle.open {
     background-color: #ff1100b0;
     border-radius: 50%;
-    width: 10px;
-    height: 10px;
+    width: 5px;
+    height: 5px;
     }
 
     #toggle.close {
         background-color: #00ff08b0;
         border-radius: 50%;
-        width: 10px;
-        height: 10px;
+        width: 5px;
+        height: 5px;
     }
 </style>

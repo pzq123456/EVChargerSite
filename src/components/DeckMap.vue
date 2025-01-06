@@ -110,7 +110,7 @@ function test() {
     const {DeckGL, HexagonLayer} = deck;
 
     const deckgl = new DeckGL({
-      // container: 'deck-map',
+      container: 'deck-map',
       mapStyle: 'https://basemaps.cartocdn.com/gl/dark-matter-nolabels-gl-style/style.json',
       initialViewState: {
         longitude: 114,
@@ -211,7 +211,7 @@ onUnmounted(() => {
 
     // 清除上述的 div
 
-    document.body.removeChild(document.querySelector('div[class=""]'));
+    // document.body.removeChild(document.querySelector('div[class=""]'));
 
 
   });

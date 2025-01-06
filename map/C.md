@@ -14,11 +14,12 @@ layout: page
     </cityDetails>
 </Drawer>
 
-<button @click="toggleDrawer" :class="{ open: isDrawerOpen, close: !isDrawerOpen }" id="toggle">
-</button>
+
 
 <LeafletMap :mainScript :center="mapCenter" :zoom="mapZoom" ref="map" />
 
+<button @click="toggleDrawer" :class="{ open: isDrawerOpen, close: !isDrawerOpen }" id="toggle">
+</button>
 
 <script setup>
     import LeafletMap from '@/components/LeafletMap.vue';
