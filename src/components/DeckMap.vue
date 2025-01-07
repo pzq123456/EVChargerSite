@@ -1,9 +1,15 @@
 <template>
+  <div class="tool-bar">
+    <button class = "cn" @click="cnV">China</button>
+    <button class = "eu" @click="euV">Europe</button>
+    <button class = "us" @click="usV">USA</button>
+  </div>
+
   <div id = "deck-map" > </div>
     <div id="control-panel">
       <div>
         <label>Radius</label>
-        <input id="radius" type="range" min="1000" max="20000" step="1000" value="1000"></input>
+        <input id="radius" type="range" min="1000" max="20000" step="1000" value="3000"></input>
         <span id="radius-value"></span>
       </div>
       <div>
@@ -13,7 +19,7 @@
       </div>
       <div>
         <label>Upper Percentile</label>
-        <input id="upperPercentile" type="range" min="90" max="100" step="1" value="100"></input>
+        <input id="upperPercentile" type="range" min="90" max="100" step="1" value="99"></input>
         <span id="upperPercentile-value"></span>
       </div>
       <div class="legned">
@@ -92,21 +98,8 @@ function loadDeckResources(callback) {
   });
 }
 
-// function getTooltip(object) {
-//   if (!object) {
-//     return null;
-//   }
-//   // const lat = object.position[1];
-//   // const lng = object.position[0];
-//   // const count = object.points.length;
-
-//   console.log(object);  
-
-//   return '0';
-// }
-
 // 编写一个测试函数 以确定是否成功加载资源
-function test() {
+function main() {
     const {DeckGL, HexagonLayer} = deck;
 
     const deckgl = new DeckGL({
@@ -115,7 +108,7 @@ function test() {
       initialViewState: {
         longitude: 114,
         latitude: 36,
-        zoom: 5,
+        zoom: 4,
         minZoom: 2,
         maxZoom: 10,
         pitch: 55
@@ -182,13 +175,119 @@ function test() {
 let deckgl = null;
 
 onMounted(() => {
-    loadDeckResources(test).then((deck) => {
+    loadDeckResources(main).then((deck) => {
         deckgl = deck;
         // console.log('DeckGL loaded');
         // console.log(deckgl);
     });
 
 });
+
+let currentViewState = {
+  longitude: -98.5795,
+  latitude: 39.8283,
+  zoom: 5,
+  pitch: 55
+};
+
+function setViewState(deckgl, viewState) {
+  currentViewState = { ...currentViewState, ...viewState };
+  deckgl.setProps({
+    viewState: currentViewState,
+    onViewStateChange: ({ viewState }) => {
+      currentViewState = viewState; // 动态同步用户交互的视图状态
+      deckgl.setProps({ viewState });
+    }
+  });
+}
+
+// function cnV() {
+//   setViewState(deckgl, {
+//     longitude: 114,
+//     latitude: 36,
+//     zoom: 4,
+//     pitch: 55
+//   });
+// }
+
+// function euV() {
+//   setViewState(deckgl, {
+//     longitude: 8.6821,
+//     latitude: 50.1109,
+//     zoom: 4,
+//     pitch: 55
+//   });
+// }
+
+// function usV() {
+//   setViewState(deckgl, {
+//     longitude: -98.5795,
+//     latitude: 39.8283,
+//     zoom: 4,
+//     pitch: 55
+//   });
+// }
+
+function flyTo(deckgl, targetViewState, duration = 2000) {
+  const startViewState = { ...currentViewState };
+  const startTime = performance.now();
+
+  function animate() {
+    const elapsedTime = performance.now() - startTime;
+    const t = Math.min(elapsedTime / duration, 1); // 归一化时间进度 (0 ~ 1)
+
+    // 自定义缓动函数（可选）
+    const easing = t => t * (2 - t); // Ease out
+
+    // 插值计算新的视图状态
+    const interpolatedViewState = {
+      longitude: startViewState.longitude + (targetViewState.longitude - startViewState.longitude) * easing(t),
+      latitude: startViewState.latitude + (targetViewState.latitude - startViewState.latitude) * easing(t),
+      zoom: startViewState.zoom + (targetViewState.zoom - startViewState.zoom) * easing(t),
+      pitch: startViewState.pitch + (targetViewState.pitch - startViewState.pitch) * easing(t),
+    };
+
+    // 更新视图状态
+    setViewState(deckgl, interpolatedViewState);
+
+    // 如果动画未完成，继续下一帧
+    if (t < 1) {
+      requestAnimationFrame(animate);
+    }
+  }
+
+  // 启动动画
+  requestAnimationFrame(animate);
+}
+
+// 示例用法
+function cnV() {
+  flyTo(deckgl, {
+    longitude: 114,
+    latitude: 36,
+    zoom: 4,
+    pitch: 55
+  });
+}
+
+function euV() {
+  flyTo(deckgl, {
+    longitude: 8.6821,
+    latitude: 50.1109,
+    zoom: 4,
+    pitch: 55
+  });
+}
+
+function usV() {
+  flyTo(deckgl, {
+    longitude: -98.5795,
+    latitude: 39.8283,
+    zoom: 4,
+    pitch: 55
+  });
+}
+
 
 
 
@@ -217,64 +316,7 @@ onUnmounted(() => {
   });
 
 
-function interpolatePoints(start, end, numPoints) {
-  const points = [];
-  for (let i = 0; i <= numPoints; i++) {
-    const t = i / numPoints;
-    const interpolatedPoint = {
-      longitude: start.longitude + t * (end.longitude - start.longitude),
-      latitude: start.latitude + t * (end.latitude - start.latitude),
-      zoom: start.zoom + t * (end.zoom - start.zoom),
-      pitch: start.pitch + t * (end.pitch - start.pitch)
-    };
-    points.push(interpolatedPoint);
-  }
-  return points;
-}
 
-function generateFlightPath(locations, numIntermediatePoints) {
-  let flightPath = [];
-  for (let i = 0; i < locations.length; i++) {
-    const start = locations[i];
-    const end = locations[(i + 1) % locations.length];
-    const interpolatedPoints = interpolatePoints(start, end, numIntermediatePoints);
-    flightPath = flightPath.concat(interpolatedPoints);
-  }
-  return flightPath;
-}
-
-function flying(deckgl) {
-  const locations = [
-    {longitude: 116.4074, latitude: 39.9042, zoom: 4, pitch: 50},
-    {longitude: -98.5795, latitude: 39.8283, zoom: 4, pitch: 50},
-    {longitude: 8.6821, latitude: 50.1109, zoom: 4, pitch: 50}
-  ];
-
-  const flightPath = generateFlightPath(locations, 100);
-  let index = 0;
-
-  function fly() {
-    const location = flightPath[index];
-    deckgl.setProps({
-      viewState: {
-        longitude: location.longitude,
-        latitude: location.latitude,
-        zoom: location.zoom,
-        pitch: location.pitch
-      }
-    });
-
-    index = (index + 1) % flightPath.length;
-  }
-
-  // 添加退出条件
-  // 循环一次后即退出
-  const timer = setInterval(fly, 120);
-  setTimeout(() => {
-    clearInterval(timer);
-  }, 120 * flightPath.length);
-
-}
 
 </script>
 
@@ -330,4 +372,34 @@ input {
   border-radius: 5px; /* 添加圆角 */
   overflow: hidden; /* 隐藏溢出内容 */
 }
+
+.tool-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background-color: var(--vp-c-bg-soft); /* 使用背景变量 */
+  border: 1px solid var(--vp-c-border); /* 使用边框变量 */
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+}
+
+
+button {
+  padding: 8px 16px; /* 增加按钮内边距 */
+  margin: 0 5px;
+  border: 1px solid var(--vp-c-bg-soft); /* 使用成功色 */
+  border-radius: 5px; /* 增加圆角 */
+  background-color: var(--vp-c-green-soft); /* 使用成功色 */
+  color: var(--vp-c-text-1); /* 使用主文本颜色变量 */
+  cursor: pointer;
+  font-weight: 500; /* 增加字体粗细 */
+}
+
+button:hover {
+  background-color: var(--vp-c-bg-soft); /* 使用背景变量 */
+  border: 1px solid var(--vp-c-green-1);
+}
+
 </style>
