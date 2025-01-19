@@ -12,7 +12,16 @@
 
 
 
-<iframe width="600" height="450" src="https://lookerstudio.google.com/embed/reporting/346c47ef-9107-40d6-885e-c3e4cfdfaec6/page/QvocE" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
+<iframe 
+    width="600" 
+    height="450" 
+    src="https://lookerstudio.google.com/embed/reporting/346c47ef-9107-40d6-885e-c3e4cfdfaec6/page/QvocE?hl=en" 
+    frameborder="0" 
+    style="border:0" 
+    allowfullscreen 
+    sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox">
+</iframe>
+
 
 
 <!-- <LeafletMap :mainScript :center="mapCenter" :zoom="mapZoom" ref="map" />
