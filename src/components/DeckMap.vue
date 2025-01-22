@@ -9,17 +9,17 @@
     <div id="control-panel">
       <div>
         <label>Radius</label>
-        <input id="radius" type="range" min="1000" max="20000" step="1000" value="3000"></input>
+        <input id="radius" type="range" min="1000" max="20000" step="1000" value="10000"></input>
         <span id="radius-value"></span>
       </div>
       <div>
         <label>Coverage</label>
-        <input id="coverage" type="range" min="0" max="1" step="0.1" value="1"></input>
+        <input id="coverage" type="range" min="0" max="1" step="0.1" value="0.7"></input>
         <span id="coverage-value"></span>
       </div>
       <div>
         <label>Upper Percentile</label>
-        <input id="upperPercentile" type="range" min="90" max="100" step="1" value="99"></input>
+        <input id="upperPercentile" type="range" min="90" max="100" step="1" value="98"></input>
         <span id="upperPercentile-value"></span>
       </div>
       <div class="legned">
@@ -43,7 +43,7 @@
 
 <script setup>
 import { onMounted, onUnmounted, ref } from 'vue';
-import { data } from '@/loader/points.data.js';
+import { data } from '@/loader/points2.data.js';
 const { eu, us, cn } = data; // data from csv
 
 
@@ -136,39 +136,86 @@ function main() {
         document.getElementById(key).oninput = renderLayer;
     });
 
-    function renderLayer () {
-        const options = {};
-        OPTIONS.forEach(key => {
-            const value = document.getElementById(key).value;
-            document.getElementById(key + '-value').innerHTML = value;
-            options[key] = Number(value);
-        });
+    function renderLayer() {
+    const options = {};
+    OPTIONS.forEach(key => {
+        const value = document.getElementById(key).value;
+        document.getElementById(key + '-value').innerHTML = value;
+        options[key] = Number(value);
+    });
 
-        const hexagonLayer = new HexagonLayer({
-            id: 'heatmap',
-            colorRange: COLOR_RANGE,
-            data,
-            elevationRange: [0, 1000],
-            elevationScale: 250,
-            extruded: true,
-            getPosition: d => d,
-            ...options
-        });
+    const hexagonLayer = new HexagonLayer({
+        id: 'heatmap',
+        colorRange: COLOR_RANGE,
+        data, // 更新后数据
+        elevationRange: [0, 1000],
+        elevationScale: 250,
+        extruded: true,
+        getPosition: d => d,
+        getColorWeight: d => d[2],
+        getElevationWeight: d => d[2],
+        ...options
+    });
 
-        deckgl.setProps({
-            layers: [hexagonLayer]
-        });
-    }
+    deckgl.setProps({
+        layers: [hexagonLayer]
+    });
+  }
 
-    let data = null;
+  // 数据加载和合并
+  let data = [];
 
-    data = eu.map(d => [Number(d.lon), Number(d.lat)]);
-    data = data.concat(us.map(d => [Number(d.lon), Number(d.lat)]));
-    data = data.concat(cn.map(d => [Number(d.lon), Number(d.lat)]));
+  data = data.concat(
+      eu.map(d => ([Number(d.grid_lon), Number(d.grid_lat), Number(d.count) || 0]))
+  );
 
-    renderLayer();
+  data = data.concat(
+      us.map(d => ([Number(d.grid_lon), Number(d.grid_lat), Number(d.count) || 0]))
+  );
 
-    return deckgl;
+  data = data.concat(
+      cn.map(d => ([Number(d.grid_lon), Number(d.grid_lat), Number(d.count) || 0]))
+  );
+
+  // function renderLayer () {
+  //       const options = {};
+  //       OPTIONS.forEach(key => {
+  //           const value = document.getElementById(key).value;
+  //           document.getElementById(key + '-value').innerHTML = value;
+  //           options[key] = Number(value);
+  //       });
+
+  //       const hexagonLayer = new HexagonLayer({
+  //           id: 'heatmap',
+  //           colorRange: COLOR_RANGE,
+  //           data,
+  //           elevationRange: [0, 1000],
+  //           elevationScale: 250,
+  //           extruded: true,
+  //           getPosition: d => d,
+  //           ...options
+  //       });
+
+  //       deckgl.setProps({
+  //           layers: [hexagonLayer]
+  //       });
+  //   }
+
+  //   let data = null;
+
+  //   data = eu.map(d => [Number(d.lon), Number(d.lat)]);
+  //   data = data.concat(us.map(d => [Number(d.lon), Number(d.lat)]));
+  //   data = data.concat(cn.map(d => [Number(d.lon), Number(d.lat)]));
+
+  //   renderLayer();
+
+  //   return deckgl;
+
+  // 渲染图层
+  renderLayer();
+
+  return deckgl;
+
 
 }
 
