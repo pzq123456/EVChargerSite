@@ -9,7 +9,7 @@
     <div id="control-panel">
       <div>
         <label>Radius</label>
-        <input id="radius" type="range" min="10000" max="20000" step="1000" value="10000"></input>
+        <input id="radius" type="range" min="1000" max="20000" step="1000" value="10000"></input>
         <span id="radius-value"></span>
       </div>
       <div>
@@ -22,6 +22,18 @@
         <input id="upperPercentile" type="range" min="90" max="100" step="1" value="98"></input>
         <span id="upperPercentile-value"></span>
       </div>
+      <div class="checkbox-container">
+        <div class="check-item">
+          <label>Show Hexagon Layer</label> <input type="checkbox" id="toggle-hexagon" checked>
+        </div>
+
+        <div class="check-item">
+          <label>Show GeoJSON Layer</label> <input type="checkbox" id="toggle-geojson" checked>
+        </div>
+
+      </div>
+
+      
       <div class="legned">
         <div style="background-color: rgb(1, 152, 189); width: 16.6666668%; height: 10px;"></div>
         <div style="background-color: rgb(73, 227, 206); width: 16.6666668%; height: 10px;"></div>
@@ -29,6 +41,15 @@
         <div style="background-color: rgb(254, 237, 177); width: 16.6666668%; height: 10px;"></div>
         <div style="background-color: rgb(254, 173, 84); width: 16.6666668%; height: 10px;"></div>
         <div style="background-color: rgb(209, 55, 78); width: 16.6666668%; height: 10px;"></div>
+      </div>
+
+      <div class="legned">
+        <div style="background-color: rgb(0, 0, 0); width: 16.6666668%; height: 10px;"></div>
+        <div style="background-color: rgb(11, 31, 51); width: 16.6666668%; height: 10px;"></div>
+        <div style="background-color: rgb(22, 62, 102); width: 16.6666668%; height: 10px;"></div>
+        <div style="background-color: rgb(33, 93, 153); width: 16.6666668%; height: 10px;"></div>
+        <div style="background-color: rgb(44, 124, 204); width: 16.6666668%; height: 10px;"></div>
+        <div style="background-color: rgb(55, 155, 255); width: 16.6666668%; height: 10px;"></div>
       </div>
 
       <div class="legnd-info">
@@ -46,6 +67,9 @@ import { onMounted, onUnmounted, ref } from 'vue';
 import { data } from '@/loader/points2.data.js';
 const { eu, us, cn } = data; // data from csv
 
+import { data as population } from '@/loader/C.data.js';
+
+// console.log(population);
 
 // deck-map
 const deckmap = ref(null);
@@ -100,17 +124,18 @@ function loadDeckResources(callback) {
 
 // 编写一个测试函数 以确定是否成功加载资源
 function main() {
-    const {DeckGL, HexagonLayer} = deck;
+    const {DeckGL, HexagonLayer, GeoJsonLayer} = deck;
 
     const deckgl = new DeckGL({
       container: 'deck-map',
       mapStyle: 'https://basemaps.cartocdn.com/gl/dark-matter-nolabels-gl-style/style.json',
+      // mapStyle: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
       initialViewState: {
         longitude: 114,
         latitude: 36,
         zoom: 4,
         minZoom: 2,
-        maxZoom: 10,
+        maxZoom: 15,
         pitch: 55
       },
       controller: true,
@@ -124,12 +149,12 @@ function main() {
     const OPTIONS = ['radius', 'coverage', 'upperPercentile'];
 
     const COLOR_RANGE = [
-        [1, 152, 189],
-        [73, 227, 206],
-        [216, 254, 181],
-        [254, 237, 177],
-        [254, 173, 84],
-        [209, 55, 78]
+        [1, 152, 189, 120],
+        [73, 227, 206, 120],
+        [216, 254, 181, 120],
+        [254, 237, 177, 120],
+        [254, 173, 84, 120],
+        [209, 55, 78, 120]
     ];
 
     OPTIONS.forEach(key => {
@@ -148,8 +173,8 @@ function main() {
         id: 'heatmap',
         colorRange: COLOR_RANGE,
         data, // 更新后数据
-        elevationRange: [0, 1000],
-        elevationScale: 250,
+        elevationRange: [0, 1500],
+        elevationScale: 800,
         extruded: true,
         getPosition: d => d,
         getColorWeight: d => d[2],
@@ -157,9 +182,42 @@ function main() {
         ...options
     });
 
-    deckgl.setProps({
-        layers: [hexagonLayer]
+    const geojsonlayer = new GeoJsonLayer({
+      id: 'GeoJsonLayer',
+      data: population.us.features.concat(population.eu.features).concat(population.cn.features),
+
+      stroked: false,
+      filled: true,
+      pickable: true,
+
+      getFillColor: f => [f.properties.V * 55, f.properties.V * 155, f.properties.V * 255, 150],
+      // [160, 60, 180, 100],
+      getLineColor: [0, 0, 0],
+      getLineWidth: 2,
     });
+
+    const toggleHexagon = document.getElementById('toggle-hexagon');
+    const toggleGeojson = document.getElementById('toggle-geojson');
+
+    // 绑定 触发事件 renderLayer
+    toggleHexagon.onchange = renderLayer;
+    toggleGeojson.onchange = renderLayer;
+
+    // console.log(toggleHexagon.checked, toggleGeojson.checked);
+
+    deckgl.setProps({
+        layers: [
+            toggleHexagon.checked ? hexagonLayer : null,
+            toggleGeojson.checked ? geojsonlayer : null
+        ].filter(Boolean)
+    });
+    
+
+    // deckgl.setProps({
+    //     // layers: [hexagonLayer]
+    //     // layers: [geojsonlayer, hexagonLayer]
+
+    // });
   }
 
   // 数据加载和合并
@@ -177,46 +235,10 @@ function main() {
       cn.map(d => ([Number(d.grid_lon), Number(d.grid_lat), Number(d.count) || 0]))
   );
 
-  // function renderLayer () {
-  //       const options = {};
-  //       OPTIONS.forEach(key => {
-  //           const value = document.getElementById(key).value;
-  //           document.getElementById(key + '-value').innerHTML = value;
-  //           options[key] = Number(value);
-  //       });
-
-  //       const hexagonLayer = new HexagonLayer({
-  //           id: 'heatmap',
-  //           colorRange: COLOR_RANGE,
-  //           data,
-  //           elevationRange: [0, 1000],
-  //           elevationScale: 250,
-  //           extruded: true,
-  //           getPosition: d => d,
-  //           ...options
-  //       });
-
-  //       deckgl.setProps({
-  //           layers: [hexagonLayer]
-  //       });
-  //   }
-
-  //   let data = null;
-
-  //   data = eu.map(d => [Number(d.lon), Number(d.lat)]);
-  //   data = data.concat(us.map(d => [Number(d.lon), Number(d.lat)]));
-  //   data = data.concat(cn.map(d => [Number(d.lon), Number(d.lat)]));
-
-  //   renderLayer();
-
-  //   return deckgl;
-
   // 渲染图层
   renderLayer();
 
   return deckgl;
-
-
 }
 
 let deckgl = null;
@@ -224,8 +246,6 @@ let deckgl = null;
 onMounted(() => {
     loadDeckResources(main).then((deck) => {
         deckgl = deck;
-        // console.log('DeckGL loaded');
-        // console.log(deckgl);
     });
 
 });
@@ -247,33 +267,6 @@ function setViewState(deckgl, viewState) {
     }
   });
 }
-
-// function cnV() {
-//   setViewState(deckgl, {
-//     longitude: 114,
-//     latitude: 36,
-//     zoom: 4,
-//     pitch: 55
-//   });
-// }
-
-// function euV() {
-//   setViewState(deckgl, {
-//     longitude: 8.6821,
-//     latitude: 50.1109,
-//     zoom: 4,
-//     pitch: 55
-//   });
-// }
-
-// function usV() {
-//   setViewState(deckgl, {
-//     longitude: -98.5795,
-//     latitude: 39.8283,
-//     zoom: 4,
-//     pitch: 55
-//   });
-// }
 
 function flyTo(deckgl, targetViewState, duration = 2000) {
   const startViewState = { ...currentViewState };
@@ -352,13 +345,6 @@ onUnmounted(() => {
     document.head.removeChild(document.querySelector('script[src="https://unpkg.com/maplibre-gl@3.6.0/dist/maplibre-gl.js"]'));
     document.head.removeChild(document.querySelector('script[src="https://d3js.org/d3.v5.min.js"]'));
     document.head.removeChild(document.querySelector('script[src="https://unpkg.com/deck.gl@^9.0.0/dist.min.js"]'));
-
-    // <div class="" style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%;"></div>
-
-    // 清除上述的 div
-
-    // document.body.removeChild(document.querySelector('div[class=""]'));
-
 
   });
 
@@ -448,5 +434,20 @@ button:hover {
   background-color: var(--vp-c-bg-soft); /* 使用背景变量 */
   border: 1px solid var(--vp-c-green-1);
 }
+
+.checkbox-container {
+  /* 上写排列元素 */
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.check-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
 
 </style>

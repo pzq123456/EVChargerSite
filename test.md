@@ -1,14 +1,9 @@
-# test
+---
+layout: page
+---
 
-<DropDown
-:options="data"
-defaultKey="B"
-/>
-
+<deckMap />
 
 <script setup>
-import { menu } from './map/menu.js';
-import DropDown from '@/components/Dropdown.vue';
-
-const data = menu;
+    import deckMap from '@/components/DeckMap2.vue'
 </script>
