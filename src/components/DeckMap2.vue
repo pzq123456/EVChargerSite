@@ -3,10 +3,15 @@
     <button class = "cn" @click="cnV">China</button>
     <button class = "eu" @click="euV">Europe</button>
     <button class = "us" @click="usV">USA</button>
+    <button class="togglePanel" @click="togglePanel = !togglePanel">
+      Panel {{ togglePanel ? 'OFF' : 'ON' }}
+    </button>
   </div>
 
   <div id = "deck-map" > </div>
-    <div id="control-panel">
+
+    <div id="control-panel" :class= "{collapsed: togglePanel}">
+
       <div>
         <label>Radius</label>
         <input id="radius" type="range" min="1000" max="20000" step="1000" value="10000"></input>
@@ -25,10 +30,21 @@
       <div class="checkbox-container">
         <div class="check-item">
           <label>Show Hexagon Layer</label> <input type="checkbox" id="toggle-hexagon" checked>
+          <!-- 滑动条控制不透明度 -->
+        </div>
+
+        <div class="check-item">
+          <label for="opacity">Opacity for Hexagon Layer</label>
+          <input id="opacity-Hexagon" type="range" min="0" max="1" step="0.1" value="0.9"></input>
         </div>
 
         <div class="check-item">
           <label>Show GeoJSON Layer</label> <input type="checkbox" id="toggle-geojson" checked>
+        </div>
+
+        <div class="check-item">
+          <label for="opacity">Opacity for GeoJSON Layer</label>
+          <input id="opacity-GeoJSON" type="range" min="0" max="1" step="0.1" value="0.3"></input>
         </div>
 
       </div>
@@ -69,7 +85,21 @@ const { eu, us, cn } = data; // data from csv
 
 import { data as population } from '@/loader/C.data.js';
 
+import { Stastics } from '@/layers/stastics';
+
+const myData = population.us.features.concat(population.eu.features).concat(population.cn.features)
+
+const stastics = new Stastics();
+
+// f => [f.properties.V * 55, f.properties.V * 155, f.properties.V * 255, 150],
+stastics.append(myData, f => f.properties.V);
+// console.log(stastics);
+
 // console.log(population);
+
+const togglePanel = ref(false);
+
+const colorSet = ['#f7fbff','#deebf7','#c6dbef','#9ecae1','#6baed6','#4292c6','#2171b5','#08519c','#08306b']; // blues
 
 // deck-map
 const deckmap = ref(null);
@@ -169,8 +199,28 @@ function main() {
         options[key] = Number(value);
     });
 
+    const toggleHexagon = document.getElementById('toggle-hexagon');
+    const toggleGeojson = document.getElementById('toggle-geojson');
+
+    // 绑定 触发事件 renderLayer
+    toggleHexagon.onchange = renderLayer;
+    toggleGeojson.onchange = renderLayer;
+
+    // 透明度
+    const opacityHexagon = document.getElementById('opacity-Hexagon');
+    const opacityGeoJSON = document.getElementById('opacity-GeoJSON');
+
+    opacityHexagon.oninput = renderLayer;
+    opacityGeoJSON.oninput = renderLayer;
+
+    // 绑定 触发事件 renderLayer
+
     const hexagonLayer = new HexagonLayer({
         id: 'heatmap',
+
+        // 透明度
+        opacity: opacityHexagon.value,
+
         colorRange: COLOR_RANGE,
         data, // 更新后数据
         elevationRange: [0, 1500],
@@ -184,24 +234,26 @@ function main() {
 
     const geojsonlayer = new GeoJsonLayer({
       id: 'GeoJsonLayer',
-      data: population.us.features.concat(population.eu.features).concat(population.cn.features),
+
+      opacity: opacityGeoJSON.value,
+
+      // data: population.us.features.concat(population.eu.features).concat(population.cn.features),
+      data: myData,
+
 
       stroked: false,
       filled: true,
-      pickable: true,
+      // pickable: true,
 
-      getFillColor: f => [f.properties.V * 55, f.properties.V * 155, f.properties.V * 255, 150],
+      // getFillColor: f => [f.properties.V * 55, f.properties.V * 155, f.properties.V * 255, 150],
+      getFillColor: f => stastics.mapValue2Color2(f.properties.V, false, colorSet),
+
       // [160, 60, 180, 100],
       getLineColor: [0, 0, 0],
       getLineWidth: 2,
     });
 
-    const toggleHexagon = document.getElementById('toggle-hexagon');
-    const toggleGeojson = document.getElementById('toggle-geojson');
 
-    // 绑定 触发事件 renderLayer
-    toggleHexagon.onchange = renderLayer;
-    toggleGeojson.onchange = renderLayer;
 
     // console.log(toggleHexagon.checked, toggleGeojson.checked);
 
@@ -369,6 +421,11 @@ onUnmounted(() => {
   backdrop-filter: blur(8px); /* 添加背景模糊效果 */
 }
 
+/* control panel 折叠后的样式*/
+#control-panel.collapsed {
+  display: none;
+}
+
 label {
   display: inline-block;
   width: 140px;
@@ -443,6 +500,8 @@ button:hover {
 }
 
 .check-item {
+/* 增加上边框 */
+  border-top: 1px solid var(--vp-c-border); /* 使用边框变量 */
   display: flex;
   justify-content: space-between;
   align-items: center;
