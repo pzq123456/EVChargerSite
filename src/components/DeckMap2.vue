@@ -60,12 +60,17 @@
       </div>
 
       <div class="legned">
-        <div style="background-color: rgb(0, 0, 0); width: 16.6666668%; height: 10px;"></div>
+        <!-- <div style="background-color: rgb(0, 0, 0); width: 16.6666668%; height: 10px;"></div>
         <div style="background-color: rgb(11, 31, 51); width: 16.6666668%; height: 10px;"></div>
         <div style="background-color: rgb(22, 62, 102); width: 16.6666668%; height: 10px;"></div>
         <div style="background-color: rgb(33, 93, 153); width: 16.6666668%; height: 10px;"></div>
         <div style="background-color: rgb(44, 124, 204); width: 16.6666668%; height: 10px;"></div>
-        <div style="background-color: rgb(55, 155, 255); width: 16.6666668%; height: 10px;"></div>
+        <div style="background-color: rgb(55, 155, 255); width: 16.6666668%; height: 10px;"></div> -->
+        <!-- colorSet v-for -->
+
+        <!-- v-for="(color, index) in colorSet" :style="{backgroundColor: color, width: '16.6666668%', height: '10px'}" :key="index" -->
+
+        <div v-for="(color, index) in colorSet" :style="{backgroundColor: color, width: '16.6666668%', height: '10px'}" :key="index"></div>
       </div>
 
       <div class="legnd-info">
