@@ -5,6 +5,14 @@
 ## 🏫Address: 
 - Room ZN618, 6/F, North Wing, Block Z, Phase 8, 181 Chatham Road South, The Hong Kong Polytechnic University, Hung Hom, Kowloon, Hong Kong, China
 
+## Subscribe to our newsletter
+<subscribe />
+
+<script setup>
+    import subscribe from '@/components/subscribe.vue'
+</script>
+
+
 <!-- ## 网站用户访问统计 -->
 
 <!-- 

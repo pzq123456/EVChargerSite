@@ -12,7 +12,8 @@ export const themeConfig = {
             items: [
               { text: 'Contact Us', link: '/contact' },
               { text: 'Team', link: '/team' },
-              { text: 'Statistics', link: '/report' }
+              { text: 'Statistics', link: '/report' },
+              { text: 'Subscribe', link: '/contact#subscribe-to-our-newsletter' }
             ]
           }
     ],

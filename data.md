@@ -23,6 +23,8 @@ You could request for the full dataset by sending us (global.ev.map@gmail.com) t
     </div>
 </div>
 
+> - Subscribe to our newsletter for the [latest data updates](https://follow.it/global-ev-data-initiative?leanpub).
+
 
 
 <script setup>

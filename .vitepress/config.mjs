@@ -25,6 +25,10 @@ export default defineConfig({
         gtag('js', new Date());
         gtag('config', 'G-4706EZS57W');`
     ],
+    [
+      'meta',
+      { name: 'follow.it-verification-code', content: 'eM1sfu8zWECLCdCR4Evu' }
+    ] // 添加 follow.it 验证码
   ],
   markdown: {
     math: true
