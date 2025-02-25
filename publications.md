@@ -1,3 +1,8 @@
+---
+title: Publications
+date: 2025-2-25
+type: publications
+---
 
 # Publications 
 <!-- 

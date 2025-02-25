@@ -4,8 +4,8 @@ layout: page
 
 <iframe 
   id="myIframe" 
-  width="90%" 
-  height="3000px" 
+  width="100%"
+  height="800px"
   src="https://lookerstudio.google.com/embed/reporting/55a75e4e-9843-4381-9654-c6fccce58ea1/page/18DeE?hl=en" 
   frameborder="0" 
   style="border:0" 

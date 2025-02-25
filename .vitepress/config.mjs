@@ -1,6 +1,8 @@
-import { defineConfig } from 'vitepress'
-import { themeConfig } from './themeConfig'
-import { viteConfig } from './viteConfig'
+import { defineConfig } from 'vitepress';
+import { themeConfig } from './themeConfig';
+import { viteConfig } from './viteConfig';
+
+import { createRssFile } from "./utils/rss"; // 引入 RSS 文件生成函数
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -26,7 +28,10 @@ export default defineConfig({
   ],
   markdown: {
     math: true
-  }
+  },
+  
+  buildEnd: createRssFile, // 在 build 结束后生成 RSS 文件
+
   // appearance.initialValue = 'dark',
   // appearance.darkMode = true,
   // appearance : "force-dark",
