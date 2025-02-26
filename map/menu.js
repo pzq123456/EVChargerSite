@@ -4,6 +4,11 @@ export const menu = {
       "info": "-",
       "url": "map/AB"
     },
+    "AB2024": {
+      "title": "Spatial Distribution of EV Charging Stations (EVCSs) in 2024",
+      "info": "-",
+      "url": "map/AB2024"
+    },
     "C": {
       "title": "Population Coverage of EV Charging Stations (EVCSs) in 2022",
       "info": "The spatial distributions of the level of population coverage of EVCSs at the city level across China, the US, and Europe. It can be found that for most cities in our study areas, they tend to have a low level of population coverage of EVCSs.",

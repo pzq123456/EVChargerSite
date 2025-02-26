@@ -1,9 +1,3 @@
----
-title: News for Global Public Electric Vehicle Charging Station Site
-date: 2025-2-25
-type: news
----
-
 # News
 
 ## [Data] [Global Public Electric Vehicle Charging Station Data in 2022](./2024-11-22) 

@@ -3,10 +3,13 @@
     <button class = "cn" @click="cnV">China</button>
     <button class = "eu" @click="euV">Europe</button>
     <button class = "us" @click="usV">USA</button>
+    <button class="togglePanel" @click="togglePanel = !togglePanel">
+      Panel {{ togglePanel ? 'OFF' : 'ON' }}
+    </button>
   </div>
 
   <div id = "deck-map" > </div>
-    <div id="control-panel">
+    <div id="control-panel" :class= "{collapsed: togglePanel}">
       <div>
         <label>Radius</label>
         <input id="radius" type="range" min="10000" max="20000" step="1000" value="10000"></input>
@@ -43,10 +46,10 @@
 
 <script setup>
 import { onMounted, onUnmounted, ref } from 'vue';
-import { data } from '@/loader/points2.data.js';
+import { data } from '@/loader/points3.data.js';
 const { eu, us, cn } = data; // data from csv
 
-
+const togglePanel = ref(false);
 // deck-map
 const deckmap = ref(null);
 
@@ -148,8 +151,8 @@ function main() {
         id: 'heatmap',
         colorRange: COLOR_RANGE,
         data, // 更新后数据
-        elevationRange: [0, 1000],
-        elevationScale: 250,
+        elevationRange: [0, 1500],
+        elevationScale: 800,
         extruded: true,
         getPosition: d => d,
         getColorWeight: d => d[2],
@@ -381,6 +384,11 @@ onUnmounted(() => {
   border-radius: 5px;
   box-shadow: var(--vp-shadow-1); /* 使用阴影变量 */
   backdrop-filter: blur(8px); /* 添加背景模糊效果 */
+}
+
+/* control panel 折叠后的样式*/
+#control-panel.collapsed {
+  display: none;
 }
 
 label {

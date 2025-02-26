@@ -1,105 +1,46 @@
 # Data Sets
 
+> - Subscribe to our news letter for the [latest data updates](/contact#subscribe-to-our-newsletter).
+
 ## 1. Global Public Electric Vehicle Charging Station (EVCS) Data in 2022
+
 ### 1.1 Data Description
+
+<details>
+  <summary>Details... </summary>
+
+
 - **For** the US, we collected the location data of 46,548 EVCSs (with a sample rate of 87.02%) from the Alternative Fuels Data Center; 
 - **For** China, we collected the location data of 73,114 EVCSs (with a sample rate of 65.64%) from the AMAP, one of the largest online mapping service providers in China. 
 - **For** Europe, we collected the location data of 317,528 recharging points (with a sample rate of 48.78%) from the European Alternative Fuels Observatory. These recharging points can be further grouped into 95,133 EVCSs according to the fields of “location_unique_id” and “location_country” in the dataset. 
+
+ </details>
+
+
  
 
-### 1.2 Sample Data Download
+### 1.2 Sample Data Download(2022)
 
 You could request for the full dataset by sending us (global.ev.map@gmail.com) the <a><button onclick="window.open('./ApplicationForm.docx')">Data Request Form</button></a>.
 
-<div class="row">
-    <div class="col-md-4">
-        <button @click="downloadeu" class="btn btn-primary">Download Europe Data</button>
-    </div>
-    <div class="col-md-4">
-        <button @click="downloadus" class="btn btn-primary">Download US Data</button>
-    </div>
-    <div class="col-md-4">
-        <button @click="downloadcn" class="btn btn-primary">Download CN Data</button>
-    </div>
-</div>
+<dataBtns :dataSrc="myData" />
 
-> - Subscribe to our newsletter for the [latest data updates](https://follow.it/global-ev-data-initiative?leanpub).
+## 2. Global Public Electric Vehicle Charging Station (EVCS) Data in 2024
 
+### 1.2 Sample Data Download(2024)
 
+You could request for the full dataset by sending us (global.ev.map@gmail.com) the <a><button onclick="window.open('./ApplicationForm.docx')">Data Request Form</button></a>.
+
+<dataBtns :dataSrc="myData24" />
 
 <script setup>
-    // import { data as eu } from '@/loader/eu.data.js';
-    // import { data as us } from '@/loader/us.data.js';
-    // import { data as cn } from '@/loader/cn.data.js';
-
+    import { ref } from 'vue';
     import { data } from '@/loader/csv.data.js';
+    import { data as data24} from '@/loader/csv2.data.js';
+    import dataBtns from '@/components/Databtns.vue';
 
-    const { eu, us, cn } = data; // data from csv
-
-    // donwload data as csv
-    const downloadeu = () => {
-        const data = eu.map(item => Object.values(item).join(',')).join('\n');
-        const blob = new Blob([data], { type: 'text/plain' });
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'europe.csv';
-        a.click();
-    }
-
-    const downloadus = () => {
-        const data = us.map(item => Object.values(item).join(',')).join('\n');
-        const blob = new Blob([data], { type: 'text/plain' });
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'us.csv';
-        a.click();
-    }
-
-    const downloadcn = () => {
-        const data = cn.map(item => Object.values(item).join(',')).join('\n');
-        const blob = new Blob([data], { type: 'text/plain' });
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'cn.csv';
-        a.click();
-    }
-
-
-
-
-
-    // const downloadeu = () => {
-    //     const data = JSON.stringify(eu);
-    //     const blob = new Blob([data], { type: 'text/plain' });
-    //     const url = window.URL.createObjectURL(blob);
-    //     const a = document.createElement('a');
-    //     a.href = url;
-    //     a.download = 'eu.data.json';
-    //     a.click();
-    // }
-
-    // const downloadus = () => {
-    //     const data = JSON.stringify(us);
-    //     const blob = new Blob([data], { type: 'text/plain' });
-    //     const url = window.URL.createObjectURL(blob);
-    //     const a = document.createElement('a');
-    //     a.href = url;
-    //     a.download = 'us.data.json';
-    //     a.click();
-    // }
-
-    // const downloadcn = () => {
-    //     const data = JSON.stringify(cn);
-    //     const blob = new Blob([data], { type: 'text/plain' });
-    //     const url = window.URL.createObjectURL(blob);
-    //     const a = document.createElement('a');
-    //     a.href = url;
-    //     a.download = 'cn.data.json';
-    //     a.click();
-    // }
+    const myData = ref(data);
+    const myData24 = ref(data24);
 
 </script>
 
