@@ -14,6 +14,11 @@ export const menu = {
       "info": "The spatial distributions of the level of population coverage of EVCSs at the city level across China, the US, and Europe. It can be found that for most cities in our study areas, they tend to have a low level of population coverage of EVCSs.",
       "url": "map/C"
     },
+    "C2024": {
+      "title": "Population Coverage of EV Charging Stations (EVCSs) in 2024",
+      "info": "The spatial distributions of the level of population coverage of EVCSs at the city level across China, the US, and Europe. It can be found that for most cities in our study areas, they tend to have a low level of population coverage of EVCSs.",
+      "url": "map/C2024"
+    },
     "D": {
       "title": "Housing Price around EV Charging Stations (EVCSs) in 2022",
       "info": "The spatial distributions of the housing price index of EVCSs at the city level across China and the US with different buffer radii. It can be found that for most cities in both China and the US, the values of housing price index are close to each other (fluctuating around 1), while the US has a wider variation range.",

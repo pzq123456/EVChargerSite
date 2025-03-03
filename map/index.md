@@ -43,7 +43,17 @@ Interactive Map : [Click Here](./AB.md)
 
 ## [Spatial Distribution of EV Charging Stations (EVCSs) in 2024](./AB2024.md)
 > The spatial distribution of public EVCSs across China, the United States, and Europe in 2024. 
+
 Interactive Map : [Click Here](./AB2024.md)
 
+<details>
+  <summary>Other Maps for 2024</summary>
 
+  ## [Population Coverage of Public EV Charging Stations (EVCSs) in 2024](./C2024.md)
+
+  > The spatial distributions of the level of population coverage of EVCSs at the city level across China, the US, and Europe. It can be found that for most cities in the our study areas, they tend to have a low level of population coverage of EVCSs.
+
+  Interactive Map : [Click Here](./C2024.md)
+
+</details>
 
