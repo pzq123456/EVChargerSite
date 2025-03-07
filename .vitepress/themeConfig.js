@@ -7,13 +7,13 @@ export const themeConfig = {
         { text: 'Data', link: '/data' },
         { text: 'Publications', link: '/publications' },
         { text: 'News', link: '/News' },
+        { text: 'Team', link: '/team' },
         {
-            text: 'Contact',
+            text: 'About',
             items: [
               { text: 'Contact Us', link: '/contact' },
-              { text: 'Team', link: '/team' },
               { text: 'Statistics', link: '/report' },
-              { text: 'Subscribe', link: '/contact#subscribe-to-our-newsletter' }
+              { text: 'Subscribe', link: 'https://docs.google.com/forms/d/e/1FAIpQLSee3mhBgstlslpNp1UDsA4isU6-iz9m7eFLyJQVAOQuAHwDQg/viewform?usp=dialog' }
             ]
           }
     ],
