@@ -1,6 +1,6 @@
 # Data Sets
 
-> - Subscribe to our news letter for the [latest data updates](/contact#subscribe-to-our-newsletter).
+> - [Subscribe](https://docs.google.com/forms/d/e/1FAIpQLSee3mhBgstlslpNp1UDsA4isU6-iz9m7eFLyJQVAOQuAHwDQg/viewform?usp=dialog) to our news letter for the latest data updates.
 
 ## 1. Global Public Electric Vehicle Charging Station (EVCS) Data in 2022
 

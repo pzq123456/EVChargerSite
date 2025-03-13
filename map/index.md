@@ -6,6 +6,22 @@ type: maps
 
 # Maps
 
+## [Spatial Distribution of EV Charging Stations (EVCSs) in 2024](./AB2024.md)
+> The spatial distribution of public EVCSs across China, the United States, and Europe in 2024. 
+
+Interactive Map : [Click Here](./AB2024.md)
+
+<details>
+  <summary>Other Maps for 2024</summary>
+
+  ## [Population Coverage of Public EV Charging Stations (EVCSs) in 2024](./C2024.md)
+
+  > The spatial distributions of the level of population coverage of EVCSs at the city level across China, the US, and Europe. It can be found that for most cities in the our study areas, they tend to have a low level of population coverage of EVCSs.
+
+  Interactive Map : [Click Here](./C2024.md)
+
+</details>
+
 ## [Spatial Distribution of EV Charging Stations (EVCSs) in 2022](./AB.md)
 > The spatial distribution of public EVCSs across China, the United States, and Europe in 2022. It is found that the distribution of EVCSs in China and Europe exhibits significant concentration, with approximately 50% located in specific city clusters in China and 80% in Europe. Meanwhile, this concentration is less pronounced but still significant in the US, at around 20%. The substantial clustering of EVCSs in prominent city clusters (often characterized by higher levels of economic activity and development) underscores the spatial inequities in EVCS deployment, leaving less-developed areas potentially underserved. Note that 50% of EVCS locations are used here in order to generate the map quickly while keeping the key spatial EVCS patterns.
 
@@ -41,19 +57,5 @@ Interactive Map : [Click Here](./AB.md)
 </details>
 
 
-## [Spatial Distribution of EV Charging Stations (EVCSs) in 2024](./AB2024.md)
-> The spatial distribution of public EVCSs across China, the United States, and Europe in 2024. 
 
-Interactive Map : [Click Here](./AB2024.md)
-
-<details>
-  <summary>Other Maps for 2024</summary>
-
-  ## [Population Coverage of Public EV Charging Stations (EVCSs) in 2024](./C2024.md)
-
-  > The spatial distributions of the level of population coverage of EVCSs at the city level across China, the US, and Europe. It can be found that for most cities in the our study areas, they tend to have a low level of population coverage of EVCSs.
-
-  Interactive Map : [Click Here](./C2024.md)
-
-</details>
 
