@@ -29,18 +29,20 @@
         />
       </svg>
     </h1>
-    <ul v-if="isDropdownOpen" class="dropdown-menu">
-      <li v-for="(item, key) in options" :key="key" class="dropdown-item">
-        <a
-          :href="base + item.url"
-          class="dropdown-link"
-          :class="{ 'dropdown-item-active': selectedTitle === item.title }"
-          @click="selectedTitle = item.title"
-        >
-          {{ item.title }}
-        </a>
-      </li>
-    </ul>
+    <transition name="fade">
+      <ul v-if="isDropdownOpen" class="dropdown-menu">
+        <li v-for="(item, key) in options" :key="key" class="dropdown-item">
+          <a
+            :href="base + item.url"
+            class="dropdown-link"
+            :class="{ 'dropdown-item-active': selectedTitle === item.title }"
+            @click="selectedTitle = item.title"
+          >
+            {{ item.title }}
+          </a>
+        </li>
+      </ul>
+    </transition>
   </div>
 </template>
 
@@ -76,13 +78,20 @@ const toggleDropdown = () => {
 
 <style scoped>
 .dropdown {
+  margin: 1px 0;
   display: inline-block;
   position: relative;
   cursor: pointer;
-  border-radius: 4px;
-  padding: 8px;
+  border-radius: 8px;
+  padding: 5px 10px;
   width: 100%;
   transition: all 0.3s;
+  border: 1px solid var(--vp-c-divider); /* 添加边框 */
+  background-color: var(--vp-c-bg); /* 使用背景变量 */
+}
+
+.dropdown:hover {
+  border-color: var(--vp-c-brand-1); /* 悬停时改变边框颜色 */
 }
 
 .dropdown-title {
@@ -93,29 +102,31 @@ const toggleDropdown = () => {
   align-items: center;
   /* 居中文字 */
   justify-content: center;
-
 }
 
 .dropdown svg {
   margin-left: 8px;
   fill: var(--vp-c-text-2); /* 使用文本颜色变量 */
+  transition: transform 0.3s;
 }
 
 .dropdown-menu {
   position: absolute;
   top: 100%;
   left: 0;
-  margin: 0;
-  padding: 0;
+  margin-top: 8px;
+  padding: 8px 0;
   list-style: none;
   background-color: var(--vp-c-bg-soft); /* 使用背景变量 */
-  border-radius: 5px;
+  border-radius: 8px;
   width: 100%;
   z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* 添加阴影 */
+  border: 1px solid var(--vp-c-divider); /* 添加边框 */
 }
 
 .dropdown-item {
-  padding: 8px 12px;
+  padding: 8px 16px;
   transition: background-color 0.2s;
 }
 
@@ -126,15 +137,31 @@ const toggleDropdown = () => {
 /* 高亮当前选择的item */
 .dropdown-item-active {
   background-color: var(--vp-c-warning-soft); /* 使用默认背景变量 */
+  /* 加粗 */
+  font-weight: 600;
 }
 
 .dropdown-link {
   text-decoration: none;
   color: var(--vp-c-text-1); /* 使用文本颜色变量 */
+  display: block;
+  width: 100%;
 }
 
 .dropdown-link:hover {
   text-decoration: underline;
   color: var(--vp-c-brand-2); /* 使用品牌色变量 */
+}
+
+/* 动画效果 */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
 }
 </style>

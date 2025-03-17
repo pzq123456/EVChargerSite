@@ -36,7 +36,7 @@ def eu_merge():
 
     gdf2 = gpd.read_file(PATH6, driver='GeoJSON')
 
-    gdf2.rename(columns={'1000buffer-city': '1000m buffer', '300buffer-city': '300m buffer', '800buffer-city': '800m buffer'}, inplace=True)
+    # gdf2.rename(columns={'1000buffer-city': '1000m buffer', '300buffer-city': '300m buffer', '800buffer-city': '800m buffer'}, inplace=True)
     # 同时将 '1000m buffer', '300m buffer', '800m buffer' 列的值转换为浮点数
     gdf2['1000m buffer'] = gdf2['1000m buffer'].fillna(0).astype(float)
     gdf2['300m buffer'] = gdf2['300m buffer'].fillna(0).astype(float)

@@ -28,7 +28,7 @@ export const menu = {
     //   "title": "Access to EV Charging Stations (EVCSs) through Road Network in 2022",
     //   "info": "The spatial distributions of road network density and the relative development level of road network around EVCSs at the city level across China, the US, and Europe with different buffer radii. It can be found that road network density around EVCSs in Chinese cities tend to be lower compared to the US and Europe. Meanwhile, in terms of the relative development level of road network, cities in China and the US tend to have a greater variability compared to Europe.",
     //   "url": "map/F"
-    // }
+    // },
 
     "D2024": {
       "title": "Housing Price around EV Charging Stations (EVCSs) in 2024",
@@ -40,11 +40,11 @@ export const menu = {
       "info": "The spatial distributions of POI Mix of EVCSs at the city level across China, the US, and Europe with different buffer radii. It can be found that for most cities in our study areas, they tend to have a high POI Mix of EVCSs, while more cities in the US and Europe tend to have a higher POI Mix of EVCSs compared to China when the buffer radii are 800m and 1000m.",
       "url": "map/E2024"
     },
-    // "F2024": {
-    //   "title": "Access to EV Charging Stations (EVCSs) through Road Network in 2022",
-    //   "info": "The spatial distributions of road network density and the relative development level of road network around EVCSs at the city level across China, the US, and Europe with different buffer radii. It can be found that road network density around EVCSs in Chinese cities tend to be lower compared to the US and Europe. Meanwhile, in terms of the relative development level of road network, cities in China and the US tend to have a greater variability compared to Europe.",
-    //   "url": "map/F2024"
-    // }
+    "F2024": {
+      "title": "Access to EV Charging Stations (EVCSs) through Road Network in 2024",
+      "info": "The spatial distributions of road network density and the relative development level of road network around EVCSs at the city level across China, the US, and Europe with different buffer radii. It can be found that road network density around EVCSs in Chinese cities tend to be lower compared to the US and Europe. Meanwhile, in terms of the relative development level of road network, cities in China and the US tend to have a greater variability compared to Europe.",
+      "url": "map/F2024"
+    },
     "AB": {
       "title": "Spatial Distribution of EV Charging Stations (EVCSs) in 2022",
       "info": "-",

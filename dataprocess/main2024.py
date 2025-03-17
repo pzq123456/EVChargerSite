@@ -15,9 +15,9 @@ PATH4 = os.path.join(PATH, 'poi','china') # norm E
 PATH5 = os.path.join(PATH, 'poi','europe') # norm E
 
 # Network 待讨论
-# PATH6 = os.path.join(PATH, 'Appendix F-network','us') # norm
-# PATH7 = os.path.join(PATH, 'Appendix F-network','cn') # norm
-# PATH8 = os.path.join(PATH, 'Appendix F-network','eu') # norm
+PATH6 = os.path.join(PATH, 'network','usa') # norm
+PATH7 = os.path.join(PATH, 'network','china') # norm
+PATH8 = os.path.join(PATH, 'network','europe') # norm
 
 # PATH9 = os.path.join(PATH,  'Appendix F-network','usr') # norm
 # PATH10 = os.path.join(PATH, 'Appendix F-network','cnr') # norm
@@ -106,6 +106,10 @@ def processE(path = PATH3, column = 'Mix', SAVEDDIR = 'E', SAVVNAME = 'usa_2024'
     files = scan_files(path, '.geojson')
     gdf = gpd.read_file(os.path.join(path, files[0]))
 
+    # 先做简化
+    tqdm.tqdm.write('simplify')
+    gdf['geometry'] = gdf['geometry'].simplify(0.01)
+
     for file in tqdm.tqdm(files[1:]):
         tmpGdf = gpd.read_file(os.path.join(path, file))
         columnName = file.split('.')[0].split('_')[-1].replace('dist', 'm buffer')
@@ -116,8 +120,38 @@ def processE(path = PATH3, column = 'Mix', SAVEDDIR = 'E', SAVVNAME = 'usa_2024'
     columnname = files[0].split('.')[0].split('_')[-1].replace('dist', 'm buffer')
     gdf = rename_columns(gdf, column, columnname)
 
+    tqdm.tqdm.write('save')
+    gdf.to_file(os.path.join(SAVE_PATH, SAVEDDIR, name), driver='GeoJSON')
+
+def processF(path = PATH6, column = 'density', SAVEDDIR = 'F', SAVVNAME = 'usa_2024'): 
+    # city_den_r county_road_density_ratio_300dist.geojson
+    # density county_road_density_300dist.geojson
+
+    name = SAVVNAME + '.json'
+
+    files = scan_files(path, '.geojson')
+    gdf = gpd.read_file(os.path.join(path, files[0]))
+
+    # 先做简化
     tqdm.tqdm.write('simplify')
     gdf['geometry'] = gdf['geometry'].simplify(0.01)
+
+    for file in tqdm.tqdm(files[1:]):
+        tmpGdf = gpd.read_file(os.path.join(path, file))
+        tmpGdf = tmpGdf.drop(columns = ['geometry']) # 优化
+        
+        if 'ratio' in file: # 若 file 中含有 ratio
+            columnName = file.split('.')[0].split('_')[-1].replace('dist', 'm buffer (level)')
+            tmpGdf = rename_columns(tmpGdf, 'city_den_r', columnName)
+            gdf = merge_gdf(gdf, tmpGdf, columnName)
+        else: # 若 file 中不含有 ratio
+            columnName = file.split('.')[0].split('_')[-1].replace('dist', 'm buffer (density)')
+            tmpGdf = rename_columns(tmpGdf, column, columnName)
+            gdf = merge_gdf(gdf, tmpGdf, columnName)
+
+    # rename column
+    columnname = files[0].split('.')[0].split('_')[-1].replace('dist', 'm buffer (density)')
+    gdf = rename_columns(gdf, column, columnname)
 
     tqdm.tqdm.write('save')
     gdf.to_file(os.path.join(SAVE_PATH, SAVEDDIR, name), driver='GeoJSON')
@@ -132,8 +166,11 @@ if __name__ == '__main__':
     # processD(PATH2, column = 'norm', SAVEDDIR = 'D', SAVVNAME = 'us_2024')
 
     # processE()
-    processE(PATH4, column = 'Mix', SAVEDDIR = 'E', SAVVNAME = 'cn_2024')
-    processE(PATH5, column = 'Mix', SAVEDDIR = 'E', SAVVNAME = 'eu_2024')
+    # processE(PATH4, column = 'Mix', SAVEDDIR = 'E', SAVVNAME = 'cn_2024')
+    # processE(PATH5, column = 'Mix', SAVEDDIR = 'E', SAVVNAME = 'eu_2024')
 
+    # processF()
+    processF(PATH7, column = 'density', SAVEDDIR = 'F', SAVVNAME = 'cn_2024')
+    processF(PATH8, column = 'density', SAVEDDIR = 'F', SAVVNAME = 'eu_2024')
 
 
