@@ -172,3 +172,6 @@ node_modules/
 EVChargerSite-f47da46b494a.json
 
 data/WebGISdata2024
+data/points/Norway_UK_2022.csv
+data/points/Norway_UK_2022.zip
+data/points/Norway_UK_2022.geojson
