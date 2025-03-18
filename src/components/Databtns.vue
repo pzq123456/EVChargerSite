@@ -61,18 +61,22 @@ const downloadcn = () => {
     .col-md-4 {
         flex: 0 0 33.333333%;
         max-width: 33.333333%;
-        padding: 0 15px;
-        color: var(--vp-c-brand-1);
+        padding: 5px 5px;
     }
 
     .btn-primary {
-        border: 1px solid var(--vp-c-brand-3);
-        border-radius: 4px;
+        border: 1px solid var(--vp-c-border);
+        border-radius: 5px;
+        
     }
 
     .btn-primary:hover {
-        background-color: var(--vp-c-brand-3);
-        color: white;
+        border: 1px solid var(--vp-c-brand-3);
+        color: var(--vp-c-brand-3);
+        background-color: var(--vp-c-bg-soft);
+        font-weight: bold;
+        /* 动画效果 */
+        transition: all 0.3s;
     }
 
     .btn {

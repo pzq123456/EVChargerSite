@@ -29,9 +29,9 @@ export const themeConfig = {
 
     },
 
-    search: {
-        provider: 'local'
-    },
+    // search: {
+    //     provider: 'local'
+    // },
 
 
 }
