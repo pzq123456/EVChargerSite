@@ -7,21 +7,25 @@ DIR = os.path.dirname(__file__)
 PATH = os.path.join(DIR, '..', 'data','WebGISdata2024')
 SAVE_PATH = os.path.join(DIR, 'output')
 
+# D
 PATH1 = os.path.join(PATH, 'housing','china') # norm D
 PATH2 = os.path.join(PATH, 'housing','usa') # norm D
 
+# E
 PATH3 = os.path.join(PATH, 'poi','usa') # norm E
 PATH4 = os.path.join(PATH, 'poi','china') # norm E
 PATH5 = os.path.join(PATH, 'poi','europe') # norm E
 
-# Network 待讨论
+# F
 PATH6 = os.path.join(PATH, 'network','usa') # norm
 PATH7 = os.path.join(PATH, 'network','china') # norm
 PATH8 = os.path.join(PATH, 'network','europe') # norm
 
-# PATH9 = os.path.join(PATH,  'Appendix F-network','usr') # norm
-# PATH10 = os.path.join(PATH, 'Appendix F-network','cnr') # norm
-# PATH11 = os.path.join(PATH, 'Appendix F-network','eur') # norm
+
+# C
+PATH9 = os.path.join(PATH, 'population','china') # norm C
+PATH10 = os.path.join(PATH, 'population','usa') # norm C
+PATH11 = os.path.join(PATH, 'population','europe') # norm C
 
 def simplify_geojson(path, save_path):
     gdf = gpd.read_file(path)
@@ -74,6 +78,31 @@ def find_diff(gdf1, gdf2):
         if column not in gdf1.columns:
             diff.append(column)
     return diff
+
+def processC(path = PATH9, SAVEDDIR = 'C', SAVVNAME = 'cn_2024'): 
+
+    name = SAVVNAME + '.json'
+
+    files = scan_files(path, '.geojson')
+    gdf = gpd.read_file(os.path.join(path, files[0]))
+
+    gdf['geometry'] = gdf['geometry'].simplify(0.01)
+
+    # 若是 cn 则增加后处理
+    if 'cn' in SAVVNAME:
+        # 仅仅保留 地级，省级 及 V 三个属性
+        gdf = gdf[['V', '地级', '省级', 'geometry']]
+        # 重命名 地级为 NAME_2 省级为 NAME_1
+        gdf = rename_columns(gdf, '地级', 'NAME_2')
+        gdf = rename_columns(gdf, '省级', 'NAME_1')
+    elif 'eu' in SAVVNAME:
+        # 去除 CC_2 一列
+        gdf = gdf.drop(columns = ['CC_2'])
+    
+    gdf['V'] = gdf['V'].fillna(0).astype(float) # 将 V 列的值转换为浮点数
+
+    tqdm.tqdm.write('save')
+    gdf.to_file(os.path.join(SAVE_PATH, SAVEDDIR, name), driver='GeoJSON')
 
 def processD(path = PATH1, column = 'norm', SAVEDDIR = 'D', SAVVNAME = 'cn_2024'): 
 
@@ -170,7 +199,11 @@ if __name__ == '__main__':
     # processE(PATH5, column = 'Mix', SAVEDDIR = 'E', SAVVNAME = 'eu_2024')
 
     # processF()
-    processF(PATH7, column = 'density', SAVEDDIR = 'F', SAVVNAME = 'cn_2024')
-    processF(PATH8, column = 'density', SAVEDDIR = 'F', SAVVNAME = 'eu_2024')
+    # processF(PATH7, column = 'density', SAVEDDIR = 'F', SAVVNAME = 'cn_2024')
+    # processF(PATH8, column = 'density', SAVEDDIR = 'F', SAVVNAME = 'eu_2024')
+
+    # processC()
+    # processC(PATH10, SAVEDDIR = 'C', SAVVNAME = 'us_2024')
+    processC(PATH11, SAVEDDIR = 'C', SAVVNAME = 'eu_2024')
 
 
