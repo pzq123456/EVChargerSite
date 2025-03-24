@@ -8,6 +8,8 @@ PATH1 = os.path.join(DIR, 'cn2024.csv')
 PATH2 = os.path.join(DIR, 'us2024.csv')
 PATH3 = os.path.join(DIR, 'eu2024.csv')
 
+PATH4 = os.path.join(DIR, 'cn_mainland.csv')
+
 SAVE_PATH = os.path.join(DIR, 'output')
 
 # 若无则创建输出文件夹
@@ -31,7 +33,12 @@ def aggregate_points(file_path, save_path, resolution=0.05):
     print(f"Aggregated data saved to {os.path.join(save_path, file_name)}")
 
 if __name__ == '__main__':
+    # tqdm.pandas()
+    # for path in [PATH1, PATH2, PATH3]:
+    #     if os.path.exists(path):
+    #         aggregate_points(path, SAVE_PATH, resolution=0.01)
+
     tqdm.pandas()
-    for path in [PATH1, PATH2, PATH3]:
+    for path in [PATH4]:
         if os.path.exists(path):
             aggregate_points(path, SAVE_PATH, resolution=0.01)

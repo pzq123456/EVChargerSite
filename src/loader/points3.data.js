@@ -12,7 +12,8 @@ function sampleData(data, percentage = 40) {
 
 export default {
   watch: [
-    '../../data/points/2024/output/cn2024_aggregated.csv', 
+    // '../../data/points/2024/output/cn2024_aggregated.csv', 
+    '../../data/points/2024/output/cn_mainland_aggregated.csv',
     '../../data/points/2024/output/eu2024_aggregated.csv',
     '../../data/points/2024/output/us2024_aggregated.csv'
   ],
