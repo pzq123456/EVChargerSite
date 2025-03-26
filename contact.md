@@ -8,7 +8,7 @@
 ## Register as a Member for the Global EV Data Initiative
 > Leave your email address and we will send you the latest information about the Global EV Data Initiative regularly.
 
-- [Register as a Member](https://docs.google.com/forms/d/e/1FAIpQLSee3mhBgstlslpNp1UDsA4isU6-iz9m7eFLyJQVAOQuAHwDQg/viewform?usp=dialog)
+- [Register as a Member](https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAAYrjOiZUNFdHUDFRQ0hZSFJLRTY5VEJKTE1GVllTOS4u)
 
 <!-- <subscribe />
 
