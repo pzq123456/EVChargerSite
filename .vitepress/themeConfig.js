@@ -13,10 +13,11 @@ export const themeConfig = {
             items: [
               { text: 'Contact Us', link: '/contact' },
               { text: 'Statistics', link: '/report' },
-              { text: 'Subscribe', link: 'https://docs.google.com/forms/d/e/1FAIpQLSee3mhBgstlslpNp1UDsA4isU6-iz9m7eFLyJQVAOQuAHwDQg/viewform?usp=dialog' }
+              { text: 'Subscribe', link: 'https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAAYrjOiZUNFdHUDFRQ0hZSFJLRTY5VEJKTE1GVllTOS4u' }
             ]
           }
     ],
+    // https://docs.google.com/forms/d/e/1FAIpQLSee3mhBgstlslpNp1UDsA4isU6-iz9m7eFLyJQVAOQuAHwDQg/viewform?usp=dialog
 
     logo: '/logo.png',
     head: [
