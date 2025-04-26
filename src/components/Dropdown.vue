@@ -88,6 +88,7 @@ const toggleDropdown = () => {
   transition: all 0.3s;
   border: 1px solid var(--vp-c-divider); /* 添加边框 */
   background-color: var(--vp-c-bg); /* 使用背景变量 */
+  z-index: 2;
 }
 
 .dropdown:hover {

@@ -8,6 +8,7 @@
         <button class = "cn" @click="cnV">China</button>
         <button class = "eu" @click="euV">Europe</button>
         <button class = "us" @click="usV">USA</button>
+        <button class = "animation" @click="animationV">Animation</button>
         <!-- <button class="togglePanel" @click="togglePanel = !togglePanel">
           Panel {{ togglePanel ? 'OFF' : 'ON' }}
         </button> -->
@@ -27,244 +28,68 @@
         <span>Higher</span>
       </div>
     </div>
-
-
-  <!-- <div id="deck-map"></div> -->
 </template>
 
 <script setup>
+import { 
+  loadDeckResources, 
+  cleanupDeckResources, 
+  main, 
+  AnimationManager,
+  viewPresets 
+} from '@/components/DeckMapUtils.js'
 import { onMounted, onUnmounted, ref } from 'vue';
 import { data } from '@/loader/points2.data.js';
-const { eu, us, cn } = data; // data from csv
 
 const togglePanel = ref(false);
-// deck-map
-const deckmap = ref(null);
 
-function loadDeckResources(callback) {
-  return new Promise((resolve, reject) => {
-    let resourcesLoaded = 0;
-    const totalResources = 4;
-
-    function resourceLoaded() {
-      resourcesLoaded += 1;
-      if (resourcesLoaded === totalResources) {
-        let deckgl = callback();
-        resolve(deckgl);
-      }
-    }
-
-    function resourceFailed() {
-      reject(new Error('Failed to load resources'));
-    }
-
-    // 加载 Deck JS
-    const deckScript = document.createElement('script');
-    deckScript.src = 'https://unpkg.com/deck.gl@^9.0.0/dist.min.js';
-    deckScript.onload = resourceLoaded;
-    deckScript.onerror = resourceFailed;
-    document.head.appendChild(deckScript);
-
-    // 加载 Maplibre CSS
-    const maplibreCSS = document.createElement('link');
-    maplibreCSS.rel = 'stylesheet';
-    maplibreCSS.href = 'https://unpkg.com/maplibre-gl@3.6.0/dist/maplibre-gl.css';
-    maplibreCSS.onload = resourceLoaded;
-    maplibreCSS.onerror = resourceFailed;
-    document.head.appendChild(maplibreCSS);
-
-    // 加载 Maplibre JS
-    const maplibreScript = document.createElement('script');
-    maplibreScript.src = 'https://unpkg.com/maplibre-gl@3.6.0/dist/maplibre-gl.js';
-    maplibreScript.onload = resourceLoaded;
-    maplibreScript.onerror = resourceFailed;
-    document.head.appendChild(maplibreScript);
-
-    // 加载 D3 JS
-    const d3Script = document.createElement('script');
-    d3Script.src = 'https://d3js.org/d3.v5.min.js';
-    d3Script.onload = resourceLoaded;
-    d3Script.onerror = resourceFailed;
-    document.head.appendChild(d3Script);
-  });
-}
-
-// 编写一个测试函数 以确定是否成功加载资源
-function main() {
-    const {DeckGL, HexagonLayer} = deck;
-
-    const deckgl = new DeckGL({
-      container: 'deck-map',
-      mapStyle: 'https://basemaps.cartocdn.com/gl/dark-matter-nolabels-gl-style/style.json',
-      initialViewState: {
-        longitude: 114,
-        latitude: 36,
-        zoom: 4,
-        minZoom: 2,
-        maxZoom: 10,
-        pitch: 55
-      },
-      controller: true,
-      cotainer: deckmap.value,
-      // pickable: true,
-      // getPosition: d => d,
-      // getTooltip: getTooltip,
-      getCursor: ({isHovering}) => isHovering ? 'pointer' : 'default',
-    });
-
-    const OPTIONS = ['radius', 'coverage'];
-
-    const COLOR_RANGE = [
-        [1, 152, 189],
-        [73, 227, 206],
-        [216, 254, 181],
-        [254, 237, 177],
-        [254, 173, 84],
-        [209, 55, 78]
-    ];
-
-    function renderLayer() {
-    const hexagonLayer = new HexagonLayer({
-        id: 'heatmap',
-        colorRange: COLOR_RANGE,
-        data, // 更新后数据
-        elevationRange: [10, 2000],
-        elevationScale: 100,
-        extruded: true,
-        getPosition: d => d,
-        colorScaleType : 'linear',
-        coverage: 0.7,
-        radius: 10000,
-        // ...options
-    });
-
-    deckgl.setProps({
-        layers: [hexagonLayer]
-    });
-  }
-
-  // 数据加载和合并
-  let data = [];
-
-  data = data.concat(
-      eu.map(d => ([Number(d.grid_lon), Number(d.grid_lat), Number(d.count) || 0]))
-  );
-
-  data = data.concat(
-      us.map(d => ([Number(d.grid_lon), Number(d.grid_lat), Number(d.count) || 0]))
-  );
-
-  data = data.concat(
-      cn.map(d => ([Number(d.grid_lon), Number(d.grid_lat), Number(d.count) || 0]))
-  );
-
-  // 渲染图层
-  renderLayer();
-
-  return deckgl;
-
-
-}
+let deckmap;
 
 let deckgl = null;
+let animationManager = null;
 
 onMounted(() => {
-    loadDeckResources(main).then((deck) => {
+    deckmap = document.getElementById('deck-map');
+    console.log('deckmap', deckmap);
+    loadDeckResources(main, deckmap, data).then((deck) => {
         deckgl = deck;
-        // console.log('DeckGL loaded');
-        // console.log(deckgl);
+        animationManager = new AnimationManager(deckgl);
     });
-
 });
 
-let currentViewState = {
-  longitude: -98.5795,
-  latitude: 39.8283,
-  zoom: 5,
-  pitch: 55
-};
+// 手动控制函数
+function cnV() { 
+  animationManager.flyTo(viewPresets.china); 
+}
+function euV() { 
+  animationManager.flyTo(viewPresets.europe); 
+}
+function usV() { 
+  animationManager.flyTo(viewPresets.usa); 
+}
 
-function setViewState(deckgl, viewState) {
-  currentViewState = { ...currentViewState, ...viewState };
-  deckgl.setProps({
-    viewState: currentViewState,
-    onViewStateChange: ({ viewState }) => {
-      currentViewState = viewState; // 动态同步用户交互的视图状态
-      deckgl.setProps({ viewState });
+function animationV(){
+  // 关闭 panel
+  togglePanel.value = true;
+  animationManager.startAutoAnimation(
+    ()=>{ // 动画结束额回调函数
+      // 打开 panel
+      togglePanel.value = false;
     }
-  });
-}
-
-function flyTo(deckgl, targetViewState, duration = 2000) {
-  const startViewState = { ...currentViewState };
-  const startTime = performance.now();
-
-  function animate() {
-    const elapsedTime = performance.now() - startTime;
-    const t = Math.min(elapsedTime / duration, 1); // 归一化时间进度 (0 ~ 1)
-
-    // 自定义缓动函数（可选）
-    const easing = t => t * (2 - t); // Ease out
-
-    // 插值计算新的视图状态
-    const interpolatedViewState = {
-      longitude: startViewState.longitude + (targetViewState.longitude - startViewState.longitude) * easing(t),
-      latitude: startViewState.latitude + (targetViewState.latitude - startViewState.latitude) * easing(t),
-      zoom: startViewState.zoom + (targetViewState.zoom - startViewState.zoom) * easing(t),
-      pitch: startViewState.pitch + (targetViewState.pitch - startViewState.pitch) * easing(t),
-    };
-
-    // 更新视图状态
-    setViewState(deckgl, interpolatedViewState);
-
-    // 如果动画未完成，继续下一帧
-    if (t < 1) {
-      requestAnimationFrame(animate);
-    }
-  }
-
-  // 启动动画
-  requestAnimationFrame(animate);
-}
-
-// 示例用法
-function cnV() {
-  flyTo(deckgl, {
-    longitude: 114,
-    latitude: 36,
-    zoom: 4,
-    pitch: 55
-  });
-}
-
-function euV() {
-  flyTo(deckgl, {
-    longitude: 8.6821,
-    latitude: 50.1109,
-    zoom: 4,
-    pitch: 55
-  });
-}
-
-function usV() {
-  flyTo(deckgl, {
-    longitude: -98.5795,
-    latitude: 39.8283,
-    zoom: 4,
-    pitch: 55
-  });
+  );
 }
 
 onUnmounted(() => {
-    deckgl.finalize();
-    deckgl.canvas.remove();
-    deckgl = null;
-    document.head.removeChild(document.querySelector('link[href="https://unpkg.com/maplibre-gl@3.6.0/dist/maplibre-gl.css"]'));
-    document.head.removeChild(document.querySelector('script[src="https://unpkg.com/maplibre-gl@3.6.0/dist/maplibre-gl.js"]'));
-    document.head.removeChild(document.querySelector('script[src="https://d3js.org/d3.v5.min.js"]'));
-    document.head.removeChild(document.querySelector('script[src="https://unpkg.com/deck.gl@^9.0.0/dist.min.js"]'));
-  });
-
+    if (animationManager) {
+        animationManager.destroy();
+    }
+    if (deckgl) {
+        deckgl.finalize();
+        deckgl.canvas.remove();
+        deckgl = null;
+    }
+    cleanupDeckResources();
+});
 </script>
 
 <style scoped>
