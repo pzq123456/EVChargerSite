@@ -97,10 +97,10 @@ onUnmounted(() => {
   margin: 12px;
   padding: 20px;
   z-index: 1;
-  border: 1px solid var(--vp-c-border); /* 使用边框变量 */
   border-radius: 5px;
-  box-shadow: var(--vp-shadow-1); /* 使用阴影变量 */
   backdrop-filter: blur(8px); /* 添加背景模糊效果 */
+  color: white;
+  border: 1px solid var(--vp-c-border); /* 使用边框变量 */
   /* 设置字体为 Arial 粗体*/
   font-family: Arial, sans-serif;
   font-weight: bold;
@@ -121,14 +121,6 @@ label {
   color: var(--vp-c-text-1); /* 使用主文本颜色变量 */
 }
 
-input {
-  width: 100px;
-  padding: 5px;
-  border: 1px solid var(--vp-c-border); /* 使用边框变量 */
-  border-radius: 3px;
-  background-color: var(--vp-c-bg); /* 使用背景变量 */
-  color: var(--vp-c-text-1); /* 使用主文本颜色变量 */
-}
 
 .legned {
   display: flex;
@@ -140,7 +132,6 @@ input {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: var(--vp-c-text-1); /* 使用主文本颜色变量 */
 }
 
 #deck-map {
@@ -157,10 +148,8 @@ input {
 button {
   padding: 8px 16px; /* 增加按钮内边距 */
   margin: 0 5px;
-  border: 1px solid var(--vp-c-bg-soft); /* 使用成功色 */
   border-radius: 5px; /* 增加圆角 */
   background-color: var(--vp-c-green-soft); /* 使用成功色 */
-  color: var(--vp-c-text-1); /* 使用主文本颜色变量 */
   cursor: pointer;
   font-weight: 500; /* 增加字体粗细 */
 }
