@@ -2,9 +2,9 @@
 
 
   <div id = "deck-map"> </div>
-    <div id="control-panel" :class= "{collapsed: togglePanel}">
+    <div id="control-panel">
 
-      <div class="tool-bar">
+      <div class="tool-bar" :class= "{collapsed: togglePanel}">
         <button class = "cn" @click="cnV">China</button>
         <button class = "eu" @click="euV">Europe</button>
         <button class = "us" @click="usV">USA</button>
@@ -97,16 +97,22 @@ onUnmounted(() => {
   margin: 12px;
   padding: 20px;
   z-index: 1;
-  background-color: var(--vp-c-bg-soft); /* 使用背景变量 */
   border: 1px solid var(--vp-c-border); /* 使用边框变量 */
   border-radius: 5px;
   box-shadow: var(--vp-shadow-1); /* 使用阴影变量 */
   backdrop-filter: blur(8px); /* 添加背景模糊效果 */
+  /* 设置字体为 Arial 粗体*/
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  font-size: 20px;
 }
 
+
 /* control panel 折叠后的样式*/
-#control-panel.collapsed {
-  display: none;
+.tool-bar.collapsed {
+  /* 确保宽度不变的情况下，隐藏内容 */
+  overflow: hidden;
+  height: 0;
 }
 
 label {
