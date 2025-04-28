@@ -24,8 +24,8 @@
       </div>
 
       <div class="legnd-info">
-        <span>Lower</span>
-        <span>Higher</span>
+        <span>Low</span>
+        <span>High</span>
       </div>
     </div>
 </template>
@@ -98,8 +98,9 @@ onUnmounted(() => {
   padding: 20px;
   z-index: 1;
   border-radius: 5px;
+  background-color: var(--vp-c-bg-soft); /* 使用背景变量 */
   backdrop-filter: blur(8px); /* 添加背景模糊效果 */
-  color: white;
+  color: var(--vp-c-text-1); /* 使用主文本颜色变量 */
   border: 1px solid var(--vp-c-border); /* 使用边框变量 */
   /* 设置字体为 Arial 粗体*/
   font-family: Arial, sans-serif;
