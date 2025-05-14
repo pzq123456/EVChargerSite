@@ -1,0 +1,84 @@
+{
+  "formProps": {
+    "labelWidth": "120px",
+    "class": "query-form"
+  },
+  "title": "数据选择",
+  "databases": {
+    "charging_stations": {
+      "label": "充电桩数据",
+      "fields": [
+        {
+          "type": "cascader",
+          "model": "regions",
+          "label": "地区选择",
+          "optionsRef": "regionOptions",
+          "props": {
+            "multiple": true,
+            "collapseTags": true,
+            "collapseTagsTooltip": true,
+            "clearable": true
+          },
+          "style": {
+            "width": "100%"
+          },
+          "placeholder": "请选择地区",
+          "rules": {
+            "required": true,
+            "message": "请选择地区",
+            "trigger": "change"
+          }
+        },
+        {
+          "type": "checkbox-group",
+          "model": "years",
+          "label": "年份选择",
+          "optionsRef": "availableYears",
+          "rules": {
+            "required": true,
+            "message": "请选择年份",
+            "trigger": "change"
+          }
+        }
+      ]
+    },
+    "user_reviews": {
+      "label": "用户评论数据",
+      "fields": [
+        {
+          "type": "cascader",
+          "model": "regions",
+          "label": "地区选择",
+          "optionsRef": "regionOptions",
+          "props": {
+            "multiple": true,
+            "collapseTags": true,
+            "collapseTagsTooltip": true,
+            "clearable": true
+          },
+          "style": {
+            "width": "100%"
+          },
+          "placeholder": "请选择地区",
+          "rules": {
+            "required": true,
+            "message": "请选择地区",
+            "trigger": "change"
+          }
+        },
+        {
+          "type": "checkbox-group",
+          "model": "years",
+          "label": "年份选择",
+          "optionsRef": "availableYears",
+          "rules": {
+            "required": true,
+            "message": "请选择年份",
+            "trigger": "change"
+          }
+        }
+      ]
+    }
+  },
+  "actions": true
+}
