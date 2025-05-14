@@ -38,9 +38,9 @@ import DatabaseForm from '@/components/form/DatabaseForm.vue'
 import ReportPreview from '@/components/form//preview/Preview.vue'
 
 /* 表单配置文件 */
-import UserInfoConfig from '@/components/form/formConfig/userInfo.js'
+import UserInfoConfig from '@/components/form/formConfig/UserInfo.js'
 import DataQueryConfig from '@/components/form/formConfig/DataQuery.js'
-import { extractFormRef } from '@/components/form/formConfig/helper.js' // 提取表单配置为ref
+import { extractFormRef } from '@/components/form/formConfig/helper.js'
 
 
 const userForm = extractFormRef(UserInfoConfig)
