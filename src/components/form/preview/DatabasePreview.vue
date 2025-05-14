@@ -11,7 +11,6 @@
       <div v-if="queryParams[dbKey]?.selected" class="database-section">
         <h4 class="database-title">{{ dbConfig.label }}</h4>
         <el-descriptions :column="1" border :label-width="labelWidth">
-          <el-descriptions-item label="是否选择">是</el-descriptions-item>
           <template v-for="field in dbConfig.fields" :key="field.model">
             <el-descriptions-item :label="field.label">
               {{ formatFieldValue(field, queryParams[dbKey][field.model]) }}
@@ -51,7 +50,7 @@ const hasSelectedDatabases = computed(() => {
 
 const formatFieldValue = (field, value) => {
   if (!value || (Array.isArray(value) && value.length === 0)) {
-    return '全部' // 根据需求可以改为 'all' 或 '全部'
+    return 'all' // 根据需求可以改为 'all' 或 '全部'
   }
 
   if (Array.isArray(value)) {

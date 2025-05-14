@@ -1,45 +1,45 @@
 // 地区选项
 export const regionOptions = [
   {
-    value: 'china',
-    label: '中国'
+    value: 'China',
+    label: 'China'
   },
   {
-    value: 'usa',
-    label: '美国'
+    value: 'USA',
+    label: 'USA'
   },
   {
-    value: 'europe',
-    label: '欧洲',
+    value: 'Europe',
+    label: 'Europe',
     children: [
-      { value: 'germany', label: '德国' },
-      { value: 'france', label: '法国' },
-      { value: 'uk', label: '英国' },
-      { value: 'italy', label: '意大利' }
+      { value: 'Germany', label: 'Germany' },
+      { value: 'France', label: 'France' },
+      { value: 'UK', label: 'UK' },
+      { value: 'Italy', label: 'Italy' }
     ]
   },
   {
     value: 'others',
-    label: '其他地区',
+    label: 'Other Regions',
     children: [
-      { value: 'hongkong', label: '香港' },
-      { value: 'japan', label: '日本' },
-      { value: 'korea', label: '韩国' },
-      { value: 'taiwan', label: '台湾地区' },
-      { value: 'australia', label: '澳大利亚' },
-      { value: 'newzealand', label: '新西兰' },
-      { value: 'thailand', label: '泰国' },
-      { value: 'singapore', label: '新加坡' },
-      { value: 'malaysia', label: '马来西亚' },
-      { value: 'colombia', label: '哥伦比亚' },
-      { value: 'peru', label: '秘鲁' },
-      { value: 'brazil', label: '巴西' }
+      { value: 'HongKong, China', label: 'Hong Kong' },
+      { value: 'Japan', label: 'Japan' },
+      { value: 'korea', label: 'Korea' },
+      { value: 'TaiWan, China', label: 'Taiwan' },
+      { value: 'Australia', label: 'Australia' },
+      { value: 'Newzealand', label: 'New Zealand' },
+      { value: 'Thailand', label: 'Thailand' },
+      { value: 'Singapore', label: 'Singapore' },
+      { value: 'Malaysia', label: 'Malaysia' },
+      { value: 'Colombia', label: 'Colombia' },
+      { value: 'Peru', label: 'Peru' },
+      { value: 'Brazil', label: 'Brazil' }
     ]
   }
 ]
 
 // 可用年份
-export const availableYears = ['2022', '2023', '2024', '2025']
+export const availableYears = ['2022', '2024*', '2025*']
 
 // 表单验证规则
 export const rules = {

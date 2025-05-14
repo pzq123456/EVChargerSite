@@ -5,10 +5,10 @@
     ref="formRef"
     v-bind="formProps"
   >
-    <h3 class="form-section-title" v-if="title">{{ title }}</h3>
+    <!-- <h3 class="form-section-title" v-if="title">{{ title }}</h3> -->
 
     <div v-for="(databaseConfig, dbKey) in databases" :key="dbKey" class="database-card">
-      <el-form-item :prop="`${dbKey}.selected`">
+      <el-form-item :prop="`${dbKey}.selected`" label="Database">
         <el-checkbox 
           v-model="formData[dbKey].selected" 
           :label="databaseConfig.label" 
@@ -54,6 +54,7 @@
     <el-form-item v-if="actions">
       <slot name="actions"></slot>
     </el-form-item>
+
   </el-form>
 </template>
 
@@ -107,7 +108,7 @@ const formRules = computed(() => {
     validator: (rule, value, callback) => {
       const selected = Object.values(formData).some(db => db.selected)
       if (!selected) {
-        callback(new Error('请至少选择一个数据库'))
+        callback(new Error('Please select at least one database'))
       } else {
         callback()
       }
@@ -170,15 +171,14 @@ defineExpose({
 }
 
 .database-card {
-  margin-bottom: 20px;
-  padding: 15px;
-  border: 1px solid #ebeef5;
-  border-radius: 4px;
+  margin-bottom: 5px;
+  padding: 10px;
+  border: 1px solid var(--vp-c-border);
+  border-radius: 5px;
+  background-color: var(--vp-c-bg-elv);
 }
 
 .database-details {
-  margin-top: 15px;
-  padding-left: 20px;
-  border-left: 2px solid #409eff;
+  border-left: 2px solid var(--vp-c-brand-3);
 }
 </style>

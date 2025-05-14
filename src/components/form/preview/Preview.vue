@@ -1,7 +1,6 @@
 <template>
   <div class="preview-container" v-if="visible">
     <div class="preview-content" id="printable-content">
-
       <!-- 报告头 -->
       <el-row class="report-header" justify="space-between">
         <el-col :span="16">
@@ -22,25 +21,16 @@
     <!-- 操作按钮 -->
     <div class="print-actions">
       <el-button type="success" @click="printReport" size="large">
-        <el-icon>
-          <Printer />
-        </el-icon> 打印报告
-      </el-button>
-      <el-button type="primary" @click="exportPDF" size="large">
-        <el-icon>
-          <Document />
-        </el-icon> 导出PDF
+        <el-icon><Printer /></el-icon> Print
       </el-button>
     </div>
   </div>
 </template>
 
 <script setup>
-
 import userInfoCard from './UserInfoPreview.vue'
 import DatabasePreview from './DatabasePreview.vue'
 import SignaturePreview from './SignaturePreview.vue'
-
 
 const props = defineProps({
   visible: {
@@ -76,21 +66,13 @@ const emit = defineEmits(['print', 'export'])
 const printReport = () => {
   emit('print')
 }
-
-const exportPDF = () => {
-  emit('export', {
-    userInfo: props.userInfo,
-    queryParams: props.queryParams
-  })
-}
 </script>
 
 <style scoped>
 .preview-container {
-  background: #fff;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--el-border-color);
 }
 
 .preview-content > * {
@@ -108,63 +90,26 @@ const exportPDF = () => {
   color: #333;
 }
 
-
-.section-title {
-  margin: 0 0 15px 0;
-  color: #333;
-  font-size: 18px;
-}
-
-.signature-area {
-  margin-top: 60px;
-  padding-top: 40px;
-  border-top: 1px solid #eee;
-}
-
-.signature-box,
-.date-box {
-  padding: 20px 0;
-}
-
-.signature-label,
-.date-label {
-  font-weight: bold;
-  margin-bottom: 15px;
-}
-
-.signature-image,
-.signature-preview {
-  max-width: 300px;
-  max-height: 80px;
-  border-bottom: 1px solid #333;
-  display: block;
-}
-
-.date-value {
-  padding-top: 15px;
-}
-
-.report-footer {
-  margin-top: 40px;
-  text-align: center;
-  color: #666;
-  font-size: 14px;
-}
-
 .print-actions {
   margin-top: 30px;
   text-align: center;
 }
 
-/* 打印样式 */
+/* 打印样式优化 */
 @media print {
   body * {
     visibility: hidden;
+    background: transparent !important;
+    color: #000 !important;
   }
 
   #printable-content,
   #printable-content * {
     visibility: visible;
+    background: transparent !important;
+    color: #000 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
   }
 
   #printable-content {
@@ -172,17 +117,61 @@ const exportPDF = () => {
     left: 0;
     top: 0;
     width: 100%;
-    padding: 20px;
-  }
-
-  .print-actions {
-    display: none;
-  }
-
-  /* 优化打印边距 */
-  .preview-content {
     padding: 0;
+    margin: 0;
   }
 
+  /* 移除所有背景色和边框 */
+  .el-row, .el-col, .el-card, .el-form-item {
+    background-color: transparent !important;
+    border: none !important;
+  }
+
+  /* 移除按钮区域 */
+  .print-actions {
+    display: none !important;
+  }
+
+  /* 优化标题样式 */
+  .report-title {
+    color: #000 !important;
+    font-size: 24pt;
+    margin-bottom: 20pt;
+  }
+
+  /* 优化边距 */
+  .preview-content > * {
+    margin-bottom: 15pt;
+  }
+}
+
+/* 全局打印样式 - 会应用到所有子组件 */
+@media print {
+  html, body {
+    background: #fff !important;
+  }
+
+  :deep(*) {
+    background-color: transparent !important;
+    color: #000 !important;
+    border-color: #000 !important;
+  }
+  
+  :deep(.el-card) {
+    border: none !important;
+    box-shadow: none !important;
+  }
+  
+  :deep(.el-table) {
+    border: 1px solid #000 !important;
+  }
+  
+  :deep(.el-table th) {
+    background-color: transparent !important;
+  }
+  
+  :deep(.el-button) {
+    display: none !important;
+  }
 }
 </style>
