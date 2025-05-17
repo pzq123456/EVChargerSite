@@ -20,7 +20,6 @@
     </el-button>
 </div>
 
-<!-- element 的 分割线 -->
 <el-divider></el-divider>
 
 <ReportPreview :visible="showPreview" :user-info="userForm" :query-params="queryForm"
@@ -59,13 +58,12 @@ const hasSelectedDatabase = computed(() => {
 
 const generatePreview = async () => {
   try {
-    // await Promise.all([
-    //   userInfoForm.value.validate(),
-    //   databaseForm.value.validate()
-    // ])
+    await Promise.all([
+      userInfoForm.value.validate(),
+      databaseForm.value.validate()
+    ])
     showPreview.value = true
   } catch (error) {
-    // ElMessage.error('请完善所有必填信息')
     ElMessage.error('Please complete all required fields')
   }
 }
@@ -81,7 +79,6 @@ const printReport = () => {
 }
 
 const exportPDF = (data) => {
-  // 实际项目中这里应该调用PDF生成库
   console.log('导出PDF:', data)
   ElMessage.success('PDF导出功能需集成PDF生成库')
 }

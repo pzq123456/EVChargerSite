@@ -1,5 +1,8 @@
 # News
 
+## [Talk] [Presentations on Global EV Data Initiative at University of Cambridge](./2025-5-17)
+The Principal Investigator of the Global EV Data Initiative, Dr. Chengxiang (Tony) Zhuge was invited by Prof Ying Jin and Dr Li Wan to give two talks at the Architecture and Land Economy departments, University of Cambridge on 30 April and 1 May 2025...
+
 ## [Data] [Global Public Electric Vehicle Charging Station Data in 2024](./2025-3-19) 
 
 We are glad to share the Global Public Electric Vehicle Charging Station Data in 2024, which contain public EV charging station locations in the US, China and Europe...
@@ -8,7 +11,4 @@ We are glad to share the Global Public Electric Vehicle Charging Station Data in
 
 We are glad to share the Global Public Electric Vehicle Charging Station Data in 2022, which contain public EV charging station locations in the US, China and Europe...
 
-<!-- ## [Paper] [The Factors Influencing the Electric Vehicle Market Share: A Comparative Study of The European Union and United States](./2024-12-9) 
-
-A master student from the TIP Group, Ruoqing PENG, published a paper which compared the factors influencing the electric vehicle market shares in European Union and United States, based on his master dissertation... -->
 
