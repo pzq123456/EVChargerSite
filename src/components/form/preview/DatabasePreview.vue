@@ -3,7 +3,7 @@
     <template #header>
       <div class="card-header">
         <span>
-          Data Filting Information
+          Data Application Information
         </span>
       </div>
     </template>
