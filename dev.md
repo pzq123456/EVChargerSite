@@ -22,8 +22,15 @@
 
 <el-divider></el-divider>
 
-<ReportPreview :visible="showPreview" :user-info="userForm" :query-params="queryForm"
-    :userInfoConfig="UserInfoConfig" :dataConfig="DataQueryConfig" @print="printReport" />
+<ReportPreview
+  :visible="showPreview"
+  :user-info="userForm"
+  :query-params="queryForm"
+  :userInfoConfig="UserInfoConfig"
+  :dataConfig="DataQueryConfig"
+  @print="printReport"
+  @export="exportPDF"
+/>
 
 
 <script setup>
@@ -58,10 +65,10 @@ const hasSelectedDatabase = computed(() => {
 
 const generatePreview = async () => {
   try {
-    await Promise.all([
-      userInfoForm.value.validate(),
-      databaseForm.value.validate()
-    ])
+    // await Promise.all([
+    //   userInfoForm.value.validate(),
+    //   databaseForm.value.validate()
+    // ])
     showPreview.value = true
   } catch (error) {
     ElMessage.error('Please complete all required fields')

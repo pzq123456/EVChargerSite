@@ -1,5 +1,16 @@
 <template>
-  <div class="preview-container" v-if="visible">
+<div class="custom-alert-wrapper" v-show="visible">
+  <el-alert 
+    type="warning"
+    title="Submission Instructions"
+    description="Please review and sign the generated application form (PDF format), then email it to global.ev.map@gmail.com along with any supporting documents. Please use your institutional email for submission."
+    show-icon
+    :closable="true"
+    class="custom-alert"
+  />
+</div>
+
+  <div class="preview-container" v-show="visible">
     <div class="preview-content" id="printable-content">
       <!-- 报告头 -->
       <el-row class="report-header" justify="space-between">
@@ -69,6 +80,34 @@ const printReport = () => {
 </script>
 
 <style scoped>
+.custom-alert-wrapper {
+  margin: 16px 0;
+  border-radius: 6px;
+}
+
+.custom-alert {
+  border-left: 2px solid #e6a23c;
+  animation: alert-pop 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes alert-pop {
+  0% {
+    transform: scale(0.95) translateY(-20px);
+    opacity: 0;
+    box-shadow: none;
+  }
+  60% {
+    transform: scale(1.03) translateY(4px);
+    opacity: 1;
+    box-shadow: 0 8px 32px rgba(230, 162, 60, 0.18);
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+    box-shadow: 0 4px 16px rgba(230, 162, 60, 0.15);
+  }
+}
+
 .preview-container {
   padding: 20px;
   border-radius: 8px;
@@ -87,7 +126,6 @@ const printReport = () => {
 .report-title {
   margin: 0;
   font-size: 24px;
-  color: #333;
 }
 
 .print-actions {

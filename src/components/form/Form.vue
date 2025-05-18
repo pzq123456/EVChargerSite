@@ -13,8 +13,24 @@
     <!-- element 的 分割线 -->
     <el-divider></el-divider>
 
-    <ReportPreview :visible="showPreview" :user-info="userForm" :query-params="queryForm"
-      :userInfoConfig="UserInfoConfig" :dataConfig="DataQueryConfig" @print="printReport" @export="exportPDF" />
+    <ReportPreview
+      :visible="showPreview"
+      :user-info="userForm"
+      :query-params="queryForm"
+      :userInfoConfig="UserInfoConfig"
+      :dataConfig="DataQueryConfig"
+      @print="printReport"
+      @export="exportPDF"
+    >
+      <template #tip>
+        <el-alert
+          title="Please ensure that the data is correct before printing."
+          type="warning"
+          show-icon
+          center
+        />
+      </template>
+    </ReportPreview>
 
 </template>
 

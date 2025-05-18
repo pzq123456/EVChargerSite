@@ -173,9 +173,17 @@ defineExpose({
 .database-card {
   margin-bottom: 5px;
   padding: 10px;
-  border: 1px solid var(--vp-c-border);
+  border: 1px solid var(--vp-c-divider);
   border-radius: 5px;
-  background-color: var(--vp-c-bg-elv);
+  background-color: var(--vp-c-bg);
+}
+
+/* .database-card honver */
+.database-card:hover {
+  /* background-color: var(--vp-c-border); */
+  border: 1px solid var(--vp-c-border);
+  /* 渐入动画 */
+  transition: all 0.3s ease;
 }
 
 .database-details {
