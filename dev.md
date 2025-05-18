@@ -65,10 +65,10 @@ const hasSelectedDatabase = computed(() => {
 
 const generatePreview = async () => {
   try {
-    // await Promise.all([
-    //   userInfoForm.value.validate(),
-    //   databaseForm.value.validate()
-    // ])
+    await Promise.all([
+      userInfoForm.value.validate(),
+      databaseForm.value.validate()
+    ])
     showPreview.value = true
   } catch (error) {
     ElMessage.error('Please complete all required fields')
