@@ -1,7 +1,7 @@
 <template>
   <el-dialog
     v-model="dialogVisible"
-    title="Membership Agreement"
+    :title="dialogTitle"
     :width="dialogWidth"
     :before-close="handleClose"
   >
@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { ElMessage } from 'element-plus'
 
 export default {
@@ -69,6 +69,10 @@ export default {
     modelValue: {
       type: Boolean,
       default: false
+    },
+    title: {
+      type: String,
+      default: 'Membership Agreement' // Fallback title to prevent undefined errors
     }
   },
   emits: ['update:modelValue', 'agreement-submitted'],
@@ -79,8 +83,21 @@ export default {
       set: (value) => emit('update:modelValue', value)
     })
     
-    const dialogWidth = computed(() => {
-      return window.innerWidth <= 768 ? '90%' : '50%'
+    const dialogTitle = computed(() => props.title || 'Membership Agreement') // Safe title access
+    
+    // SSR-safe dialog width
+    const dialogWidth = ref('90%') // Default for SSR
+    onMounted(() => {
+      // Update dialogWidth only on client-side
+      if (typeof window !== 'undefined') {
+        dialogWidth.value = window.innerWidth <= 768 ? '90%' : '50%'
+        // Optional: Add resize listener for dynamic updates
+        const handleResize = () => {
+          dialogWidth.value = window.innerWidth <= 768 ? '90%' : '50%'
+        }
+        window.addEventListener('resize', handleResize)
+        return () => window.removeEventListener('resize', handleResize)
+      }
     })
     
     const checkedAgreements = ref([])
@@ -126,6 +143,7 @@ export default {
     return {
       dialogVisible,
       dialogWidth,
+      dialogTitle,
       checkedAgreements,
       checkAll,
       isIndeterminate,
@@ -194,6 +212,7 @@ p {
 @media (max-width: 768px) {
   .agreement-content {
     max-height: 70vh;
+    padding: 0 12px;
   }
 
   h3 {
@@ -205,8 +224,7 @@ p {
   }
 
   .agreement-item {
-    font-size: 10px;
-    margin-bottom: 30px;
+    font-size: 13px;
   }
 
   .dialog-footer .el-button {
