@@ -2,7 +2,7 @@
   <el-dialog
     v-model="dialogVisible"
     title="Membership Agreement"
-    width="50%"
+    :width="dialogWidth"
     :before-close="handleClose"
   >
     <div class="agreement-content">
@@ -79,6 +79,10 @@ export default {
       set: (value) => emit('update:modelValue', value)
     })
     
+    const dialogWidth = computed(() => {
+      return window.innerWidth <= 768 ? '90%' : '50%'
+    })
+    
     const checkedAgreements = ref([])
     const checkAll = ref(false)
     const isIndeterminate = ref(false)
@@ -121,6 +125,7 @@ export default {
     
     return {
       dialogVisible,
+      dialogWidth,
       checkedAgreements,
       checkAll,
       isIndeterminate,
@@ -138,23 +143,76 @@ export default {
 .agreement-content {
   max-height: 60vh;
   overflow-y: auto;
-  padding: 0 10px;
+  padding: 0 16px;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
 }
 
 .agreement-item {
-  display: block;
-  margin-bottom: 12px;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 16px;
   white-space: normal;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.agreement-item :deep(.el-checkbox__label) {
+  padding-left: 8px;
+  flex: 1;
 }
 
 .select-all {
-  margin-top: 20px;
-  padding-top: 10px;
+  margin-top: 16px;
+  padding-top: 12px;
   border-top: 1px solid #eee;
 }
 
 .dialog-footer {
   display: flex;
   justify-content: flex-end;
+  gap: 12px;
+  padding: 16px;
+}
+
+.dialog-footer .el-button {
+  padding: 12px 24px;
+  font-size: 16px;
+  min-height: 48px; /* Larger touch target for mobile */
+}
+
+h3 {
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+
+p {
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 768px) {
+  .agreement-content {
+    max-height: 70vh;
+  }
+
+  h3 {
+    font-size: 18px;
+  }
+
+  p {
+    font-size: 13px;
+  }
+
+  .agreement-item {
+    font-size: 10px;
+    margin-bottom: 30px;
+  }
+
+  .dialog-footer .el-button {
+    padding: 10px 20px;
+    font-size: 14px;
+    min-height: 44px;
+  }
 }
 </style>
