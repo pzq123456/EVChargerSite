@@ -43,7 +43,6 @@ export default {
             { label: "Miss", value: "Miss", description: "未婚女性" },
             { label: "Mrs.", value: "Mrs.", description: "已婚女性" },
             { label: "Sir", value: "Sir", description: "爵士" },
-            { label: "Dame", value: "Dame", description: "女爵士" },
             { label: "Lord", value: "Lord", description: "勋爵" },
             { label: "Lady", value: "Lady", description: "女勋爵" },
           ],
@@ -69,7 +68,7 @@ export default {
           label: "Justification",
           required: true,
           rows: 6,
-          placeholder: "Please provide a detailed justification for your request (at least 100 words), including whether it is for any research project",
+          placeholder: "Please provide a detailed justification for your request (at least 50 words), including whether it is for any research project",
           rules: [
             {
               validator: (rule, value, callback) => {
@@ -78,8 +77,8 @@ export default {
                 } else {
                   // 统计英文单词数
                   const wordCount = value.match(/\b\w+\b/g) ? value.match(/\b\w+\b/g).length : 0;
-                  if (wordCount < 100) {
-                    callback(new Error('Justification must be at least 100 words'));
+                  if (wordCount < 50) {
+                    callback(new Error('Justification must be at least 50 words'));
                   } else {
                     callback();
                   }

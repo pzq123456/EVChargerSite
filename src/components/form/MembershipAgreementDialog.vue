@@ -8,7 +8,8 @@
     <div class="agreement-content">
       <h3>Global EV Data Initiative Membership Terms</h3>
       <p>
-        An open electric vehicle data initiative that aims to collect, analyse, 
+        Global EV Data Initiative is an open electric vehicle data initiative 
+        that aims to collect, analyse, 
         visualize and share data on the electric vehicle market, policy and 
         charging infrastructure across the globe.
       </p>
@@ -16,17 +17,14 @@
       <el-divider />
       
       <el-checkbox-group v-model="checkedAgreements">
-        <el-checkbox value="agreeEmail" class="agreement-item">
-          I understand that the email address I provided will serve as my unique Member ID.
-        </el-checkbox>
         <el-checkbox value="agreeMembership" class="agreement-item">
           By applying for data, I agree to become a member of the Global EV Data Initiative.
         </el-checkbox>
+        <el-checkbox value="agreeEmail" class="agreement-item">
+          I understand that the email address I provided will serve as my unique Member ID.
+        </el-checkbox>
         <el-checkbox value="agreeDataUsage" class="agreement-item">
           I consent to the use of my anonymized data for research and statistical purposes.
-        </el-checkbox>
-        <el-checkbox value="agreeTerms" class="agreement-item">
-          I have read and agree to the full Terms and Conditions of the Global EV Data Initiative.
         </el-checkbox>
       </el-checkbox-group>
       
