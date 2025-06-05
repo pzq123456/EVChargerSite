@@ -25,9 +25,6 @@
         <el-checkbox value="agreeDataUsage" class="agreement-item">
           I consent to the use of my anonymized data for research and statistical purposes.
         </el-checkbox>
-        <el-checkbox value="agreeCommunications" class="agreement-item">
-          I agree to receive occasional communications about the initiative.
-        </el-checkbox>
         <el-checkbox value="agreeTerms" class="agreement-item">
           I have read and agree to the full Terms and Conditions of the Global EV Data Initiative.
         </el-checkbox>
