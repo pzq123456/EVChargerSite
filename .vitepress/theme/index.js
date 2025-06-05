@@ -7,6 +7,7 @@ import { createPinia } from 'pinia'
 
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import 'element-plus/theme-chalk/dark/css-vars.css'
+import 'element-plus/dist/index.css'
 
 export default {
   extends: DefaultTheme,

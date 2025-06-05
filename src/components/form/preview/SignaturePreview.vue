@@ -1,6 +1,81 @@
 <template>
   <div class="signature-area">
     <div class="signature-container">
+      <div class="signature-box">
+        <div class="signature-header">
+          <span class="signature-label">SIGNATURE: </span>
+          <span class="signature-required">(Required)</span>
+        </div>
+        <div class="signature-field">
+        </div>
+        <p class="date-value">Date: {{ generationTime }}</p>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+
+const generationTime = ref(new Date().toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+}))
+</script>
+
+<style scoped>
+.signature-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-left: auto;
+  width: fit-content;
+  font-family: Arial, sans-serif;
+}
+
+.signature-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 250px;
+}
+
+.signature-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.signature-label {
+  color: #333;
+}
+
+.signature-required {
+  color: #d32f2f;
+}
+
+.signature-field {
+  width: 100%;
+  height: 80px;
+  border-bottom: 1px solid #1d0606;
+  position: relative;
+  margin-bottom: 8px;
+}
+
+.date-value {
+  margin: 0;
+  text-align: right;
+  font-size: 14px;
+  width: 100%;
+}
+</style>
+
+<!-- <template>
+  <div class="signature-area">
+    <div class="signature-container">
       <div class="signature-box" v-if="userInfo.signature">
         <img :src="userInfo.signature" alt="Signature" class="signature-image" />
         <p class="date-value">{{ generationTime }}</p>
@@ -50,4 +125,4 @@ const generationTime = ref(new Date().toLocaleDateString('en-US', {
   margin: 0;
   text-align: right; /* 日期右对齐 */
 }
-</style>
+</style> -->

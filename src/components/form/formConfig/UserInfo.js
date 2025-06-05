@@ -89,27 +89,27 @@ export default {
             }
           ]
         },
-        {
-          type: "upload",
-          model: "signature",
-          label: "Signature",
-          required: true,
-          accept: "image/jpeg,image/png",
-          tip: "Please upload your signature image (PNG/JPG format supported)",
-          showPreview: true,
-          rules: [
-            {
-              validator: (rule, value, callback) => {
-                if (!value) {
-                  callback(new Error('Signature is required'));
-                } else {
-                  callback();
-                }
-              },
-              trigger: 'change'
-            }
-          ]
-        }
+        // {
+        //   type: "upload",
+        //   model: "signature",
+        //   label: "Signature",
+        //   required: true,
+        //   accept: "image/jpeg,image/png",
+        //   tip: "Please upload your signature image (PNG/JPG format supported)",
+        //   showPreview: true,
+        //   rules: [
+        //     {
+        //       validator: (rule, value, callback) => {
+        //         if (!value) {
+        //           callback(new Error('Signature is required'));
+        //         } else {
+        //           callback();
+        //         }
+        //       },
+        //       trigger: 'change'
+        //     }
+        //   ]
+        // }
       ]
     }
   ]

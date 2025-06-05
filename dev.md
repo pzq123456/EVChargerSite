@@ -15,12 +15,19 @@
 </DatabaseForm>
 
 <div class="form-footer">
-    <el-button type="success" @click="generatePreview" :disabled="!hasSelectedDatabase" size="large">
+    <el-button type="success" @click="generatePreview" :disabled="!userAgreeAgreement||!hasSelectedDatabase" size="large">
         Print Preview
     </el-button>
+    <el-button 
+    type="primary" 
+    @click="showAgreementDialog" 
+    :disabled="userAgreeAgreement" 
+    size="large"
+    v-show="!userAgreeAgreement"
+    >
+        User Agreement
+    </el-button>
 </div>
-
-<el-divider></el-divider>
 
 <ReportPreview
   :visible="showPreview"
@@ -32,14 +39,20 @@
   @export="exportPDF"
 />
 
+<membership-agreement-dialog 
+  v-model="agreementVisible"
+  @agreement-submitted="handleAgreementSubmitted"
+/>
 
 <script setup>
 import { ref, computed } from 'vue'
 
-import { ElButton } from 'element-plus'
+import { ElButton, ElMessage } from 'element-plus'
 
 import UserInfoForm from '@/components/form/UserInfoForm.vue'
 import DatabaseForm from '@/components/form/DatabaseForm.vue'
+
+import MembershipAgreementDialog from '@/components/form/MembershipAgreementDialog.vue'
 
 import ReportPreview from '@/components/form//preview/Preview.vue'
 
@@ -62,6 +75,24 @@ const databaseForm = ref()
 const hasSelectedDatabase = computed(() => {
   return Object.values(queryForm.value).some(db => db.selected)
 })
+
+const agreementVisible = ref(true)
+
+const userAgreeAgreement = ref(false)
+
+const showAgreementDialog = () => {
+  agreementVisible.value = true
+}
+
+const handleAgreementSubmitted = () => {
+  // 处理用户同意协议后的逻辑
+  userAgreeAgreement.value = true
+    ElMessage({
+      message: 'You have agreed to the membership agreement',
+      grouping: true,
+      type: 'success',
+  })
+}
 
 const generatePreview = async () => {
   try {

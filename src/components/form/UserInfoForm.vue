@@ -1,7 +1,6 @@
 <template>
   <el-form :model="formData" :rules="formRules" ref="formRef" v-bind="formProps">
     <template v-for="section in formConfig.sections" :key="section.title">
-      <!-- <h3 v-if="section.title" class="form-section-title">{{ section.title }}</h3> -->
       <template v-for="item in section.items" :key="item.model">
         <el-form-item :label="item.label" :prop="item.model">
           <el-input v-if="item.type === 'input'" v-model="formData[item.model]" :type="item.inputType || 'text'"
@@ -24,7 +23,7 @@
               <div v-if="item.tip" class="el-upload__tip">{{ item.tip }}</div>
             </template>
             <div v-else class="upload-preview">
-              <img v-if="formData[item.model].startsWith('data:image')" :src="formData[item.model]"
+              <img v-if="formData[item.model]?.startsWith?.('data:image')" :src="formData[item.model]"
                 class="preview-image" />
               <div v-else class="file-info">
                 <el-icon>
@@ -33,7 +32,7 @@
               </div>
               <div class="preview-actions">
                 <el-button size="small" type="primary"
-                  @click.stop="$refs.formRef.$el.querySelector('.el-upload__input').click()">
+                  @click.stop="$refs.formRef?.$el?.querySelector('.el-upload__input')?.click()">
                   re-upload
                 </el-button>
                 <el-button size="small" type="danger" @click.stop="removeUpload(item.model)">
@@ -49,7 +48,8 @@
 </template>
 
 <script setup>
-import { reactive, ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
+import { ElMessage } from 'element-plus'
 
 const props = defineProps({
   formConfig: { type: Object, required: true },
@@ -58,7 +58,13 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue'])
 const formRef = ref()
-const formData = reactive({ ...props.modelValue })
+
+// 使用计算属性来保持响应式
+const formData = computed({
+  get: () => props.modelValue,
+  set: (value) => emit('update:modelValue', value)
+})
+
 const formProps = computed(() => props.formConfig.formProps || {})
 
 const formRules = computed(() => {
@@ -73,27 +79,33 @@ const formRules = computed(() => {
 })
 
 const handleUpload = (file, model) => {
-  if (props.formConfig.accept && !file.raw.type.match(props.formConfig.accept.replace('*', '.*')))
+  if (props.formConfig.accept && !file.raw.type.match(props.formConfig.accept.replace('*', '.*'))) {
     return ElMessage.error(`Please upload ${props.formConfig.accept} files only`)
-  // if (props.formConfig.maxSize && file.raw.size > props.formConfig.maxSize * 1024)
-  //   return ElMessage.error(`文件大小不能超过${props.formConfig.maxSize}KB`)
+  }
 
   if (file.raw.type.includes('image')) {
     const reader = new FileReader()
-    reader.onload = e => (formData[model] = e.target.result, emit('update:modelValue', formData))
+    reader.onload = e => {
+      const newValue = { ...formData.value, [model]: e.target.result }
+      emit('update:modelValue', newValue)
+    }
     reader.readAsDataURL(file.raw)
   } else {
-    formData[model] = file.raw
-    emit('update:modelValue', formData)
+    const newValue = { ...formData.value, [model]: file.raw }
+    emit('update:modelValue', newValue)
   }
 }
 
-const removeUpload = model => (formData[model] = null, emit('update:modelValue', formData))
+const removeUpload = model => {
+  const newValue = { ...formData.value, [model]: null }
+  emit('update:modelValue', newValue)
+}
 
-defineExpose({ validate: () => formRef.value.validate() })
+defineExpose({ validate: () => formRef.value?.validate() })
 </script>
 
 <style scoped>
+/* 原有样式保持不变 */
 .form-section-title {
   margin: 20px 0 15px;
   color: #606266;
