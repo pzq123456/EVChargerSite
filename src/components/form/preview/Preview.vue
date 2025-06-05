@@ -49,12 +49,12 @@
       <!-- 用户条款 -->
       <section class="section membership-terms">
 
-        <span class="terms-text">I <b>agree</b> to the following Membership Terms: </span>
+        <span class="terms-text">If I am not currently a member of the Global EV Data Initiative, I <b>agree</b> to the following Membership Terms: </span>
         <br>
         <div class="terms-content">
           <span><b>1.</b> By applying for data, I agree to become a member of the Global EV Data Initiative.</span>
           <br>
-          <span><b>2.</b> I understand that the email address I provided will serve as my unique Member ID.</span>
+         <span><b>2.</b> I understand that the email address I provided will serve as my unique Member ID.</span>
           <br>
           <span><b>3.</b> I consent to the use of my anonymized data for research and statistical purposes.</span>
         </div>
