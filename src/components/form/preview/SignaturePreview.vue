@@ -2,12 +2,6 @@
   <div class="signature-area">
     <div class="signature-container">
       <div class="signature-box">
-        <div class="signature-header">
-          <span class="signature-label">SIGNATURE: </span>
-          <span class="signature-required">(Required)</span>
-        </div>
-        <div class="signature-field">
-        </div>
         <p class="date-value">Date: {{ generationTime }}</p>
       </div>
     </div>

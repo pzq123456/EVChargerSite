@@ -22,6 +22,8 @@
       <!-- 用户信息 -->
       <userInfoCard :userInfo="userInfo" :userInfoConfig="userInfoConfig" />
 
+      <div STYLE="page-break-after: always;"></div>
+      
       <!-- 数据选择信息 -->
       <DatabasePreview :queryParams="queryParams" :dataConfig="dataConfig" />
 
