@@ -11,23 +11,38 @@
 > - *These datasets are available, but may be shareable until the relevant work (e.g., paper) is published. However, you are still welcome to submit an application now, as we will share the datasets requested as soon as we can. 
 > - If a large-scale dataset or multiple datasets are requested, a strong justification with supporting documents (e.g., a project record, or supporting letter from supervisor / principal investigator) is generally needed.  
 
-<DatabaseForm :form-config="DataQueryConfig" v-model="queryForm" ref="databaseForm">
-</DatabaseForm>
+<DatabaseForm :form-config="DataQueryConfig" v-model="queryForm" ref="databaseForm" />
+
+
+
+## Part 3 Global EV Data Initiative Membership Terms
+
+> Global EV Data Initiative is an open electric vehicle data initiative that aims to collect, analyse, visualize and share data on the electric vehicle market, policy and charging infrastructure across the globe.
+
+<MembershipAgreement 
+  @all-agreed="handleAllAgreed" v-model="agreementStatus"
+/>
+
+## Part 4 Declaration
+- By completing this declaration, I hereby declare that the information included in thisapplication form is true and correct to the best of my knowledge. 
+- I understand that any falseor misleading information given by me in connection with my application may result intermination of the application process, I will not share the datasets with anyone else or usethem for commercial purposes. 
 
 <div class="form-footer">
-  <el-button type="success" @click="generatePreview" :disabled="!userAgreeAgreement||!hasSelectedDatabase" size="large" plain>
-      Print Preview
-  </el-button>
-  <el-button 
-    type="primary" 
-    @click="showAgreementDialog" 
-    :disabled="userAgreeAgreement" 
+<el-tooltip
+  :disabled="allAgreed && hasSelectedDatabase"
+  content="You must complete the form and agree to all membership terms before using this feature."
+  placement="top"
+>
+  <el-button
+    type="success"
+    @click="generatePreview"
+    :disabled="!allAgreed || !hasSelectedDatabase"
     size="large"
-    v-show="!userAgreeAgreement"
     plain
   >
-      User Agreement
+    Print Preview
   </el-button>
+</el-tooltip>
 </div>
 
 <ReportPreview
@@ -40,11 +55,6 @@
   @export="exportPDF"
 />
 
-<membership-agreement-dialog 
-  v-model="agreementVisible"
-  @agreement-submitted="handleAgreementSubmitted"
-/>
-
 <div class="preview-footer" v-show="showPreview">
   <el-button type="primary" @click="backToEdit" size="large" plain>
     Back to Edit
@@ -54,11 +64,11 @@
 <script setup>
 import { ref, computed } from 'vue'
 
-import { ElButton, ElMessage } from 'element-plus'
+import { ElButton, ElMessage, ElTooltip } from 'element-plus'
 
 import UserInfoForm from '@/components/form/UserInfoForm.vue'
 import DatabaseForm from '@/components/form/DatabaseForm.vue'
-import MembershipAgreementDialog from '@/components/form/MembershipAgreementDialog.vue'
+import MembershipAgreement from '@/components/form/MembershipAgreement.vue'
 import ReportPreview from '@/components/form/preview/Preview.vue'
 
 /* 表单配置文件 */
@@ -72,25 +82,28 @@ const showPreview = ref(false)
 const userInfoForm = ref()
 const databaseForm = ref()
 
+const agreementStatus = ref({
+  agreeMembership: false,
+  agreeEmail: false,
+  agreeDataUsage: false,
+  allAgreed: false
+})
+
 // 计算是否有选中的数据库
 const hasSelectedDatabase = computed(() => {
   return Object.values(queryForm.value).some(db => db.selected)
 })
 
+// 是否所有用户条款都已同意
+const allAgreed = computed(() => {
+  return agreementStatus.value.allAgreed;
+})
+
 const agreementVisible = ref(true)
 const userAgreeAgreement = ref(false)
 
-const showAgreementDialog = () => {
-  agreementVisible.value = true
-}
-
-const handleAgreementSubmitted = () => {
-  userAgreeAgreement.value = true
-  ElMessage({
-    message: 'You have agreed to the membership agreement',
-    grouping: true,
-    type: 'success',
-  })
+const handleAllAgreed = () => {
+  console.log('All agreements have been accepted')
 }
 
 const generatePreview = async () => {

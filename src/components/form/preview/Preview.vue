@@ -24,7 +24,8 @@
         <p class="instructions-text">
           Please review and sign the generated application form (<b>PDF format</b>), then email it to
           <a href="mailto:global.ev.map@gmail.com" class="instructions-email">global.ev.map@gmail.com</a>
-          along with any supporting documents. <span class="highlight-text"><b>Please use your institutional email for submission.</b></span>
+          along with any supporting documents. <span class="highlight-text"><b>Please use your institutional email for
+              submission.</b></span>
         </p>
       </el-row>
 
@@ -49,15 +50,25 @@
       <!-- 用户条款 -->
       <section class="section membership-terms">
 
-        <span class="terms-text">If I am not currently a member of the Global EV Data Initiative, I <b>agree</b> to the following Membership Terms: </span>
+        <span class="terms-text">If I am not currently a member of the Global EV Data Initiative, I <b>agree</b> to the
+          following Membership Terms: </span>
+        <br>
         <br>
         <div class="terms-content">
           <span><b>1.</b> By applying for data, I agree to become a member of the Global EV Data Initiative.</span>
           <br>
-         <span><b>2.</b> I understand that the email address I provided will serve as my unique Member ID.</span>
+          <span><b>2.</b> I understand that the email address I provided will serve as my unique Member ID.</span>
           <br>
           <span><b>3.</b> I consent to the use of my anonymized data for research and statistical purposes.</span>
+
+          <br>
+          <br>
+          <span>By completing this declaration, I hereby declare that the information included in thisapplication form
+            is true and correct to the best of my knowledge. I understand that any falseor misleading information given
+            by me in connection with my application may result intermination of the application process, I will not
+            share the datasets with anyone else or usethem for commercial purposes. </span>
         </div>
+
       </section>
     </div>
 
