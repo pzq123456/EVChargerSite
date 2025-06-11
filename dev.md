@@ -108,7 +108,13 @@ const handleAllAgreed = () => {
 
 const generatePreview = async () => {
   try {
+    // showPreview.value = true
+    await Promise.all([
+      userInfoForm.value.validate(),
+      databaseForm.value.validate()
+    ])
     showPreview.value = true
+    // 使用requestAnimationFrame确保在下一个渲染周期执行
   } catch (error) {
     ElMessage.error('Please complete all required fields')
   }

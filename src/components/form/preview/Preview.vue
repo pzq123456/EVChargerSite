@@ -22,7 +22,7 @@
 
         <!-- 重要提醒 -->
         <p class="instructions-text">
-          Please review and sign the generated application form (<b>PDF format</b>), then email it to
+          Please review and sign the generated application form (<b>PDF format</b>), and then email it to
           <a href="mailto:global.ev.map@gmail.com" class="instructions-email">global.ev.map@gmail.com</a>
           along with any supporting documents. <span class="highlight-text"><b>Please use your institutional email for
               submission.</b></span>
@@ -47,11 +47,12 @@
         <SignaturePreview :userInfo="userInfo" />
       </section>
 
+      <div STYLE="page-break-after: always;"></div>
+
       <!-- 用户条款 -->
       <section class="section membership-terms">
 
-        <span class="terms-text">If I am not currently a member of the Global EV Data Initiative, I <b>agree</b> to the
-          following Membership Terms: </span>
+        <span class="terms-text"> Global EV Data Initiative Membership Terms: </span>
         <br>
         <br>
         <div class="terms-content">
@@ -63,10 +64,10 @@
 
           <br>
           <br>
-          <span>By completing this declaration, I hereby declare that the information included in thisapplication form
-            is true and correct to the best of my knowledge. I understand that any falseor misleading information given
-            by me in connection with my application may result intermination of the application process, I will not
-            share the datasets with anyone else or usethem for commercial purposes. </span>
+          <span class="terms-text"> Declaration: </span>
+          <br>
+          <br>
+          <span>By completing this declaration, I hereby declare that the information included in thisapplication form is true and correct to the best of my knowledge. I understand that any falseor misleading information given by me in connection with my application may result intermination of the application process, I will not share the datasets with anyone else or usethem for commercial purposes. </span>
         </div>
 
       </section>
@@ -180,6 +181,12 @@ const printReport = () => {
 .print-actions {
   margin-top: 30px;
   text-align: center;
+}
+
+.terms-text{
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
 }
 
 
