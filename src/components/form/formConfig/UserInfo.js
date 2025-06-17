@@ -42,9 +42,6 @@ export default {
             { label: "Ms.", value: "Ms.", description: "通用女性称谓" },
             { label: "Miss", value: "Miss", description: "未婚女性" },
             { label: "Mrs.", value: "Mrs.", description: "已婚女性" },
-            { label: "Sir", value: "Sir", description: "爵士" },
-            { label: "Lord", value: "Lord", description: "勋爵" },
-            { label: "Lady", value: "Lady", description: "女勋爵" },
           ],
           placeholder: "Please select a title"
         },
