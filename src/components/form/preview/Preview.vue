@@ -12,6 +12,10 @@
         <el-col :span="16">
           <h1 class="report-title">Global EV Data Application Form</h1>
         </el-col>
+
+        <el-col :span="8">
+          <img src="/logo.png" alt="Global EV Data Initiative Logo" class="report-logo" />
+        </el-col>
         <!-- 组织简介 -->
         <p>
           Global EV Data Initiative is an open electric vehicle data initiative
@@ -51,25 +55,21 @@
 
       <!-- 用户条款 -->
       <section class="section membership-terms">
-
-        <span class="terms-text"> Global EV Data Initiative Membership Terms: </span>
-        <br>
-        <br>
+        <span class="terms-text">Global EV Data Initiative Membership Terms:</span>
+        <br><br>
         <div class="terms-content">
           <span><b>1.</b> By applying for data, I agree to become a member of the Global EV Data Initiative.</span>
           <br>
           <span><b>2.</b> I understand that the email address I provided will serve as my unique Member ID.</span>
           <br>
           <span><b>3.</b> I consent to the use of my anonymized data for research and statistical purposes.</span>
-
-          <br>
-          <br>
-          <span class="terms-text"> Declaration: </span>
-          <br>
-          <br>
-          <span>By completing this declaration, I hereby declare that the information included in thisapplication form is true and correct to the best of my knowledge. I understand that any falseor misleading information given by me in connection with my application may result intermination of the application process, I will not share the datasets with anyone else or usethem for commercial purposes. </span>
+          <br><br>
+          <span>If I am not currently a member of the Global EV Data Initiative, I <b>agree</b> to the following Membership Terms:</span>
+          <br><br>
+          <span class="terms-text">Declaration:</span>
+          <br><br>
+          <span>By completing this declaration, I hereby declare that the information included in this application form is true and correct to the best of my knowledge. I understand that any false or misleading information given by me in connection with my application may result in termination of the application process. I will not share the datasets with anyone else or use them for commercial purposes.</span>
         </div>
-
       </section>
     </div>
 
@@ -189,6 +189,11 @@ const printReport = () => {
   margin-bottom: 10px;
 }
 
+.report-logo {
+  max-width: 100px;
+  height: auto;
+  float: right;
+}
 
 
 /* 打印样式优化 */
@@ -198,6 +203,8 @@ const printReport = () => {
     background: transparent !important;
     color: #000 !important;
   }
+
+  /* 只显示打印内容 */
 
   #printable-content,
   #printable-content * {

@@ -1,31 +1,32 @@
 # Global EV Data Application Form
 
-> - Note: This form is used to apply for datasets available through the Global EV Data Initiative (please see its website: https://globalevdata.github.io/ ). Please fill in this application form. We will process your application within two weeks. If you have any questions, you may contact us by email (global.ev.map@gmail.com). 
-> - (Version 2025.2 revised on 12 May 2025)
+> Note: This form is used to apply for datasets available through the Global EV Data Initiative (please see its website: https://globalevdata.github.io/ ). Please fill in this application form. We will process your application within two weeks. If you have any questions, you may contact us by email (global.ev.map@gmail.com). 
 
-## Part1 Basic Information
+*(Version 2025.2 revised on 12 May 2025)*
+
+## Part 1 Basic Information
 
 <UserInfoForm :form-config="UserInfoConfig" v-model="userForm" ref="userInfoForm" />
 
-## Part2 Databases you need
-> - *These datasets are available, but may be shareable until the relevant work (e.g., paper) is published. However, you are still welcome to submit an application now, as we will share the datasets requested as soon as we can. 
-> - If a large-scale dataset or multiple datasets are requested, a strong justification with supporting documents (e.g., a project record, or supporting letter from supervisor / principal investigator) is generally needed.  
+## Part 2 Databases you need
+
+> If a large-scale dataset or multiple datasets are requested, a strong justification with supporting documents (e.g., a project record, or supporting letter from supervisor / principal investigator) is generally needed.  
 
 <DatabaseForm :form-config="DataQueryConfig" v-model="queryForm" ref="databaseForm" />
 
-
+> These datasets marked with an asterisk (*) are available , but may be shareable until the relevant work (e.g., paper) is published. However, you are still welcome to submit an application now, as we will share the datasets requested as soon as we can. 
 
 ## Part 3 Global EV Data Initiative Membership Terms
 
-> Global EV Data Initiative is an open electric vehicle data initiative that aims to collect, analyse, visualize and share data on the electric vehicle market, policy and charging infrastructure across the globe.
+> If I am not currently a member of the Global EV Data Initiative, I <b>agree</b> to the following Membership Terms:
 
 <MembershipAgreement 
   @all-agreed="handleAllAgreed" v-model="agreementStatus"
 />
 
 ## Part 4 Declaration
-- By completing this declaration, I hereby declare that the information included in thisapplication form is true and correct to the best of my knowledge. 
-- I understand that any falseor misleading information given by me in connection with my application may result intermination of the application process, I will not share the datasets with anyone else or usethem for commercial purposes. 
+1. By completing this declaration, I hereby declare that the information included in this application form is true and correct to the best of my knowledge. 
+2. I understand that any falseor misleading information given by me in connection with my application may result intermination of the application process, I will not share the datasets with anyone else or usethem for commercial purposes. 
 
 <div class="form-footer">
 <el-tooltip
@@ -53,6 +54,7 @@
   :dataConfig="DataQueryConfig"
   @print="printReport"
   @export="exportPDF"
+  ref="componentRef"
 />
 
 <div class="preview-footer" v-show="showPreview">
@@ -108,7 +110,6 @@ const handleAllAgreed = () => {
 
 const generatePreview = async () => {
   try {
-    // showPreview.value = true
     await Promise.all([
       userInfoForm.value.validate(),
       databaseForm.value.validate()
@@ -124,9 +125,12 @@ const printReport = () => {
   const printContent = document.getElementById('printable-content').innerHTML
   const originalContent = document.body.innerHTML
   document.body.innerHTML = printContent
-  window.print()
-  document.body.innerHTML = originalContent
-  location.reload()
+  // 等待页面渲染完成后再触发打印
+  requestAnimationFrame(() => {
+    window.print()
+    document.body.innerHTML = originalContent
+    location.reload()
+  })
 }
 
 const exportPDF = (data) => {
