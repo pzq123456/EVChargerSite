@@ -1,7 +1,7 @@
 <template>
   <div class="custom-alert-wrapper" v-show="visible">
     <el-alert type="warning" title="Submission Instructions"
-      description="Please review and sign the generated application form (PDF format), then email it to global.ev.map@gmail.com along with any supporting documents. Please use your institutional email for submission."
+      description="Please review the generated application form (PDF format), then email it to global.ev.map@gmail.com along with any supporting documents. Please use your institutional email for submission."
       show-icon :closable="true" class="custom-alert" />
   </div>
 
@@ -19,14 +19,13 @@
         <!-- 组织简介 -->
         <p>
           Global EV Data Initiative is an open electric vehicle data initiative
-          that aims to collect, analyse,
-          visualize and share data on the electric vehicle market, policy and
+          that aims to collect, analyse, visualize and share data on the electric vehicle market, policy and
           charging infrastructure across the globe.
         </p>
 
         <!-- 重要提醒 -->
         <p class="instructions-text">
-          Please review and sign the generated application form (<b>PDF format</b>), and then email it to
+          Please review the generated application form (<b>PDF format</b>), and then email it to
           <a href="mailto:global.ev.map@gmail.com" class="instructions-email">global.ev.map@gmail.com</a>
           along with any supporting documents. <span class="highlight-text"><b>Please use your institutional email for
               submission.</b></span>
@@ -58,14 +57,15 @@
         <span class="terms-text">Global EV Data Initiative Membership Terms:</span>
         <br><br>
         <div class="terms-content">
+          <span>If I am not currently a member of the Global EV Data Initiative, I <b>agree</b> to the following Membership Terms:</span>
+          <br><br>
           <span><b>1.</b> By applying for data, I agree to become a member of the Global EV Data Initiative.</span>
           <br>
           <span><b>2.</b> I understand that the email address I provided will serve as my unique Member ID.</span>
           <br>
           <span><b>3.</b> I consent to the use of my anonymized data for research and statistical purposes.</span>
           <br><br>
-          <span>If I am not currently a member of the Global EV Data Initiative, I <b>agree</b> to the following Membership Terms:</span>
-          <br><br>
+
           <span class="terms-text">Declaration:</span>
           <br><br>
           <span>By completing this declaration, I hereby declare that the information included in this application form is true and correct to the best of my knowledge. I understand that any false or misleading information given by me in connection with my application may result in termination of the application process. I will not share the datasets with anyone else or use them for commercial purposes.</span>
@@ -185,7 +185,6 @@ const printReport = () => {
 
 .terms-text{
   font-weight: bold;
-  color: #333;
   margin-bottom: 10px;
 }
 

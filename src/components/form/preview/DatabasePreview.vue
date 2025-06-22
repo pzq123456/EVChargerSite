@@ -3,7 +3,7 @@
     <template #header>
       <div class="card-header">
         <span>
-          Data Application Information
+          Dataset Selected
         </span>
       </div>
     </template>

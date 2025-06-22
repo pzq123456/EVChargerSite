@@ -14,11 +14,11 @@
 
 <DatabaseForm :form-config="DataQueryConfig" v-model="queryForm" ref="databaseForm" />
 
-> These datasets marked with an asterisk (*) are available , but may be shareable until the relevant work (e.g., paper) is published. However, you are still welcome to submit an application now, as we will share the datasets requested as soon as we can. 
+> Those datasets marked with an asterisk (*) are available, but may be shareable until the relevant work (e.g., paper) is published. However, you are still welcome to submit an application now, as we will share the datasets requested as soon as we can. 
 
 ## Part 3 Global EV Data Initiative Membership Terms
 
-> If I am not currently a member of the Global EV Data Initiative, I <b>agree</b> to the following Membership Terms:
+> If you are currently not a member of the Global EV Data Initiative, you do agree to the following Membership Terms:
 
 <MembershipAgreement 
   @all-agreed="handleAllAgreed" v-model="agreementStatus"
@@ -110,10 +110,10 @@ const handleAllAgreed = () => {
 
 const generatePreview = async () => {
   try {
-    await Promise.all([
-      userInfoForm.value.validate(),
-      databaseForm.value.validate()
-    ])
+    // await Promise.all([
+    //   userInfoForm.value.validate(),
+    //   databaseForm.value.validate()
+    // ])
     showPreview.value = true
     // 使用requestAnimationFrame确保在下一个渲染周期执行
   } catch (error) {

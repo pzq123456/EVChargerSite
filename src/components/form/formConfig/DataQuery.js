@@ -1,7 +1,7 @@
 // config.js
 export default {
   formProps: {
-    labelWidth: "120px",
+    labelWidth: "140px",
     class: "query-form"
   },
   title: "Data Selection",
@@ -18,7 +18,7 @@ function createDatabaseConfig(label) {
     {
       type: "cascader",
       model: "regions",
-      label: "Regions",
+      label: "Country/Region",
       optionsRef: "regionOptions",
       props: {
         multiple: true,
