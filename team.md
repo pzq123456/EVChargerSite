@@ -18,6 +18,11 @@ const Investigators = [{
 // External Collaborators
 const ExternalCollaborators = [
   {
+    avatar: '8.png',
+    name: 'Fan ZHANG',
+    title: 'Leading Researcher & Postdoc Fellow',
+  },
+  {
     avatar: '6.png',
     name: 'Binru WEI',
     title: 'Assistant Professor at Zhejiang University',
@@ -26,7 +31,18 @@ const ExternalCollaborators = [
     avatar: '7.png',
     name: 'Zhenhan PENG',
     title: 'PhD Student at KU Leuven, Belgium',
-  }
+  },
+  {
+    avatar: 'Yuan LI.png',
+    name: 'Yuan LI',
+    title: 'Research Assistant',
+  },
+  {
+    avatar: 'Xingjun HUANG.png',
+    name: 'Xingjun HUANG',
+    title: 'Postdoctoral Fellow of the TIP research group',
+  },
+
 ]
 
 
@@ -43,11 +59,6 @@ const Reachers = [
     title: 'Leading Researcher & Postdoc Fellow',
   },
   {
-    avatar: '8.png',
-    name: 'Fan ZHANG',
-    title: 'Leading Researcher & Postdoc Fellow',
-  },
-  {
     avatar: '4.png',
     name: 'Justin Hayse Chiwing G. TANG',
     title: 'Leading Researcher & PhD Student',
@@ -58,9 +69,19 @@ const Reachers = [
     title: 'Data Analyst & PhD Student',
   },
   {
+    avatar: 'Shiqi WANG.png',
+    name: 'Shiqi WANG',
+    title: 'Data Analyst & PhD Student',
+  },
+  {
+    avatar: 'Zili TIAN.png',
+    name: 'Zili TIAN',
+    title: 'Data Analyst & PhD Student',
+  },
+  {
     avatar: '10.png',
     name: 'Xiaoqi SHI',
-    title: 'Data Analyst & Master Student',
+    title: 'Data Analyst & PhD Student',
   },
   {
     avatar: '9.png',
@@ -68,7 +89,6 @@ const Reachers = [
     title: 'Data Analyst & Master Student',
   },
   {
-    // Ding Chen，Data Analyst & Master Student
     avatar: '11.png',
     name: 'Ding CHEN',
     title: 'Data Analyst & Master Student',
@@ -77,26 +97,8 @@ const Reachers = [
     avatar: '12.png',
     name: 'Zhiqing PAN',
     title: 'Website Developer & Research Assistant',
-    // links : [
-    //   {
-    //     icon: 'github',
-    //     link: 'https://www.github.com/pzq123456',
-    //   }
-    // ]
   },
 ]
-
-
-// Justin
-// Leading Researcher & PhD Student
-
-// Enyuan
-// Data Analyst & PhD Student
-
-// Xiaoqi SHI
-// Data Analyst & Master Student
-
-
 
 
 </script>

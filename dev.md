@@ -18,7 +18,7 @@
 
 ## Part 3 Global EV Data Initiative Membership Terms
 
-> If you are currently not a member of the Global EV Data Initiative, you do agree to the following Membership Terms:
+> If you are currently not a member of the Global EV Data Initiative, you need to the following Membership Terms:
 
 <MembershipAgreement 
   @all-agreed="handleAllAgreed" v-model="agreementStatus"
