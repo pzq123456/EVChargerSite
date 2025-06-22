@@ -5,17 +5,6 @@
         <div class="hero-text">
           <h1 class="hero-title">{{ hero.title }}</h1>
           <p class="hero-tagline">{{ hero.tagline }}</p>
-          <div class="hero-actions">
-            <el-button 
-              type="success" 
-              size="large" 
-              round 
-              @click="$emit('scroll-to', 'about')"
-            >
-              Learn More
-              <el-icon class="button-icon"><i-ep-arrow-right /></el-icon>
-            </el-button>
-          </div>
         </div>
         
         <div class="hero-media">
@@ -25,15 +14,11 @@
               class="logo-image" 
               fit="contain"
             />
-            <div class="logo-shine"></div>
             <div class="logo-shadow"></div>
           </div>
         </div>
       </div>
       
-      <div class="scroll-indicator" @click="$emit('scroll-to', 'about')">
-        <el-icon class="scroll-icon"><i-ep-arrow-down /></el-icon>
-      </div>
     </div>
   </section>
 </template>
@@ -99,21 +84,6 @@ defineEmits(['scroll-to', 'contact'])
   max-width: 90%;
 }
 
-.hero-actions {
-  display: flex;
-  gap: 16px;
-  margin-top: 40px;
-}
-
-
-.hero-media {
-  flex: 1;
-  position: relative;
-  min-height: 400px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 .logo-container {
   position: relative;
@@ -172,18 +142,6 @@ defineEmits(['scroll-to', 'contact'])
   z-index: 3;
   animation: bounce 2s infinite;
 }
-
-.scroll-icon {
-  font-size: 1.5rem;
-  color: var(--vp-c-brand-1);
-  transition: all 0.3s ease;
-}
-
-.scroll-indicator:hover .scroll-icon {
-  color: var(--vp-c-brand-2);
-  transform: translateY(5px);
-}
-
 @keyframes bounce {
   0%, 20%, 50%, 80%, 100% {
     transform: translateY(0) translateX(-50%);

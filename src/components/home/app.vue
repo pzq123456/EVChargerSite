@@ -4,8 +4,8 @@
     <Carousel :carousel="teamData.carousel" />
     <Features :features="teamData.features" @navigate-to="navigateTo" />
     <Publications :publications="teamData.publications" @navigate-to="navigateTo" />
-    <News :news="teamData.news" :format-date="formatDate" />
-    <Team :team="teamData.team" />
+    <News :news="teamData.news" :format-date="formatDate" :navigate-to="navigateTo" />
+    <!-- <Team :team="teamData.team" /> -->
   </div>
 </template>
 
@@ -17,7 +17,7 @@ import Carousel from './Carousel.vue'
 import Features from './Features.vue'
 import Publications from './Publications.vue'
 import News from './News.vue'
-import Team from './Team.vue'
+// import Team from './Team.vue'
 
 const contactForm = ref({
   name: '',
@@ -37,17 +37,24 @@ const router = useRouter()
 
 const navigateTo = (link) => {
   if (link.startsWith('/')) {
-    router.go(link)
+    // 处理绝对路径（以/开头）
+    const base = import.meta.env.BASE_URL || '/'
+    const fullPath = base.endsWith('/') && link.startsWith('/') ? base.slice(0, -1) + link : base + link
+    router.go(fullPath)
   } else if (link.startsWith('http')) {
+    // 处理外部链接
     window.open(link, '_blank')
   } else {
-    scrollTo(link)
+    // 处理相对路径（如 News/2025-5-21.html）
+    const base = import.meta.env.BASE_URL || '/'
+    const fullPath = base + (base.endsWith('/') ? '' : '/') + link
+    router.go(fullPath)
   }
 }
 
 const formatDate = (dateString) => {
   const options = { year: 'numeric', month: 'short', day: 'numeric' }
-  return new Date(dateString).toLocaleDateString(undefined, options)
+  return new Date(dateString).toLocaleDateString('en-US', options)
 }
 
 const submitContact = () => {

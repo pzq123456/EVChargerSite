@@ -36,7 +36,7 @@ defineProps({
   color: white;
   text-align: center;
   padding: 20px;
-  background-color: rgba(0, 0, 0, 0.5);
+  background: rgba(66, 65, 65, 0.18);
 }
 
 .carousel-content h2 {

@@ -11,13 +11,31 @@
         <div class="pub-image-container">
           <el-image :src="pub.image" fit="cover" class="pub-image" />
           <div class="pub-journal-tag">
-            <el-tag type="success" effect="plain">{{ pub.journal }}</el-tag>
+            <el-tag type="success">{{ pub.journal }}</el-tag>
           </div>
         </div>
         <div class="pub-content">
           <h3 class="pub-title">{{ pub.title }}</h3>
           <div class="pub-meta">
-            <span class="pub-authors">{{ pub.authors }}</span>
+            <el-popover
+              placement="top"
+              :width="400"
+              trigger="hover"
+              :disabled="!isAuthorsOverflow(index)"
+            >
+              <template #reference>
+                <span 
+                  ref="authorsRef"
+                  class="pub-authors"
+                  v-html="formatAuthors(pub.authors)"
+                ></span>
+              </template>
+              <div class="popover-authors">
+                <p v-for="(author, idx) in parseAuthors(pub.authors)" :key="idx" class="popover-author-item">
+                  {{ author.name }}<sup v-if="author.hasStar">*</sup>
+                </p>
+              </div>
+            </el-popover>
             <span class="pub-year">{{ pub.year }}</span>
           </div>
           <p class="pub-abstract">{{ pub.abstract }}</p>
@@ -25,14 +43,13 @@
             <el-button type="primary" text @click="$emit('navigate-to', pub.link)">
               Read Paper <el-icon><i-ep-right /></el-icon>
             </el-button>
-
             <el-button
               v-if="pub.github && /^https?:\/\/.+/.test(pub.github)"
               :style="{
-              background: '#fff',
-              borderRadius: '50%',
-              minWidth: '0',
-              border: '1px solid #e0e0e0'
+                background: '#fff',
+                borderRadius: '50%',
+                minWidth: '0',
+                border: '1px solid #e0e0e0'
               }"
               circle
               @click="window.open(pub.github, '_blank')"
@@ -47,15 +64,74 @@
 </template>
 
 <script setup>
+import { ref, nextTick } from 'vue';
+
 defineProps({
   publications: {
     type: Array,
     required: true
   }
 })
+
+const authorsRef = ref([]);
+
+// 解析作者数据，返回结构化对象数组
+const parseAuthors = (authors) => {
+  if (!Array.isArray(authors)) {
+    return authors ? [{ name: String(authors), hasStar: authors.includes('*') }] : [];
+  }
+  return authors.map(author => ({
+    name: author.replace('*', ''),
+    hasStar: author.includes('*')
+  }));
+};
+
+// 格式化作者名称，处理上标样式
+const formatAuthors = (authors) => {
+  const parsed = parseAuthors(authors);
+  return parsed.map(author => {
+    if (author.hasStar) {
+      return `<span class="author-highlight">${author.name}<sup>*</sup></span>`;
+    }
+    return author.name;
+  }).join(', ');
+};
+
+// 检查作者名称是否溢出
+const isAuthorsOverflow = (index) => {
+  return nextTick(() => {
+    const el = authorsRef.value[index];
+    if (el) {
+      return el.scrollWidth > el.offsetWidth;
+    }
+    return false;
+  });
+};
 </script>
 
 <style scoped>
+.author-highlight {
+  color: var(--vp-c-brand-1);
+  font-weight: bold;
+}
+
+.author-highlight sup {
+  font-size: 0.8em;
+  vertical-align: super;
+}
+
+.popover-authors {
+  max-height: 200px;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.popover-author-item {
+  margin: 5px 0;
+  font-size: 0.9rem;
+  color: var(--vp-c-text-1);
+}
+
 .publications-section {
   padding: 80px 0;
 }
@@ -110,6 +186,7 @@ defineProps({
   width: 100%;
   height: 100%;
   transition: all 0.5s ease;
+  background-color: #ffffff;
 }
 
 .publication-card:hover .pub-image {
@@ -150,6 +227,7 @@ defineProps({
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  cursor: pointer;
 }
 
 .pub-year {

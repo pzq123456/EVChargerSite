@@ -35,12 +35,12 @@ const ExternalCollaborators = [
   {
     avatar: 'Yuan LI.png',
     name: 'Yuan LI',
-    title: 'Research Assistant',
+    title: 'PhD student at Vrije Universiteit Brussel, Belgium',
   },
   {
     avatar: 'Xingjun HUANG.png',
     name: 'Xingjun HUANG',
-    title: 'Postdoctoral Fellow of the TIP research group',
+    title: 'Lecturer at School of Modern Posts, Chongqing University of Posts and Telecommunications, China',
   },
 
 ]
@@ -64,23 +64,23 @@ const Reachers = [
     title: 'Leading Researcher & PhD Student',
   },
   {
-    avatar: '5.png',
-    name: 'Enyuan CAO',
-    title: 'Data Analyst & PhD Student',
-  },
-  {
     avatar: 'Shiqi WANG.png',
     name: 'Shiqi WANG',
-    title: 'Data Analyst & PhD Student',
+    title: 'Leading Researcher & PhD student',
   },
   {
     avatar: 'Zili TIAN.png',
     name: 'Zili TIAN',
-    title: 'Data Analyst & PhD Student',
+    title: 'Leading Researcher & PhD student',
   },
   {
     avatar: '10.png',
     name: 'Xiaoqi SHI',
+    title: 'Data Analyst & PhD Student',
+  },
+  {
+    avatar: '5.png',
+    name: 'Enyuan CAO',
     title: 'Data Analyst & PhD Student',
   },
   {

@@ -194,7 +194,7 @@ const getNewsTag = (item) => {
 
 .news-image-container {
   position: relative;
-  height: 220px;
+  height: 300px;
   overflow: hidden;
 }
 
@@ -243,6 +243,12 @@ const getNewsTag = (item) => {
   margin-left: 12px;
   font-weight: 500;
   border: none;
+  background-color: transparent;
+  color: var(--vp-c-text-3);
+  font-size: 0.9rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--vp-c-divider);
 }
 
 .news-summary {

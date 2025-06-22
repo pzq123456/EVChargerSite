@@ -1,3 +1,11 @@
+// news
+import img1 from '../../../News/imgs/1.png'
+import img2 from '../../../News/imgs/2.png'
+import img3 from '../../../News/imgs/3.png'
+
+// publications
+import image1 from '../../../asset/image.png'
+
 export const teamData = {
     hero: {
         title: "Global EV Data Initiative",
@@ -46,93 +54,59 @@ export const teamData = {
 
     publications: [
         {
-            title: "Global EV Market Trends 2023",
-            authors: "Smith, J., Lee, H., Zhang, W.",
-            journal: "Nature Energy",
-            year: 2023,
-            link: "/home",
-            image: "https://images.pexels.com/photos/709552/pexels-photo-709552.jpeg",
-            abstract: "This study analyzes the latest trends in global electric vehicle adoption patterns and market dynamics across different regions.",
-            github: ""
+            title: "Where are public electric vehicle charging stations located globally? Insights from a spatial planning perspective.",
+            authors: "Xiong Yang, Zhenhan Peng, Chengxiang Zhuge*, Justin Hayse Chiwing G. Tang, Ruichen Ma, Binru Wei, and Wenzhong Shi*",
+            journal: "Under Review",
+            year: 2024,
+            link: "/publications",
+            image: image1,
+            abstract: "This study provides a comprehensive analysis of the global distribution of public electric vehicle (EV) charging stations, highlighting spatial patterns and planning implications.",
+            github: "https://github.com/"
         },
         {
-            title: "Charging Infrastructure Optimization",
-            authors: "Garcia, M., Chen, X., Wang, Y.",
-            journal: "Renewable & Sustainable Energy Reviews",
-            year: 2022,
+            title: "XXXX XXXX",
+            authors: "XXX, XXX, XXX",
+            journal: "XXX Journal",
+            year: 2025,
             link: "#",
             image: "https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg",
             abstract: "A novel approach to optimizing charging station locations based on spatial demand analysis and user behavior modeling.",
             github: ""
         },
         {
-            title: "Policy Impacts on EV Adoption",
-            authors: "Johnson, K., Brown, T., Kim, S.",
-            journal: "Energy Policy",
-            year: 2022,
+            title: "XXX XXXX",
+            authors: "XXX, XXX, XXX",
+            journal: "XXX Journal",
+            year: 2025,
             link: "#",
             image: "https://images.pexels.com/photos/326055/pexels-photo-326055.jpeg",
             abstract: "Comprehensive evaluation of various policy instruments and their effectiveness in promoting electric vehicle adoption.",
             github: ""
         },
-        {
-            title: "Policy Impacts on EV Adoption",
-            authors: "Johnson, K., Brown, T., Kim, S.",
-            journal: "Energy Policy",
-            year: 2022,
-            link: "#",
-            image: "https://images.pexels.com/photos/326055/pexels-photo-326055.jpeg",
-            abstract: "Comprehensive evaluation of various policy instruments and their effectiveness in promoting electric vehicle adoption.",
-            github: "https://github.com/example/repo"
-        },
-        {
-            title: "Policy Impacts on EV Adoption",
-            authors: "Johnson, K., Brown, T., Kim, S.",
-            journal: "Energy Policy",
-            year: 2022,
-            link: "#",
-            image: "https://images.pexels.com/photos/326055/pexels-photo-326055.jpeg",
-            abstract: "Comprehensive evaluation of various policy instruments and their effectiveness in promoting electric vehicle adoption.",
-            github: ""
-        }
     ],
 
     news: [
         {
-            title: "Team wins prestigious research grant",
-            date: "2023-05-15",
-            summary: "Our team has been awarded a $2M grant to study EV adoption patterns.",
-            link: "#",
-            image: "https://images.pexels.com/photos/709552/pexels-photo-709552.jpeg"
+            title: "[Talk] Presentations on Global EV Data Initiative at University of Cambridge",
+            date: "2025-5-21",
+            summary: "The Principal Investigator of the Global EV Data Initiative, Dr. Chengxiang (Tony) Zhuge was invited by Prof Ying Jin and Dr Li Wan to give two talks at the Architecture and Land Economy departments, University of Cambridge on 30 April and 1 May 2025...",
+            link: "/News/2025-5-21",
+            image: img3
         },
         {
-            title: "New partnership announced",
-            date: "2023-04-02",
-            summary: "Collaborating with industry leaders to improve charging infrastructure.",
-            link: "#",
-            image: "https://images.pexels.com/photos/709552/pexels-photo-709552.jpeg"
+            title: "[Data] Global Public Electric Vehicle Charging Station Data in 2024",
+            date: "2025-3-19",
+            summary: "We are glad to share the Global Public Electric Vehicle Charging Station Data in 2024, which contain public EV charging station locations in the US, China and Europe...",
+            link: "News/2025-3-19",
+            image: img2
         },
         {
-            title: "Keynote at International Conference",
-            date: "2023-03-18",
-            summary: "Our PI delivered a keynote at the Global EV Symposium.",
-            link: "#",
-            image: "https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg"
+            title: "[Data] Global Public Electric Vehicle Charging Station Data in 2022",
+            date: "2024-11-22",
+            summary: "We are glad to share the Global Public Electric Vehicle Charging Station Data in 2022, which contain public EV charging station locations in the US, China and Europe...",
+            link: "News/2024-11-22",
+            image: img1
         },
-        {
-            title: "Keynote at International Conference",
-            date: "2023-03-18",
-            summary: "Our PI delivered a keynote at the Global EV Symposium.",
-            link: "#",
-            image: "https://images.pexels.com/photos/326055/pexels-photo-326055.jpeg"
-        },
-        {
-            title: "Keynote at International Conference",
-            date: "2023-03-18",
-            summary: "Our PI delivered a keynote at the Global EV Symposium.",
-            link: "#",
-            image: "https://images.pexels.com/photos/326055/pexels-photo-326055.jpeg"
-        }
     ],
 
     team: [
