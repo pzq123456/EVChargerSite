@@ -18,11 +18,6 @@ const Investigators = [{
 // External Collaborators
 const ExternalCollaborators = [
   {
-    avatar: '8.png',
-    name: 'Fan ZHANG',
-    title: 'Leading Researcher & Postdoc Fellow',
-  },
-  {
     avatar: '6.png',
     name: 'Binru WEI',
     title: 'Assistant Professor at Zhejiang University',
@@ -42,7 +37,11 @@ const ExternalCollaborators = [
     name: 'Xingjun HUANG',
     title: 'Lecturer at School of Modern Posts, Chongqing University of Posts and Telecommunications, China',
   },
-
+  {
+    avatar: '8.png',
+    name: 'Fan ZHANG',
+    title: 'Postdoc Fellow at HK PolyU',
+  },
 ]
 
 
@@ -134,7 +133,7 @@ const Reachers = [
 
   <VPTeamPageSection>
       <template #title>
-        International Collaborators
+        Collaborators
       </template>
       <template #members>
         <VPTeamMembers size="medium" :members= "ExternalCollaborators" />
