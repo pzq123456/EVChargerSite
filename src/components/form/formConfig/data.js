@@ -71,30 +71,4 @@ export const regionOptions = [
 // 可用年份
 export const availableYears = ['2022', '2024*', '2025*']
 
-// 表单验证规则
-export const rules = {
-  databases: [
-    {
-      type: 'array',
-      required: true,
-      message: '请至少选择一个数据库',
-      trigger: 'change'
-    }
-  ],
-  regions: [
-    {
-      type: 'array',
-      required: true,
-      message: '请选择地区',
-      trigger: 'change'
-    }
-  ],
-  years: [
-    {
-      type: 'array',
-      required: true,
-      message: '请选择年份',
-      trigger: 'change'
-    }
-  ]
-}
+export const availableYearsForAAM = ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024']

@@ -110,10 +110,10 @@ const handleAllAgreed = () => {
 
 const generatePreview = async () => {
   try {
-    await Promise.all([
-      userInfoForm.value.validate(),
-      databaseForm.value.validate()
-    ])
+    // await Promise.all([
+    //   userInfoForm.value.validate(),
+    //   databaseForm.value.validate()
+    // ])
     showPreview.value = true
     // 使用requestAnimationFrame确保在下一个渲染周期执行
   } catch (error) {

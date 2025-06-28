@@ -2,16 +2,14 @@
   <el-card shadow="never" v-if="hasSelectedDatabases">
     <template #header>
       <div class="card-header">
-        <span>
-          Dataset Selected
-        </span>
+        <span>Dataset Selected</span>
       </div>
     </template>
-    <template v-for="(dbConfig, dbKey) in dataConfig.databases" :key="dbKey">
+    <template v-for="dbKey in sortedDatabaseKeys" :key="dbKey">
       <div v-if="queryParams[dbKey]?.selected" class="database-section">
-        <h4 class="database-title">{{ dbConfig.label }}</h4>
+        <h4 class="database-title">{{ dataConfig.databases[dbKey].label }}</h4>
         <el-descriptions :column="1" border :label-width="labelWidth">
-          <template v-for="field in dbConfig.fields" :key="field.model">
+          <template v-for="field in sortedFields(dbKey)" :key="field.model">
             <el-descriptions-item :label="field.label">
               {{ formatFieldValue(field, queryParams[dbKey][field.model]) }}
             </el-descriptions-item>
@@ -39,22 +37,35 @@ const props = defineProps({
   },
   labelWidth: {
     type: String,
-    default: '120px' // 默认标签宽度
+    default: '120px'
   }
 })
 
-// 计算属性
+// 计算属性：按字母顺序排序的数据库键
+const sortedDatabaseKeys = computed(() => {
+  return Object.keys(props.dataConfig.databases).sort((a, b) => {
+    return props.dataConfig.databases[a].label.localeCompare(props.dataConfig.databases[b].label)
+  })
+})
+
+// 计算属性：是否有选中的数据库
 const hasSelectedDatabases = computed(() => {
   return Object.values(props.queryParams).some(db => db?.selected)
 })
 
+// 方法：获取排序后的字段列表
+const sortedFields = (dbKey) => {
+  const fields = props.dataConfig.databases[dbKey]?.fields || []
+  return [...fields].sort((a, b) => a.label.localeCompare(b.label))
+}
+
 const formatFieldValue = (field, value) => {
   if (!value || (Array.isArray(value) && value.length === 0)) {
-    return 'all' // 根据需求可以改为 'all' 或 '全部'
+    return 'all'
   }
 
   if (Array.isArray(value)) {
-    return value.join(' ')
+    return [...value].sort().join(' ') // 对数组值也进行排序
   }
 
   return value
@@ -62,11 +73,9 @@ const formatFieldValue = (field, value) => {
 </script>
 
 <style scoped>
-.section-title {
-  margin: 0 0 15px 0;
-  color: var(--el-text-color-primary);
-  font-size: 18px;
+.card-header {
   font-weight: 500;
+  font-size: 16px;
 }
 
 .database-section {
@@ -80,7 +89,6 @@ const formatFieldValue = (field, value) => {
   font-weight: 500;
 }
 
-/* 如果需要更精细的控制，可以添加以下样式 */
 :deep(.el-descriptions__label) {
   font-weight: 500;
   color: var(--el-text-color-regular);
