@@ -52,10 +52,51 @@ const navigateTo = (link) => {
   }
 }
 
-const formatDate = (dateString) => {
-  const options = { year: 'numeric', month: 'short', day: 'numeric' }
-  return new Date(dateString).toLocaleDateString('en-US', options)
-}
+const formatDate = (dateInput) => {
+  try {
+    // 处理多种日期输入格式
+    let date;
+    
+    if (dateInput instanceof Date) {
+      // 如果已经是Date对象，直接使用
+      date = dateInput;
+    } else if (typeof dateInput === 'string') {
+      // 处理字符串格式的日期
+      const parts = dateInput.split(/[-/]/);
+      
+      // 标准化日期字符串格式为YYYY-MM-DD
+      if (parts.length === 3) {
+        const year = parts[0].padStart(4, '0');
+        const month = parts[1].padStart(2, '0');
+        const day = parts[2].padStart(2, '0');
+        dateInput = `${year}-${month}-${day}`;
+      }
+      
+      // 尝试解析日期
+      date = new Date(dateInput);
+      
+      // 检查是否解析为无效日期
+      if (isNaN(date.getTime())) {
+        // 尝试其他格式
+        date = new Date(dateInput.replace(/(\d+)(st|nd|rd|th)/, '$1'));
+      }
+    } else {
+      throw new Error('Invalid date input type');
+    }
+    
+    // 再次验证日期有效性
+    if (isNaN(date.getTime())) {
+      throw new Error('Invalid date');
+    }
+    
+    // 格式化选项
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return date.toLocaleDateString('en-US', options);
+  } catch (error) {
+    console.error('Error formatting date:', error);
+    return 'Invalid date'; // 或者根据需求返回null/抛出错误
+  }
+};
 
 const submitContact = () => {
   console.log('Form submitted:', contactForm.value)

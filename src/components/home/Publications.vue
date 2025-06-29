@@ -41,7 +41,7 @@
           <p class="pub-abstract">{{ pub.abstract }}</p>
           <div class="pub-actions">
             <el-button type="primary" text @click="$emit('navigate-to', pub.link)">
-              Read Paper <el-icon><i-ep-right /></el-icon>
+              Read Paper <el-icon><right /></el-icon>
             </el-button>
             <el-button
               v-if="pub.github && /^https?:\/\/.+/.test(pub.github)"

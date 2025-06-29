@@ -52,7 +52,7 @@
                   @click="navigateTo(item.link)"
                 >
                   Read Full Story
-                  <el-icon class="arrow-icon"><i-ep-arrow-right /></el-icon>
+                  <el-icon class="arrow-icon"><right /></el-icon>
                 </el-button>
               </div>
             </div>

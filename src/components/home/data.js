@@ -95,7 +95,7 @@ export const teamData = {
         },
         {
             title: "[Data] Global Public Electric Vehicle Charging Station Data in 2024",
-            date: "2025-3-19",
+            date: "2025-03-19",
             summary: "We are glad to share the Global Public Electric Vehicle Charging Station Data in 2024, which contain public EV charging station locations in the US, China and Europe...",
             link: "News/2025-3-19",
             image: img2
