@@ -43,7 +43,7 @@ We collected social media data related to Advanced Air Mobility (AAM) from Twitt
 To request access to the social media text dataset used and produced in our study, please send the completed Data Request Form to: global.ev.map@gmail.com 
 
 <FileDownloader 
-  :fileUrl='BibliometricURL'
+  :fileUrl='SocialMediaURL'
   buttonText="Download Sample Data" 
   fileName="sample Social Media Text Data.xlsx"
 />
@@ -56,7 +56,7 @@ We collected bibliometric text data from two leading academic databases, includi
 To request access to the bibliometric text dataset used and produced in our study, please send the completed Data Request Form to: global.ev.map@gmail.com 
 
 <FileDownloader 
-  :fileUrl='SocialMediaURL'
+  :fileUrl='BibliometricURL'
   buttonText="Download Sample Data" 
   fileName="sample Bibliometric Text Data.xlsx"
 />

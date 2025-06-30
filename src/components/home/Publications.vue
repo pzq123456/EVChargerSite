@@ -73,6 +73,9 @@ defineProps({
   }
 })
 
+// define emits
+defineEmits(['navigate-to']);
+
 const authorsRef = ref([]);
 
 // 解析作者数据，返回结构化对象数组

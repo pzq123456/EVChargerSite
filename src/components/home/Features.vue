@@ -29,6 +29,9 @@ defineProps({
     required: true
   }
 })
+
+// defineEmits
+defineEmits(['navigate-to'])
 </script>
 
 <style scoped>
