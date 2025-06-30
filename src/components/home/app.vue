@@ -2,9 +2,9 @@
   <div class="team-page">
     <Hero :hero="teamData.hero" @scroll-to="scrollTo" />
     <Carousel :carousel="teamData.carousel" />
-    <Features :features="teamData.features" @navigate-to="navigateTo" />
+    <!-- <Features :features="teamData.features" @navigate-to="navigateTo" /> -->
     <Publications :publications="teamData.publications" @navigate-to="navigateTo" />
-    <News :news="teamData.news" :format-date="formatDate" :navigate-to="navigateTo" />
+    <!-- <News :news="teamData.news" :format-date="formatDate" :navigate-to="navigateTo" /> -->
     <!-- <Team :team="teamData.team" /> -->
   </div>
 </template>
@@ -14,9 +14,9 @@ import { ref } from 'vue'
 import { teamData } from './data.js'
 import Hero from './Hero.vue'
 import Carousel from './Carousel.vue'
-import Features from './Features.vue'
+// import Features from './Features.vue'
 import Publications from './Publications.vue'
-import News from './News.vue'
+// import News from './News.vue'
 // import Team from './Team.vue'
 
 const contactForm = ref({
