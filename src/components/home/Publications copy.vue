@@ -2,70 +2,64 @@
   <section class="publications-section">
     <h2 class="section-title">Recent Publications</h2>
     <div class="publications-grid">
-      <el-card 
+      <article 
         v-for="(pub, index) in publications" 
         :key="index" 
         class="publication-card"
-        shadow="hover"
       >
         <div class="pub-image-container">
-          <el-image :src="pub.image" fit="cover" class="pub-image" />
+          <img :src="pub.image" class="pub-image" />
           <div class="pub-journal-tag">
-            <el-tag type="success">{{ pub.journal }}</el-tag>
+            <span class="journal-badge">{{ pub.journal }}</span>
           </div>
         </div>
         <div class="pub-content">
           <h3 class="pub-title">{{ pub.title }}</h3>
           <div class="pub-meta">
             <span 
-              ref="authorsRef"
               class="pub-authors"
-              v-html="formatAuthors(pub.authors)"
-              :title="isAuthorsOverflow(index) ? getAuthorsTooltip(pub.authors) : ''"
-            ></span>
+              :title="getAuthorsTitle(pub.authors)"
+            >
+              <template v-for="(author, idx) in parseAuthors(pub.authors)" :key="idx">
+                <span v-if="author.hasStar" class="author-highlight">
+                  {{ author.name }}<sup>*</sup>
+                </span>
+                <span v-else>{{ author.name }}</span>
+                <span v-if="idx < parseAuthors(pub.authors).length - 1">, </span>
+              </template>
+            </span>
             <span class="pub-year">{{ pub.year }}</span>
           </div>
           <p class="pub-abstract">{{ pub.abstract }}</p>
           <div class="pub-actions">
-            <el-button type="primary" text @click="$emit('navigate-to', pub.link)">
-              Read Paper <el-icon><right /></el-icon>
-            </el-button>
-            <el-button
+            <button class="read-button" @click="$emit('navigate-to', pub.link)">
+              Read Paper <span class="arrow-icon">→</span>
+            </button>
+            <button
               v-if="pub.github && /^https?:\/\/.+/.test(pub.github)"
-              :style="{
-                background: '#fff',
-                borderRadius: '50%',
-                minWidth: '0',
-                border: '1px solid #e0e0e0'
-              }"
-              circle
-              @click="window.open(pub.github, '_blank')"
+              class="github-button"
+              @click="openGithub(pub.github)"
             >
               <img src="https://www.svgrepo.com/show/303615/github-icon-1-logo.svg" alt="GitHub" width="20" />
-            </el-button>
+            </button>
           </div>
         </div>
-      </el-card>
+      </article>
     </div>
   </section>
 </template>
 
 <script setup>
-import { ref, nextTick } from 'vue';
-
 defineProps({
   publications: {
     type: Array,
     required: true
   }
-})
+});
 
-// define emits
 defineEmits(['navigate-to']);
 
-const authorsRef = ref([]);
-
-// 解析作者数据，返回结构化对象数组
+// 解析作者数据
 const parseAuthors = (authors) => {
   if (!Array.isArray(authors)) {
     return authors ? [{ name: String(authors), hasStar: authors.includes('*') }] : [];
@@ -76,45 +70,21 @@ const parseAuthors = (authors) => {
   }));
 };
 
-// 格式化作者名称，处理上标样式
-const formatAuthors = (authors) => {
+// 获取作者标题（用于原生 tooltip）
+const getAuthorsTitle = (authors) => {
   const parsed = parseAuthors(authors);
-  return parsed.map(author => {
-    if (author.hasStar) {
-      return `<span class="author-highlight">${author.name}<sup>*</sup></span>`;
-    }
-    return author.name;
-  }).join(', ');
+  return parsed.map(author => author.name).join(', ');
 };
 
-// 生成tooltip内容
-const getAuthorsTooltip = (authors) => {
-  const parsed = parseAuthors(authors);
-  return parsed.map(author => author.name + (author.hasStar ? '*' : '')).join(', ');
-};
-
-// 检查作者名称是否溢出
-const isAuthorsOverflow = (index) => {
-  const el = authorsRef.value[index];
-  if (el) {
-    return el.scrollWidth > el.offsetWidth;
+// 安全打开 GitHub 链接
+const openGithub = (url) => {
+  if (typeof window !== 'undefined') {
+    window.open(url, '_blank');
   }
-  return false;
 };
 </script>
 
 <style scoped>
-/* [Previous styles remain exactly the same] */
-.author-highlight {
-  color: var(--vp-c-brand-1);
-  font-weight: bold;
-}
-
-.author-highlight sup {
-  font-size: 0.8em;
-  vertical-align: super;
-}
-
 .publications-section {
   padding: 80px 0;
 }
@@ -142,6 +112,7 @@ const isAuthorsOverflow = (index) => {
   grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   gap: 50px;
   margin-top: 40px;
+  background: var(--vp-c-bg-soft);
 }
 
 .publication-card {
@@ -152,6 +123,8 @@ const isAuthorsOverflow = (index) => {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  background: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .publication-card:hover {
@@ -168,6 +141,7 @@ const isAuthorsOverflow = (index) => {
 .pub-image {
   width: 100%;
   height: 100%;
+  object-fit: cover;
   transition: all 0.5s ease;
   background-color: #ffffff;
 }
@@ -176,11 +150,17 @@ const isAuthorsOverflow = (index) => {
   transform: scale(1.1);
 }
 
-.pub-journal-tag {
+.journal-badge {
   position: absolute;
   top: 15px;
   right: 15px;
   z-index: 2;
+  padding: 4px 12px;
+  background: var(--el-color-success);
+  color: white;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: bold;
 }
 
 .pub-content {
@@ -188,6 +168,7 @@ const isAuthorsOverflow = (index) => {
   flex: 1;
   display: flex;
   flex-direction: column;
+  background: var(--vp-c-bg-soft);
 }
 
 .pub-title {
@@ -213,6 +194,20 @@ const isAuthorsOverflow = (index) => {
   cursor: pointer;
 }
 
+.pub-authors span:not(:last-child)::after {
+  content: ', ';
+}
+
+.author-highlight {
+  color: var(--vp-c-brand-1);
+  font-weight: bold;
+}
+
+.author-highlight sup {
+  font-size: 0.8em;
+  vertical-align: super;
+}
+
 .pub-year {
   margin-left: 10px;
   color: var(--vp-c-brand-1);
@@ -234,6 +229,46 @@ const isAuthorsOverflow = (index) => {
   display: flex;
   justify-content: space-between;
   margin-top: auto;
+}
+
+.read-button {
+  background: none;
+  border: none;
+  color: var(--vp-c-brand-1);
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.read-button:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.arrow-icon {
+  font-size: 1.2em;
+}
+
+.github-button {
+  background: #fff;
+  border-radius: 50%;
+  min-width: 0;
+  border: 1px solid #e0e0e0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.github-button:hover {
+  transform: scale(1.1);
 }
 
 @media (max-width: 992px) {
