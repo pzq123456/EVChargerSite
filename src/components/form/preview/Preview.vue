@@ -11,6 +11,7 @@
       <el-row class="report-header" justify="space-between">
         <el-col :span="16">
           <h1 class="report-title">Global EV Data Application Form</h1>
+            <h6><em>(Version 2025.2 revised on 12 May 2025)</em></h6>
         </el-col>
 
         <el-col :span="8">

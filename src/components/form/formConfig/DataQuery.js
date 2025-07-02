@@ -7,7 +7,7 @@ export default {
   title: "Data Selection",
   databases: {
     charging_stations: createDatabaseConfig("Charging Stations"),
-    user_reviews: createDatabaseConfig("User Comments"),
+    // user_reviews: createDatabaseConfig("User Comments"),
     advanced_air_mobility: createSimpleDatabaseConfig("Advanced Air Mobility Text Data"),
   },
 
