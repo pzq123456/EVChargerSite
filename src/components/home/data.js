@@ -2,6 +2,8 @@
 import img1 from '../../../News/imgs/1.png'
 import img2 from '../../../News/imgs/2.png'
 import img3 from '../../../News/imgs/3.png'
+import img4 from '../../../News/imgs/4.png'
+
 
 // publications
 import image1 from '../../../asset/image.png'
@@ -15,20 +17,20 @@ export const teamData = {
 
     carousel: [
         {
-            title: "Research Excellence",
-            description: "Cutting-edge research in electric vehicle technologies",
-            image: "https://images.pexels.com/photos/709552/pexels-photo-709552.jpeg"
+            title: "2022 Global EV Data",
+            description: "A comprehensive dataset of public electric vehicle charging stations in the US, China, and Europe.",
+            image: img1
         },
         {
-            title: "Global Collaboration",
-            description: "Working with partners worldwide to advance EV adoption",
-            image: "https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg"
+            title: "2024 Global EV Data",
+            description: "An updated dataset of public electric vehicle charging stations in the US, China, and Europe.",
+            image: img2
         },
-        {
-            title: "Data Innovation",
-            description: "Developing innovative data solutions for the EV industry",
-            image: "https://images.pexels.com/photos/326055/pexels-photo-326055.jpeg"
-        }
+        // {
+        //     title: "Data Innovation",
+        //     description: "Developing innovative data solutions for the EV industry",
+        //     image: img3
+        // }
     ],
 
     features: [
@@ -64,25 +66,25 @@ export const teamData = {
             github: "https://github.com/"
         },
         {
-            title: "XXXX XXXX",
-            authors: "XXX, XXX, XXX",
-            journal: "XXX Journal",
+            title: "Stakeholder attention to advanced air mobility reveals worldwide disparities",
+            authors: "Justin Hayse Chiwing G. Tang, Yuan Li, Enyuan Cao, Xiong Yang, Ding Chen, Ruichen Ma, Zhenhan Peng, Binru Wei, Chengxiang Zhuge*",
+            journal: "Under Review",
             year: 2025,
-            link: "#",
-            image: "https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg",
-            abstract: "A novel approach to optimizing charging station locations based on spatial demand analysis and user behavior modeling.",
-            github: ""
+            link: "/publications",
+            image: img4,
+            abstract: "This paper examines the global disparities in stakeholder attention towards advanced air mobility (AAM), utilizing a comprehensive dataset to analyze trends and regional differences.",
+            github: "https://github.com/Charlene1218L/AAM_text_mining"
         },
-        {
-            title: "XXX XXXX",
-            authors: "XXX, XXX, XXX",
-            journal: "XXX Journal",
-            year: 2025,
-            link: "#",
-            image: "https://images.pexels.com/photos/326055/pexels-photo-326055.jpeg",
-            abstract: "Comprehensive evaluation of various policy instruments and their effectiveness in promoting electric vehicle adoption.",
-            github: ""
-        },
+        // {
+        //     title: "XXX XXXX",
+        //     authors: "XXX, XXX, XXX",
+        //     journal: "XXX Journal",
+        //     year: 2025,
+        //     link: "#",
+        //     image: "https://images.pexels.com/photos/326055/pexels-photo-326055.jpeg",
+        //     abstract: "Comprehensive evaluation of various policy instruments and their effectiveness in promoting electric vehicle adoption.",
+        //     github: ""
+        // },
     ],
 
     news: [
