@@ -2,7 +2,7 @@
 import img1 from '../../../News/imgs/1.png'
 import img2 from '../../../News/imgs/2.png'
 import img3 from '../../../News/imgs/3.png'
-import img4 from '../../../News/imgs/4.png'
+import img4 from '../../../News/imgs/4.1.png'
 
 
 // publications
@@ -17,9 +17,9 @@ export const teamData = {
 
     carousel: [
         {
-            title: "2022 Global EV Data",
-            description: "A comprehensive dataset of public electric vehicle charging stations in the US, China, and Europe.",
-            image: img1
+            title: "Advanced Air Mobility (AAM) Social Media Text Data",
+            description: "This social media text dataset contains only the cleaned data alongside results from our AAM text mining research, including sentiment and topic analyses. ",
+            image: img4
         },
         {
             title: "2024 Global EV Data",
