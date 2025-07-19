@@ -4,7 +4,7 @@ export const themeConfig = {
         { text: 'Home', link: '/' },
         // { text: 'About', link: '/about' },
         { text: 'Map', link: '/map' },
-        { text: 'Data', link: '/data' },
+        { text: 'Data', link: '/datasets' },
         { text: 'Publications', link: '/publications' },
         { text: 'News', link: '/News' },
         { text: 'Team', link: '/team' },
@@ -30,9 +30,32 @@ export const themeConfig = {
 
     },
 
-    // search: {
-    //     provider: 'local'
-    // },
+sidebar: {
+      '/datasets/': [
+        {
+          text: 'Data Sets',
+          items: [
+            { text: 'Overview', link: '/datasets/' },
+            {
+              text: 'EV Charger Data',
+              collapsed: false,
+              items: [
+                { text: '2024 EVCS Data', link: '/datasets/ev-charger/2024' },
+                { text: '2022 EVCS Data', link: '/datasets/ev-charger/2022' },
+              ],
+            },
+            {
+              text: 'EV Text Data',
+              collapsed: false,
+              items: [
+                { text: 'AAM Social Media', link: '/datasets/ev-text/aam-social' },
+                { text: 'AAM Bibliometric', link: '/datasets/ev-text/aam-bibliometric' },
+              ],
+            },
+          ],
+        },
+      ],
+    },
 
 
 }
