@@ -1,3 +1,7 @@
+---
+prev: false
+next: false
+---
 # Advanced Air Mobility (AAM) Social Media Text Data (2015 – 2024)
 
 > - [Subscribe](https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAAYrjOiZUNFdHUDFRQ0hZSFJLRTY5VEJKTE1GVllTOS4u) to receive the latest data updates.
