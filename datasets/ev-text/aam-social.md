@@ -19,6 +19,8 @@ We collected social media data related to Advanced Air Mobility (AAM) from Twitt
   fileName="sample Social Media Text Data.xlsx"
 />
 
+[**Back to the dataset list**](/datasets/index.md)
+
 <script setup>
     import { ref } from 'vue';
     import FileDownloader from '@/components/Databtn.vue';

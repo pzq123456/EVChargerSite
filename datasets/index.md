@@ -8,8 +8,7 @@ next: false
 > - [Subscribe](https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAAYrjOiZUNFdHUDFRQ0hZSFJLRTY5VEJKTE1GVllTOS4u) to receive the latest data updates.
 
 ## Overview
-
-Explore our comprehensive datasets, categorized for easy access. Each dataset includes detailed descriptions and sample data for download. Request full datasets by contacting us at [global.ev.map@gmail.com](mailto:global.ev.map@gmail.com) with the [Data Request Form](/ApplicationForm).
+Here is a list of datasets which are being shared through the Global EV Data Initiative. You can get more details on each dataset, and how to request the datasets through “View Details".
 
 ### Available Datasets
 
@@ -36,7 +35,7 @@ table {
 th, td {
   padding: 0.75rem;
   text-align: left;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--vp-border-color);
 }
 
 th {

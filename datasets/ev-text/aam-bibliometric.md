@@ -18,7 +18,7 @@ We collected bibliometric text data from two leading academic databases, includi
   fileName="sample Bibliometric Text Data.xlsx"
 />
 
-
+[**Back to the dataset list**](/datasets/index.md)
 
 <script setup>
     import { ref } from 'vue';
