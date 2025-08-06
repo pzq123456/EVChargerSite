@@ -1,78 +1,13 @@
 <template>
   <section class="projects-section">
     <h2 class="section-title">Individual Project/Papers</h2>
-    
-    <!-- Filter Section -->
-    <div class="filter-section">
-      <el-input
-        v-model="searchQuery"
-        placeholder="Search by title..."
-        clearable
-        class="search-input"
-      >
-        <template #prefix>
-          <i class="el-icon-search"></i>
-        </template>
-      </el-input>
-      <el-select v-model="roleFilter" placeholder="Filter by role" clearable>
-        <el-option
-          v-for="role in uniqueRoles"
-          :key="role"
-          :label="role"
-          :value="role"
-        />
-      </el-select>
-      <el-select v-model="fundingFilter" placeholder="Filter by funding" clearable>
-        <el-option
-          v-for="funding in uniqueFundings"
-          :key="funding"
-          :label="funding"
-          :value="funding"
-        />
-      </el-select>
-    </div>
-
-    <!-- Text Projects -->
-    <div class="projects-list">
-      <el-card 
-        v-for="(project, index) in paginatedTextProjects" 
-        :key="'text-'+index"
-        class="project-card"
-        shadow="hover"
-        :class="{ 'animate-in': isVisible[index] }"
-        ref="textCardRefs"
-      >
-        <div class="project-content">
-          <h3 class="project-title">{{ project.title }}</h3>
-          <div class="project-meta">
-            <span class="project-funding">{{ project.funding }}</span>
-            <span class="project-period">{{ project.period }}</span>
-          </div>
-          <div class="project-role">
-            <el-tag :type="project.role === 'PI' ? 'success' : 'info'">{{ project.role }}</el-tag>
-          </div>
-        </div>
-      </el-card>
-    </div>
-
-    <!-- Pagination for Text Projects -->
-    <el-pagination
-      v-if="filteredTextProjects.length > textItemsPerPage"
-      v-model:current-page="currentTextPage"
-      :page-size="textItemsPerPage"
-      layout="prev, pager, next"
-      :total="filteredTextProjects.length"
-      class="pagination"
-    />
-
-    <!-- Image Projects -->
     <div class="projects-grid">
       <el-card 
         v-for="(project, index) in paginatedImageProjects" 
         :key="'image-'+index"
         class="project-card"
         shadow="hover"
-        :class="{ 'animate-in': isVisible[index + paginatedTextProjects.length] }"
+        :class="{ 'animate-in': isVisible[index] }"
         ref="imageCardRefs"
         @mousemove="handleMouseMove"
         @mouseleave="handleMouseLeave"
@@ -87,78 +22,32 @@
         </div>
         <div class="project-content">
           <h3 class="project-title">{{ project.title }}</h3>
+          <a v-if="project.link" :href="project.link" target="_blank" class="project-link">View Project</a>
         </div>
       </el-card>
     </div>
-
-    <!-- Pagination for Image Projects -->
-    <el-pagination
-      v-if="filteredImageProjects.length > imageItemsPerPage"
-      v-model:current-page="currentImagePage"
-      :page-size="imageItemsPerPage"
-      layout="prev, pager, next"
-      :total="filteredImageProjects.length"
-      class="pagination"
-    />
   </section>
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useIntersectionObserver } from '@vueuse/core'
 
-const textProjects = [
-  {
-    title: "Electrifying the Bus System in Hong Kong: Feasibility Analysis and System Optimization",
-    funding: "Chief Executive's Policy Unit of the Hong Kong Government",
-    period: "Period: 2024 - 2025",
-    role: "PI"
-  },
-  {
-    title: "Evolutionary Mechanism and Impact Assessment of Hydrogen Fuel Cell Vehicle Market",
-    funding: "Shenzhen Municipal Science and Technology Innovation Commission",
-    period: "Period: 2023 - 2026",
-    role: "PI"
-  },
-  {
-    title: "Interlinked Low-Carbon Travel and Residential Behaviour: Energy, Climate, Social and Infrastructural Impacts",
-    funding: "The Hong Kong Polytechnic University",
-    period: "Period: 2022-2025",
-    role: "PI"
-  },
-  {
-    title: "Saving Water and Energy in the Residential Sector: Behavioural Adaptation and Technology Adoption",
-    funding: "The Hong Kong Polytechnic University",
-    period: "Period: 2023-2025",
-    role: "PI"
-  },
-  {
-    title: "Smart Infrastructure Planning for Transportation Electrification",
-    funding: "The Hong Kong Polytechnic University",
-    period: "Period: 2022-2024",
-    role: "PI"
-  },
-  {
-    title: "Assessing Local Environmental Benefits of Urban Transportation Electrification in Hong Kong",
-    funding: "The Hong Kong Polytechnic University",
-    period: "Period: 2021-2023",
-    role: "PI"
-  },
-  {
-    title: "Analysis and Modelling of Users' Willingness to Use the Vehicle-to-Grid Technology",
-    funding: "National Natural Science Foundation of China",
-    period: "Period: 2021-2023",
-    role: "PI"
-  },
-  {
-    title: "Developing Public Charging Infrastructure for Electric Vehicles: A Data-Driven and Activity-based Approach",
-    funding: "The Hong Kong Polytechnic University",
-    period: "Period: 2019-2022",
-    role: "PI"
-  }
-];
-
 const imageProjects = [
+  {
+    title: "Where are electric vehicle charging stations located globally?",
+    image: "https://globalevdata.github.io/GlobalCharger/assets/img2.R_IwUWN7.png",
+    link: "https://globalevdata.github.io/GlobalCharger/",
+    paper: "",
+    code: ""
+  },
+  {
+    title: "United States Electric Vehicle Charger System",
+    image: "https://globalevdata.github.io/USCharger/assets/img1.BzpLkadO.png",
+    link: "https://globalevdata.github.io/USCharger/",
+    paper: "",
+    code: ""
+  },
   {
     title: "Electric Mobility: Smart Infrastructure Planning and Operation",
     image: "https://static.wixstatic.com/media/907b0c_d5dce50fdc4544d4aa2f2ecfde32bd1d~mv2.png/v1/fit/w_558,h_558,q_90,enc_avif,quality_auto/907b0c_d5dce50fdc4544d4aa2f2ecfde32bd1d~mv2.png"
@@ -183,32 +72,12 @@ const imageProjects = [
 
 // State management
 const searchQuery = ref('');
-const roleFilter = ref('');
-const fundingFilter = ref('');
-const currentTextPage = ref(1);
-const currentImagePage = ref(1);
-const textItemsPerPage = ref(3);
-const imageItemsPerPage = ref(6);
-const textCardRefs = ref([]);
 const imageCardRefs = ref([]);
 const isVisible = ref({});
 
-// Computed properties
-const uniqueRoles = computed(() => {
-  return [...new Set(textProjects.map(project => project.role))];
-});
-
-const uniqueFundings = computed(() => {
-  return [...new Set(textProjects.map(project => project.funding))];
-});
-
-const filteredTextProjects = computed(() => {
-  return textProjects.filter(project => 
-    project.title.toLowerCase().includes(searchQuery.value.toLowerCase()) &&
-    (!roleFilter.value || project.role === roleFilter.value) &&
-    (!fundingFilter.value || project.funding === fundingFilter.value)
-  );
-});
+// Pagination variables
+const currentImagePage = ref(1);
+const imageItemsPerPage = ref(6); // Show all projects by default
 
 const filteredImageProjects = computed(() => {
   return imageProjects.filter(project => 
@@ -216,28 +85,14 @@ const filteredImageProjects = computed(() => {
   );
 });
 
-const paginatedTextProjects = computed(() => {
-  const start = (currentTextPage.value - 1) * textItemsPerPage.value;
-  return filteredTextProjects.value.slice(start, start + textItemsPerPage.value);
-});
-
 const paginatedImageProjects = computed(() => {
   const start = (currentImagePage.value - 1) * imageItemsPerPage.value;
   return filteredImageProjects.value.slice(start, start + imageItemsPerPage.value);
 });
 
-// Watch for filter changes and reset pagination
-watch([searchQuery, roleFilter, fundingFilter], () => {
-  currentTextPage.value = 1; // Reset to first page when filters change
-});
-
-watch(searchQuery, () => {
-  currentImagePage.value = 1; // Reset to first page when search query changes
-});
-
 // Intersection Observer for animation
 onMounted(() => {
-  const cards = [...textCardRefs.value, ...imageCardRefs.value];
+  const cards = [...imageCardRefs.value];
   cards.forEach((card, index) => {
     useIntersectionObserver(
       card,
@@ -293,30 +148,6 @@ const handleMouseLeave = (event) => {
   background: linear-gradient(to right, var(--vp-c-brand-2), var(--vp-c-brand-1), transparent);
   margin: 15px auto 0;
   border-radius: 2px;
-}
-
-.filter-section {
-  display: flex;
-  gap: 16px;
-  margin-bottom: 40px;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.search-input {
-  max-width: 300px;
-}
-
-.el-select {
-  max-width: 250px;
-}
-
-.projects-list {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  margin-bottom: 40px;
 }
 
 .projects-grid {
@@ -405,32 +236,24 @@ const handleMouseLeave = (event) => {
   font-weight: 500;
 }
 
-.project-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 16px;
-  font-size: 0.95rem;
+.project-link {
+  display: inline-block;
+  margin-top: 10px;
   color: var(--vp-c-text-2);
+  text-decoration: underline;
+  position: absolute;
+  bottom: 12px;
+  border-radius: 4px;
+  border: 1px solid var(--vp-c-text-2);
+  padding: 3px 6px;
+  font-size: 0.8rem;
 }
 
-.project-funding {
-  font-weight: 500;
-}
-
-.project-period {
+.project-link:hover {
+  text-decoration: underline;
   color: var(--vp-c-brand-1);
-  font-style: italic;
-}
-
-.project-role {
-  margin-top: 12px;
-}
-
-.pagination {
-  display: flex;
-  justify-content: center;
-  margin: 20px 0;
+  border-color: var(--vp-c-brand-1);
+  background: var(--vp-c-bg-soft);
 }
 
 @media (max-width: 992px) {
@@ -442,15 +265,6 @@ const handleMouseLeave = (event) => {
 @media (max-width: 768px) {
   .projects-section {
     padding: 40px 20px;
-  }
-
-  .filter-section {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .search-input, .el-select {
-    max-width: 100%;
   }
 
   .projects-grid {
