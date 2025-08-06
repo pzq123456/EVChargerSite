@@ -3,7 +3,8 @@ export const themeConfig = {
     nav: [
         { text: 'Home', link: '/' },
         // { text: 'About', link: '/about' },
-        { text: 'Map', link: '/map' },
+        // { text: 'Map', link: '/map' },
+        { text: 'individual project/papers', link: '/project' },
         { text: 'Data', link: '/datasets' },
         { text: 'Publications', link: '/publications' },
         { text: 'News', link: '/News' },
