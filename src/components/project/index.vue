@@ -40,14 +40,14 @@ const imageProjects = [
   {
     title: "Where are electric vehicle charging stations located globally?",
     image: image1,
-    link: "https://globalevdata.github.io/USCharger/map/A.html",
+    link: "https://globalevdata.github.io/GlobalCharger/",
     paper: "",
     code: ""
   },
   {
     title: "Decade-long EV charging accessibility and equity in U.S.",
     image: image2,
-    link: "https://globalevdata.github.io/USCharger/",
+    link: "https://globalevdata.github.io/USCharger/map/A.html",
     paper: "",
     code: ""
   }
