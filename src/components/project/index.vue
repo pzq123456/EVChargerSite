@@ -1,6 +1,6 @@
 <template>
   <section class="projects-section">
-    <h2 class="section-title">Individual Project/Papers</h2>
+    <h2 class="section-title">Featured Projects</h2>
     <div class="projects-grid">
       <el-card 
         v-for="(project, index) in paginatedImageProjects" 
@@ -33,41 +33,44 @@
 import { ref, computed, onMounted } from 'vue'
 import { useIntersectionObserver } from '@vueuse/core'
 
+import image1 from './image1.png?url'
+import image2 from './image2.png?url'
+
 const imageProjects = [
   {
     title: "Where are electric vehicle charging stations located globally?",
-    image: "https://globalevdata.github.io/GlobalCharger/assets/img2.R_IwUWN7.png",
+    image: image1,
     link: "https://globalevdata.github.io/GlobalCharger/",
     paper: "",
     code: ""
   },
   {
-    title: "United States Electric Vehicle Charger System",
-    image: "https://globalevdata.github.io/USCharger/assets/img1.BzpLkadO.png",
+    title: "Decade-long EV charging accessibility and equity in U.S.",
+    image: image2,
     link: "https://globalevdata.github.io/USCharger/",
     paper: "",
     code: ""
   },
-  {
-    title: "Electric Mobility: Smart Infrastructure Planning and Operation",
-    image: "https://static.wixstatic.com/media/907b0c_d5dce50fdc4544d4aa2f2ecfde32bd1d~mv2.png/v1/fit/w_558,h_558,q_90,enc_avif,quality_auto/907b0c_d5dce50fdc4544d4aa2f2ecfde32bd1d~mv2.png"
-  },
-  {
-    title: "Shared Mobility: Sharing Vehicles and Infrastructure",
-    image: "https://static.wixstatic.com/media/907b0c_f3d8edc2736c43b59ab17a7024562a64~mv2.png/v1/fit/w_559,h_558,q_90,enc_avif,quality_auto/907b0c_f3d8edc2736c43b59ab17a7024562a64~mv2.png"
-  },
-  {
-    title: "Urban Micro-simulation",
-    image: "https://static.wixstatic.com/media/907b0c_1abd37a611e34a7391c770379bd15e0f~mv2.png/v1/fit/w_558,h_558,q_90,enc_avif,quality_auto/907b0c_1abd37a611e34a7391c770379bd15e0f~mv2.png"
-  },
-  {
-    title: "Autonomous Mobility: Adoption Behavior and Impact Assessment",
-    image: "https://static.wixstatic.com/media/907b0c_0c070b602e0941e68144f090c3bc8f96~mv2.png/v1/fit/w_558,h_558,q_90,enc_avif,quality_auto/907b0c_0c070b602e0941e68144f090c3bc8f96~mv2.png"
-  },
-  {
-    title: "Water-Energy Nexus: Behavioural Adaptation and Technology Adoption",
-    image: "https://static.wixstatic.com/media/907b0c_f2b2dc0c5a584995bd39c2869b6f520d~mv2.png/v1/fit/w_559,h_558,q_90,enc_avif,quality_auto/907b0c_f2b2dc0c5a584995bd39c2869b6f520d~mv2.png"
-  }
+  // {
+  //   title: "Electric Mobility: Smart Infrastructure Planning and Operation",
+  //   image: "https://static.wixstatic.com/media/907b0c_d5dce50fdc4544d4aa2f2ecfde32bd1d~mv2.png/v1/fit/w_558,h_558,q_90,enc_avif,quality_auto/907b0c_d5dce50fdc4544d4aa2f2ecfde32bd1d~mv2.png"
+  // },
+  // {
+  //   title: "Shared Mobility: Sharing Vehicles and Infrastructure",
+  //   image: "https://static.wixstatic.com/media/907b0c_f3d8edc2736c43b59ab17a7024562a64~mv2.png/v1/fit/w_559,h_558,q_90,enc_avif,quality_auto/907b0c_f3d8edc2736c43b59ab17a7024562a64~mv2.png"
+  // },
+  // {
+  //   title: "Urban Micro-simulation",
+  //   image: "https://static.wixstatic.com/media/907b0c_1abd37a611e34a7391c770379bd15e0f~mv2.png/v1/fit/w_558,h_558,q_90,enc_avif,quality_auto/907b0c_1abd37a611e34a7391c770379bd15e0f~mv2.png"
+  // },
+  // {
+  //   title: "Autonomous Mobility: Adoption Behavior and Impact Assessment",
+  //   image: "https://static.wixstatic.com/media/907b0c_0c070b602e0941e68144f090c3bc8f96~mv2.png/v1/fit/w_558,h_558,q_90,enc_avif,quality_auto/907b0c_0c070b602e0941e68144f090c3bc8f96~mv2.png"
+  // },
+  // {
+  //   title: "Water-Energy Nexus: Behavioural Adaptation and Technology Adoption",
+  //   image: "https://static.wixstatic.com/media/907b0c_f2b2dc0c5a584995bd39c2869b6f520d~mv2.png/v1/fit/w_559,h_558,q_90,enc_avif,quality_auto/907b0c_f2b2dc0c5a584995bd39c2869b6f520d~mv2.png"
+  // }
 ];
 
 // State management
@@ -209,7 +212,7 @@ const handleMouseLeave = (event) => {
   position: relative;
   height: 220px;
   overflow: hidden;
-  background: var(--vp-c-bg-soft);
+  background: white;
 }
 
 .project-image {
