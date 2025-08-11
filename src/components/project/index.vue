@@ -2,19 +2,20 @@
   <section class="projects-section">
     <h2 class="section-title">Featured Projects</h2>
     <div class="projects-grid">
-      <el-card 
-        v-for="(project, index) in paginatedImageProjects" 
-        :key="'image-'+index"
+      <el-card
+        v-for="(project, index) in paginatedImageProjects"
+        :key="'image-' + index"
         class="project-card"
         shadow="hover"
         :class="{ 'animate-in': isVisible[index] }"
         ref="imageCardRefs"
         @mousemove="handleMouseMove"
         @mouseleave="handleMouseLeave"
+        @click="goToLink(project.link)"
       >
         <div class="project-image-container">
-          <el-image 
-            :src="project.image" 
+          <el-image
+            :src="project.image"
             fit="contain"
             class="project-image"
             lazy
@@ -22,7 +23,6 @@
         </div>
         <div class="project-content">
           <h3 class="project-title">{{ project.title }}</h3>
-          <a v-if="project.link" :href="project.link" target="_blank" class="project-link">View Project</a>
         </div>
       </el-card>
     </div>
@@ -50,27 +50,7 @@ const imageProjects = [
     link: "https://globalevdata.github.io/USCharger/",
     paper: "",
     code: ""
-  },
-  // {
-  //   title: "Electric Mobility: Smart Infrastructure Planning and Operation",
-  //   image: "https://static.wixstatic.com/media/907b0c_d5dce50fdc4544d4aa2f2ecfde32bd1d~mv2.png/v1/fit/w_558,h_558,q_90,enc_avif,quality_auto/907b0c_d5dce50fdc4544d4aa2f2ecfde32bd1d~mv2.png"
-  // },
-  // {
-  //   title: "Shared Mobility: Sharing Vehicles and Infrastructure",
-  //   image: "https://static.wixstatic.com/media/907b0c_f3d8edc2736c43b59ab17a7024562a64~mv2.png/v1/fit/w_559,h_558,q_90,enc_avif,quality_auto/907b0c_f3d8edc2736c43b59ab17a7024562a64~mv2.png"
-  // },
-  // {
-  //   title: "Urban Micro-simulation",
-  //   image: "https://static.wixstatic.com/media/907b0c_1abd37a611e34a7391c770379bd15e0f~mv2.png/v1/fit/w_558,h_558,q_90,enc_avif,quality_auto/907b0c_1abd37a611e34a7391c770379bd15e0f~mv2.png"
-  // },
-  // {
-  //   title: "Autonomous Mobility: Adoption Behavior and Impact Assessment",
-  //   image: "https://static.wixstatic.com/media/907b0c_0c070b602e0941e68144f090c3bc8f96~mv2.png/v1/fit/w_558,h_558,q_90,enc_avif,quality_auto/907b0c_0c070b602e0941e68144f090c3bc8f96~mv2.png"
-  // },
-  // {
-  //   title: "Water-Energy Nexus: Behavioural Adaptation and Technology Adoption",
-  //   image: "https://static.wixstatic.com/media/907b0c_f2b2dc0c5a584995bd39c2869b6f520d~mv2.png/v1/fit/w_559,h_558,q_90,enc_avif,quality_auto/907b0c_f2b2dc0c5a584995bd39c2869b6f520d~mv2.png"
-  // }
+  }
 ];
 
 // State management
@@ -83,7 +63,7 @@ const currentImagePage = ref(1);
 const imageItemsPerPage = ref(6); // Show all projects by default
 
 const filteredImageProjects = computed(() => {
-  return imageProjects.filter(project => 
+  return imageProjects.filter(project =>
     project.title.toLowerCase().includes(searchQuery.value.toLowerCase())
   );
 });
@@ -123,6 +103,13 @@ const handleMouseLeave = (event) => {
   const card = event.currentTarget;
   card.style.setProperty('--mouse-x', '50%');
   card.style.setProperty('--mouse-y', '50%');
+};
+
+// New method for navigation
+const goToLink = (link) => {
+  if (link) {
+    window.open(link, '_blank');
+  }
 };
 </script>
 
@@ -169,6 +156,7 @@ const handleMouseLeave = (event) => {
   position: relative;
   opacity: 0;
   transform: translateY(20px);
+  cursor: pointer; /* Add cursor style to indicate clickability */
 }
 
 .project-card.animate-in {
@@ -239,25 +227,7 @@ const handleMouseLeave = (event) => {
   font-weight: 500;
 }
 
-.project-link {
-  display: inline-block;
-  margin-top: 10px;
-  color: var(--vp-c-text-2);
-  text-decoration: underline;
-  position: absolute;
-  bottom: 12px;
-  border-radius: 4px;
-  border: 1px solid var(--vp-c-text-2);
-  padding: 3px 6px;
-  font-size: 0.8rem;
-}
-
-.project-link:hover {
-  text-decoration: underline;
-  color: var(--vp-c-brand-1);
-  border-color: var(--vp-c-brand-1);
-  background: var(--vp-c-bg-soft);
-}
+/* The original project-link styles and element are removed */
 
 @media (max-width: 992px) {
   .projects-grid {
