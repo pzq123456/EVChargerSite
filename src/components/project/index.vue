@@ -34,7 +34,7 @@ import { ref, computed, onMounted } from 'vue'
 import { useIntersectionObserver } from '@vueuse/core'
 
 import image1 from './image1.png?url'
-import image2 from './image2.png?url'
+// import image2 from './image2.png?url'
 
 const imageProjects = [
   {
@@ -44,13 +44,13 @@ const imageProjects = [
     paper: "",
     code: ""
   },
-  {
-    title: "Decade-long EV charging accessibility and equity in U.S.",
-    image: image2,
-    link: "https://globalevdata.github.io/USCharger/map/A.html",
-    paper: "",
-    code: ""
-  }
+  // {
+  //   title: "Decade-long EV charging accessibility and equity in U.S.",
+  //   image: image2,
+  //   link: "https://globalevdata.github.io/USCharger/map/A.html",
+  //   paper: "",
+  //   code: ""
+  // }
 ];
 
 // State management
