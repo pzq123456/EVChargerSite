@@ -1,0 +1,11 @@
+UID_review,UID_charger_station,Date,Sentiment,Topic,Keywords,Country,Province
+938661667553066641,114901726753148854,2024-11-08 14:08,Negative,Location and Availability,"charging, phone, leave",China,Hubei
+952704160669753791,769883293725013783,2021-10-06 00:00:00,Negative,Location and Availability,"location, spots, occupied",China,Shanxi
+167969417742250372,870765428727536813,2024-08-20 21:44,Neutral,Location and Availability,"underground, moist",China,Shanghai
+950833205514822937,752536973838587055,2021-12-25 21:36,Neutral,Overall sentiment,open,China,Hebei
+333041937177587983,160808437915927036,2024-11-13 00:12,Negative,Location and Availability,"location, charging power, occupied",China,Zhejiang
+166185874283963717,160808437915927036,2023-06-01 17:15,Neutral,Overall sentiment,"n, u, l, l",China,Zhejiang
+792820909086476949,939736068218457008,2024-03-31 10:37,Neutral,Overall sentiment,open,China,Jiangxi
+303887104536311153,807307453159726361,2024-08-22 01:42,Positive,Pricing and Payment,"price, member, discount",China,Shanghai
+523555373799441165,807307453159726361,2024-08-30 21:38,Negative,Pricing and Payment,"price, untrustworthy",China,Shanghai
+506640109308865092,807307453159726361,2023-07-27 19:37,Neutral,Overall sentiment,review,China,Shanghai

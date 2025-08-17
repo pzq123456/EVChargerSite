@@ -51,6 +51,7 @@ sidebar: {
               items: [
                 { text: 'AAM Social Media', link: '/datasets/ev-text/aam-social' },
                 { text: 'AAM Bibliometric', link: '/datasets/ev-text/aam-bibliometric' },
+                { text: 'EV Charger Review', link: '/datasets/ev-text/ev-charger-review'}
               ],
             },
           ],

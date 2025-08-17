@@ -7,8 +7,8 @@ export default {
   title: "Data Selection",
   databases: {
     charging_stations: createDatabaseConfig("Charging Stations"),
-    // user_reviews: createDatabaseConfig("User Comments"),
     advanced_air_mobility: createSimpleDatabaseConfig("Advanced Air Mobility Text Data"),
+    user_reviews: createDatabaseConfig("EV Charging Review Data*", "availableYearsForEVCReviewData", "regionOptions2"),
   },
 
   actions: true
@@ -32,13 +32,13 @@ function createSimpleDatabaseConfig(label) {
 
 
 // 公共配置生成函数，减少重复代码
-function createDatabaseConfig(label) {
+function createDatabaseConfig(label, yearOptions = "availableYears", regionOptions = "regionOptions") {
   const commonFields = [
     {
       type: "cascader",
       model: "regions",
       label: "Country/Region",
-      optionsRef: "regionOptions",
+      optionsRef: regionOptions,
       props: {
         multiple: true,
         collapseTags: true,
@@ -53,7 +53,7 @@ function createDatabaseConfig(label) {
       type: "checkbox-group",
       model: "years",
       label: "Years",
-      optionsRef: "availableYears",
+      optionsRef: yearOptions,
       rules: createRule("Please select at least one year")
     }
   ];

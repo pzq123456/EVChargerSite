@@ -68,7 +68,25 @@ export const regionOptions = [
   }
 ]
 
+
+export const regionOptions2 = [
+  {
+    value: 'China',
+    label: 'China'
+  },
+  {
+    value: 'USA',
+    label: 'USA'
+  },
+  {
+    value: 'Europe',
+    label: 'Europe',
+  }
+]
+
 // 可用年份
 export const availableYears = ['2022', '2024*', '2025*']
 
 export const availableYearsForAAM = ['Social Media Text Data 2015-2024*', 'Bibliometric Text Data 2015-2024*']
+
+export const availableYearsForEVCReviewData = ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024']

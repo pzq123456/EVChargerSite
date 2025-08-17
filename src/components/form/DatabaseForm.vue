@@ -60,7 +60,7 @@
 
 <script setup>
 import { reactive, ref, computed, watch } from 'vue'
-import { regionOptions, availableYears, availableYearsForAAM } from './formConfig/data.js'
+import { regionOptions, availableYears, availableYearsForAAM, availableYearsForEVCReviewData, regionOptions2 } from './formConfig/data.js'
 
 const props = defineProps({
   formConfig: {
@@ -77,7 +77,9 @@ const props = defineProps({
     default: () => ({
       regionOptions,
       availableYears,
-      availableYearsForAAM
+      availableYearsForAAM,
+      availableYearsForEVCReviewData,
+      regionOptions2
     })
   }
 })

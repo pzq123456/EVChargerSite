@@ -1,5 +1,9 @@
 # News
 
+## [Data] [Global EV Public Charging Station Review Data (2015-2024)](./2025-8-17) 
+
+We are pleased to present the Global EV Charging Station Review Dataset (2015–2024). Covering the period from 1 January 2015 to 31 December 2024...
+
 ## [Data] [Advanced Air Mobility (AAM)-related Social Media and Bibliometric Text Data (2015-2024)](./2025-7-3) 
 
 We are excited to share Advanced Air Mobility (AAM)-related text datasets from 2015 to 2024, covering social media and bibliometric text data...
